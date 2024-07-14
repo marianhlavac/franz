@@ -15,10 +15,10 @@ class KafkaProducerTopic extends KafkaTopic {
       _$native,
       partition,
       RD_KAFKA_MSG_F_COPY,
-      keyData?.cast<Void>() ?? nullptr,
-      key?.length ?? 0,
       messageData.cast<Void>(),
       payload.length,
+      keyData?.cast<Void>() ?? nullptr,
+      key?.length ?? 0,
       nullptr,
     );
 
