@@ -41,7 +41,7 @@ class _KafkaInstance {
     }
   }
 
-  KafkaTopic createTopic(String name) =>
+  KafkaTopic useTopic(String name) =>
       KafkaTopic(kafkaNativeInstance: _$native, name: name);
 
   void dispose() {

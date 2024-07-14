@@ -6,17 +6,17 @@ void main() async {
 
   // Create producer & producing topic
   final producer = kafka.createProducer();
-  final produceTopic = producer.createTopic("franz.test2");
 
   // Create handler for later async consumption
   final handler = KafkaCallbackHandler((record) {
     final textRecord = record.toTextRecord();
     print(textRecord.toString());
   });
+  final produceTopic = producer.useTopic("franz.test2");
 
   // Create consumer & attach previously created handler
   final consumer = kafka.createConsumer(groupId: 'franz-1');
-  final consumeTopic = consumer.createTopic("funnel.telemetry-ua");
+  final consumeTopic = consumer.useTopic("funnel.telemetry-ua");
 
   await consumeTopic.attachHandler(handler, 0, ConsumerOffset.end());
 

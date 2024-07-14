@@ -5,6 +5,6 @@ class KafkaProducer extends _KafkaInstance {
       : super(type: KafkaInstanceType.producer);
 
   @override
-  KafkaProducerTopic createTopic(String name) =>
+  KafkaProducerTopic useTopic(String name) =>
       KafkaProducerTopic(kafkaNativeInstance: _$native, name: name);
 }

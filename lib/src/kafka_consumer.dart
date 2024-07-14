@@ -5,6 +5,6 @@ class KafkaConsumer extends _KafkaInstance {
       : super(type: KafkaInstanceType.consumer);
 
   @override
-  KafkaConsumerTopic createTopic(String name) =>
+  KafkaConsumerTopic useTopic(String name) =>
       KafkaConsumerTopic(kafkaNativeInstance: _$native, name: name);
 }
