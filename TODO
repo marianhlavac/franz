@@ -1,3 +1,4 @@
 - Load dynamic library from system paths
     - Verify that it's working on macOS, Windows, and Linux
+- Fix apparently inaccessible timestamps & other properties of consumed messages
 - Write mapping for most of the librdkafka functionality

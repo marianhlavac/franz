@@ -1,28 +1,36 @@
 part of 'kafka_topic.dart';
 
 class KafkaConsumerTopic extends KafkaTopic {
+  final StreamController<ConsumerRecord> _sink =
+      StreamController<ConsumerRecord>.broadcast();
+
   KafkaConsumerTopic({required super.kafkaNativeInstance, required super.name});
 
-  Future<KafkaTopicAttachment> attachHandler(
-      KafkaBaseHandler handler, int partition, ConsumerOffset offset) async {
+  Stream<ConsumerRecord> get stream => _sink.stream;
+
+  Future<ActiveConsumer> consumeStart(
+      int partition, ConsumerOffset offset) async {
     librdkafka.rd_kafka_consume_start(
         _$native, partition, offset.numericOffset);
 
     final messagesSink = ReceivePort();
     final isolate = await Isolate.spawn(
-        (sendPort) => _consumerIsolate(handler, partition, sendPort),
+        (sendPort) => _consumerIsolate(partition, sendPort),
         messagesSink.sendPort,
         debugName: "franz-consumer-$name-$partition");
 
-    final sinkListener = messagesSink.listen((message) {
-      handler.handleRecord(message);
-    });
-
-    return KafkaTopicAttachment(isolate, _$native, sinkListener);
+    return ActiveConsumer(
+        messagesSink.asBroadcastStream().cast<ConsumerRecord>(),
+        partition,
+        isolate);
   }
 
-  void _consumerIsolate(
-      KafkaBaseHandler consumer, int partition, SendPort messagesOutlet) {
+  Future<void> consumeStop(ActiveConsumer activeConsumer) async {
+    librdkafka.rd_kafka_consume_stop(_$native, activeConsumer.partition);
+    activeConsumer.cancel();
+  }
+
+  void _consumerIsolate(int partition, SendPort messagesOutlet) {
     // - This method loops in isolate
     while (true) {
       final message =
