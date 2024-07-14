@@ -23,8 +23,9 @@ class ConsumerRecord<KT, PT> {
 
   String _generateStringPreview(Object? object, int maxLength) {
     return switch (object) {
-      String() => object.substring(0, maxLength) +
-          (object.length > maxLength ? '...' : ''),
+      String() => (object.length > maxLength
+          ? '${object.substring(0, maxLength)}...'
+          : object),
       List<int>() => object
               .take(maxLength)
               .map((b) => b.toRadixString(maxLength))
