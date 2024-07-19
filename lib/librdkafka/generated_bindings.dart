@@ -20268,7 +20268,7 @@ const int SHUT_RDWR = 2;
 
 const int LIBRDKAFKA_TYPECHECKS = 1;
 
-const int RD_KAFKA_VERSION = 33882367;
+const int RD_KAFKA_VERSION = 33816831;
 
 const String RD_KAFKA_DEBUG_CONTEXTS =
     'all,generic,broker,topic,metadata,feature,queue,msg,protocol,cgrp,security,fetch,interceptor,plugin,consumer,admin,eos,mock,assignor,conf';

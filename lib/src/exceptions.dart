@@ -1,14 +1,14 @@
 class UnsupportedLibRdKafkaVersion {
   final int version;
-  final (int, int) supportedRange;
+  final int supported;
 
   UnsupportedLibRdKafkaVersion(
-      {required this.version, required this.supportedRange});
+      {required this.version, required this.supported});
 
   @override
   String toString() =>
       "The loaded librdkafka version ($version) is not compatible "
-      "with franz library (>=${supportedRange.$1} <${supportedRange.$2})";
+      "with franz library (supported is $supported)";
 }
 
 class ExceptionWithErrorText implements Exception {

@@ -1,66 +1,39 @@
 import 'dart:ffi';
 import 'dart:io';
-import 'dart:isolate';
+import 'package:path/path.dart' as p;
+
 import '../src/exceptions.dart';
 import 'generated_bindings.dart';
 
 const rootLibraryName = 'package:franz/franz.dart';
-const minSupportedVersion = 0x10901FF; // >=1.9.1
-const maxSupportedVersionLt = 0x20000FF; // <2.0.0
 
-Uri? _getBundledRootDirectoryPath() {
-  final rootPath = Isolate.resolvePackageUriSync(Uri.parse(rootLibraryName));
-  return rootPath?.resolve("./librdkafka/bundled/");
+String get libraryName {
+  if (Platform.isLinux) return "librdkafka.so";
+  if (Platform.isMacOS) return "librdkafka.dylib";
+  if (Platform.isWindows) return "librdkafka.dll";
+  throw UnsupportedError("Franz library is not supported by this platform");
 }
 
-DynamicLibrary _loadSystemLibrdkafka() {
-  if (Platform.isMacOS) {
-    return DynamicLibrary.open('librdkafka.dylib');
-  } else if (Platform.isWindows) {
-    return DynamicLibrary.open('librdkafka.dll');
-  } else {
-    return DynamicLibrary.open('librdkafka.so');
-  }
-}
+String get libraryPath {
+  final envVar = Platform.environment["LIBRDKAFKA_PATH"];
+  if (envVar != null) return p.join(envVar, libraryName);
 
-DynamicLibrary _loadBundledLibrdkafka() {
-  final rootUri = _getBundledRootDirectoryPath();
+  final dartVar = String.fromEnvironment("LIBRDKAFKA_PATH");
+  if (dartVar.isNotEmpty) return p.join(dartVar, libraryName);
 
-  if (rootUri == null) {
-    exit(169);
-  }
-
-  // FIXME: Detect x64/ARM !
-  if (Platform.isMacOS) {
-    return DynamicLibrary.open(
-        rootUri.resolve("./osx-arm64/native/librdkafka.dylib").toFilePath());
-  } else if (Platform.isWindows) {
-    return DynamicLibrary.open(rootUri
-        .resolve("./win-x64/native/librdkafka.dll")
-        .toFilePath(windows: true));
-  } else {
-    return DynamicLibrary.open(
-        rootUri.resolve("./linux-arm64/native/librdkafka.so").toFilePath());
-  }
+  return libraryName;
 }
 
 LibRdKafka _verifyVersion(LibRdKafka library) {
   final version = library.rd_kafka_version();
 
-  if (version < minSupportedVersion || version >= maxSupportedVersionLt) {
+  if (version != RD_KAFKA_VERSION) {
     throw UnsupportedLibRdKafkaVersion(
-        version: version,
-        supportedRange: (minSupportedVersion, maxSupportedVersionLt));
+        version: version, supported: RD_KAFKA_VERSION);
   }
 
   return library;
 }
 
-const bool loadBundledVariant = String.fromEnvironment(
-        "LIBDRKAFKA_LOAD_VARIANT",
-        defaultValue: "bundled") ==
-    "bundled";
-
-final dylib =
-    loadBundledVariant ? _loadBundledLibrdkafka() : _loadSystemLibrdkafka();
+final dylib = DynamicLibrary.open(libraryPath);
 final librdkafka = _verifyVersion(LibRdKafka(dylib));
