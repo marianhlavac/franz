@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:franz/franz.dart';
 
 void main() async {
+  final hostname = Platform.environment["HOSTNAME"] ?? "default";
+
   // Set-up Kafka server
-  final kafka = KafkaServer.redpanda(clientId: 'random-franz');
+  final kafka =
+      KafkaServer.redpanda(hostname: hostname, clientId: 'random-franz');
 
   // Create producer & producing topic
   final producer = kafka.createProducer();
