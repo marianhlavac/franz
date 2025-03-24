@@ -4,7 +4,7 @@ version: 0.1.2
 repository: https://github.com/marianhlavac/franz
 
 environment:
-  sdk: ^3.4.0
+  sdk: ^3.6.2
 
 dependencies:
   ffi: ^2.1.2

@@ -83,6 +83,20 @@ class LibRdKafka {
       int Function(
           int, ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>, int)>();
 
+  int printf(
+    ffi.Pointer<ffi.Char> arg0,
+  ) {
+    return _printf(
+      arg0,
+    );
+  }
+
+  late final _printfPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>)>>(
+          'printf');
+  late final _printf =
+      _printfPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
+
   late final ffi.Pointer<ffi.Pointer<FILE>> ___stdinp =
       _lookup<ffi.Pointer<FILE>>('__stdinp');
 
@@ -457,20 +471,6 @@ class LibRdKafka {
           'perror');
   late final _perror =
       _perrorPtr.asFunction<void Function(ffi.Pointer<ffi.Char>)>();
-
-  int printf(
-    ffi.Pointer<ffi.Char> arg0,
-  ) {
-    return _printf(
-      arg0,
-    );
-  }
-
-  late final _printfPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>)>>(
-          'printf');
-  late final _printf =
-      _printfPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
   int putc(
     int arg0,
@@ -8178,9 +8178,60 @@ class LibRdKafka {
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
+  /// @brief Get group id of a group metadata.
+  ///
+  /// @param group_metadata The group metadata.
+  ///
+  /// @returns The group id contained in the passed \p group_metadata.
+  ///
+  /// @remark The returned pointer has the same lifetime as \p group_metadata.
+  ffi.Pointer<ffi.Char> rd_kafka_consumer_group_metadata_group_id(
+    ffi.Pointer<rd_kafka_consumer_group_metadata_t> group_metadata,
+  ) {
+    return _rd_kafka_consumer_group_metadata_group_id(
+      group_metadata,
+    );
+  }
+
+  late final _rd_kafka_consumer_group_metadata_group_idPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<ffi.Char> Function(
+                  ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>>(
+      'rd_kafka_consumer_group_metadata_group_id');
+  late final _rd_kafka_consumer_group_metadata_group_id =
+      _rd_kafka_consumer_group_metadata_group_idPtr.asFunction<
+          ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>();
+
+  /// @brief Get group instance id of a group metadata.
+  ///
+  /// @param group_metadata The group metadata.
+  ///
+  /// @returns The group instance id contained in the passed \p group_metadata
+  /// or NULL.
+  ///
+  /// @remark The returned pointer has the same lifetime as \p group_metadata.
+  ffi.Pointer<ffi.Char> rd_kafka_consumer_group_metadata_group_instance_id(
+    ffi.Pointer<rd_kafka_consumer_group_metadata_t> group_metadata,
+  ) {
+    return _rd_kafka_consumer_group_metadata_group_instance_id(
+      group_metadata,
+    );
+  }
+
+  late final _rd_kafka_consumer_group_metadata_group_instance_idPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<ffi.Char> Function(
+                  ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>>(
+      'rd_kafka_consumer_group_metadata_group_instance_id');
+  late final _rd_kafka_consumer_group_metadata_group_instance_id =
+      _rd_kafka_consumer_group_metadata_group_instance_idPtr.asFunction<
+          ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>();
+
   /// @brief Get member id of a group metadata.
   ///
-  /// @param group_metadata The group metadata
+  /// @param group_metadata The group metadata.
   ///
   /// @returns The member id contained in the passed \p group_metadata.
   ///
@@ -8202,6 +8253,30 @@ class LibRdKafka {
       _rd_kafka_consumer_group_metadata_member_idPtr.asFunction<
           ffi.Pointer<ffi.Char> Function(
               ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>();
+
+  /// @brief Get the generation id (classic protocol)
+  /// or member epoch (consumer protocol) of a group metadata.
+  ///
+  /// @param group_metadata The group metadata.
+  ///
+  /// @returns The generation id or member epoch
+  /// contained in the passed \p group_metadata.
+  int rd_kafka_consumer_group_metadata_generation_id(
+    ffi.Pointer<rd_kafka_consumer_group_metadata_t> group_metadata,
+  ) {
+    return _rd_kafka_consumer_group_metadata_generation_id(
+      group_metadata,
+    );
+  }
+
+  late final _rd_kafka_consumer_group_metadata_generation_idPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int32 Function(
+                  ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>>(
+      'rd_kafka_consumer_group_metadata_generation_id');
+  late final _rd_kafka_consumer_group_metadata_generation_id =
+      _rd_kafka_consumer_group_metadata_generation_idPtr.asFunction<
+          int Function(ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>();
 
   /// @brief Frees the consumer group metadata object as returned by
   /// rd_kafka_consumer_group_metadata().
@@ -8881,6 +8956,48 @@ class LibRdKafka {
       _rd_kafka_consumer_group_state_codePtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
+  /// @brief Returns a name for a group type code.
+  ///
+  /// @param type The group type value.
+  ///
+  /// @return The group type name corresponding to the provided group type value.
+  ffi.Pointer<ffi.Char> rd_kafka_consumer_group_type_name(
+    int type,
+  ) {
+    return _rd_kafka_consumer_group_type_name(
+      type,
+    );
+  }
+
+  late final _rd_kafka_consumer_group_type_namePtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int32)>>(
+          'rd_kafka_consumer_group_type_name');
+  late final _rd_kafka_consumer_group_type_name =
+      _rd_kafka_consumer_group_type_namePtr
+          .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
+
+  /// @brief Returns a code for a group type name.
+  ///
+  /// @param name The group type name.
+  ///
+  /// @remark The comparison is case-insensitive.
+  ///
+  /// @return The group type value corresponding to the provided group type name.
+  int rd_kafka_consumer_group_type_code(
+    ffi.Pointer<ffi.Char> name,
+  ) {
+    return _rd_kafka_consumer_group_type_code(
+      name,
+    );
+  }
+
+  late final _rd_kafka_consumer_group_type_codePtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<ffi.Char>)>>(
+          'rd_kafka_consumer_group_type_code');
+  late final _rd_kafka_consumer_group_type_code =
+      _rd_kafka_consumer_group_type_codePtr
+          .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
+
   /// @brief Release list memory
   void rd_kafka_group_list_destroy(
     ffi.Pointer<rd_kafka_group_list> grplist,
@@ -9441,6 +9558,7 @@ class LibRdKafka {
   /// - RD_KAFKA_EVENT_DESCRIBETOPICS_RESULT
   /// - RD_KAFKA_EVENT_DESCRIBECLUSTER_RESULT
   /// - RD_KAFKA_EVENT_LISTOFFSETS_RESULT
+  /// - RD_KAFKA_EVENT_ELECTLEADERS_RESULT
   ffi.Pointer<ffi.Void> rd_kafka_event_opaque(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
@@ -10157,6 +10275,35 @@ class LibRdKafka {
   late final _rd_kafka_event_AlterUserScramCredentials_result =
       _rd_kafka_event_AlterUserScramCredentials_resultPtr.asFunction<
           ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>)>();
+
+  /// @brief Get ElectLeaders result.
+  ///
+  /// @returns the result of a ElectLeaders request, or NULL if
+  /// event is of different type.
+  ///
+  /// @remark The lifetime of the returned memory is the same
+  /// as the lifetime of the \p rkev object.
+  ///
+  /// Event types:
+  /// RD_KAFKA_EVENT_ELECTLEADERS_RESULT
+  ffi.Pointer<rd_kafka_ElectLeaders_result_t>
+      rd_kafka_event_ElectLeaders_result(
+    ffi.Pointer<rd_kafka_event_t> rkev,
+  ) {
+    return _rd_kafka_event_ElectLeaders_result(
+      rkev,
+    );
+  }
+
+  late final _rd_kafka_event_ElectLeaders_resultPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rd_kafka_ElectLeaders_result_t> Function(
+                  ffi.Pointer<rd_kafka_event_t>)>>(
+      'rd_kafka_event_ElectLeaders_result');
+  late final _rd_kafka_event_ElectLeaders_result =
+      _rd_kafka_event_ElectLeaders_resultPtr.asFunction<
+          ffi.Pointer<rd_kafka_ElectLeaders_result_t> Function(
               ffi.Pointer<rd_kafka_event_t>)>();
 
   /// @brief Poll a queue for an event for max \p timeout_ms.
@@ -10899,6 +11046,52 @@ class LibRdKafka {
           ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
               ffi.Pointer<rd_kafka_group_result_t>)>();
 
+  /// @returns the topic partition object from the topic partition result object.
+  /// @remarks lifetime of the returned string is the same as the \p
+  /// partition_result.
+  /// The error object is set inside the topic partition object. For the
+  /// detailed error information, use
+  /// rd_kafka_topic_partition_result_error()
+  ffi.Pointer<rd_kafka_topic_partition_t>
+      rd_kafka_topic_partition_result_partition(
+    ffi.Pointer<rd_kafka_topic_partition_result_t> partition_result,
+  ) {
+    return _rd_kafka_topic_partition_result_partition(
+      partition_result,
+    );
+  }
+
+  late final _rd_kafka_topic_partition_result_partitionPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rd_kafka_topic_partition_t> Function(
+                  ffi.Pointer<rd_kafka_topic_partition_result_t>)>>(
+      'rd_kafka_topic_partition_result_partition');
+  late final _rd_kafka_topic_partition_result_partition =
+      _rd_kafka_topic_partition_result_partitionPtr.asFunction<
+          ffi.Pointer<rd_kafka_topic_partition_t> Function(
+              ffi.Pointer<rd_kafka_topic_partition_result_t>)>();
+
+  /// @returns the error object from the topic partition result object.
+  /// @remarks lifetime of the returned string is the same as the \p
+  /// partition_result.
+  ffi.Pointer<rd_kafka_error_t> rd_kafka_topic_partition_result_error(
+    ffi.Pointer<rd_kafka_topic_partition_result_t> partition_result,
+  ) {
+    return _rd_kafka_topic_partition_result_error(
+      partition_result,
+    );
+  }
+
+  late final _rd_kafka_topic_partition_result_errorPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rd_kafka_error_t> Function(
+                  ffi.Pointer<rd_kafka_topic_partition_result_t>)>>(
+      'rd_kafka_topic_partition_result_error');
+  late final _rd_kafka_topic_partition_result_error =
+      _rd_kafka_topic_partition_result_errorPtr.asFunction<
+          ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_topic_partition_result_t>)>();
+
   /// @brief Create a new AdminOptions object.
   ///
   /// The options object is not modified by the Admin API request APIs,
@@ -11233,6 +11426,43 @@ class LibRdKafka {
           'rd_kafka_AdminOptions_set_match_consumer_group_states');
   late final _rd_kafka_AdminOptions_set_match_consumer_group_states =
       _rd_kafka_AdminOptions_set_match_consumer_group_statesPtr.asFunction<
+          ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_AdminOptions_t>,
+              ffi.Pointer<ffi.Int32>,
+              int)>();
+
+  /// @brief Set consumer groups types to query for.
+  ///
+  /// @param options Admin options.
+  /// @param consumer_group_types Array of consumer group types.
+  /// @param consumer_group_types_cnt Size of the \p consumer_group_types array.
+  ///
+  /// @return NULL on success, a new error instance that must be
+  /// released with rd_kafka_error_destroy() in case of error.
+  ///
+  /// @remark This option is valid for ListConsumerGroups.
+  ffi.Pointer<rd_kafka_error_t>
+      rd_kafka_AdminOptions_set_match_consumer_group_types(
+    ffi.Pointer<rd_kafka_AdminOptions_t> options,
+    ffi.Pointer<ffi.Int32> consumer_group_types,
+    int consumer_group_types_cnt,
+  ) {
+    return _rd_kafka_AdminOptions_set_match_consumer_group_types(
+      options,
+      consumer_group_types,
+      consumer_group_types_cnt,
+    );
+  }
+
+  late final _rd_kafka_AdminOptions_set_match_consumer_group_typesPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rd_kafka_error_t> Function(
+                  ffi.Pointer<rd_kafka_AdminOptions_t>,
+                  ffi.Pointer<ffi.Int32>,
+                  ffi.Size)>>(
+      'rd_kafka_AdminOptions_set_match_consumer_group_types');
+  late final _rd_kafka_AdminOptions_set_match_consumer_group_types =
+      _rd_kafka_AdminOptions_set_match_consumer_group_typesPtr.asFunction<
           ffi.Pointer<rd_kafka_error_t> Function(
               ffi.Pointer<rd_kafka_AdminOptions_t>,
               ffi.Pointer<ffi.Int32>,
@@ -13355,6 +13585,28 @@ class LibRdKafka {
       'rd_kafka_ConsumerGroupListing_state');
   late final _rd_kafka_ConsumerGroupListing_state =
       _rd_kafka_ConsumerGroupListing_statePtr.asFunction<
+          int Function(ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)>();
+
+  /// @brief Gets type for the \p grplist group.
+  ///
+  /// @param grplist The group listing.
+  ///
+  /// @return A group type.
+  int rd_kafka_ConsumerGroupListing_type(
+    ffi.Pointer<rd_kafka_ConsumerGroupListing_t> grplist,
+  ) {
+    return _rd_kafka_ConsumerGroupListing_type(
+      grplist,
+    );
+  }
+
+  late final _rd_kafka_ConsumerGroupListing_typePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int32 Function(
+                  ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)>>(
+      'rd_kafka_ConsumerGroupListing_type');
+  late final _rd_kafka_ConsumerGroupListing_type =
+      _rd_kafka_ConsumerGroupListing_typePtr.asFunction<
           int Function(ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)>();
 
   /// @brief Get an array of valid list groups from a ListConsumerGroups result.
@@ -15700,6 +15952,137 @@ class LibRdKafka {
           ffi.Pointer<rd_kafka_AdminOptions_t>,
           ffi.Pointer<rd_kafka_queue_t>)>();
 
+  /// @brief Create a new rd_kafka_ElectLeaders_t object. This object is later
+  /// passed to rd_kafka_ElectLeaders().
+  ///
+  /// @param election_type The election type that needs to be performed,
+  /// preferred or unclean.
+  /// @param partitions The topic partitions for which the leader election
+  /// needs to be performed.
+  ///
+  /// @returns a new allocated elect leaders object or returns NULL in case
+  /// of invalid election_type.
+  /// Use rd_kafka_ElectLeaders_destroy() to free object when done.
+  ffi.Pointer<rd_kafka_ElectLeaders_t> rd_kafka_ElectLeaders_new(
+    int election_type,
+    ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
+  ) {
+    return _rd_kafka_ElectLeaders_new(
+      election_type,
+      partitions,
+    );
+  }
+
+  late final _rd_kafka_ElectLeaders_newPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rd_kafka_ElectLeaders_t> Function(
+                  ffi.Int32, ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
+      'rd_kafka_ElectLeaders_new');
+  late final _rd_kafka_ElectLeaders_new =
+      _rd_kafka_ElectLeaders_newPtr.asFunction<
+          ffi.Pointer<rd_kafka_ElectLeaders_t> Function(
+              int, ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+
+  /// @brief Destroy and free a rd_kafka_ElectLeaders_t object previously created
+  /// with rd_kafka_ElectLeaders_new()
+  ///
+  /// @param elect_leaders The rd_kafka_ElectLeaders_t object to be destroyed.
+  void rd_kafka_ElectLeaders_destroy(
+    ffi.Pointer<rd_kafka_ElectLeaders_t> elect_leaders,
+  ) {
+    return _rd_kafka_ElectLeaders_destroy(
+      elect_leaders,
+    );
+  }
+
+  late final _rd_kafka_ElectLeaders_destroyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<rd_kafka_ElectLeaders_t>)>>(
+      'rd_kafka_ElectLeaders_destroy');
+  late final _rd_kafka_ElectLeaders_destroy = _rd_kafka_ElectLeaders_destroyPtr
+      .asFunction<void Function(ffi.Pointer<rd_kafka_ElectLeaders_t>)>();
+
+  /// @brief Elect Leaders for the provided Topic Partitions
+  /// according to the specified election type.
+  ///
+  /// @param rk Client instance.
+  /// @param elect_leaders The elect leaders request containing
+  /// election type and partitions information.
+  /// @param options Optional admin options, or NULL for defaults.
+  /// @param rkqu Queue to emit result on.
+  ///
+  /// Supported admin options:
+  /// - rd_kafka_AdminOptions_set_operation_timeout() - default 60 seconds.
+  /// Controls how long the brokers will wait for records to be deleted.
+  /// - rd_kafka_AdminOptions_set_request_timeout() - default socket.timeout.ms.
+  /// Controls how long \c rdkafka will wait for the request to complete.
+  ///
+  /// @remark The result event type emitted on the supplied queue is of type
+  /// \c RD_KAFKA_EVENT_ELECTLEADERS_RESULT
+  /// @remark If we are passing partitions as NULL, then the broker
+  /// will attempt leader election for all partitions, but the results
+  /// will contain only partitions for which there was an election or
+  /// resulted in an error.
+  void rd_kafka_ElectLeaders(
+    ffi.Pointer<rd_kafka_t> rk,
+    ffi.Pointer<rd_kafka_ElectLeaders_t> elect_leaders,
+    ffi.Pointer<rd_kafka_AdminOptions_t> options,
+    ffi.Pointer<rd_kafka_queue_t> rkqu,
+  ) {
+    return _rd_kafka_ElectLeaders(
+      rk,
+      elect_leaders,
+      options,
+      rkqu,
+    );
+  }
+
+  late final _rd_kafka_ElectLeadersPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Pointer<rd_kafka_t>,
+              ffi.Pointer<rd_kafka_ElectLeaders_t>,
+              ffi.Pointer<rd_kafka_AdminOptions_t>,
+              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_ElectLeaders');
+  late final _rd_kafka_ElectLeaders = _rd_kafka_ElectLeadersPtr.asFunction<
+      void Function(
+          ffi.Pointer<rd_kafka_t>,
+          ffi.Pointer<rd_kafka_ElectLeaders_t>,
+          ffi.Pointer<rd_kafka_AdminOptions_t>,
+          ffi.Pointer<rd_kafka_queue_t>)>();
+
+  /// @brief Get the array of topic partition result objects from the
+  /// elect leaders result event and populates the size of the
+  /// array in \p cntp.
+  ///
+  /// @param result The elect leaders result.
+  /// @param cntp The number of elements in the array.
+  ///
+  /// @returns the array of topic partition result objects from the
+  /// elect leaders result event.
+  ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_result_t>>
+      rd_kafka_ElectLeaders_result_partitions(
+    ffi.Pointer<rd_kafka_ElectLeaders_result_t> result,
+    ffi.Pointer<ffi.Size> cntp,
+  ) {
+    return _rd_kafka_ElectLeaders_result_partitions(
+      result,
+      cntp,
+    );
+  }
+
+  late final _rd_kafka_ElectLeaders_result_partitionsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_result_t>> Function(
+              ffi.Pointer<rd_kafka_ElectLeaders_result_t>,
+              ffi.Pointer<
+                  ffi.Size>)>>('rd_kafka_ElectLeaders_result_partitions');
+  late final _rd_kafka_ElectLeaders_result_partitions =
+      _rd_kafka_ElectLeaders_result_partitionsPtr.asFunction<
+          ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_result_t>> Function(
+              ffi.Pointer<rd_kafka_ElectLeaders_result_t>,
+              ffi.Pointer<ffi.Size>)>();
+
   /// @brief Set SASL/OAUTHBEARER token and metadata
   ///
   /// @param rk Client instance.
@@ -16406,24 +16789,6 @@ final class imaxdiv_t extends ffi.Struct {
 typedef uintmax_t = ffi.UnsignedLong;
 typedef Dartuintmax_t = int;
 
-@ffi.Packed(1)
-final class _OSUnalignedU16 extends ffi.Struct {
-  @ffi.Uint16()
-  external int __val;
-}
-
-@ffi.Packed(1)
-final class _OSUnalignedU32 extends ffi.Struct {
-  @ffi.Uint32()
-  external int __val;
-}
-
-@ffi.Packed(1)
-final class _OSUnalignedU64 extends ffi.Struct {
-  @ffi.Uint64()
-  external int __val;
-}
-
 final class fd_set extends ffi.Struct {
   @ffi.Array.multi([32])
   external ffi.Array<__int32_t> fds_bits;
@@ -16628,6 +16993,8 @@ final class rd_kafka_group_result_s extends ffi.Opaque {}
 final class rd_kafka_acl_result_s extends ffi.Opaque {}
 
 final class rd_kafka_Uuid_s extends ffi.Opaque {}
+
+final class rd_kafka_topic_partition_result_s extends ffi.Opaque {}
 
 /// @enum rd_kafka_resp_err_t
 /// @brief Error codes.
@@ -17156,7 +17523,15 @@ abstract class rd_kafka_resp_err_t {
 
   /// The member epoch is stale
   static const int RD_KAFKA_RESP_ERR_STALE_MEMBER_EPOCH = 113;
-  static const int RD_KAFKA_RESP_ERR_END_ALL = 114;
+
+  /// Client sent a push telemetry request with an invalid or outdated
+  /// subscription ID.
+  static const int RD_KAFKA_RESP_ERR_UNKNOWN_SUBSCRIPTION_ID = 117;
+
+  /// Client sent a push telemetry request larger than the maximum size
+  /// the broker will accept.
+  static const int RD_KAFKA_RESP_ERR_TELEMETRY_TOO_LARGE = 118;
+  static const int RD_KAFKA_RESP_ERR_END_ALL = 119;
 }
 
 /// @brief Error code value, name and description.
@@ -17640,6 +18015,16 @@ abstract class rd_kafka_consumer_group_state_t {
   static const int RD_KAFKA_CONSUMER_GROUP_STATE__CNT = 6;
 }
 
+/// @enum rd_kafka_consumer_group_type_t
+///
+/// @brief Consumer group type.
+abstract class rd_kafka_consumer_group_type_t {
+  static const int RD_KAFKA_CONSUMER_GROUP_TYPE_UNKNOWN = 0;
+  static const int RD_KAFKA_CONSUMER_GROUP_TYPE_CONSUMER = 1;
+  static const int RD_KAFKA_CONSUMER_GROUP_TYPE_CLASSIC = 2;
+  static const int RD_KAFKA_CONSUMER_GROUP_TYPE__CNT = 3;
+}
+
 /// @brief Group information
 final class rd_kafka_group_info extends ffi.Struct {
   /// < Originating broker info
@@ -17763,6 +18148,9 @@ typedef rd_kafka_DescribeUserScramCredentials_result_t = rd_kafka_event_t;
 
 /// ! AlterUserScramCredentials result type
 typedef rd_kafka_AlterUserScramCredentials_result_t = rd_kafka_event_t;
+
+/// ! ElectLeaders result type
+typedef rd_kafka_ElectLeaders_result_t = rd_kafka_event_t;
 
 /// @brief on_conf_set() is called from rd_kafka_*_conf_set() in the order
 /// the interceptors were added.
@@ -18082,6 +18470,7 @@ typedef rd_kafka_interceptor_f_on_broker_state_change_t = ffi.NativeFunction<
         ffi.Pointer<ffi.Void> ic_opaque)>;
 typedef rd_kafka_topic_result_t = rd_kafka_topic_result_s;
 typedef rd_kafka_group_result_t = rd_kafka_group_result_s;
+typedef rd_kafka_topic_partition_result_t = rd_kafka_topic_partition_result_s;
 
 /// @enum rd_kafka_admin_op_t
 ///
@@ -18155,8 +18544,11 @@ abstract class rd_kafka_admin_op_t {
   /// < ListOffsets
   static const int RD_KAFKA_ADMIN_OP_LISTOFFSETS = 21;
 
+  /// < ElectLeaders
+  static const int RD_KAFKA_ADMIN_OP_ELECTLEADERS = 22;
+
   /// < Number of ops defined
-  static const int RD_KAFKA_ADMIN_OP__CNT = 22;
+  static const int RD_KAFKA_ADMIN_OP__CNT = 23;
 }
 
 final class rd_kafka_AdminOptions_s extends ffi.Opaque {}
@@ -18288,8 +18680,11 @@ abstract class rd_kafka_ResourceType_t {
   /// < Broker
   static const int RD_KAFKA_RESOURCE_BROKER = 4;
 
+  /// < Transactional ID
+  static const int RD_KAFKA_RESOURCE_TRANSACTIONAL_ID = 5;
+
   /// < Number of resource types defined
-  static const int RD_KAFKA_RESOURCE__CNT = 5;
+  static const int RD_KAFKA_RESOURCE__CNT = 6;
 }
 
 /// @enum rd_kafka_ResourcePatternType_t
@@ -18476,6 +18871,21 @@ final class rd_kafka_DeleteAcls_result_response_s extends ffi.Opaque {}
 typedef rd_kafka_DeleteAcls_result_response_t
     = rd_kafka_DeleteAcls_result_response_s;
 
+final class rd_kafka_ElectLeaders_s extends ffi.Opaque {}
+
+/// @enum rd_kafka_ElectionType_t
+/// @brief Apache Kafka Election Types
+abstract class rd_kafka_ElectionType_t {
+  /// < Preferred Replica Election
+  static const int RD_KAFKA_ELECTION_TYPE_PREFERRED = 0;
+
+  /// < Unclean Election
+  static const int RD_KAFKA_ELECTION_TYPE_UNCLEAN = 1;
+}
+
+/// @brief Represents elect leaders request.
+typedef rd_kafka_ElectLeaders_t = rd_kafka_ElectLeaders_s;
+
 const int __has_safe_buffers = 1;
 
 const int __DARWIN_ONLY_64_BIT_INO_T = 1;
@@ -18654,6 +19064,10 @@ const int __MAC_14_4 = 140400;
 
 const int __MAC_14_5 = 140500;
 
+const int __MAC_15_0 = 150000;
+
+const int __MAC_15_1 = 150100;
+
 const int __IPHONE_2_0 = 20000;
 
 const int __IPHONE_2_1 = 20100;
@@ -18812,6 +19226,10 @@ const int __IPHONE_17_4 = 170400;
 
 const int __IPHONE_17_5 = 170500;
 
+const int __IPHONE_18_0 = 180000;
+
+const int __IPHONE_18_1 = 180100;
+
 const int __WATCHOS_1_0 = 10000;
 
 const int __WATCHOS_2_0 = 20000;
@@ -18905,6 +19323,10 @@ const int __WATCHOS_10_3 = 100300;
 const int __WATCHOS_10_4 = 100400;
 
 const int __WATCHOS_10_5 = 100500;
+
+const int __WATCHOS_11_0 = 110000;
+
+const int __WATCHOS_11_1 = 110100;
 
 const int __TVOS_9_0 = 90000;
 
@@ -19002,6 +19424,10 @@ const int __TVOS_17_4 = 170400;
 
 const int __TVOS_17_5 = 170500;
 
+const int __TVOS_18_0 = 180000;
+
+const int __TVOS_18_1 = 180100;
+
 const int __BRIDGEOS_2_0 = 20000;
 
 const int __BRIDGEOS_3_0 = 30000;
@@ -19054,6 +19480,10 @@ const int __BRIDGEOS_8_4 = 80400;
 
 const int __BRIDGEOS_8_5 = 80500;
 
+const int __BRIDGEOS_9_0 = 90000;
+
+const int __BRIDGEOS_9_1 = 90100;
+
 const int __DRIVERKIT_19_0 = 190000;
 
 const int __DRIVERKIT_20_0 = 200000;
@@ -19080,11 +19510,19 @@ const int __DRIVERKIT_23_4 = 230400;
 
 const int __DRIVERKIT_23_5 = 230500;
 
+const int __DRIVERKIT_24_0 = 240000;
+
+const int __DRIVERKIT_24_1 = 240100;
+
 const int __VISIONOS_1_0 = 10000;
 
 const int __VISIONOS_1_1 = 10100;
 
 const int __VISIONOS_1_2 = 10200;
+
+const int __VISIONOS_2_0 = 20000;
+
+const int __VISIONOS_2_1 = 20100;
 
 const int MAC_OS_X_VERSION_10_0 = 1000;
 
@@ -19208,9 +19646,13 @@ const int MAC_OS_VERSION_14_4 = 140400;
 
 const int MAC_OS_VERSION_14_5 = 140500;
 
-const int __MAC_OS_X_VERSION_MIN_REQUIRED = 140000;
+const int MAC_OS_VERSION_15_0 = 150000;
 
-const int __MAC_OS_X_VERSION_MAX_ALLOWED = 140500;
+const int MAC_OS_VERSION_15_1 = 150100;
+
+const int __MAC_OS_X_VERSION_MIN_REQUIRED = 150000;
+
+const int __MAC_OS_X_VERSION_MAX_ALLOWED = 150100;
 
 const int __ENABLE_LEGACY_MAC_AVAILABILITY = 1;
 
@@ -19754,13 +20196,13 @@ const int __DARWIN_BIG_ENDIAN = 4321;
 
 const int __DARWIN_PDP_ENDIAN = 3412;
 
-const int __DARWIN_BYTE_ORDER = 1234;
-
 const int LITTLE_ENDIAN = 1234;
 
 const int BIG_ENDIAN = 4321;
 
 const int PDP_ENDIAN = 3412;
+
+const int __DARWIN_BYTE_ORDER = 1234;
 
 const int BYTE_ORDER = 1234;
 
@@ -19971,6 +20413,8 @@ const int SO_NET_SERVICE_TYPE = 4374;
 const int SO_NETSVC_MARKING_LEVEL = 4377;
 
 const int SO_RESOLVER_SIGNATURE = 4401;
+
+const int SO_BINDTODEVICE = 4404;
 
 const int NET_SERVICE_TYPE_BE = 0;
 
@@ -20268,7 +20712,7 @@ const int SHUT_RDWR = 2;
 
 const int LIBRDKAFKA_TYPECHECKS = 1;
 
-const int RD_KAFKA_VERSION = 33816831;
+const int RD_KAFKA_VERSION = 34078975;
 
 const String RD_KAFKA_DEBUG_CONTEXTS =
     'all,generic,broker,topic,metadata,feature,queue,msg,protocol,cgrp,security,fetch,interceptor,plugin,consumer,admin,eos,mock,assignor,conf';
@@ -20372,3 +20816,5 @@ const int RD_KAFKA_EVENT_DESCRIBETOPICS_RESULT = 1048576;
 const int RD_KAFKA_EVENT_DESCRIBECLUSTER_RESULT = 2097152;
 
 const int RD_KAFKA_EVENT_LISTOFFSETS_RESULT = 4194304;
+
+const int RD_KAFKA_EVENT_ELECTLEADERS_RESULT = 8388608;
