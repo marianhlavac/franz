@@ -1,2 +1,2 @@
 lib/librdkafka/bundled/* linguist-vendored
-lib/librdkafka/generated_bindings.dart linguist-generated
+lib/librdkafka/generated_bindings.g.dart linguist-generated

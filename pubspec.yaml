@@ -21,7 +21,7 @@ platforms:
   windows:
 
 ffigen:
-  output: "lib/librdkafka/generated_bindings.dart"
+  output: "lib/librdkafka/generated_bindings.g.dart"
   name: LibRdKafka
   headers:
     entry-points:

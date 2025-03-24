@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 
 import '../src/exceptions.dart';
-import 'generated_bindings.dart';
+import 'generated_bindings.g.dart';
 
 const rootLibraryName = 'package:franz/franz.dart';
 

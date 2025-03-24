@@ -5,7 +5,7 @@ import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-import 'package:franz/librdkafka/generated_bindings.dart';
+import 'package:franz/librdkafka/generated_bindings.g.dart';
 import 'package:franz/librdkafka/loader.dart';
 import 'package:franz/src/utils/uint8list_native.dart';
 

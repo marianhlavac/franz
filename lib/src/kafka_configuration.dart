@@ -3,7 +3,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:franz/src/utils/error_handler.dart';
 
-import '../librdkafka/generated_bindings.dart';
+import '../librdkafka/generated_bindings.g.dart';
 import '../librdkafka/loader.dart';
 import 'exceptions.dart';
 

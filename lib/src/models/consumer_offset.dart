@@ -1,4 +1,4 @@
-import '../../librdkafka/generated_bindings.dart';
+import '../../librdkafka/generated_bindings.g.dart';
 
 class ConsumerOffset {
   final int _offset;
