@@ -1,5 +1,5 @@
 name: franz
-description: A starting point for Dart libraries or applications.
+description: Dart library using librdkafka via FFI
 version: 0.2.0
 repository: https://github.com/marianhlavac/franz
 
