@@ -1,11 +1,17 @@
+import 'dart:convert';
 import 'dart:ffi';
+import 'dart:math';
+import 'dart:typed_data';
 
+import 'package:ffi/ffi.dart';
 import 'package:franz/franz.dart';
 import 'package:franz/librdkafka/loader.dart';
 import 'package:franz/src/utils/error_handler.dart';
+import 'package:franz/src/utils/uint8list_native.dart';
 
 import '../librdkafka/generated_bindings.g.dart';
 import 'exceptions.dart';
+import 'utils/variable_arguments.dart';
 
 part 'kafka_consumer.dart';
 part 'kafka_producer.dart';
