@@ -1,13 +1,19 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:franz/franz.dart';
 
 void main() async {
-  final hostname = Platform.environment["HOSTNAME"] ?? "default";
+  final hostname = Platform.environment["HOSTNAME"] ?? "localhost";
+
+  log("Running example on $hostname");
 
   // Set-up Kafka server
-  final kafka =
-      KafkaServer.redpanda(hostname: hostname, clientId: 'random-franz');
+  final kafka = KafkaServer.redpanda(
+    hostname: hostname,
+    clientId: 'random-franz',
+  );
 
   // Create producer & producing topic
   final producer = kafka.createProducer();
@@ -18,20 +24,32 @@ void main() async {
   final consumeTopic = consumer.useTopic("funnel.telemetry-ua");
 
   // Start consuming & listen to consumer stream
-  final activeConsumer =
-      await consumeTopic.consumeStart(0, ConsumerOffset.end());
+  final activeConsumer = await consumeTopic.consumeStart(
+    0,
+    ConsumerOffset.end(),
+  );
   final listener = activeConsumer.stream.listen((record) {
     final textRecord = record.toTextRecord();
-    print(textRecord.toString());
+    log(textRecord.toString());
   });
 
   // While consumer is consuming, produce some messages, asynchronously ofc
-  while (true) {
-    produceTopic.produceStringMessage(
-        key: "zdar", payload: "no nazdaaaar", partition: 0);
-    await Future.delayed(const Duration(seconds: 2));
+  try {
+    while (true) {
+      produceTopic.produceStringMessage(payload: "simple message");
+      producer.produceStringMessage(
+        topic: "franz.test3",
+        key: "2f7622af-20ce-4c19-8d89-7f8c1090a535",
+        payload: "message with key and headers",
+        headers: {"foo": utf8.encode("bar")},
+      );
+      log("Produced message to franz.test3");
+      await Future.delayed(const Duration(seconds: 1));
+    }
+  } finally {
+    await listener.cancel();
+    await consumeTopic.consumeStop(activeConsumer);
+    producer.dispose();
+    consumeTopic.dispose();
   }
-
-  await listener.cancel();
-  await consumeTopic.consumeStop(activeConsumer);
 }
