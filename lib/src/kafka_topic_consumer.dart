@@ -38,11 +38,12 @@ class KafkaConsumerTopic extends KafkaTopic {
 
       if (message == nullptr) continue;
 
-      if (message.ref.err > 0) {
+      if (message.ref.err.value > 0) {
         if (message.ref.err ==
             rd_kafka_resp_err_t.RD_KAFKA_RESP_ERR__PARTITION_EOF) {
           print(
-              "!! Reached end of topic $name [${message.ref.partition}] at offset ${message.ref.offset}");
+            "!! Reached end of topic $name [${message.ref.partition}] at offset ${message.ref.offset}",
+          );
           // TODO
         } else {
           final errorCstr =

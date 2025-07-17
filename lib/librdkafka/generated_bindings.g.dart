@@ -213,12 +213,12 @@ class LibRdKafka {
 
   ffi.Pointer<ffi.Char> fgets(
     ffi.Pointer<ffi.Char> arg0,
-    int arg1,
+    int __size,
     ffi.Pointer<FILE> arg2,
   ) {
     return _fgets(
       arg0,
-      arg1,
+      __size,
       arg2,
     );
   }
@@ -593,13 +593,13 @@ class LibRdKafka {
     ffi.Pointer<FILE> arg0,
     ffi.Pointer<ffi.Char> arg1,
     int arg2,
-    int arg3,
+    int __size,
   ) {
     return _setvbuf(
       arg0,
       arg1,
       arg2,
-      arg3,
+      __size,
     );
   }
 
@@ -1287,11 +1287,11 @@ class LibRdKafka {
 
   ffi.Pointer<ffi.Char> fgetln(
     ffi.Pointer<FILE> arg0,
-    ffi.Pointer<ffi.Size> arg1,
+    ffi.Pointer<ffi.Size> __len,
   ) {
     return _fgetln(
       arg0,
-      arg1,
+      __len,
     );
   }
 
@@ -1337,12 +1337,12 @@ class LibRdKafka {
   void setbuffer(
     ffi.Pointer<FILE> arg0,
     ffi.Pointer<ffi.Char> arg1,
-    int arg2,
+    int __size,
   ) {
     return _setbuffer(
       arg0,
       arg1,
-      arg2,
+      __size,
     );
   }
 
@@ -1473,14 +1473,14 @@ class LibRdKafka {
 
   int __snprintf_chk(
     ffi.Pointer<ffi.Char> arg0,
-    int arg1,
+    int __maxlen,
     int arg2,
     int arg3,
     ffi.Pointer<ffi.Char> arg4,
   ) {
     return ___snprintf_chk(
       arg0,
-      arg1,
+      __maxlen,
       arg2,
       arg3,
       arg4,
@@ -1521,7 +1521,7 @@ class LibRdKafka {
 
   int __vsnprintf_chk(
     ffi.Pointer<ffi.Char> arg0,
-    int arg1,
+    int __maxlen,
     int arg2,
     int arg3,
     ffi.Pointer<ffi.Char> arg4,
@@ -1529,7 +1529,7 @@ class LibRdKafka {
   ) {
     return ___vsnprintf_chk(
       arg0,
-      arg1,
+      __maxlen,
       arg2,
       arg3,
       arg4,
@@ -2192,15 +2192,15 @@ class LibRdKafka {
   ///
   /// @param err Error code to translate
   ffi.Pointer<ffi.Char> rd_kafka_err2str(
-    int err,
+    rd_kafka_resp_err_t err,
   ) {
     return _rd_kafka_err2str(
-      err,
+      err.value,
     );
   }
 
   late final _rd_kafka_err2strPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int32)>>(
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int)>>(
           'rd_kafka_err2str');
   late final _rd_kafka_err2str =
       _rd_kafka_err2strPtr.asFunction<ffi.Pointer<ffi.Char> Function(int)>();
@@ -2209,15 +2209,15 @@ class LibRdKafka {
   ///
   /// @param err Error code to translate
   ffi.Pointer<ffi.Char> rd_kafka_err2name(
-    int err,
+    rd_kafka_resp_err_t err,
   ) {
     return _rd_kafka_err2name(
-      err,
+      err.value,
     );
   }
 
   late final _rd_kafka_err2namePtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int32)>>(
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int)>>(
           'rd_kafka_err2name');
   late final _rd_kafka_err2name =
       _rd_kafka_err2namePtr.asFunction<ffi.Pointer<ffi.Char> Function(int)>();
@@ -2245,12 +2245,12 @@ class LibRdKafka {
   ///
   /// @remark errno propagation from librdkafka is not safe on Windows
   /// and should not be used, use rd_kafka_last_error() instead.
-  int rd_kafka_last_error() {
-    return _rd_kafka_last_error();
+  rd_kafka_resp_err_t rd_kafka_last_error() {
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_last_error());
   }
 
   late final _rd_kafka_last_errorPtr =
-      _lookup<ffi.NativeFunction<ffi.Int32 Function()>>('rd_kafka_last_error');
+      _lookup<ffi.NativeFunction<ffi.Int Function()>>('rd_kafka_last_error');
   late final _rd_kafka_last_error =
       _rd_kafka_last_errorPtr.asFunction<int Function()>();
 
@@ -2276,16 +2276,16 @@ class LibRdKafka {
   /// set by the legacy librdkafka APIs.
   ///
   /// @sa rd_kafka_last_error()
-  int rd_kafka_errno2err(
+  rd_kafka_resp_err_t rd_kafka_errno2err(
     int errnox,
   ) {
-    return _rd_kafka_errno2err(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_errno2err(
       errnox,
-    );
+    ));
   }
 
   late final _rd_kafka_errno2errPtr =
-      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Int)>>(
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>(
           'rd_kafka_errno2err');
   late final _rd_kafka_errno2err =
       _rd_kafka_errno2errPtr.asFunction<int Function(int)>();
@@ -2332,21 +2332,21 @@ class LibRdKafka {
   ///
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR if no fatal error has been raised, else
   /// any other error code.
-  int rd_kafka_fatal_error(
+  rd_kafka_resp_err_t rd_kafka_fatal_error(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return _rd_kafka_fatal_error(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_fatal_error(
       rk,
       errstr,
       errstr_size,
-    );
+    ));
   }
 
   late final _rd_kafka_fatal_errorPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>,
+          ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>,
               ffi.Size)>>('rd_kafka_fatal_error');
   late final _rd_kafka_fatal_error = _rd_kafka_fatal_errorPtr.asFunction<
       int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>, int)>();
@@ -2366,21 +2366,21 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR if a fatal error was triggered, or
   /// RD_KAFKA_RESP_ERR__PREV_IN_PROGRESS if a previous fatal error
   /// has already been triggered.
-  int rd_kafka_test_fatal_error(
+  rd_kafka_resp_err_t rd_kafka_test_fatal_error(
     ffi.Pointer<rd_kafka_t> rk,
-    int err,
+    rd_kafka_resp_err_t err,
     ffi.Pointer<ffi.Char> reason,
   ) {
-    return _rd_kafka_test_fatal_error(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_test_fatal_error(
       rk,
-      err,
+      err.value,
       reason,
-    );
+    ));
   }
 
   late final _rd_kafka_test_fatal_errorPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(ffi.Pointer<rd_kafka_t>, ffi.Int32,
+          ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Int,
               ffi.Pointer<ffi.Char>)>>('rd_kafka_test_fatal_error');
   late final _rd_kafka_test_fatal_error =
       _rd_kafka_test_fatal_errorPtr.asFunction<
@@ -2388,17 +2388,16 @@ class LibRdKafka {
 
   /// @returns the error code for \p error or RD_KAFKA_RESP_ERR_NO_ERROR if
   /// \p error is NULL.
-  int rd_kafka_error_code(
+  rd_kafka_resp_err_t rd_kafka_error_code(
     ffi.Pointer<rd_kafka_error_t> error,
   ) {
-    return _rd_kafka_error_code(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_error_code(
       error,
-    );
+    ));
   }
 
   late final _rd_kafka_error_codePtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int32 Function(ffi.Pointer<rd_kafka_error_t>)>>(
+          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_error_t>)>>(
       'rd_kafka_error_code');
   late final _rd_kafka_error_code = _rd_kafka_error_codePtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_error_t>)>();
@@ -2522,11 +2521,11 @@ class LibRdKafka {
   ///
   /// The returned object must be destroyed with rd_kafka_error_destroy().
   ffi.Pointer<rd_kafka_error_t> rd_kafka_error_new(
-    int code,
+    rd_kafka_resp_err_t code,
     ffi.Pointer<ffi.Char> fmt,
   ) {
     return _rd_kafka_error_new(
-      code,
+      code.value,
       fmt,
     );
   }
@@ -2534,7 +2533,7 @@ class LibRdKafka {
   late final _rd_kafka_error_newPtr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Int32, ffi.Pointer<ffi.Char>)>>('rd_kafka_error_new');
+              ffi.Int, ffi.Pointer<ffi.Char>)>>('rd_kafka_error_new');
   late final _rd_kafka_error_new = _rd_kafka_error_newPtr.asFunction<
       ffi.Pointer<rd_kafka_error_t> Function(int, ffi.Pointer<ffi.Char>)>();
 
@@ -2796,23 +2795,24 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or
   /// RD_KAFKA_RESP_ERR__UNKNOWN_PARTITION if \p partition was not found
   /// in the list.
-  int rd_kafka_topic_partition_list_set_offset(
+  rd_kafka_resp_err_t rd_kafka_topic_partition_list_set_offset(
     ffi.Pointer<rd_kafka_topic_partition_list_t> rktparlist,
     ffi.Pointer<ffi.Char> topic,
     int partition,
     int offset,
   ) {
-    return _rd_kafka_topic_partition_list_set_offset(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_topic_partition_list_set_offset(
       rktparlist,
       topic,
       partition,
       offset,
-    );
+    ));
   }
 
   late final _rd_kafka_topic_partition_list_set_offsetPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Int32,
@@ -2964,25 +2964,25 @@ class LibRdKafka {
   ///
   /// @returns RD_KAFKA_RESP_ERR__READ_ONLY if the headers are read-only,
   /// else RD_KAFKA_RESP_ERR_NO_ERROR.
-  int rd_kafka_header_add(
+  rd_kafka_resp_err_t rd_kafka_header_add(
     ffi.Pointer<rd_kafka_headers_t> hdrs,
     ffi.Pointer<ffi.Char> name,
-    int name_size,
+    Dart__darwin_ssize_t name_size,
     ffi.Pointer<ffi.Void> value,
-    int value_size,
+    Dart__darwin_ssize_t value_size,
   ) {
-    return _rd_kafka_header_add(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_header_add(
       hdrs,
       name,
       name_size,
       value,
       value_size,
-    );
+    ));
   }
 
   late final _rd_kafka_header_addPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_headers_t>,
               ffi.Pointer<ffi.Char>,
               ssize_t,
@@ -2997,19 +2997,19 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR__READ_ONLY if the headers are read-only,
   /// RD_KAFKA_RESP_ERR__NOENT if no matching headers were found,
   /// else RD_KAFKA_RESP_ERR_NO_ERROR if headers were removed.
-  int rd_kafka_header_remove(
+  rd_kafka_resp_err_t rd_kafka_header_remove(
     ffi.Pointer<rd_kafka_headers_t> hdrs,
     ffi.Pointer<ffi.Char> name,
   ) {
-    return _rd_kafka_header_remove(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_header_remove(
       hdrs,
       name,
-    );
+    ));
   }
 
   late final _rd_kafka_header_removePtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(ffi.Pointer<rd_kafka_headers_t>,
+          ffi.Int Function(ffi.Pointer<rd_kafka_headers_t>,
               ffi.Pointer<ffi.Char>)>>('rd_kafka_header_remove');
   late final _rd_kafka_header_remove = _rd_kafka_header_removePtr.asFunction<
       int Function(ffi.Pointer<rd_kafka_headers_t>, ffi.Pointer<ffi.Char>)>();
@@ -3029,23 +3029,23 @@ class LibRdKafka {
   /// that is not accounted for in \p sizep.
   /// @remark The returned pointer is only valid as long as the headers list and
   /// the header item is valid.
-  int rd_kafka_header_get_last(
+  rd_kafka_resp_err_t rd_kafka_header_get_last(
     ffi.Pointer<rd_kafka_headers_t> hdrs,
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Pointer<ffi.Void>> valuep,
     ffi.Pointer<ffi.Size> sizep,
   ) {
-    return _rd_kafka_header_get_last(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_header_get_last(
       hdrs,
       name,
       valuep,
       sizep,
-    );
+    ));
   }
 
   late final _rd_kafka_header_get_lastPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_headers_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Void>>,
@@ -3066,25 +3066,25 @@ class LibRdKafka {
   /// @param valuep (out) Set to a (null-terminated) const pointer to the value
   /// (may be NULL).
   /// @param sizep  (out) Set to the value's size (not including null-terminator).
-  int rd_kafka_header_get(
+  rd_kafka_resp_err_t rd_kafka_header_get(
     ffi.Pointer<rd_kafka_headers_t> hdrs,
     int idx,
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Pointer<ffi.Void>> valuep,
     ffi.Pointer<ffi.Size> sizep,
   ) {
-    return _rd_kafka_header_get(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_header_get(
       hdrs,
       idx,
       name,
       valuep,
       sizep,
-    );
+    ));
   }
 
   late final _rd_kafka_header_getPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_headers_t>,
               ffi.Size,
               ffi.Pointer<ffi.Char>,
@@ -3099,25 +3099,25 @@ class LibRdKafka {
   /// Same semantics as rd_kafka_header_get()
   ///
   /// @sa rd_kafka_header_get()
-  int rd_kafka_header_get_all(
+  rd_kafka_resp_err_t rd_kafka_header_get_all(
     ffi.Pointer<rd_kafka_headers_t> hdrs,
     int idx,
     ffi.Pointer<ffi.Pointer<ffi.Char>> namep,
     ffi.Pointer<ffi.Pointer<ffi.Void>> valuep,
     ffi.Pointer<ffi.Size> sizep,
   ) {
-    return _rd_kafka_header_get_all(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_header_get_all(
       hdrs,
       idx,
       namep,
       valuep,
       sizep,
-    );
+    ));
   }
 
   late final _rd_kafka_header_get_allPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_headers_t>,
               ffi.Size,
               ffi.Pointer<ffi.Pointer<ffi.Char>>,
@@ -3197,7 +3197,7 @@ class LibRdKafka {
   /// @remark Message timestamps require broker version 0.10.0 or later.
   int rd_kafka_message_timestamp(
     ffi.Pointer<rd_kafka_message_t> rkmessage,
-    ffi.Pointer<ffi.Int32> tstype,
+    ffi.Pointer<ffi.UnsignedInt> tstype,
   ) {
     return _rd_kafka_message_timestamp(
       rkmessage,
@@ -3208,11 +3208,11 @@ class LibRdKafka {
   late final _rd_kafka_message_timestampPtr = _lookup<
       ffi.NativeFunction<
           ffi.Int64 Function(ffi.Pointer<rd_kafka_message_t>,
-              ffi.Pointer<ffi.Int32>)>>('rd_kafka_message_timestamp');
+              ffi.Pointer<ffi.UnsignedInt>)>>('rd_kafka_message_timestamp');
   late final _rd_kafka_message_timestamp =
       _rd_kafka_message_timestampPtr.asFunction<
           int Function(
-              ffi.Pointer<rd_kafka_message_t>, ffi.Pointer<ffi.Int32>)>();
+              ffi.Pointer<rd_kafka_message_t>, ffi.Pointer<ffi.UnsignedInt>)>();
 
   /// @brief Returns the latency for a produced message measured from
   /// the produce() call.
@@ -3266,19 +3266,19 @@ class LibRdKafka {
   ///
   /// @remark As an optimization the raw protocol headers are parsed on
   /// the first call to this function.
-  int rd_kafka_message_headers(
+  rd_kafka_resp_err_t rd_kafka_message_headers(
     ffi.Pointer<rd_kafka_message_t> rkmessage,
     ffi.Pointer<ffi.Pointer<rd_kafka_headers_t>> hdrsp,
   ) {
-    return _rd_kafka_message_headers(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_message_headers(
       rkmessage,
       hdrsp,
-    );
+    ));
   }
 
   late final _rd_kafka_message_headersPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_message_t>,
+              ffi.Int Function(ffi.Pointer<rd_kafka_message_t>,
                   ffi.Pointer<ffi.Pointer<rd_kafka_headers_t>>)>>(
       'rd_kafka_message_headers');
   late final _rd_kafka_message_headers =
@@ -3295,19 +3295,19 @@ class LibRdKafka {
   /// Otherwise same semantics as rd_kafka_message_headers()
   ///
   /// @sa rd_kafka_message_headers
-  int rd_kafka_message_detach_headers(
+  rd_kafka_resp_err_t rd_kafka_message_detach_headers(
     ffi.Pointer<rd_kafka_message_t> rkmessage,
     ffi.Pointer<ffi.Pointer<rd_kafka_headers_t>> hdrsp,
   ) {
-    return _rd_kafka_message_detach_headers(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_message_detach_headers(
       rkmessage,
       hdrsp,
-    );
+    ));
   }
 
   late final _rd_kafka_message_detach_headersPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_message_t>,
+              ffi.Int Function(ffi.Pointer<rd_kafka_message_t>,
                   ffi.Pointer<ffi.Pointer<rd_kafka_headers_t>>)>>(
       'rd_kafka_message_detach_headers');
   late final _rd_kafka_message_detach_headers =
@@ -3367,18 +3367,18 @@ class LibRdKafka {
   ///
   /// @remark The message status is not available in on_acknowledgement
   /// interceptors.
-  int rd_kafka_message_status(
+  rd_kafka_msg_status_t rd_kafka_message_status(
     ffi.Pointer<rd_kafka_message_t> rkmessage,
   ) {
-    return _rd_kafka_message_status(
+    return rd_kafka_msg_status_t.fromValue(_rd_kafka_message_status(
       rkmessage,
-    );
+    ));
   }
 
   late final _rd_kafka_message_statusPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int32 Function(ffi.Pointer<rd_kafka_message_t>)>>(
-      'rd_kafka_message_status');
+      ffi.NativeFunction<
+          ffi.UnsignedInt Function(
+              ffi.Pointer<rd_kafka_message_t>)>>('rd_kafka_message_status');
   late final _rd_kafka_message_status = _rd_kafka_message_statusPtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_message_t>)>();
 
@@ -3662,25 +3662,25 @@ class LibRdKafka {
   ///
   /// @remark Setting properties or values that were disabled at build time due to
   /// missing dependencies will return RD_KAFKA_CONF_INVALID.
-  int rd_kafka_conf_set(
+  rd_kafka_conf_res_t rd_kafka_conf_set(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> value,
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return _rd_kafka_conf_set(
+    return rd_kafka_conf_res_t.fromValue(_rd_kafka_conf_set(
       conf,
       name,
       value,
       errstr,
       errstr_size,
-    );
+    ));
   }
 
   late final _rd_kafka_conf_setPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>,
@@ -3790,7 +3790,7 @@ class LibRdKafka {
                     ffi.Pointer<rd_kafka_t> rk,
                     ffi.Pointer<ffi.Void> payload,
                     ffi.Size len,
-                    ffi.Int32 err,
+                    ffi.Int err,
                     ffi.Pointer<ffi.Void> opaque,
                     ffi.Pointer<ffi.Void> msg_opaque)>>
         dr_cb,
@@ -3811,7 +3811,7 @@ class LibRdKafka {
                               ffi.Pointer<rd_kafka_t> rk,
                               ffi.Pointer<ffi.Void> payload,
                               ffi.Size len,
-                              ffi.Int32 err,
+                              ffi.Int err,
                               ffi.Pointer<ffi.Void> opaque,
                               ffi.Pointer<ffi.Void> msg_opaque)>>)>>(
       'rd_kafka_conf_set_dr_cb');
@@ -3824,7 +3824,7 @@ class LibRdKafka {
                       ffi.Pointer<rd_kafka_t> rk,
                       ffi.Pointer<ffi.Void> payload,
                       ffi.Size len,
-                      ffi.Int32 err,
+                      ffi.Int err,
                       ffi.Pointer<ffi.Void> opaque,
                       ffi.Pointer<ffi.Void> msg_opaque)>>)>();
 
@@ -4041,7 +4041,7 @@ class LibRdKafka {
             ffi.NativeFunction<
                 ffi.Void Function(
                     ffi.Pointer<rd_kafka_t> rk,
-                    ffi.Int32 err,
+                    ffi.Int err,
                     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
                     ffi.Pointer<ffi.Void> opaque)>>
         rebalance_cb,
@@ -4060,7 +4060,7 @@ class LibRdKafka {
                       ffi.NativeFunction<
                           ffi.Void Function(
                               ffi.Pointer<rd_kafka_t> rk,
-                              ffi.Int32 err,
+                              ffi.Int err,
                               ffi.Pointer<rd_kafka_topic_partition_list_t>
                                   partitions,
                               ffi.Pointer<ffi.Void> opaque)>>)>>(
@@ -4073,7 +4073,7 @@ class LibRdKafka {
                   ffi.NativeFunction<
                       ffi.Void Function(
                           ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Int32 err,
+                          ffi.Int err,
                           ffi.Pointer<rd_kafka_topic_partition_list_t>
                               partitions,
                           ffi.Pointer<ffi.Void> opaque)>>)>();
@@ -4099,7 +4099,7 @@ class LibRdKafka {
             ffi.NativeFunction<
                 ffi.Void Function(
                     ffi.Pointer<rd_kafka_t> rk,
-                    ffi.Int32 err,
+                    ffi.Int err,
                     ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
                     ffi.Pointer<ffi.Void> opaque)>>
         offset_commit_cb,
@@ -4119,7 +4119,7 @@ class LibRdKafka {
                           ffi.NativeFunction<
                               ffi.Void Function(
                                   ffi.Pointer<rd_kafka_t> rk,
-                                  ffi.Int32 err,
+                                  ffi.Int err,
                                   ffi.Pointer<rd_kafka_topic_partition_list_t>
                                       offsets,
                                   ffi.Pointer<ffi.Void> opaque)>>)>>(
@@ -4132,7 +4132,7 @@ class LibRdKafka {
                   ffi.NativeFunction<
                       ffi.Void Function(
                           ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Int32 err,
+                          ffi.Int err,
                           ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
                           ffi.Pointer<ffi.Void> opaque)>>)>();
 
@@ -4795,7 +4795,7 @@ class LibRdKafka {
   ///
   /// @remark See <openssl/x509_vfy.h> in the OpenSSL source distribution
   /// for a list of \p x509_error codes.
-  int rd_kafka_conf_set_ssl_cert_verify_cb(
+  rd_kafka_conf_res_t rd_kafka_conf_set_ssl_cert_verify_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
             ffi.NativeFunction<
@@ -4812,15 +4812,15 @@ class LibRdKafka {
                     ffi.Pointer<ffi.Void> opaque)>>
         ssl_cert_verify_cb,
   ) {
-    return _rd_kafka_conf_set_ssl_cert_verify_cb(
+    return rd_kafka_conf_res_t.fromValue(_rd_kafka_conf_set_ssl_cert_verify_cb(
       conf,
       ssl_cert_verify_cb,
-    );
+    ));
   }
 
   late final _rd_kafka_conf_set_ssl_cert_verify_cbPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
+              ffi.Int Function(
                   ffi.Pointer<rd_kafka_conf_t>,
                   ffi.Pointer<
                       ffi.NativeFunction<
@@ -4894,32 +4894,32 @@ class LibRdKafka {
   /// See
   /// https://github.com/openssl/openssl/blob/master/README-PROVIDERS.md for more
   /// information.
-  int rd_kafka_conf_set_ssl_cert(
+  rd_kafka_conf_res_t rd_kafka_conf_set_ssl_cert(
     ffi.Pointer<rd_kafka_conf_t> conf,
-    int cert_type,
-    int cert_enc,
+    rd_kafka_cert_type_t cert_type,
+    rd_kafka_cert_enc_t cert_enc,
     ffi.Pointer<ffi.Void> buffer,
     int size,
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return _rd_kafka_conf_set_ssl_cert(
+    return rd_kafka_conf_res_t.fromValue(_rd_kafka_conf_set_ssl_cert(
       conf,
-      cert_type,
-      cert_enc,
+      cert_type.value,
+      cert_enc.value,
       buffer,
       size,
       errstr,
       errstr_size,
-    );
+    ));
   }
 
   late final _rd_kafka_conf_set_ssl_certPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_conf_t>,
-              ffi.Int32,
-              ffi.Int32,
+              ffi.UnsignedInt,
+              ffi.UnsignedInt,
               ffi.Pointer<ffi.Void>,
               ffi.Size,
               ffi.Pointer<ffi.Char>,
@@ -5074,23 +5074,23 @@ class LibRdKafka {
   ///
   /// @returns \p RD_KAFKA_CONF_OK if the property name matched, else
   /// \p RD_KAFKA_CONF_UNKNOWN.
-  int rd_kafka_conf_get(
+  rd_kafka_conf_res_t rd_kafka_conf_get(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> dest,
     ffi.Pointer<ffi.Size> dest_size,
   ) {
-    return _rd_kafka_conf_get(
+    return rd_kafka_conf_res_t.fromValue(_rd_kafka_conf_get(
       conf,
       name,
       dest,
       dest_size,
-    );
+    ));
   }
 
   late final _rd_kafka_conf_getPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>,
@@ -5102,23 +5102,23 @@ class LibRdKafka {
   /// @brief Retrieve topic configuration value for property \p name.
   ///
   /// @sa rd_kafka_conf_get()
-  int rd_kafka_topic_conf_get(
+  rd_kafka_conf_res_t rd_kafka_topic_conf_get(
     ffi.Pointer<rd_kafka_topic_conf_t> conf,
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> dest,
     ffi.Pointer<ffi.Size> dest_size,
   ) {
-    return _rd_kafka_topic_conf_get(
+    return rd_kafka_conf_res_t.fromValue(_rd_kafka_topic_conf_get(
       conf,
       name,
       dest,
       dest_size,
-    );
+    ));
   }
 
   late final _rd_kafka_topic_conf_getPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_topic_conf_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>,
@@ -5287,25 +5287,25 @@ class LibRdKafka {
   /// with `rd_kafka_topic_conf_new()`.
   ///
   /// @returns rd_kafka_conf_res_t to indicate success or failure.
-  int rd_kafka_topic_conf_set(
+  rd_kafka_conf_res_t rd_kafka_topic_conf_set(
     ffi.Pointer<rd_kafka_topic_conf_t> conf,
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> value,
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return _rd_kafka_topic_conf_set(
+    return rd_kafka_conf_res_t.fromValue(_rd_kafka_topic_conf_set(
       conf,
       name,
       value,
       errstr,
       errstr_size,
-    );
+    ));
   }
 
   late final _rd_kafka_topic_conf_setPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_topic_conf_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>,
@@ -5811,13 +5811,13 @@ class LibRdKafka {
   ///
   /// @sa To destroy the Kafka handle, use rd_kafka_destroy().
   ffi.Pointer<rd_kafka_t> rd_kafka_new(
-    int type,
+    rd_kafka_type_t type,
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
     return _rd_kafka_new(
-      type,
+      type.value,
       conf,
       errstr,
       errstr_size,
@@ -5827,7 +5827,7 @@ class LibRdKafka {
   late final _rd_kafka_newPtr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<rd_kafka_t> Function(
-              ffi.Int32,
+              ffi.UnsignedInt,
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Size)>>('rd_kafka_new');
@@ -5896,17 +5896,17 @@ class LibRdKafka {
       .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_t>)>();
 
   /// @brief Returns Kafka handle type.
-  int rd_kafka_type(
+  rd_kafka_type_t rd_kafka_type(
     ffi.Pointer<rd_kafka_t> rk,
   ) {
-    return _rd_kafka_type(
+    return rd_kafka_type_t.fromValue(_rd_kafka_type(
       rk,
-    );
+    ));
   }
 
-  late final _rd_kafka_typePtr =
-      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<rd_kafka_t>)>>(
-          'rd_kafka_type');
+  late final _rd_kafka_typePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_t>)>>('rd_kafka_type');
   late final _rd_kafka_type =
       _rd_kafka_typePtr.asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
 
@@ -6158,19 +6158,19 @@ class LibRdKafka {
   /// Success or error is returned per-partition \p err in the \p partitions list.
   ///
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR
-  int rd_kafka_pause_partitions(
+  rd_kafka_resp_err_t rd_kafka_pause_partitions(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
   ) {
-    return _rd_kafka_pause_partitions(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_pause_partitions(
       rk,
       partitions,
-    );
+    ));
   }
 
   late final _rd_kafka_pause_partitionsPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_t>,
+              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
                   ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
       'rd_kafka_pause_partitions');
   late final _rd_kafka_pause_partitions =
@@ -6183,19 +6183,19 @@ class LibRdKafka {
   /// Success or error is returned per-partition \p err in the \p partitions list.
   ///
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR
-  int rd_kafka_resume_partitions(
+  rd_kafka_resp_err_t rd_kafka_resume_partitions(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
   ) {
-    return _rd_kafka_resume_partitions(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_resume_partitions(
       rk,
       partitions,
-    );
+    ));
   }
 
   late final _rd_kafka_resume_partitionsPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_t>,
+              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
                   ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
       'rd_kafka_resume_partitions');
   late final _rd_kafka_resume_partitions =
@@ -6209,7 +6209,7 @@ class LibRdKafka {
   /// Offsets are returned in \p *low and \p *high respectively.
   ///
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or an error code on failure.
-  int rd_kafka_query_watermark_offsets(
+  rd_kafka_resp_err_t rd_kafka_query_watermark_offsets(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> topic,
     int partition,
@@ -6217,19 +6217,19 @@ class LibRdKafka {
     ffi.Pointer<ffi.Int64> high,
     int timeout_ms,
   ) {
-    return _rd_kafka_query_watermark_offsets(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_query_watermark_offsets(
       rk,
       topic,
       partition,
       low,
       high,
       timeout_ms,
-    );
+    ));
   }
 
   late final _rd_kafka_query_watermark_offsetsPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Int32,
@@ -6255,25 +6255,25 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or an error code on failure.
   ///
   /// @remark Shall only be used with an active consumer instance.
-  int rd_kafka_get_watermark_offsets(
+  rd_kafka_resp_err_t rd_kafka_get_watermark_offsets(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> topic,
     int partition,
     ffi.Pointer<ffi.Int64> low,
     ffi.Pointer<ffi.Int64> high,
   ) {
-    return _rd_kafka_get_watermark_offsets(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_get_watermark_offsets(
       rk,
       topic,
       partition,
       low,
       high,
-    );
+    ));
   }
 
   late final _rd_kafka_get_watermark_offsetsPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Int32,
@@ -6307,21 +6307,21 @@ class LibRdKafka {
   /// RD_KAFKA_RESP_ERR__UNKNOWN_PARTITION if all partitions are unknown,
   /// RD_KAFKA_RESP_ERR_LEADER_NOT_AVAILABLE if unable to query leaders
   /// for the given partitions.
-  int rd_kafka_offsets_for_times(
+  rd_kafka_resp_err_t rd_kafka_offsets_for_times(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
     int timeout_ms,
   ) {
-    return _rd_kafka_offsets_for_times(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_offsets_for_times(
       rk,
       offsets,
       timeout_ms,
-    );
+    ));
   }
 
   late final _rd_kafka_offsets_for_timesPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
               ffi.Int)>>('rd_kafka_offsets_for_times');
@@ -6695,19 +6695,19 @@ class LibRdKafka {
   ///
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or an error code on error,
   /// eg RD_KAFKA_RESP_ERR__NOT_CONFIGURED when log.queue is not set to true.
-  int rd_kafka_set_log_queue(
+  rd_kafka_resp_err_t rd_kafka_set_log_queue(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_set_log_queue(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_set_log_queue(
       rk,
       rkqu,
-    );
+    ));
   }
 
   late final _rd_kafka_set_log_queuePtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(ffi.Pointer<rd_kafka_t>,
+          ffi.Int Function(ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_set_log_queue');
   late final _rd_kafka_set_log_queue = _rd_kafka_set_log_queuePtr.asFunction<
       int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<rd_kafka_queue_t>)>();
@@ -6975,24 +6975,24 @@ class LibRdKafka {
   /// @returns `RD_KAFKA_RESP_ERR__NO_ERROR` on success else an error code.
   ///
   /// @deprecated Use rd_kafka_seek_partitions().
-  int rd_kafka_seek(
+  rd_kafka_resp_err_t rd_kafka_seek(
     ffi.Pointer<rd_kafka_topic_t> rkt,
     int partition,
     int offset,
     int timeout_ms,
   ) {
-    return _rd_kafka_seek(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_seek(
       rkt,
       partition,
       offset,
       timeout_ms,
-    );
+    ));
   }
 
   late final _rd_kafka_seekPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Int32,
-              ffi.Int64, ffi.Int)>>('rd_kafka_seek');
+          ffi.Int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Int32, ffi.Int64,
+              ffi.Int)>>('rd_kafka_seek');
   late final _rd_kafka_seek = _rd_kafka_seekPtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_topic_t>, int, int, int)>();
 
@@ -7341,21 +7341,21 @@ class LibRdKafka {
   /// this API.
   ///
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or an error code on error.
-  int rd_kafka_offset_store(
+  rd_kafka_resp_err_t rd_kafka_offset_store(
     ffi.Pointer<rd_kafka_topic_t> rkt,
     int partition,
     int offset,
   ) {
-    return _rd_kafka_offset_store(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_offset_store(
       rkt,
       partition,
       offset,
-    );
+    ));
   }
 
   late final _rd_kafka_offset_storePtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Int32,
+          ffi.Int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Int32,
               ffi.Int64)>>('rd_kafka_offset_store');
   late final _rd_kafka_offset_store = _rd_kafka_offset_storePtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_topic_t>, int, int)>();
@@ -7390,19 +7390,19 @@ class LibRdKafka {
   /// is true, or
   /// RD_KAFKA_RESP_ERR__UNKNOWN_PARTITION or RD_KAFKA_RESP_ERR__STATE
   /// if none of the offsets could be stored.
-  int rd_kafka_offsets_store(
+  rd_kafka_resp_err_t rd_kafka_offsets_store(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
   ) {
-    return _rd_kafka_offsets_store(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_offsets_store(
       rk,
       offsets,
-    );
+    ));
   }
 
   late final _rd_kafka_offsets_storePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_t>,
+              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
                   ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
       'rd_kafka_offsets_store');
   late final _rd_kafka_offsets_store = _rd_kafka_offsets_storePtr.asFunction<
@@ -7483,19 +7483,19 @@ class LibRdKafka {
   /// RD_KAFKA_RESP_ERR__INVALID_ARG if list is empty, contains invalid
   /// topics or regexes or duplicate entries,
   /// RD_KAFKA_RESP_ERR__FATAL if the consumer has raised a fatal error.
-  int rd_kafka_subscribe(
+  rd_kafka_resp_err_t rd_kafka_subscribe(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> topics,
   ) {
-    return _rd_kafka_subscribe(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_subscribe(
       rk,
       topics,
-    );
+    ));
   }
 
   late final _rd_kafka_subscribePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_t>,
+              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
                   ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
       'rd_kafka_subscribe');
   late final _rd_kafka_subscribe = _rd_kafka_subscribePtr.asFunction<
@@ -7503,16 +7503,16 @@ class LibRdKafka {
           ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
 
   /// @brief Unsubscribe from the current subscription set.
-  int rd_kafka_unsubscribe(
+  rd_kafka_resp_err_t rd_kafka_unsubscribe(
     ffi.Pointer<rd_kafka_t> rk,
   ) {
-    return _rd_kafka_unsubscribe(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_unsubscribe(
       rk,
-    );
+    ));
   }
 
   late final _rd_kafka_unsubscribePtr =
-      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<rd_kafka_t>)>>(
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>)>>(
           'rd_kafka_unsubscribe');
   late final _rd_kafka_unsubscribe = _rd_kafka_unsubscribePtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
@@ -7524,19 +7524,19 @@ class LibRdKafka {
   ///
   /// @remark The application is responsible for calling
   /// rd_kafka_topic_partition_list_destroy on the returned list.
-  int rd_kafka_subscription(
+  rd_kafka_resp_err_t rd_kafka_subscription(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_list_t>> topics,
   ) {
-    return _rd_kafka_subscription(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_subscription(
       rk,
       topics,
-    );
+    ));
   }
 
   late final _rd_kafka_subscriptionPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_t>,
+              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
                   ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_list_t>>)>>(
       'rd_kafka_subscription');
   late final _rd_kafka_subscription = _rd_kafka_subscriptionPtr.asFunction<
@@ -7601,16 +7601,16 @@ class LibRdKafka {
   ///
   /// @remark The application still needs to call rd_kafka_destroy() after
   /// this call finishes to clean up the underlying handle resources.
-  int rd_kafka_consumer_close(
+  rd_kafka_resp_err_t rd_kafka_consumer_close(
     ffi.Pointer<rd_kafka_t> rk,
   ) {
-    return _rd_kafka_consumer_close(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_consumer_close(
       rk,
-    );
+    ));
   }
 
   late final _rd_kafka_consumer_closePtr =
-      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<rd_kafka_t>)>>(
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>)>>(
           'rd_kafka_consumer_close');
   late final _rd_kafka_consumer_close = _rd_kafka_consumer_closePtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
@@ -7783,19 +7783,19 @@ class LibRdKafka {
   /// @returns An error code indicating if the new assignment was applied or not.
   /// RD_KAFKA_RESP_ERR__FATAL is returned if the consumer has raised
   /// a fatal error.
-  int rd_kafka_assign(
+  rd_kafka_resp_err_t rd_kafka_assign(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
   ) {
-    return _rd_kafka_assign(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_assign(
       rk,
       partitions,
-    );
+    ));
   }
 
   late final _rd_kafka_assignPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_t>,
+              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
                   ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
       'rd_kafka_assign');
   late final _rd_kafka_assign = _rd_kafka_assignPtr.asFunction<
@@ -7816,19 +7816,19 @@ class LibRdKafka {
   /// instance by the consumer group leader.
   /// They are usually the same following a rebalance but not necessarily
   /// since an application is free to assign any partitions.
-  int rd_kafka_assignment(
+  rd_kafka_resp_err_t rd_kafka_assignment(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_list_t>> partitions,
   ) {
-    return _rd_kafka_assignment(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_assignment(
       rk,
       partitions,
-    );
+    ));
   }
 
   late final _rd_kafka_assignmentPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_t>,
+              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
                   ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_list_t>>)>>(
       'rd_kafka_assignment');
   late final _rd_kafka_assignment = _rd_kafka_assignmentPtr.asFunction<
@@ -7896,21 +7896,21 @@ class LibRdKafka {
   /// This error code is permanent, uncommitted messages will be
   /// reprocessed by this or a different member and committed there.
   /// Partition level error is also set in the \p offsets.
-  int rd_kafka_commit(
+  rd_kafka_resp_err_t rd_kafka_commit(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
-    int async1,
+    int async$,
   ) {
-    return _rd_kafka_commit(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_commit(
       rk,
       offsets,
-      async1,
-    );
+      async$,
+    ));
   }
 
   late final _rd_kafka_commitPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
               ffi.Int)>>('rd_kafka_commit');
@@ -7922,21 +7922,21 @@ class LibRdKafka {
   /// The committed offset is the message's offset + 1.
   ///
   /// @sa rd_kafka_commit
-  int rd_kafka_commit_message(
+  rd_kafka_resp_err_t rd_kafka_commit_message(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_message_t> rkmessage,
-    int async1,
+    int async$,
   ) {
-    return _rd_kafka_commit_message(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_commit_message(
       rk,
       rkmessage,
-      async1,
-    );
+      async$,
+    ));
   }
 
   late final _rd_kafka_commit_messagePtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_message_t>,
               ffi.Int)>>('rd_kafka_commit_message');
@@ -7964,7 +7964,7 @@ class LibRdKafka {
   ///
   /// @sa rd_kafka_commit()
   /// @sa rd_kafka_conf_set_offset_commit_cb()
-  int rd_kafka_commit_queue(
+  rd_kafka_resp_err_t rd_kafka_commit_queue(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
@@ -7972,24 +7972,24 @@ class LibRdKafka {
             ffi.NativeFunction<
                 ffi.Void Function(
                     ffi.Pointer<rd_kafka_t> rk,
-                    ffi.Int32 err,
+                    ffi.Int err,
                     ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
                     ffi.Pointer<ffi.Void> commit_opaque)>>
         cb,
     ffi.Pointer<ffi.Void> commit_opaque,
   ) {
-    return _rd_kafka_commit_queue(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_commit_queue(
       rk,
       offsets,
       rkqu,
       cb,
       commit_opaque,
-    );
+    ));
   }
 
   late final _rd_kafka_commit_queuePtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
               ffi.Pointer<rd_kafka_queue_t>,
@@ -7997,7 +7997,7 @@ class LibRdKafka {
                   ffi.NativeFunction<
                       ffi.Void Function(
                           ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Int32 err,
+                          ffi.Int err,
                           ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
                           ffi.Pointer<ffi.Void> commit_opaque)>>,
               ffi.Pointer<ffi.Void>)>>('rd_kafka_commit_queue');
@@ -8010,7 +8010,7 @@ class LibRdKafka {
               ffi.NativeFunction<
                   ffi.Void Function(
                       ffi.Pointer<rd_kafka_t> rk,
-                      ffi.Int32 err,
+                      ffi.Int err,
                       ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
                       ffi.Pointer<ffi.Void> commit_opaque)>>,
           ffi.Pointer<ffi.Void>)>();
@@ -8030,21 +8030,21 @@ class LibRdKafka {
   /// \p offset or \p err field of each \p partitions' element is filled
   /// in with the stored offset, or a partition specific error.
   /// Else returns an error code.
-  int rd_kafka_committed(
+  rd_kafka_resp_err_t rd_kafka_committed(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
     int timeout_ms,
   ) {
-    return _rd_kafka_committed(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_committed(
       rk,
       partitions,
       timeout_ms,
-    );
+    ));
   }
 
   late final _rd_kafka_committedPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
               ffi.Int)>>('rd_kafka_committed');
@@ -8066,19 +8066,19 @@ class LibRdKafka {
   /// \p offset or \p err field of each \p partitions' element is filled
   /// in with the stored offset, or a partition specific error.
   /// Else returns an error code.
-  int rd_kafka_position(
+  rd_kafka_resp_err_t rd_kafka_position(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
   ) {
-    return _rd_kafka_position(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_position(
       rk,
       partitions,
-    );
+    ));
   }
 
   late final _rd_kafka_positionPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_t>,
+              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
                   ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
       'rd_kafka_position');
   late final _rd_kafka_position = _rd_kafka_positionPtr.asFunction<
@@ -8537,16 +8537,16 @@ class LibRdKafka {
   /// _V_HEADERS are mixed.
   ///
   /// @sa rd_kafka_produce, rd_kafka_produceva, RD_KAFKA_V_END
-  int rd_kafka_producev(
+  rd_kafka_resp_err_t rd_kafka_producev(
     ffi.Pointer<rd_kafka_t> rk,
   ) {
-    return _rd_kafka_producev(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_producev(
       rk,
-    );
+    ));
   }
 
   late final _rd_kafka_producevPtr =
-      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<rd_kafka_t>)>>(
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>)>>(
           'rd_kafka_producev');
   late final _rd_kafka_producev =
       _rd_kafka_producevPtr.asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
@@ -8657,20 +8657,20 @@ class LibRdKafka {
   /// outstanding requests were completed, else RD_KAFKA_RESP_ERR_NO_ERROR
   ///
   /// @sa rd_kafka_outq_len()
-  int rd_kafka_flush(
+  rd_kafka_resp_err_t rd_kafka_flush(
     ffi.Pointer<rd_kafka_t> rk,
     int timeout_ms,
   ) {
-    return _rd_kafka_flush(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_flush(
       rk,
       timeout_ms,
-    );
+    ));
   }
 
   late final _rd_kafka_flushPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int32 Function(
-              ffi.Pointer<rd_kafka_t>, ffi.Int)>>('rd_kafka_flush');
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Int)>>(
+      'rd_kafka_flush');
   late final _rd_kafka_flush = _rd_kafka_flushPtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_t>, int)>();
 
@@ -8702,20 +8702,20 @@ class LibRdKafka {
   /// or unknown,
   /// RD_KAFKA_RESP_ERR__NOT_IMPLEMENTED if called on a non-producer
   /// client instance.
-  int rd_kafka_purge(
+  rd_kafka_resp_err_t rd_kafka_purge(
     ffi.Pointer<rd_kafka_t> rk,
     int purge_flags,
   ) {
-    return _rd_kafka_purge(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_purge(
       rk,
       purge_flags,
-    );
+    ));
   }
 
   late final _rd_kafka_purgePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int32 Function(
-              ffi.Pointer<rd_kafka_t>, ffi.Int)>>('rd_kafka_purge');
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Int)>>(
+      'rd_kafka_purge');
   late final _rd_kafka_purge = _rd_kafka_purgePtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_t>, int)>();
 
@@ -8737,31 +8737,31 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success (in which case *metadatap)
   /// will be set, else RD_KAFKA_RESP_ERR__TIMED_OUT on timeout or
   /// other error code on error.
-  int rd_kafka_metadata1(
+  rd_kafka_resp_err_t rd_kafka_metadata$1(
     ffi.Pointer<rd_kafka_t> rk,
     int all_topics,
     ffi.Pointer<rd_kafka_topic_t> only_rkt,
     ffi.Pointer<ffi.Pointer<rd_kafka_metadata>> metadatap,
     int timeout_ms,
   ) {
-    return _rd_kafka_metadata1(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_metadata$1(
       rk,
       all_topics,
       only_rkt,
       metadatap,
       timeout_ms,
-    );
+    ));
   }
 
-  late final _rd_kafka_metadata1Ptr = _lookup<
+  late final _rd_kafka_metadata$1Ptr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Int,
               ffi.Pointer<rd_kafka_topic_t>,
               ffi.Pointer<ffi.Pointer<rd_kafka_metadata>>,
               ffi.Int)>>('rd_kafka_metadata');
-  late final _rd_kafka_metadata1 = _rd_kafka_metadata1Ptr.asFunction<
+  late final _rd_kafka_metadata$1 = _rd_kafka_metadata$1Ptr.asFunction<
       int Function(ffi.Pointer<rd_kafka_t>, int, ffi.Pointer<rd_kafka_topic_t>,
           ffi.Pointer<ffi.Pointer<rd_kafka_metadata>>, int)>();
 
@@ -8891,23 +8891,23 @@ class LibRdKafka {
   ///
   /// @deprecated Use rd_kafka_ListConsumerGroups() and
   /// rd_kafka_DescribeConsumerGroups() instead.
-  int rd_kafka_list_groups(
+  rd_kafka_resp_err_t rd_kafka_list_groups(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> group,
     ffi.Pointer<ffi.Pointer<rd_kafka_group_list>> grplistp,
     int timeout_ms,
   ) {
-    return _rd_kafka_list_groups(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_list_groups(
       rk,
       group,
       grplistp,
       timeout_ms,
-    );
+    ));
   }
 
   late final _rd_kafka_list_groupsPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<rd_kafka_group_list>>,
@@ -8922,16 +8922,16 @@ class LibRdKafka {
   ///
   /// @return The group state name corresponding to the provided group state value.
   ffi.Pointer<ffi.Char> rd_kafka_consumer_group_state_name(
-    int state,
+    rd_kafka_consumer_group_state_t state,
   ) {
     return _rd_kafka_consumer_group_state_name(
-      state,
+      state.value,
     );
   }
 
-  late final _rd_kafka_consumer_group_state_namePtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int32)>>(
-          'rd_kafka_consumer_group_state_name');
+  late final _rd_kafka_consumer_group_state_namePtr = _lookup<
+          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>>(
+      'rd_kafka_consumer_group_state_name');
   late final _rd_kafka_consumer_group_state_name =
       _rd_kafka_consumer_group_state_namePtr
           .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
@@ -8941,17 +8941,18 @@ class LibRdKafka {
   /// @param name The state name.
   ///
   /// @return The group state value corresponding to the provided group state name.
-  int rd_kafka_consumer_group_state_code(
+  rd_kafka_consumer_group_state_t rd_kafka_consumer_group_state_code(
     ffi.Pointer<ffi.Char> name,
   ) {
-    return _rd_kafka_consumer_group_state_code(
+    return rd_kafka_consumer_group_state_t
+        .fromValue(_rd_kafka_consumer_group_state_code(
       name,
-    );
+    ));
   }
 
-  late final _rd_kafka_consumer_group_state_codePtr =
-      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<ffi.Char>)>>(
-          'rd_kafka_consumer_group_state_code');
+  late final _rd_kafka_consumer_group_state_codePtr = _lookup<
+          ffi.NativeFunction<ffi.UnsignedInt Function(ffi.Pointer<ffi.Char>)>>(
+      'rd_kafka_consumer_group_state_code');
   late final _rd_kafka_consumer_group_state_code =
       _rd_kafka_consumer_group_state_codePtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
@@ -8962,16 +8963,16 @@ class LibRdKafka {
   ///
   /// @return The group type name corresponding to the provided group type value.
   ffi.Pointer<ffi.Char> rd_kafka_consumer_group_type_name(
-    int type,
+    rd_kafka_consumer_group_type_t type,
   ) {
     return _rd_kafka_consumer_group_type_name(
-      type,
+      type.value,
     );
   }
 
-  late final _rd_kafka_consumer_group_type_namePtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int32)>>(
-          'rd_kafka_consumer_group_type_name');
+  late final _rd_kafka_consumer_group_type_namePtr = _lookup<
+          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>>(
+      'rd_kafka_consumer_group_type_name');
   late final _rd_kafka_consumer_group_type_name =
       _rd_kafka_consumer_group_type_namePtr
           .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
@@ -8983,17 +8984,18 @@ class LibRdKafka {
   /// @remark The comparison is case-insensitive.
   ///
   /// @return The group type value corresponding to the provided group type name.
-  int rd_kafka_consumer_group_type_code(
+  rd_kafka_consumer_group_type_t rd_kafka_consumer_group_type_code(
     ffi.Pointer<ffi.Char> name,
   ) {
-    return _rd_kafka_consumer_group_type_code(
+    return rd_kafka_consumer_group_type_t
+        .fromValue(_rd_kafka_consumer_group_type_code(
       name,
-    );
+    ));
   }
 
-  late final _rd_kafka_consumer_group_type_codePtr =
-      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<ffi.Char>)>>(
-          'rd_kafka_consumer_group_type_code');
+  late final _rd_kafka_consumer_group_type_codePtr = _lookup<
+          ffi.NativeFunction<ffi.UnsignedInt Function(ffi.Pointer<ffi.Char>)>>(
+      'rd_kafka_consumer_group_type_code');
   late final _rd_kafka_consumer_group_type_code =
       _rd_kafka_consumer_group_type_codePtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
@@ -9290,16 +9292,16 @@ class LibRdKafka {
   ///
   /// @warning It is not permitted to call rd_kafka_poll() after directing the
   /// main queue with rd_kafka_poll_set_consumer().
-  int rd_kafka_poll_set_consumer(
+  rd_kafka_resp_err_t rd_kafka_poll_set_consumer(
     ffi.Pointer<rd_kafka_t> rk,
   ) {
-    return _rd_kafka_poll_set_consumer(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_poll_set_consumer(
       rk,
-    );
+    ));
   }
 
   late final _rd_kafka_poll_set_consumerPtr =
-      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<rd_kafka_t>)>>(
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>)>>(
           'rd_kafka_poll_set_consumer');
   late final _rd_kafka_poll_set_consumer = _rd_kafka_poll_set_consumerPtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
@@ -9477,17 +9479,16 @@ class LibRdKafka {
   ///
   /// Event types:
   /// - all
-  int rd_kafka_event_error(
+  rd_kafka_resp_err_t rd_kafka_event_error(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_error(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_event_error(
       rkev,
-    );
+    ));
   }
 
   late final _rd_kafka_event_errorPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int32 Function(ffi.Pointer<rd_kafka_event_t>)>>(
+          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_event_t>)>>(
       'rd_kafka_event_error');
   late final _rd_kafka_event_error = _rd_kafka_event_errorPtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_event_t>)>();
@@ -10370,23 +10371,24 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or RD_KAFKA_RESP_ERR__CONFLICT
   /// if an existing interceptor with the same \p ic_name and function
   /// has already been added to \p conf.
-  int rd_kafka_conf_interceptor_add_on_conf_set(
+  rd_kafka_resp_err_t rd_kafka_conf_interceptor_add_on_conf_set(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_conf_set_t> on_conf_set,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return _rd_kafka_conf_interceptor_add_on_conf_set(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_conf_interceptor_add_on_conf_set(
       conf,
       ic_name,
       on_conf_set,
       ic_opaque,
-    );
+    ));
   }
 
   late final _rd_kafka_conf_interceptor_add_on_conf_setPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
+              ffi.Int Function(
                   ffi.Pointer<rd_kafka_conf_t>,
                   ffi.Pointer<ffi.Char>,
                   ffi.Pointer<rd_kafka_interceptor_f_on_conf_set_t>,
@@ -10410,23 +10412,24 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or RD_KAFKA_RESP_ERR__CONFLICT
   /// if an existing interceptor with the same \p ic_name and function
   /// has already been added to \p conf.
-  int rd_kafka_conf_interceptor_add_on_conf_dup(
+  rd_kafka_resp_err_t rd_kafka_conf_interceptor_add_on_conf_dup(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_conf_dup_t> on_conf_dup,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return _rd_kafka_conf_interceptor_add_on_conf_dup(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_conf_interceptor_add_on_conf_dup(
       conf,
       ic_name,
       on_conf_dup,
       ic_opaque,
-    );
+    ));
   }
 
   late final _rd_kafka_conf_interceptor_add_on_conf_dupPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
+              ffi.Int Function(
                   ffi.Pointer<rd_kafka_conf_t>,
                   ffi.Pointer<ffi.Char>,
                   ffi.Pointer<rd_kafka_interceptor_f_on_conf_dup_t>,
@@ -10451,23 +10454,24 @@ class LibRdKafka {
   ///
   /// @remark Multiple on_conf_destroy() interceptors are allowed to be added
   /// to the same configuration object.
-  int rd_kafka_conf_interceptor_add_on_conf_destroy(
+  rd_kafka_resp_err_t rd_kafka_conf_interceptor_add_on_conf_destroy(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_conf_destroy_t> on_conf_destroy,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return _rd_kafka_conf_interceptor_add_on_conf_destroy(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_conf_interceptor_add_on_conf_destroy(
       conf,
       ic_name,
       on_conf_destroy,
       ic_opaque,
-    );
+    ));
   }
 
   late final _rd_kafka_conf_interceptor_add_on_conf_destroyPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
+              ffi.Int Function(
                   ffi.Pointer<rd_kafka_conf_t>,
                   ffi.Pointer<ffi.Char>,
                   ffi.Pointer<rd_kafka_interceptor_f_on_conf_destroy_t>,
@@ -10500,23 +10504,23 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or RD_KAFKA_RESP_ERR__CONFLICT
   /// if an existing interceptor with the same \p ic_name and function
   /// has already been added to \p conf.
-  int rd_kafka_conf_interceptor_add_on_new(
+  rd_kafka_resp_err_t rd_kafka_conf_interceptor_add_on_new(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_new_t> on_new,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return _rd_kafka_conf_interceptor_add_on_new(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_conf_interceptor_add_on_new(
       conf,
       ic_name,
       on_new,
       ic_opaque,
-    );
+    ));
   }
 
   late final _rd_kafka_conf_interceptor_add_on_newPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_new_t>,
@@ -10539,23 +10543,23 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or RD_KAFKA_RESP_ERR__CONFLICT
   /// if an existing interceptor with the same \p ic_name and function
   /// has already been added to \p conf.
-  int rd_kafka_interceptor_add_on_destroy(
+  rd_kafka_resp_err_t rd_kafka_interceptor_add_on_destroy(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_destroy_t> on_destroy,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return _rd_kafka_interceptor_add_on_destroy(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_interceptor_add_on_destroy(
       rk,
       ic_name,
       on_destroy,
       ic_opaque,
-    );
+    ));
   }
 
   late final _rd_kafka_interceptor_add_on_destroyPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_destroy_t>,
@@ -10578,23 +10582,23 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or RD_KAFKA_RESP_ERR__CONFLICT
   /// if an existing intercepted with the same \p ic_name and function
   /// has already been added to \p conf.
-  int rd_kafka_interceptor_add_on_send(
+  rd_kafka_resp_err_t rd_kafka_interceptor_add_on_send(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_send_t> on_send,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return _rd_kafka_interceptor_add_on_send(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_interceptor_add_on_send(
       rk,
       ic_name,
       on_send,
       ic_opaque,
-    );
+    ));
   }
 
   late final _rd_kafka_interceptor_add_on_sendPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_send_t>,
@@ -10617,23 +10621,24 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or RD_KAFKA_RESP_ERR__CONFLICT
   /// if an existing interceptor with the same \p ic_name and function
   /// has already been added to \p conf.
-  int rd_kafka_interceptor_add_on_acknowledgement(
+  rd_kafka_resp_err_t rd_kafka_interceptor_add_on_acknowledgement(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_acknowledgement_t> on_acknowledgement,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return _rd_kafka_interceptor_add_on_acknowledgement(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_interceptor_add_on_acknowledgement(
       rk,
       ic_name,
       on_acknowledgement,
       ic_opaque,
-    );
+    ));
   }
 
   late final _rd_kafka_interceptor_add_on_acknowledgementPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
+              ffi.Int Function(
                   ffi.Pointer<rd_kafka_t>,
                   ffi.Pointer<ffi.Char>,
                   ffi.Pointer<rd_kafka_interceptor_f_on_acknowledgement_t>,
@@ -10657,23 +10662,23 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or RD_KAFKA_RESP_ERR__CONFLICT
   /// if an existing interceptor with the same \p ic_name and function
   /// has already been added to \p conf.
-  int rd_kafka_interceptor_add_on_consume(
+  rd_kafka_resp_err_t rd_kafka_interceptor_add_on_consume(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_consume_t> on_consume,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return _rd_kafka_interceptor_add_on_consume(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_interceptor_add_on_consume(
       rk,
       ic_name,
       on_consume,
       ic_opaque,
-    );
+    ));
   }
 
   late final _rd_kafka_interceptor_add_on_consumePtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_consume_t>,
@@ -10696,23 +10701,23 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or RD_KAFKA_RESP_ERR__CONFLICT
   /// if an existing interceptor with the same \p ic_name and function
   /// has already been added to \p conf.
-  int rd_kafka_interceptor_add_on_commit(
+  rd_kafka_resp_err_t rd_kafka_interceptor_add_on_commit(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_commit_t> on_commit,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return _rd_kafka_interceptor_add_on_commit(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_interceptor_add_on_commit(
       rk,
       ic_name,
       on_commit,
       ic_opaque,
-    );
+    ));
   }
 
   late final _rd_kafka_interceptor_add_on_commitPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_commit_t>,
@@ -10735,23 +10740,24 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or RD_KAFKA_RESP_ERR__CONFLICT
   /// if an existing interceptor with the same \p ic_name and function
   /// has already been added to \p conf.
-  int rd_kafka_interceptor_add_on_request_sent(
+  rd_kafka_resp_err_t rd_kafka_interceptor_add_on_request_sent(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_request_sent_t> on_request_sent,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return _rd_kafka_interceptor_add_on_request_sent(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_interceptor_add_on_request_sent(
       rk,
       ic_name,
       on_request_sent,
       ic_opaque,
-    );
+    ));
   }
 
   late final _rd_kafka_interceptor_add_on_request_sentPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
+              ffi.Int Function(
                   ffi.Pointer<rd_kafka_t>,
                   ffi.Pointer<ffi.Char>,
                   ffi.Pointer<rd_kafka_interceptor_f_on_request_sent_t>,
@@ -10775,24 +10781,25 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or RD_KAFKA_RESP_ERR__CONFLICT
   /// if an existing interceptor with the same \p ic_name and function
   /// has already been added to \p conf.
-  int rd_kafka_interceptor_add_on_response_received(
+  rd_kafka_resp_err_t rd_kafka_interceptor_add_on_response_received(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_response_received_t>
         on_response_received,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return _rd_kafka_interceptor_add_on_response_received(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_interceptor_add_on_response_received(
       rk,
       ic_name,
       on_response_received,
       ic_opaque,
-    );
+    ));
   }
 
   late final _rd_kafka_interceptor_add_on_response_receivedPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
+              ffi.Int Function(
                   ffi.Pointer<rd_kafka_t>,
                   ffi.Pointer<ffi.Char>,
                   ffi.Pointer<rd_kafka_interceptor_f_on_response_received_t>,
@@ -10816,23 +10823,24 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or RD_KAFKA_RESP_ERR__CONFLICT
   /// if an existing interceptor with the same \p ic_name and function
   /// has already been added to \p conf.
-  int rd_kafka_interceptor_add_on_thread_start(
+  rd_kafka_resp_err_t rd_kafka_interceptor_add_on_thread_start(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_thread_start_t> on_thread_start,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return _rd_kafka_interceptor_add_on_thread_start(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_interceptor_add_on_thread_start(
       rk,
       ic_name,
       on_thread_start,
       ic_opaque,
-    );
+    ));
   }
 
   late final _rd_kafka_interceptor_add_on_thread_startPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
+              ffi.Int Function(
                   ffi.Pointer<rd_kafka_t>,
                   ffi.Pointer<ffi.Char>,
                   ffi.Pointer<rd_kafka_interceptor_f_on_thread_start_t>,
@@ -10856,23 +10864,24 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or RD_KAFKA_RESP_ERR__CONFLICT
   /// if an existing interceptor with the same \p ic_name and function
   /// has already been added to \p conf.
-  int rd_kafka_interceptor_add_on_thread_exit(
+  rd_kafka_resp_err_t rd_kafka_interceptor_add_on_thread_exit(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_thread_exit_t> on_thread_exit,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return _rd_kafka_interceptor_add_on_thread_exit(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_interceptor_add_on_thread_exit(
       rk,
       ic_name,
       on_thread_exit,
       ic_opaque,
-    );
+    ));
   }
 
   late final _rd_kafka_interceptor_add_on_thread_exitPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
+              ffi.Int Function(
                   ffi.Pointer<rd_kafka_t>,
                   ffi.Pointer<ffi.Char>,
                   ffi.Pointer<rd_kafka_interceptor_f_on_thread_exit_t>,
@@ -10896,24 +10905,25 @@ class LibRdKafka {
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or RD_KAFKA_RESP_ERR__CONFLICT
   /// if an existing interceptor with the same \p ic_name and function
   /// has already been added to \p conf.
-  int rd_kafka_interceptor_add_on_broker_state_change(
+  rd_kafka_resp_err_t rd_kafka_interceptor_add_on_broker_state_change(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_broker_state_change_t>
         on_broker_state_change,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return _rd_kafka_interceptor_add_on_broker_state_change(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_interceptor_add_on_broker_state_change(
       rk,
       ic_name,
       on_broker_state_change,
       ic_opaque,
-    );
+    ));
   }
 
   late final _rd_kafka_interceptor_add_on_broker_state_changePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
+              ffi.Int Function(
                   ffi.Pointer<rd_kafka_t>,
                   ffi.Pointer<ffi.Char>,
                   ffi.Pointer<rd_kafka_interceptor_f_on_broker_state_change_t>,
@@ -10928,17 +10938,17 @@ class LibRdKafka {
               ffi.Pointer<ffi.Void>)>();
 
   /// @returns the error code for the given topic result.
-  int rd_kafka_topic_result_error(
+  rd_kafka_resp_err_t rd_kafka_topic_result_error(
     ffi.Pointer<rd_kafka_topic_result_t> topicres,
   ) {
-    return _rd_kafka_topic_result_error(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_topic_result_error(
       topicres,
-    );
+    ));
   }
 
   late final _rd_kafka_topic_result_errorPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_topic_result_t>)>>(
+              ffi.Int Function(ffi.Pointer<rd_kafka_topic_result_t>)>>(
       'rd_kafka_topic_result_error');
   late final _rd_kafka_topic_result_error = _rd_kafka_topic_result_errorPtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_topic_result_t>)>();
@@ -11111,18 +11121,18 @@ class LibRdKafka {
   /// an unknown API op type.
   ffi.Pointer<rd_kafka_AdminOptions_t> rd_kafka_AdminOptions_new(
     ffi.Pointer<rd_kafka_t> rk,
-    int for_api,
+    rd_kafka_admin_op_t for_api,
   ) {
     return _rd_kafka_AdminOptions_new(
       rk,
-      for_api,
+      for_api.value,
     );
   }
 
   late final _rd_kafka_AdminOptions_newPtr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<rd_kafka_AdminOptions_t> Function(ffi.Pointer<rd_kafka_t>,
-              ffi.Int32)>>('rd_kafka_AdminOptions_new');
+              ffi.UnsignedInt)>>('rd_kafka_AdminOptions_new');
   late final _rd_kafka_AdminOptions_new =
       _rd_kafka_AdminOptions_newPtr.asFunction<
           ffi.Pointer<rd_kafka_AdminOptions_t> Function(
@@ -11159,23 +11169,24 @@ class LibRdKafka {
   /// case an error string will be written \p errstr.
   ///
   /// @remark This option is valid for all Admin API requests.
-  int rd_kafka_AdminOptions_set_request_timeout(
+  rd_kafka_resp_err_t rd_kafka_AdminOptions_set_request_timeout(
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     int timeout_ms,
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return _rd_kafka_AdminOptions_set_request_timeout(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_AdminOptions_set_request_timeout(
       options,
       timeout_ms,
       errstr,
       errstr_size,
-    );
+    ));
   }
 
   late final _rd_kafka_AdminOptions_set_request_timeoutPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_AdminOptions_t>,
               ffi.Int,
               ffi.Pointer<ffi.Char>,
@@ -11209,23 +11220,24 @@ class LibRdKafka {
   ///
   /// @remark This option is valid for CreateTopics, DeleteTopics,
   /// CreatePartitions, and DeleteRecords.
-  int rd_kafka_AdminOptions_set_operation_timeout(
+  rd_kafka_resp_err_t rd_kafka_AdminOptions_set_operation_timeout(
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     int timeout_ms,
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return _rd_kafka_AdminOptions_set_operation_timeout(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_AdminOptions_set_operation_timeout(
       options,
       timeout_ms,
       errstr,
       errstr_size,
-    );
+    ));
   }
 
   late final _rd_kafka_AdminOptions_set_operation_timeoutPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_AdminOptions_t>,
               ffi.Int,
               ffi.Pointer<ffi.Char>,
@@ -11251,23 +11263,24 @@ class LibRdKafka {
   ///
   /// @remark This option is valid for CreateTopics,
   /// CreatePartitions, AlterConfigs.
-  int rd_kafka_AdminOptions_set_validate_only(
+  rd_kafka_resp_err_t rd_kafka_AdminOptions_set_validate_only(
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     int true_or_false,
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return _rd_kafka_AdminOptions_set_validate_only(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_AdminOptions_set_validate_only(
       options,
       true_or_false,
       errstr,
       errstr_size,
-    );
+    ));
   }
 
   late final _rd_kafka_AdminOptions_set_validate_onlyPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_AdminOptions_t>,
               ffi.Int,
               ffi.Pointer<ffi.Char>,
@@ -11302,23 +11315,23 @@ class LibRdKafka {
   /// @remark This API should typically not be used, but serves as a workaround
   /// if new resource types are to the broker that the client
   /// does not know where to send.
-  int rd_kafka_AdminOptions_set_broker(
+  rd_kafka_resp_err_t rd_kafka_AdminOptions_set_broker(
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     int broker_id,
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return _rd_kafka_AdminOptions_set_broker(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_AdminOptions_set_broker(
       options,
       broker_id,
       errstr,
       errstr_size,
-    );
+    ));
   }
 
   late final _rd_kafka_AdminOptions_set_brokerPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_AdminOptions_t>,
               ffi.Int32,
               ffi.Pointer<ffi.Char>,
@@ -11406,7 +11419,7 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_error_t>
       rd_kafka_AdminOptions_set_match_consumer_group_states(
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
-    ffi.Pointer<ffi.Int32> consumer_group_states,
+    ffi.Pointer<ffi.UnsignedInt> consumer_group_states,
     int consumer_group_states_cnt,
   ) {
     return _rd_kafka_AdminOptions_set_match_consumer_group_states(
@@ -11421,14 +11434,14 @@ class LibRdKafka {
               ffi.NativeFunction<
                   ffi.Pointer<rd_kafka_error_t> Function(
                       ffi.Pointer<rd_kafka_AdminOptions_t>,
-                      ffi.Pointer<ffi.Int32>,
+                      ffi.Pointer<ffi.UnsignedInt>,
                       ffi.Size)>>(
           'rd_kafka_AdminOptions_set_match_consumer_group_states');
   late final _rd_kafka_AdminOptions_set_match_consumer_group_states =
       _rd_kafka_AdminOptions_set_match_consumer_group_statesPtr.asFunction<
           ffi.Pointer<rd_kafka_error_t> Function(
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<ffi.Int32>,
+              ffi.Pointer<ffi.UnsignedInt>,
               int)>();
 
   /// @brief Set consumer groups types to query for.
@@ -11444,7 +11457,7 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_error_t>
       rd_kafka_AdminOptions_set_match_consumer_group_types(
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
-    ffi.Pointer<ffi.Int32> consumer_group_types,
+    ffi.Pointer<ffi.UnsignedInt> consumer_group_types,
     int consumer_group_types_cnt,
   ) {
     return _rd_kafka_AdminOptions_set_match_consumer_group_types(
@@ -11458,24 +11471,24 @@ class LibRdKafka {
           ffi.NativeFunction<
               ffi.Pointer<rd_kafka_error_t> Function(
                   ffi.Pointer<rd_kafka_AdminOptions_t>,
-                  ffi.Pointer<ffi.Int32>,
+                  ffi.Pointer<ffi.UnsignedInt>,
                   ffi.Size)>>(
       'rd_kafka_AdminOptions_set_match_consumer_group_types');
   late final _rd_kafka_AdminOptions_set_match_consumer_group_types =
       _rd_kafka_AdminOptions_set_match_consumer_group_typesPtr.asFunction<
           ffi.Pointer<rd_kafka_error_t> Function(
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<ffi.Int32>,
+              ffi.Pointer<ffi.UnsignedInt>,
               int)>();
 
   /// @brief Set Isolation Level to an allowed `rd_kafka_IsolationLevel_t` value.
   ffi.Pointer<rd_kafka_error_t> rd_kafka_AdminOptions_set_isolation_level(
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
-    int value,
+    rd_kafka_IsolationLevel_t value,
   ) {
     return _rd_kafka_AdminOptions_set_isolation_level(
       options,
-      value,
+      value.value,
     );
   }
 
@@ -11483,7 +11496,7 @@ class LibRdKafka {
       ffi.NativeFunction<
           ffi.Pointer<rd_kafka_error_t> Function(
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Int32)>>('rd_kafka_AdminOptions_set_isolation_level');
+              ffi.UnsignedInt)>>('rd_kafka_AdminOptions_set_isolation_level');
   late final _rd_kafka_AdminOptions_set_isolation_level =
       _rd_kafka_AdminOptions_set_isolation_levelPtr.asFunction<
           ffi.Pointer<rd_kafka_error_t> Function(
@@ -11614,7 +11627,7 @@ class LibRdKafka {
   /// if the arguments were invalid.
   ///
   /// @sa rd_kafka_AdminOptions_set_validate_only()
-  int rd_kafka_NewTopic_set_replica_assignment(
+  rd_kafka_resp_err_t rd_kafka_NewTopic_set_replica_assignment(
     ffi.Pointer<rd_kafka_NewTopic_t> new_topic,
     int partition,
     ffi.Pointer<ffi.Int32> broker_ids,
@@ -11622,19 +11635,20 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return _rd_kafka_NewTopic_set_replica_assignment(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_NewTopic_set_replica_assignment(
       new_topic,
       partition,
       broker_ids,
       broker_id_cnt,
       errstr,
       errstr_size,
-    );
+    ));
   }
 
   late final _rd_kafka_NewTopic_set_replica_assignmentPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_NewTopic_t>,
               ffi.Int32,
               ffi.Pointer<ffi.Int32>,
@@ -11656,21 +11670,21 @@ class LibRdKafka {
   ///
   /// @sa rd_kafka_AdminOptions_set_validate_only()
   /// @sa http://kafka.apache.org/documentation.html#topicconfigs
-  int rd_kafka_NewTopic_set_config(
+  rd_kafka_resp_err_t rd_kafka_NewTopic_set_config(
     ffi.Pointer<rd_kafka_NewTopic_t> new_topic,
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> value,
   ) {
-    return _rd_kafka_NewTopic_set_config(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_NewTopic_set_config(
       new_topic,
       name,
       value,
-    );
+    ));
   }
 
   late final _rd_kafka_NewTopic_set_configPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_NewTopic_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>>('rd_kafka_NewTopic_set_config');
@@ -11989,7 +12003,7 @@ class LibRdKafka {
   /// if the arguments were invalid.
   ///
   /// @sa rd_kafka_AdminOptions_set_validate_only()
-  int rd_kafka_NewPartitions_set_replica_assignment(
+  rd_kafka_resp_err_t rd_kafka_NewPartitions_set_replica_assignment(
     ffi.Pointer<rd_kafka_NewPartitions_t> new_parts,
     int new_partition_idx,
     ffi.Pointer<ffi.Int32> broker_ids,
@@ -11997,19 +12011,20 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return _rd_kafka_NewPartitions_set_replica_assignment(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_NewPartitions_set_replica_assignment(
       new_parts,
       new_partition_idx,
       broker_ids,
       broker_id_cnt,
       errstr,
       errstr_size,
-    );
+    ));
   }
 
   late final _rd_kafka_NewPartitions_set_replica_assignmentPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_NewPartitions_t>,
               ffi.Int32,
               ffi.Pointer<ffi.Int32>,
@@ -12101,16 +12116,16 @@ class LibRdKafka {
 
   /// @returns a string representation of the \p confsource.
   ffi.Pointer<ffi.Char> rd_kafka_ConfigSource_name(
-    int confsource,
+    rd_kafka_ConfigSource_t confsource,
   ) {
     return _rd_kafka_ConfigSource_name(
-      confsource,
+      confsource.value,
     );
   }
 
-  late final _rd_kafka_ConfigSource_namePtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int32)>>(
-          'rd_kafka_ConfigSource_name');
+  late final _rd_kafka_ConfigSource_namePtr = _lookup<
+          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>>(
+      'rd_kafka_ConfigSource_name');
   late final _rd_kafka_ConfigSource_name = _rd_kafka_ConfigSource_namePtr
       .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
 
@@ -12154,17 +12169,17 @@ class LibRdKafka {
               ffi.Pointer<rd_kafka_ConfigEntry_t>)>();
 
   /// @returns the config source.
-  int rd_kafka_ConfigEntry_source(
+  rd_kafka_ConfigSource_t rd_kafka_ConfigEntry_source(
     ffi.Pointer<rd_kafka_ConfigEntry_t> entry,
   ) {
-    return _rd_kafka_ConfigEntry_source(
+    return rd_kafka_ConfigSource_t.fromValue(_rd_kafka_ConfigEntry_source(
       entry,
-    );
+    ));
   }
 
   late final _rd_kafka_ConfigEntry_sourcePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>>(
+              ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>>(
       'rd_kafka_ConfigEntry_source');
   late final _rd_kafka_ConfigEntry_source = _rd_kafka_ConfigEntry_sourcePtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>();
@@ -12275,32 +12290,32 @@ class LibRdKafka {
 
   /// @returns a string representation of the \p resource_pattern_type
   ffi.Pointer<ffi.Char> rd_kafka_ResourcePatternType_name(
-    int resource_pattern_type,
+    rd_kafka_ResourcePatternType_t resource_pattern_type,
   ) {
     return _rd_kafka_ResourcePatternType_name(
-      resource_pattern_type,
+      resource_pattern_type.value,
     );
   }
 
-  late final _rd_kafka_ResourcePatternType_namePtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int32)>>(
-          'rd_kafka_ResourcePatternType_name');
+  late final _rd_kafka_ResourcePatternType_namePtr = _lookup<
+          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>>(
+      'rd_kafka_ResourcePatternType_name');
   late final _rd_kafka_ResourcePatternType_name =
       _rd_kafka_ResourcePatternType_namePtr
           .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
 
   /// @returns a string representation of the \p restype
   ffi.Pointer<ffi.Char> rd_kafka_ResourceType_name(
-    int restype,
+    rd_kafka_ResourceType_t restype,
   ) {
     return _rd_kafka_ResourceType_name(
-      restype,
+      restype.value,
     );
   }
 
-  late final _rd_kafka_ResourceType_namePtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int32)>>(
-          'rd_kafka_ResourceType_name');
+  late final _rd_kafka_ResourceType_namePtr = _lookup<
+          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>>(
+      'rd_kafka_ResourceType_name');
   late final _rd_kafka_ResourceType_name = _rd_kafka_ResourceType_namePtr
       .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
 
@@ -12311,18 +12326,18 @@ class LibRdKafka {
   ///
   /// @returns a newly allocated object
   ffi.Pointer<rd_kafka_ConfigResource_t> rd_kafka_ConfigResource_new(
-    int restype,
+    rd_kafka_ResourceType_t restype,
     ffi.Pointer<ffi.Char> resname,
   ) {
     return _rd_kafka_ConfigResource_new(
-      restype,
+      restype.value,
       resname,
     );
   }
 
   late final _rd_kafka_ConfigResource_newPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_ConfigResource_t> Function(ffi.Int32,
+          ffi.Pointer<rd_kafka_ConfigResource_t> Function(ffi.UnsignedInt,
               ffi.Pointer<ffi.Char>)>>('rd_kafka_ConfigResource_new');
   late final _rd_kafka_ConfigResource_new =
       _rd_kafka_ConfigResource_newPtr.asFunction<
@@ -12380,21 +12395,21 @@ class LibRdKafka {
   ///
   /// @returns RD_KAFKA_RESP_ERR_NO_ERROR if config was added to resource,
   /// or RD_KAFKA_RESP_ERR__INVALID_ARG on invalid input.
-  int rd_kafka_ConfigResource_set_config(
+  rd_kafka_resp_err_t rd_kafka_ConfigResource_set_config(
     ffi.Pointer<rd_kafka_ConfigResource_t> config,
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> value,
   ) {
-    return _rd_kafka_ConfigResource_set_config(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_ConfigResource_set_config(
       config,
       name,
       value,
-    );
+    ));
   }
 
   late final _rd_kafka_ConfigResource_set_configPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_ConfigResource_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>>('rd_kafka_ConfigResource_set_config');
@@ -12422,13 +12437,13 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_error_t> rd_kafka_ConfigResource_add_incremental_config(
     ffi.Pointer<rd_kafka_ConfigResource_t> config,
     ffi.Pointer<ffi.Char> name,
-    int op_type,
+    rd_kafka_AlterConfigOpType_t op_type,
     ffi.Pointer<ffi.Char> value,
   ) {
     return _rd_kafka_ConfigResource_add_incremental_config(
       config,
       name,
-      op_type,
+      op_type.value,
       value,
     );
   }
@@ -12438,7 +12453,7 @@ class LibRdKafka {
               ffi.Pointer<rd_kafka_error_t> Function(
                   ffi.Pointer<rd_kafka_ConfigResource_t>,
                   ffi.Pointer<ffi.Char>,
-                  ffi.Int32,
+                  ffi.UnsignedInt,
                   ffi.Pointer<ffi.Char>)>>(
       'rd_kafka_ConfigResource_add_incremental_config');
   late final _rd_kafka_ConfigResource_add_incremental_config =
@@ -12477,17 +12492,18 @@ class LibRdKafka {
               ffi.Pointer<rd_kafka_ConfigResource_t>, ffi.Pointer<ffi.Size>)>();
 
   /// @returns the ResourceType for \p config
-  int rd_kafka_ConfigResource_type(
+  rd_kafka_ResourceType_t rd_kafka_ConfigResource_type(
     ffi.Pointer<rd_kafka_ConfigResource_t> config,
   ) {
-    return _rd_kafka_ConfigResource_type(
+    return rd_kafka_ResourceType_t.fromValue(_rd_kafka_ConfigResource_type(
       config,
-    );
+    ));
   }
 
   late final _rd_kafka_ConfigResource_typePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_ConfigResource_t>)>>(
+              ffi.UnsignedInt Function(
+                  ffi.Pointer<rd_kafka_ConfigResource_t>)>>(
       'rd_kafka_ConfigResource_type');
   late final _rd_kafka_ConfigResource_type = _rd_kafka_ConfigResource_typePtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_ConfigResource_t>)>();
@@ -12512,17 +12528,17 @@ class LibRdKafka {
               ffi.Pointer<rd_kafka_ConfigResource_t>)>();
 
   /// @returns the error for this resource from an AlterConfigs request
-  int rd_kafka_ConfigResource_error(
+  rd_kafka_resp_err_t rd_kafka_ConfigResource_error(
     ffi.Pointer<rd_kafka_ConfigResource_t> config,
   ) {
-    return _rd_kafka_ConfigResource_error(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_ConfigResource_error(
       config,
-    );
+    ));
   }
 
   late final _rd_kafka_ConfigResource_errorPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_ConfigResource_t>)>>(
+              ffi.Int Function(ffi.Pointer<rd_kafka_ConfigResource_t>)>>(
       'rd_kafka_ConfigResource_error');
   late final _rd_kafka_ConfigResource_error = _rd_kafka_ConfigResource_errorPtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_ConfigResource_t>)>();
@@ -13217,7 +13233,7 @@ class LibRdKafka {
   ///
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p topicdesc object.
-  ffi.Pointer<ffi.Int32> rd_kafka_TopicDescription_authorized_operations(
+  ffi.Pointer<ffi.UnsignedInt> rd_kafka_TopicDescription_authorized_operations(
     ffi.Pointer<rd_kafka_TopicDescription_t> topicdesc,
     ffi.Pointer<ffi.Size> cntp,
   ) {
@@ -13229,13 +13245,13 @@ class LibRdKafka {
 
   late final _rd_kafka_TopicDescription_authorized_operationsPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Pointer<ffi.Int32> Function(
+              ffi.Pointer<ffi.UnsignedInt> Function(
                   ffi.Pointer<rd_kafka_TopicDescription_t>,
                   ffi.Pointer<ffi.Size>)>>(
       'rd_kafka_TopicDescription_authorized_operations');
   late final _rd_kafka_TopicDescription_authorized_operations =
       _rd_kafka_TopicDescription_authorized_operationsPtr.asFunction<
-          ffi.Pointer<ffi.Int32> Function(
+          ffi.Pointer<ffi.UnsignedInt> Function(
               ffi.Pointer<rd_kafka_TopicDescription_t>,
               ffi.Pointer<ffi.Size>)>();
 
@@ -13411,7 +13427,8 @@ class LibRdKafka {
   /// requested.
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p result object.
-  ffi.Pointer<ffi.Int32> rd_kafka_DescribeCluster_result_authorized_operations(
+  ffi.Pointer<ffi.UnsignedInt>
+      rd_kafka_DescribeCluster_result_authorized_operations(
     ffi.Pointer<rd_kafka_DescribeCluster_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
@@ -13424,13 +13441,13 @@ class LibRdKafka {
   late final _rd_kafka_DescribeCluster_result_authorized_operationsPtr =
       _lookup<
               ffi.NativeFunction<
-                  ffi.Pointer<ffi.Int32> Function(
+                  ffi.Pointer<ffi.UnsignedInt> Function(
                       ffi.Pointer<rd_kafka_DescribeCluster_result_t>,
                       ffi.Pointer<ffi.Size>)>>(
           'rd_kafka_DescribeCluster_result_authorized_operations');
   late final _rd_kafka_DescribeCluster_result_authorized_operations =
       _rd_kafka_DescribeCluster_result_authorized_operationsPtr.asFunction<
-          ffi.Pointer<ffi.Int32> Function(
+          ffi.Pointer<ffi.UnsignedInt> Function(
               ffi.Pointer<rd_kafka_DescribeCluster_result_t>,
               ffi.Pointer<ffi.Size>)>();
 
@@ -13570,17 +13587,18 @@ class LibRdKafka {
   /// @param grplist The group listing.
   ///
   /// @return A group state.
-  int rd_kafka_ConsumerGroupListing_state(
+  rd_kafka_consumer_group_state_t rd_kafka_ConsumerGroupListing_state(
     ffi.Pointer<rd_kafka_ConsumerGroupListing_t> grplist,
   ) {
-    return _rd_kafka_ConsumerGroupListing_state(
+    return rd_kafka_consumer_group_state_t
+        .fromValue(_rd_kafka_ConsumerGroupListing_state(
       grplist,
-    );
+    ));
   }
 
   late final _rd_kafka_ConsumerGroupListing_statePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
+              ffi.UnsignedInt Function(
                   ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)>>(
       'rd_kafka_ConsumerGroupListing_state');
   late final _rd_kafka_ConsumerGroupListing_state =
@@ -13592,17 +13610,18 @@ class LibRdKafka {
   /// @param grplist The group listing.
   ///
   /// @return A group type.
-  int rd_kafka_ConsumerGroupListing_type(
+  rd_kafka_consumer_group_type_t rd_kafka_ConsumerGroupListing_type(
     ffi.Pointer<rd_kafka_ConsumerGroupListing_t> grplist,
   ) {
-    return _rd_kafka_ConsumerGroupListing_type(
+    return rd_kafka_consumer_group_type_t
+        .fromValue(_rd_kafka_ConsumerGroupListing_type(
       grplist,
-    );
+    ));
   }
 
   late final _rd_kafka_ConsumerGroupListing_typePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
+              ffi.UnsignedInt Function(
                   ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)>>(
       'rd_kafka_ConsumerGroupListing_type');
   late final _rd_kafka_ConsumerGroupListing_type =
@@ -13865,7 +13884,7 @@ class LibRdKafka {
   ///
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p grpdesc object.
-  ffi.Pointer<ffi.Int32>
+  ffi.Pointer<ffi.UnsignedInt>
       rd_kafka_ConsumerGroupDescription_authorized_operations(
     ffi.Pointer<rd_kafka_ConsumerGroupDescription_t> grpdesc,
     ffi.Pointer<ffi.Size> cntp,
@@ -13879,13 +13898,13 @@ class LibRdKafka {
   late final _rd_kafka_ConsumerGroupDescription_authorized_operationsPtr =
       _lookup<
               ffi.NativeFunction<
-                  ffi.Pointer<ffi.Int32> Function(
+                  ffi.Pointer<ffi.UnsignedInt> Function(
                       ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
                       ffi.Pointer<ffi.Size>)>>(
           'rd_kafka_ConsumerGroupDescription_authorized_operations');
   late final _rd_kafka_ConsumerGroupDescription_authorized_operations =
       _rd_kafka_ConsumerGroupDescription_authorized_operationsPtr.asFunction<
-          ffi.Pointer<ffi.Int32> Function(
+          ffi.Pointer<ffi.UnsignedInt> Function(
               ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
               ffi.Pointer<ffi.Size>)>();
 
@@ -13894,17 +13913,18 @@ class LibRdKafka {
   /// @param grpdesc The group description.
   ///
   /// @return A group state.
-  int rd_kafka_ConsumerGroupDescription_state(
+  rd_kafka_consumer_group_state_t rd_kafka_ConsumerGroupDescription_state(
     ffi.Pointer<rd_kafka_ConsumerGroupDescription_t> grpdesc,
   ) {
-    return _rd_kafka_ConsumerGroupDescription_state(
+    return rd_kafka_consumer_group_state_t
+        .fromValue(_rd_kafka_ConsumerGroupDescription_state(
       grpdesc,
-    );
+    ));
   }
 
   late final _rd_kafka_ConsumerGroupDescription_statePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
+              ffi.UnsignedInt Function(
                   ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)>>(
       'rd_kafka_ConsumerGroupDescription_state');
   late final _rd_kafka_ConsumerGroupDescription_state =
@@ -14873,17 +14893,19 @@ class LibRdKafka {
           ffi.Pointer<rd_kafka_queue_t>)>();
 
   /// @brief Returns the mechanism of a given ScramCredentialInfo.
-  int rd_kafka_ScramCredentialInfo_mechanism(
+  rd_kafka_ScramMechanism_t rd_kafka_ScramCredentialInfo_mechanism(
     ffi.Pointer<rd_kafka_ScramCredentialInfo_t> scram_credential_info,
   ) {
-    return _rd_kafka_ScramCredentialInfo_mechanism(
+    return rd_kafka_ScramMechanism_t
+        .fromValue(_rd_kafka_ScramCredentialInfo_mechanism(
       scram_credential_info,
-    );
+    ));
   }
 
   late final _rd_kafka_ScramCredentialInfo_mechanismPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_ScramCredentialInfo_t>)>>(
+              ffi.UnsignedInt Function(
+                  ffi.Pointer<rd_kafka_ScramCredentialInfo_t>)>>(
       'rd_kafka_ScramCredentialInfo_mechanism');
   late final _rd_kafka_ScramCredentialInfo_mechanism =
       _rd_kafka_ScramCredentialInfo_mechanismPtr.asFunction<
@@ -15088,7 +15110,7 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>
       rd_kafka_UserScramCredentialUpsertion_new(
     ffi.Pointer<ffi.Char> username,
-    int mechanism,
+    rd_kafka_ScramMechanism_t mechanism,
     int iterations,
     ffi.Pointer<ffi.UnsignedChar> password,
     int password_size,
@@ -15097,7 +15119,7 @@ class LibRdKafka {
   ) {
     return _rd_kafka_UserScramCredentialUpsertion_new(
       username,
-      mechanism,
+      mechanism.value,
       iterations,
       password,
       password_size,
@@ -15110,7 +15132,7 @@ class LibRdKafka {
       ffi.NativeFunction<
           ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t> Function(
               ffi.Pointer<ffi.Char>,
-              ffi.Int32,
+              ffi.UnsignedInt,
               ffi.Int32,
               ffi.Pointer<ffi.UnsignedChar>,
               ffi.Size,
@@ -15137,11 +15159,11 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>
       rd_kafka_UserScramCredentialDeletion_new(
     ffi.Pointer<ffi.Char> username,
-    int mechanism,
+    rd_kafka_ScramMechanism_t mechanism,
   ) {
     return _rd_kafka_UserScramCredentialDeletion_new(
       username,
-      mechanism,
+      mechanism.value,
     );
   }
 
@@ -15149,7 +15171,7 @@ class LibRdKafka {
       ffi.NativeFunction<
           ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t> Function(
               ffi.Pointer<ffi.Char>,
-              ffi.Int32)>>('rd_kafka_UserScramCredentialDeletion_new');
+              ffi.UnsignedInt)>>('rd_kafka_UserScramCredentialDeletion_new');
   late final _rd_kafka_UserScramCredentialDeletion_new =
       _rd_kafka_UserScramCredentialDeletion_newPtr.asFunction<
           ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t> Function(
@@ -15345,31 +15367,31 @@ class LibRdKafka {
 
   /// @returns a string representation of the \p acl_operation
   ffi.Pointer<ffi.Char> rd_kafka_AclOperation_name(
-    int acl_operation,
+    rd_kafka_AclOperation_t acl_operation,
   ) {
     return _rd_kafka_AclOperation_name(
-      acl_operation,
+      acl_operation.value,
     );
   }
 
-  late final _rd_kafka_AclOperation_namePtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int32)>>(
-          'rd_kafka_AclOperation_name');
+  late final _rd_kafka_AclOperation_namePtr = _lookup<
+          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>>(
+      'rd_kafka_AclOperation_name');
   late final _rd_kafka_AclOperation_name = _rd_kafka_AclOperation_namePtr
       .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
 
   /// @returns a string representation of the \p acl_permission_type
   ffi.Pointer<ffi.Char> rd_kafka_AclPermissionType_name(
-    int acl_permission_type,
+    rd_kafka_AclPermissionType_t acl_permission_type,
   ) {
     return _rd_kafka_AclPermissionType_name(
-      acl_permission_type,
+      acl_permission_type.value,
     );
   }
 
-  late final _rd_kafka_AclPermissionType_namePtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int32)>>(
-          'rd_kafka_AclPermissionType_name');
+  late final _rd_kafka_AclPermissionType_namePtr = _lookup<
+          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>>(
+      'rd_kafka_AclPermissionType_name');
   late final _rd_kafka_AclPermissionType_name =
       _rd_kafka_AclPermissionType_namePtr
           .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
@@ -15391,24 +15413,24 @@ class LibRdKafka {
   /// are invalid.
   /// Use rd_kafka_AclBinding_destroy() to free object when done.
   ffi.Pointer<rd_kafka_AclBinding_t> rd_kafka_AclBinding_new(
-    int restype,
+    rd_kafka_ResourceType_t restype,
     ffi.Pointer<ffi.Char> name,
-    int resource_pattern_type,
+    rd_kafka_ResourcePatternType_t resource_pattern_type,
     ffi.Pointer<ffi.Char> principal,
     ffi.Pointer<ffi.Char> host,
-    int operation,
-    int permission_type,
+    rd_kafka_AclOperation_t operation,
+    rd_kafka_AclPermissionType_t permission_type,
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
     return _rd_kafka_AclBinding_new(
-      restype,
+      restype.value,
       name,
-      resource_pattern_type,
+      resource_pattern_type.value,
       principal,
       host,
-      operation,
-      permission_type,
+      operation.value,
+      permission_type.value,
       errstr,
       errstr_size,
     );
@@ -15417,13 +15439,13 @@ class LibRdKafka {
   late final _rd_kafka_AclBinding_newPtr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<rd_kafka_AclBinding_t> Function(
-              ffi.Int32,
+              ffi.UnsignedInt,
               ffi.Pointer<ffi.Char>,
-              ffi.Int32,
+              ffi.UnsignedInt,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>,
-              ffi.Int32,
-              ffi.Int32,
+              ffi.UnsignedInt,
+              ffi.UnsignedInt,
               ffi.Pointer<ffi.Char>,
               ffi.Size)>>('rd_kafka_AclBinding_new');
   late final _rd_kafka_AclBinding_new = _rd_kafka_AclBinding_newPtr.asFunction<
@@ -15462,24 +15484,24 @@ class LibRdKafka {
   /// parameters are invalid. Use rd_kafka_AclBinding_destroy() to free object when
   /// done.
   ffi.Pointer<rd_kafka_AclBindingFilter_t> rd_kafka_AclBindingFilter_new(
-    int restype,
+    rd_kafka_ResourceType_t restype,
     ffi.Pointer<ffi.Char> name,
-    int resource_pattern_type,
+    rd_kafka_ResourcePatternType_t resource_pattern_type,
     ffi.Pointer<ffi.Char> principal,
     ffi.Pointer<ffi.Char> host,
-    int operation,
-    int permission_type,
+    rd_kafka_AclOperation_t operation,
+    rd_kafka_AclPermissionType_t permission_type,
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
     return _rd_kafka_AclBindingFilter_new(
-      restype,
+      restype.value,
       name,
-      resource_pattern_type,
+      resource_pattern_type.value,
       principal,
       host,
-      operation,
-      permission_type,
+      operation.value,
+      permission_type.value,
       errstr,
       errstr_size,
     );
@@ -15488,13 +15510,13 @@ class LibRdKafka {
   late final _rd_kafka_AclBindingFilter_newPtr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<rd_kafka_AclBindingFilter_t> Function(
-              ffi.Int32,
+              ffi.UnsignedInt,
               ffi.Pointer<ffi.Char>,
-              ffi.Int32,
+              ffi.UnsignedInt,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>,
-              ffi.Int32,
-              ffi.Int32,
+              ffi.UnsignedInt,
+              ffi.UnsignedInt,
               ffi.Pointer<ffi.Char>,
               ffi.Size)>>('rd_kafka_AclBindingFilter_new');
   late final _rd_kafka_AclBindingFilter_new =
@@ -15511,17 +15533,17 @@ class LibRdKafka {
               int)>();
 
   /// @returns the resource type for the given acl binding.
-  int rd_kafka_AclBinding_restype(
+  rd_kafka_ResourceType_t rd_kafka_AclBinding_restype(
     ffi.Pointer<rd_kafka_AclBinding_t> acl,
   ) {
-    return _rd_kafka_AclBinding_restype(
+    return rd_kafka_ResourceType_t.fromValue(_rd_kafka_AclBinding_restype(
       acl,
-    );
+    ));
   }
 
   late final _rd_kafka_AclBinding_restypePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_AclBinding_t>)>>(
+              ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_AclBinding_t>)>>(
       'rd_kafka_AclBinding_restype');
   late final _rd_kafka_AclBinding_restype = _rd_kafka_AclBinding_restypePtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_AclBinding_t>)>();
@@ -15585,50 +15607,52 @@ class LibRdKafka {
           ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_AclBinding_t>)>();
 
   /// @returns the acl operation for the given acl binding.
-  int rd_kafka_AclBinding_operation(
+  rd_kafka_AclOperation_t rd_kafka_AclBinding_operation(
     ffi.Pointer<rd_kafka_AclBinding_t> acl,
   ) {
-    return _rd_kafka_AclBinding_operation(
+    return rd_kafka_AclOperation_t.fromValue(_rd_kafka_AclBinding_operation(
       acl,
-    );
+    ));
   }
 
   late final _rd_kafka_AclBinding_operationPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_AclBinding_t>)>>(
+              ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_AclBinding_t>)>>(
       'rd_kafka_AclBinding_operation');
   late final _rd_kafka_AclBinding_operation = _rd_kafka_AclBinding_operationPtr
       .asFunction<int Function(ffi.Pointer<rd_kafka_AclBinding_t>)>();
 
   /// @returns the permission type for the given acl binding.
-  int rd_kafka_AclBinding_permission_type(
+  rd_kafka_AclPermissionType_t rd_kafka_AclBinding_permission_type(
     ffi.Pointer<rd_kafka_AclBinding_t> acl,
   ) {
-    return _rd_kafka_AclBinding_permission_type(
+    return rd_kafka_AclPermissionType_t
+        .fromValue(_rd_kafka_AclBinding_permission_type(
       acl,
-    );
+    ));
   }
 
   late final _rd_kafka_AclBinding_permission_typePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_AclBinding_t>)>>(
+              ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_AclBinding_t>)>>(
       'rd_kafka_AclBinding_permission_type');
   late final _rd_kafka_AclBinding_permission_type =
       _rd_kafka_AclBinding_permission_typePtr
           .asFunction<int Function(ffi.Pointer<rd_kafka_AclBinding_t>)>();
 
   /// @returns the resource pattern type for the given acl binding.
-  int rd_kafka_AclBinding_resource_pattern_type(
+  rd_kafka_ResourcePatternType_t rd_kafka_AclBinding_resource_pattern_type(
     ffi.Pointer<rd_kafka_AclBinding_t> acl,
   ) {
-    return _rd_kafka_AclBinding_resource_pattern_type(
+    return rd_kafka_ResourcePatternType_t
+        .fromValue(_rd_kafka_AclBinding_resource_pattern_type(
       acl,
-    );
+    ));
   }
 
   late final _rd_kafka_AclBinding_resource_pattern_typePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_AclBinding_t>)>>(
+              ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_AclBinding_t>)>>(
       'rd_kafka_AclBinding_resource_pattern_type');
   late final _rd_kafka_AclBinding_resource_pattern_type =
       _rd_kafka_AclBinding_resource_pattern_typePtr
@@ -15964,19 +15988,19 @@ class LibRdKafka {
   /// of invalid election_type.
   /// Use rd_kafka_ElectLeaders_destroy() to free object when done.
   ffi.Pointer<rd_kafka_ElectLeaders_t> rd_kafka_ElectLeaders_new(
-    int election_type,
+    rd_kafka_ElectionType_t election_type,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
   ) {
     return _rd_kafka_ElectLeaders_new(
-      election_type,
+      election_type.value,
       partitions,
     );
   }
 
   late final _rd_kafka_ElectLeaders_newPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_ElectLeaders_t> Function(
-                  ffi.Int32, ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
+              ffi.Pointer<rd_kafka_ElectLeaders_t> Function(ffi.UnsignedInt,
+                  ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
       'rd_kafka_ElectLeaders_new');
   late final _rd_kafka_ElectLeaders_new =
       _rd_kafka_ElectLeaders_newPtr.asFunction<
@@ -16125,7 +16149,7 @@ class LibRdKafka {
   ///
   /// @sa rd_kafka_oauthbearer_set_token_failure
   /// @sa rd_kafka_conf_set_oauthbearer_token_refresh_cb
-  int rd_kafka_oauthbearer_set_token(
+  rd_kafka_resp_err_t rd_kafka_oauthbearer_set_token(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> token_value,
     int md_lifetime_ms,
@@ -16135,7 +16159,7 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return _rd_kafka_oauthbearer_set_token(
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_oauthbearer_set_token(
       rk,
       token_value,
       md_lifetime_ms,
@@ -16144,12 +16168,12 @@ class LibRdKafka {
       extension_size,
       errstr,
       errstr_size,
-    );
+    ));
   }
 
   late final _rd_kafka_oauthbearer_set_tokenPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Int32 Function(
+          ffi.Int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Int64,
@@ -16188,19 +16212,20 @@ class LibRdKafka {
   ///
   /// @sa rd_kafka_oauthbearer_set_token
   /// @sa rd_kafka_conf_set_oauthbearer_token_refresh_cb
-  int rd_kafka_oauthbearer_set_token_failure(
+  rd_kafka_resp_err_t rd_kafka_oauthbearer_set_token_failure(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> errstr,
   ) {
-    return _rd_kafka_oauthbearer_set_token_failure(
+    return rd_kafka_resp_err_t
+        .fromValue(_rd_kafka_oauthbearer_set_token_failure(
       rk,
       errstr,
-    );
+    ));
   }
 
   late final _rd_kafka_oauthbearer_set_token_failurePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Int32 Function(
+              ffi.Int Function(
                   ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>)>>(
       'rd_kafka_oauthbearer_set_token_failure');
   late final _rd_kafka_oauthbearer_set_token_failure =
@@ -16600,6 +16625,29 @@ class LibRdKafka {
               ffi.Pointer<rd_kafka_t>, int)>();
 }
 
+typedef __int8_t = ffi.SignedChar;
+typedef Dart__int8_t = int;
+typedef __uint8_t = ffi.UnsignedChar;
+typedef Dart__uint8_t = int;
+typedef __int16_t = ffi.Short;
+typedef Dart__int16_t = int;
+typedef __uint16_t = ffi.UnsignedShort;
+typedef Dart__uint16_t = int;
+typedef __int32_t = ffi.Int;
+typedef Dart__int32_t = int;
+typedef __uint32_t = ffi.UnsignedInt;
+typedef Dart__uint32_t = int;
+typedef __int64_t = ffi.LongLong;
+typedef Dart__int64_t = int;
+typedef __uint64_t = ffi.UnsignedLongLong;
+typedef Dart__uint64_t = int;
+typedef __darwin_intptr_t = ffi.Long;
+typedef Dart__darwin_intptr_t = int;
+typedef __darwin_natural_t = ffi.UnsignedInt;
+typedef Dart__darwin_natural_t = int;
+typedef __darwin_ct_rune_t = ffi.Int;
+typedef Dart__darwin_ct_rune_t = int;
+
 final class __mbstate_t extends ffi.Union {
   @ffi.Array.multi([128])
   external ffi.Array<ffi.Char> __mbstate8;
@@ -16607,6 +16655,46 @@ final class __mbstate_t extends ffi.Union {
   @ffi.LongLong()
   external int _mbstateL;
 }
+
+typedef __darwin_mbstate_t = __mbstate_t;
+typedef __darwin_ptrdiff_t = ffi.Long;
+typedef Dart__darwin_ptrdiff_t = int;
+typedef __darwin_size_t = ffi.UnsignedLong;
+typedef Dart__darwin_size_t = int;
+typedef __builtin_va_list = ffi.Pointer<ffi.Char>;
+typedef __darwin_va_list = __builtin_va_list;
+typedef __darwin_wchar_t = ffi.Int;
+typedef Dart__darwin_wchar_t = int;
+typedef __darwin_rune_t = __darwin_wchar_t;
+typedef __darwin_wint_t = ffi.Int;
+typedef Dart__darwin_wint_t = int;
+typedef __darwin_clock_t = ffi.UnsignedLong;
+typedef Dart__darwin_clock_t = int;
+typedef __darwin_socklen_t = __uint32_t;
+typedef __darwin_ssize_t = ffi.Long;
+typedef Dart__darwin_ssize_t = int;
+typedef __darwin_time_t = ffi.Long;
+typedef Dart__darwin_time_t = int;
+typedef __darwin_blkcnt_t = __int64_t;
+typedef __darwin_blksize_t = __int32_t;
+typedef __darwin_dev_t = __int32_t;
+typedef __darwin_fsblkcnt_t = ffi.UnsignedInt;
+typedef Dart__darwin_fsblkcnt_t = int;
+typedef __darwin_fsfilcnt_t = ffi.UnsignedInt;
+typedef Dart__darwin_fsfilcnt_t = int;
+typedef __darwin_gid_t = __uint32_t;
+typedef __darwin_id_t = __uint32_t;
+typedef __darwin_ino64_t = __uint64_t;
+typedef __darwin_ino_t = __darwin_ino64_t;
+typedef __darwin_mach_port_name_t = __darwin_natural_t;
+typedef __darwin_mach_port_t = __darwin_mach_port_name_t;
+typedef __darwin_mode_t = __uint16_t;
+typedef __darwin_off_t = __int64_t;
+typedef __darwin_pid_t = __int32_t;
+typedef __darwin_sigset_t = __uint32_t;
+typedef __darwin_suseconds_t = __int32_t;
+typedef __darwin_uid_t = __uint32_t;
+typedef __darwin_useconds_t = __uint32_t;
 
 final class __darwin_pthread_handler_rec extends ffi.Struct {
   external ffi
@@ -16692,6 +16780,47 @@ final class _opaque_pthread_t extends ffi.Struct {
   external ffi.Array<ffi.Char> __opaque;
 }
 
+typedef __darwin_pthread_attr_t = _opaque_pthread_attr_t;
+typedef __darwin_pthread_cond_t = _opaque_pthread_cond_t;
+typedef __darwin_pthread_condattr_t = _opaque_pthread_condattr_t;
+typedef __darwin_pthread_key_t = ffi.UnsignedLong;
+typedef Dart__darwin_pthread_key_t = int;
+typedef __darwin_pthread_mutex_t = _opaque_pthread_mutex_t;
+typedef __darwin_pthread_mutexattr_t = _opaque_pthread_mutexattr_t;
+typedef __darwin_pthread_once_t = _opaque_pthread_once_t;
+typedef __darwin_pthread_rwlock_t = _opaque_pthread_rwlock_t;
+typedef __darwin_pthread_rwlockattr_t = _opaque_pthread_rwlockattr_t;
+typedef __darwin_pthread_t = ffi.Pointer<_opaque_pthread_t>;
+typedef __darwin_nl_item = ffi.Int;
+typedef Dart__darwin_nl_item = int;
+typedef __darwin_wctrans_t = ffi.Int;
+typedef Dart__darwin_wctrans_t = int;
+typedef __darwin_wctype_t = __uint32_t;
+typedef u_int8_t = ffi.UnsignedChar;
+typedef Dartu_int8_t = int;
+typedef u_int16_t = ffi.UnsignedShort;
+typedef Dartu_int16_t = int;
+typedef u_int32_t = ffi.UnsignedInt;
+typedef Dartu_int32_t = int;
+typedef u_int64_t = ffi.UnsignedLongLong;
+typedef Dartu_int64_t = int;
+typedef register_t = ffi.Int64;
+typedef Dartregister_t = int;
+typedef user_addr_t = u_int64_t;
+typedef user_size_t = u_int64_t;
+typedef user_ssize_t = ffi.Int64;
+typedef Dartuser_ssize_t = int;
+typedef user_long_t = ffi.Int64;
+typedef Dartuser_long_t = int;
+typedef user_ulong_t = u_int64_t;
+typedef user_time_t = ffi.Int64;
+typedef Dartuser_time_t = int;
+typedef user_off_t = ffi.Int64;
+typedef Dartuser_off_t = int;
+typedef syscall_arg_t = u_int64_t;
+typedef va_list = __darwin_va_list;
+typedef fpos_t = __darwin_off_t;
+
 final class __sbuf extends ffi.Struct {
   external ffi.Pointer<ffi.UnsignedChar> _base;
 
@@ -16763,20 +16892,45 @@ final class __sFILE extends ffi.Struct {
   external int _offset;
 }
 
-typedef fpos_t = __darwin_off_t;
-typedef __darwin_off_t = __int64_t;
-typedef __int64_t = ffi.LongLong;
-typedef Dart__int64_t = int;
 typedef FILE = __sFILE;
-typedef va_list = __darwin_va_list;
-typedef __darwin_va_list = __builtin_va_list;
-typedef __builtin_va_list = ffi.Pointer<ffi.Char>;
 typedef off_t = __darwin_off_t;
 typedef ssize_t = __darwin_ssize_t;
-typedef __darwin_ssize_t = ffi.Long;
-typedef Dart__darwin_ssize_t = int;
+typedef int_least8_t = ffi.Int8;
+typedef Dartint_least8_t = int;
+typedef int_least16_t = ffi.Int16;
+typedef Dartint_least16_t = int;
+typedef int_least32_t = ffi.Int32;
+typedef Dartint_least32_t = int;
+typedef int_least64_t = ffi.Int64;
+typedef Dartint_least64_t = int;
+typedef uint_least8_t = ffi.Uint8;
+typedef Dartuint_least8_t = int;
+typedef uint_least16_t = ffi.Uint16;
+typedef Dartuint_least16_t = int;
+typedef uint_least32_t = ffi.Uint32;
+typedef Dartuint_least32_t = int;
+typedef uint_least64_t = ffi.Uint64;
+typedef Dartuint_least64_t = int;
+typedef int_fast8_t = ffi.Int8;
+typedef Dartint_fast8_t = int;
+typedef int_fast16_t = ffi.Int16;
+typedef Dartint_fast16_t = int;
+typedef int_fast32_t = ffi.Int32;
+typedef Dartint_fast32_t = int;
+typedef int_fast64_t = ffi.Int64;
+typedef Dartint_fast64_t = int;
+typedef uint_fast8_t = ffi.Uint8;
+typedef Dartuint_fast8_t = int;
+typedef uint_fast16_t = ffi.Uint16;
+typedef Dartuint_fast16_t = int;
+typedef uint_fast32_t = ffi.Uint32;
+typedef Dartuint_fast32_t = int;
+typedef uint_fast64_t = ffi.Uint64;
+typedef Dartuint_fast64_t = int;
 typedef intmax_t = ffi.Long;
 typedef Dartintmax_t = int;
+typedef uintmax_t = ffi.UnsignedLong;
+typedef Dartuintmax_t = int;
 
 final class imaxdiv_t extends ffi.Struct {
   @intmax_t()
@@ -16786,22 +16940,92 @@ final class imaxdiv_t extends ffi.Struct {
   external int rem;
 }
 
-typedef uintmax_t = ffi.UnsignedLong;
-typedef Dartuintmax_t = int;
+typedef u_char = ffi.UnsignedChar;
+typedef Dartu_char = int;
+typedef u_short = ffi.UnsignedShort;
+typedef Dartu_short = int;
+typedef u_int = ffi.UnsignedInt;
+typedef Dartu_int = int;
+typedef u_long = ffi.UnsignedLong;
+typedef Dartu_long = int;
+typedef ushort = ffi.UnsignedShort;
+typedef Dartushort = int;
+typedef uint = ffi.UnsignedInt;
+typedef Dartuint = int;
+typedef u_quad_t = u_int64_t;
+typedef quad_t = ffi.Int64;
+typedef Dartquad_t = int;
+typedef qaddr_t = ffi.Pointer<quad_t>;
+typedef caddr_t = ffi.Pointer<ffi.Char>;
+typedef daddr_t = ffi.Int32;
+typedef Dartdaddr_t = int;
+typedef dev_t = __darwin_dev_t;
+typedef fixpt_t = u_int32_t;
+typedef blkcnt_t = __darwin_blkcnt_t;
+typedef blksize_t = __darwin_blksize_t;
+typedef gid_t = __darwin_gid_t;
+typedef in_addr_t = __uint32_t;
+typedef in_port_t = __uint16_t;
+typedef ino_t = __darwin_ino_t;
+typedef ino64_t = __darwin_ino64_t;
+typedef key_t = __int32_t;
+typedef mode_t = __darwin_mode_t;
+typedef nlink_t = __uint16_t;
+typedef id_t = __darwin_id_t;
+typedef pid_t = __darwin_pid_t;
+typedef segsz_t = ffi.Int32;
+typedef Dartsegsz_t = int;
+typedef swblk_t = ffi.Int32;
+typedef Dartswblk_t = int;
+typedef uid_t = __darwin_uid_t;
+typedef clock_t = __darwin_clock_t;
+typedef time_t = __darwin_time_t;
+typedef useconds_t = __darwin_useconds_t;
+typedef suseconds_t = __darwin_suseconds_t;
+typedef rsize_t = __darwin_size_t;
+typedef errno_t = ffi.Int;
+typedef Darterrno_t = int;
 
 final class fd_set extends ffi.Struct {
   @ffi.Array.multi([32])
   external ffi.Array<__int32_t> fds_bits;
 }
 
-typedef __int32_t = ffi.Int;
-typedef Dart__int32_t = int;
+typedef fd_mask = __int32_t;
+typedef pthread_attr_t = __darwin_pthread_attr_t;
+typedef pthread_cond_t = __darwin_pthread_cond_t;
+typedef pthread_condattr_t = __darwin_pthread_condattr_t;
+typedef pthread_mutex_t = __darwin_pthread_mutex_t;
+typedef pthread_mutexattr_t = __darwin_pthread_mutexattr_t;
+typedef pthread_once_t = __darwin_pthread_once_t;
+typedef pthread_rwlock_t = __darwin_pthread_rwlock_t;
+typedef pthread_rwlockattr_t = __darwin_pthread_rwlockattr_t;
+typedef pthread_t = __darwin_pthread_t;
+typedef pthread_key_t = __darwin_pthread_key_t;
+typedef fsblkcnt_t = __darwin_fsblkcnt_t;
+typedef fsfilcnt_t = __darwin_fsfilcnt_t;
+typedef sa_family_t = __uint8_t;
+typedef socklen_t = __darwin_socklen_t;
 
 final class iovec extends ffi.Struct {
   external ffi.Pointer<ffi.Void> iov_base;
 
   @ffi.Size()
   external int iov_len;
+}
+
+typedef sae_associd_t = __uint32_t;
+typedef sae_connid_t = __uint32_t;
+
+final class sockaddr extends ffi.Struct {
+  @__uint8_t()
+  external int sa_len;
+
+  @sa_family_t()
+  external int sa_family;
+
+  @ffi.Array.multi([14])
+  external ffi.Array<ffi.Char> sa_data;
 }
 
 final class sa_endpoints extends ffi.Struct {
@@ -16819,24 +17043,7 @@ final class sa_endpoints extends ffi.Struct {
   external int sae_dstaddrlen;
 }
 
-final class sockaddr extends ffi.Struct {
-  @__uint8_t()
-  external int sa_len;
-
-  @sa_family_t()
-  external int sa_family;
-
-  @ffi.Array.multi([14])
-  external ffi.Array<ffi.Char> sa_data;
-}
-
-typedef __uint8_t = ffi.UnsignedChar;
-typedef Dart__uint8_t = int;
-typedef sa_family_t = __uint8_t;
-typedef socklen_t = __darwin_socklen_t;
-typedef __darwin_socklen_t = __uint32_t;
-typedef __uint32_t = ffi.UnsignedInt;
-typedef Dart__uint32_t = int;
+typedef sa_endpoints_t = sa_endpoints;
 
 final class linger extends ffi.Struct {
   @ffi.Int()
@@ -16854,9 +17061,6 @@ final class so_np_extensions extends ffi.Struct {
   external int npx_mask;
 }
 
-typedef u_int32_t = ffi.UnsignedInt;
-typedef Dartu_int32_t = int;
-
 final class __sockaddr_header extends ffi.Struct {
   @__uint8_t()
   external int sa_len;
@@ -16872,9 +17076,6 @@ final class sockproto extends ffi.Struct {
   @__uint16_t()
   external int sp_protocol;
 }
-
-typedef __uint16_t = ffi.UnsignedShort;
-typedef Dart__uint16_t = int;
 
 final class sockaddr_storage extends ffi.Struct {
   @__uint8_t()
@@ -16936,65 +17137,109 @@ final class sf_hdtr extends ffi.Struct {
   external int trl_cnt;
 }
 
-typedef sa_endpoints_t = sa_endpoints;
-typedef sae_associd_t = __uint32_t;
-typedef sae_connid_t = __uint32_t;
-
 /// @enum rd_kafka_type_t
 ///
 /// @brief rd_kafka_t handle type.
 ///
 /// @sa rd_kafka_new()
-abstract class rd_kafka_type_t {
+enum rd_kafka_type_t {
   /// < Producer client
-  static const int RD_KAFKA_PRODUCER = 0;
+  RD_KAFKA_PRODUCER(0),
 
   /// < Consumer client
-  static const int RD_KAFKA_CONSUMER = 1;
+  RD_KAFKA_CONSUMER(1);
+
+  final int value;
+  const rd_kafka_type_t(this.value);
+
+  static rd_kafka_type_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_PRODUCER,
+        1 => RD_KAFKA_CONSUMER,
+        _ => throw ArgumentError('Unknown value for rd_kafka_type_t: $value'),
+      };
 }
 
 /// !
 /// Timestamp types
 ///
 /// @sa rd_kafka_message_timestamp()
-abstract class rd_kafka_timestamp_type_t {
+enum rd_kafka_timestamp_type_t {
   /// < Timestamp not available
-  static const int RD_KAFKA_TIMESTAMP_NOT_AVAILABLE = 0;
+  RD_KAFKA_TIMESTAMP_NOT_AVAILABLE(0),
 
   /// < Message creation time
-  static const int RD_KAFKA_TIMESTAMP_CREATE_TIME = 1;
+  RD_KAFKA_TIMESTAMP_CREATE_TIME(1),
 
   /// < Log append time
-  static const int RD_KAFKA_TIMESTAMP_LOG_APPEND_TIME = 2;
+  RD_KAFKA_TIMESTAMP_LOG_APPEND_TIME(2);
+
+  final int value;
+  const rd_kafka_timestamp_type_t(this.value);
+
+  static rd_kafka_timestamp_type_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_TIMESTAMP_NOT_AVAILABLE,
+        1 => RD_KAFKA_TIMESTAMP_CREATE_TIME,
+        2 => RD_KAFKA_TIMESTAMP_LOG_APPEND_TIME,
+        _ => throw ArgumentError(
+            'Unknown value for rd_kafka_timestamp_type_t: $value'),
+      };
 }
 
 final class rd_kafka_s extends ffi.Opaque {}
 
+typedef rd_kafka_t = rd_kafka_s;
+
 final class rd_kafka_topic_s extends ffi.Opaque {}
+
+typedef rd_kafka_topic_t = rd_kafka_topic_s;
 
 final class rd_kafka_conf_s extends ffi.Opaque {}
 
+typedef rd_kafka_conf_t = rd_kafka_conf_s;
+
 final class rd_kafka_topic_conf_s extends ffi.Opaque {}
+
+typedef rd_kafka_topic_conf_t = rd_kafka_topic_conf_s;
 
 final class rd_kafka_queue_s extends ffi.Opaque {}
 
+typedef rd_kafka_queue_t = rd_kafka_queue_s;
+
 final class rd_kafka_op_s extends ffi.Opaque {}
+
+typedef rd_kafka_event_t = rd_kafka_op_s;
 
 final class rd_kafka_topic_result_s extends ffi.Opaque {}
 
+typedef rd_kafka_topic_result_t = rd_kafka_topic_result_s;
+
 final class rd_kafka_consumer_group_metadata_s extends ffi.Opaque {}
+
+typedef rd_kafka_consumer_group_metadata_t = rd_kafka_consumer_group_metadata_s;
 
 final class rd_kafka_error_s extends ffi.Opaque {}
 
+typedef rd_kafka_error_t = rd_kafka_error_s;
+
 final class rd_kafka_headers_s extends ffi.Opaque {}
+
+typedef rd_kafka_headers_t = rd_kafka_headers_s;
 
 final class rd_kafka_group_result_s extends ffi.Opaque {}
 
+typedef rd_kafka_group_result_t = rd_kafka_group_result_s;
+
 final class rd_kafka_acl_result_s extends ffi.Opaque {}
+
+typedef rd_kafka_acl_result_t = rd_kafka_acl_result_s;
 
 final class rd_kafka_Uuid_s extends ffi.Opaque {}
 
+typedef rd_kafka_Uuid_t = rd_kafka_Uuid_s;
+
 final class rd_kafka_topic_partition_result_s extends ffi.Opaque {}
+
+typedef rd_kafka_topic_partition_result_t = rd_kafka_topic_partition_result_s;
 
 /// @enum rd_kafka_resp_err_t
 /// @brief Error codes.
@@ -17006,532 +17251,711 @@ final class rd_kafka_topic_partition_result_s extends ffi.Opaque {}
 /// errors and are displayed as \c \"Broker: \<error string..\>\".
 ///
 /// @sa Use rd_kafka_err2str() to translate an error code a human readable string
-abstract class rd_kafka_resp_err_t {
+enum rd_kafka_resp_err_t {
   /// Begin internal error codes
-  static const int RD_KAFKA_RESP_ERR__BEGIN = -200;
+  RD_KAFKA_RESP_ERR__BEGIN(-200),
 
   /// Received message is incorrect
-  static const int RD_KAFKA_RESP_ERR__BAD_MSG = -199;
+  RD_KAFKA_RESP_ERR__BAD_MSG(-199),
 
   /// Bad/unknown compression
-  static const int RD_KAFKA_RESP_ERR__BAD_COMPRESSION = -198;
+  RD_KAFKA_RESP_ERR__BAD_COMPRESSION(-198),
 
   /// Broker is going away
-  static const int RD_KAFKA_RESP_ERR__DESTROY = -197;
+  RD_KAFKA_RESP_ERR__DESTROY(-197),
 
   /// Generic failure
-  static const int RD_KAFKA_RESP_ERR__FAIL = -196;
+  RD_KAFKA_RESP_ERR__FAIL(-196),
 
   /// Broker transport failure
-  static const int RD_KAFKA_RESP_ERR__TRANSPORT = -195;
+  RD_KAFKA_RESP_ERR__TRANSPORT(-195),
 
   /// Critical system resource
-  static const int RD_KAFKA_RESP_ERR__CRIT_SYS_RESOURCE = -194;
+  RD_KAFKA_RESP_ERR__CRIT_SYS_RESOURCE(-194),
 
   /// Failed to resolve broker
-  static const int RD_KAFKA_RESP_ERR__RESOLVE = -193;
+  RD_KAFKA_RESP_ERR__RESOLVE(-193),
 
   /// Produced message timed out
-  static const int RD_KAFKA_RESP_ERR__MSG_TIMED_OUT = -192;
+  RD_KAFKA_RESP_ERR__MSG_TIMED_OUT(-192),
 
   /// Reached the end of the topic+partition queue on
   /// the broker. Not really an error.
   /// This event is disabled by default,
   /// see the `enable.partition.eof` configuration property.
-  static const int RD_KAFKA_RESP_ERR__PARTITION_EOF = -191;
+  RD_KAFKA_RESP_ERR__PARTITION_EOF(-191),
 
   /// Permanent: Partition does not exist in cluster.
-  static const int RD_KAFKA_RESP_ERR__UNKNOWN_PARTITION = -190;
+  RD_KAFKA_RESP_ERR__UNKNOWN_PARTITION(-190),
 
   /// File or filesystem error
-  static const int RD_KAFKA_RESP_ERR__FS = -189;
+  RD_KAFKA_RESP_ERR__FS(-189),
 
   /// Permanent: Topic does not exist in cluster.
-  static const int RD_KAFKA_RESP_ERR__UNKNOWN_TOPIC = -188;
+  RD_KAFKA_RESP_ERR__UNKNOWN_TOPIC(-188),
 
   /// All broker connections are down.
-  static const int RD_KAFKA_RESP_ERR__ALL_BROKERS_DOWN = -187;
+  RD_KAFKA_RESP_ERR__ALL_BROKERS_DOWN(-187),
 
   /// Invalid argument, or invalid configuration
-  static const int RD_KAFKA_RESP_ERR__INVALID_ARG = -186;
+  RD_KAFKA_RESP_ERR__INVALID_ARG(-186),
 
   /// Operation timed out
-  static const int RD_KAFKA_RESP_ERR__TIMED_OUT = -185;
+  RD_KAFKA_RESP_ERR__TIMED_OUT(-185),
 
   /// Queue is full
-  static const int RD_KAFKA_RESP_ERR__QUEUE_FULL = -184;
+  RD_KAFKA_RESP_ERR__QUEUE_FULL(-184),
 
   /// ISR count < required.acks
-  static const int RD_KAFKA_RESP_ERR__ISR_INSUFF = -183;
+  RD_KAFKA_RESP_ERR__ISR_INSUFF(-183),
 
   /// Broker node update
-  static const int RD_KAFKA_RESP_ERR__NODE_UPDATE = -182;
+  RD_KAFKA_RESP_ERR__NODE_UPDATE(-182),
 
   /// SSL error
-  static const int RD_KAFKA_RESP_ERR__SSL = -181;
+  RD_KAFKA_RESP_ERR__SSL(-181),
 
   /// Waiting for coordinator to become available.
-  static const int RD_KAFKA_RESP_ERR__WAIT_COORD = -180;
+  RD_KAFKA_RESP_ERR__WAIT_COORD(-180),
 
   /// Unknown client group
-  static const int RD_KAFKA_RESP_ERR__UNKNOWN_GROUP = -179;
+  RD_KAFKA_RESP_ERR__UNKNOWN_GROUP(-179),
 
   /// Operation in progress
-  static const int RD_KAFKA_RESP_ERR__IN_PROGRESS = -178;
+  RD_KAFKA_RESP_ERR__IN_PROGRESS(-178),
 
   /// Previous operation in progress, wait for it to finish.
-  static const int RD_KAFKA_RESP_ERR__PREV_IN_PROGRESS = -177;
+  RD_KAFKA_RESP_ERR__PREV_IN_PROGRESS(-177),
 
   /// This operation would interfere with an existing subscription
-  static const int RD_KAFKA_RESP_ERR__EXISTING_SUBSCRIPTION = -176;
+  RD_KAFKA_RESP_ERR__EXISTING_SUBSCRIPTION(-176),
 
   /// Assigned partitions (rebalance_cb)
-  static const int RD_KAFKA_RESP_ERR__ASSIGN_PARTITIONS = -175;
+  RD_KAFKA_RESP_ERR__ASSIGN_PARTITIONS(-175),
 
   /// Revoked partitions (rebalance_cb)
-  static const int RD_KAFKA_RESP_ERR__REVOKE_PARTITIONS = -174;
+  RD_KAFKA_RESP_ERR__REVOKE_PARTITIONS(-174),
 
   /// Conflicting use
-  static const int RD_KAFKA_RESP_ERR__CONFLICT = -173;
+  RD_KAFKA_RESP_ERR__CONFLICT(-173),
 
   /// Wrong state
-  static const int RD_KAFKA_RESP_ERR__STATE = -172;
+  RD_KAFKA_RESP_ERR__STATE(-172),
 
   /// Unknown protocol
-  static const int RD_KAFKA_RESP_ERR__UNKNOWN_PROTOCOL = -171;
+  RD_KAFKA_RESP_ERR__UNKNOWN_PROTOCOL(-171),
 
   /// Not implemented
-  static const int RD_KAFKA_RESP_ERR__NOT_IMPLEMENTED = -170;
+  RD_KAFKA_RESP_ERR__NOT_IMPLEMENTED(-170),
 
   /// Authentication failure
-  static const int RD_KAFKA_RESP_ERR__AUTHENTICATION = -169;
+  RD_KAFKA_RESP_ERR__AUTHENTICATION(-169),
 
   /// No stored offset
-  static const int RD_KAFKA_RESP_ERR__NO_OFFSET = -168;
+  RD_KAFKA_RESP_ERR__NO_OFFSET(-168),
 
   /// Outdated
-  static const int RD_KAFKA_RESP_ERR__OUTDATED = -167;
+  RD_KAFKA_RESP_ERR__OUTDATED(-167),
 
   /// Timed out in queue
-  static const int RD_KAFKA_RESP_ERR__TIMED_OUT_QUEUE = -166;
+  RD_KAFKA_RESP_ERR__TIMED_OUT_QUEUE(-166),
 
   /// Feature not supported by broker
-  static const int RD_KAFKA_RESP_ERR__UNSUPPORTED_FEATURE = -165;
+  RD_KAFKA_RESP_ERR__UNSUPPORTED_FEATURE(-165),
 
   /// Awaiting cache update
-  static const int RD_KAFKA_RESP_ERR__WAIT_CACHE = -164;
+  RD_KAFKA_RESP_ERR__WAIT_CACHE(-164),
 
   /// Operation interrupted (e.g., due to yield))
-  static const int RD_KAFKA_RESP_ERR__INTR = -163;
+  RD_KAFKA_RESP_ERR__INTR(-163),
 
   /// Key serialization error
-  static const int RD_KAFKA_RESP_ERR__KEY_SERIALIZATION = -162;
+  RD_KAFKA_RESP_ERR__KEY_SERIALIZATION(-162),
 
   /// Value serialization error
-  static const int RD_KAFKA_RESP_ERR__VALUE_SERIALIZATION = -161;
+  RD_KAFKA_RESP_ERR__VALUE_SERIALIZATION(-161),
 
   /// Key deserialization error
-  static const int RD_KAFKA_RESP_ERR__KEY_DESERIALIZATION = -160;
+  RD_KAFKA_RESP_ERR__KEY_DESERIALIZATION(-160),
 
   /// Value deserialization error
-  static const int RD_KAFKA_RESP_ERR__VALUE_DESERIALIZATION = -159;
+  RD_KAFKA_RESP_ERR__VALUE_DESERIALIZATION(-159),
 
   /// Partial response
-  static const int RD_KAFKA_RESP_ERR__PARTIAL = -158;
+  RD_KAFKA_RESP_ERR__PARTIAL(-158),
 
   /// Modification attempted on read-only object
-  static const int RD_KAFKA_RESP_ERR__READ_ONLY = -157;
+  RD_KAFKA_RESP_ERR__READ_ONLY(-157),
 
   /// No such entry / item not found
-  static const int RD_KAFKA_RESP_ERR__NOENT = -156;
+  RD_KAFKA_RESP_ERR__NOENT(-156),
 
   /// Read underflow
-  static const int RD_KAFKA_RESP_ERR__UNDERFLOW = -155;
+  RD_KAFKA_RESP_ERR__UNDERFLOW(-155),
 
   /// Invalid type
-  static const int RD_KAFKA_RESP_ERR__INVALID_TYPE = -154;
+  RD_KAFKA_RESP_ERR__INVALID_TYPE(-154),
 
   /// Retry operation
-  static const int RD_KAFKA_RESP_ERR__RETRY = -153;
+  RD_KAFKA_RESP_ERR__RETRY(-153),
 
   /// Purged in queue
-  static const int RD_KAFKA_RESP_ERR__PURGE_QUEUE = -152;
+  RD_KAFKA_RESP_ERR__PURGE_QUEUE(-152),
 
   /// Purged in flight
-  static const int RD_KAFKA_RESP_ERR__PURGE_INFLIGHT = -151;
+  RD_KAFKA_RESP_ERR__PURGE_INFLIGHT(-151),
 
   /// Fatal error: see rd_kafka_fatal_error()
-  static const int RD_KAFKA_RESP_ERR__FATAL = -150;
+  RD_KAFKA_RESP_ERR__FATAL(-150),
 
   /// Inconsistent state
-  static const int RD_KAFKA_RESP_ERR__INCONSISTENT = -149;
+  RD_KAFKA_RESP_ERR__INCONSISTENT(-149),
 
   /// Gap-less ordering would not be guaranteed if proceeding
-  static const int RD_KAFKA_RESP_ERR__GAPLESS_GUARANTEE = -148;
+  RD_KAFKA_RESP_ERR__GAPLESS_GUARANTEE(-148),
 
   /// Maximum poll interval exceeded
-  static const int RD_KAFKA_RESP_ERR__MAX_POLL_EXCEEDED = -147;
+  RD_KAFKA_RESP_ERR__MAX_POLL_EXCEEDED(-147),
 
   /// Unknown broker
-  static const int RD_KAFKA_RESP_ERR__UNKNOWN_BROKER = -146;
+  RD_KAFKA_RESP_ERR__UNKNOWN_BROKER(-146),
 
   /// Functionality not configured
-  static const int RD_KAFKA_RESP_ERR__NOT_CONFIGURED = -145;
+  RD_KAFKA_RESP_ERR__NOT_CONFIGURED(-145),
 
   /// Instance has been fenced
-  static const int RD_KAFKA_RESP_ERR__FENCED = -144;
+  RD_KAFKA_RESP_ERR__FENCED(-144),
 
   /// Application generated error
-  static const int RD_KAFKA_RESP_ERR__APPLICATION = -143;
+  RD_KAFKA_RESP_ERR__APPLICATION(-143),
 
   /// Assignment lost
-  static const int RD_KAFKA_RESP_ERR__ASSIGNMENT_LOST = -142;
+  RD_KAFKA_RESP_ERR__ASSIGNMENT_LOST(-142),
 
   /// No operation performed
-  static const int RD_KAFKA_RESP_ERR__NOOP = -141;
+  RD_KAFKA_RESP_ERR__NOOP(-141),
 
   /// No offset to automatically reset to
-  static const int RD_KAFKA_RESP_ERR__AUTO_OFFSET_RESET = -140;
+  RD_KAFKA_RESP_ERR__AUTO_OFFSET_RESET(-140),
 
   /// Partition log truncation detected
-  static const int RD_KAFKA_RESP_ERR__LOG_TRUNCATION = -139;
+  RD_KAFKA_RESP_ERR__LOG_TRUNCATION(-139),
 
   /// A different record in the batch was invalid
   /// and this message failed persisting.
-  static const int RD_KAFKA_RESP_ERR__INVALID_DIFFERENT_RECORD = -138;
+  RD_KAFKA_RESP_ERR__INVALID_DIFFERENT_RECORD(-138),
 
   /// End internal error codes
-  static const int RD_KAFKA_RESP_ERR__END = -100;
+  RD_KAFKA_RESP_ERR__END(-100),
 
   /// Unknown broker error
-  static const int RD_KAFKA_RESP_ERR_UNKNOWN = -1;
+  RD_KAFKA_RESP_ERR_UNKNOWN(-1),
 
   /// Success
-  static const int RD_KAFKA_RESP_ERR_NO_ERROR = 0;
+  RD_KAFKA_RESP_ERR_NO_ERROR(0),
 
   /// Offset out of range
-  static const int RD_KAFKA_RESP_ERR_OFFSET_OUT_OF_RANGE = 1;
+  RD_KAFKA_RESP_ERR_OFFSET_OUT_OF_RANGE(1),
 
   /// Invalid message
-  static const int RD_KAFKA_RESP_ERR_INVALID_MSG = 2;
+  RD_KAFKA_RESP_ERR_INVALID_MSG(2),
 
   /// Unknown topic or partition
-  static const int RD_KAFKA_RESP_ERR_UNKNOWN_TOPIC_OR_PART = 3;
+  RD_KAFKA_RESP_ERR_UNKNOWN_TOPIC_OR_PART(3),
 
   /// Invalid message size
-  static const int RD_KAFKA_RESP_ERR_INVALID_MSG_SIZE = 4;
+  RD_KAFKA_RESP_ERR_INVALID_MSG_SIZE(4),
 
   /// Leader not available
-  static const int RD_KAFKA_RESP_ERR_LEADER_NOT_AVAILABLE = 5;
-  static const int RD_KAFKA_RESP_ERR_NOT_LEADER_FOR_PARTITION = 6;
+  RD_KAFKA_RESP_ERR_LEADER_NOT_AVAILABLE(5),
+  RD_KAFKA_RESP_ERR_NOT_LEADER_FOR_PARTITION(6),
 
   /// Request timed out
-  static const int RD_KAFKA_RESP_ERR_REQUEST_TIMED_OUT = 7;
+  RD_KAFKA_RESP_ERR_REQUEST_TIMED_OUT(7),
 
   /// Broker not available
-  static const int RD_KAFKA_RESP_ERR_BROKER_NOT_AVAILABLE = 8;
+  RD_KAFKA_RESP_ERR_BROKER_NOT_AVAILABLE(8),
 
   /// Replica not available
-  static const int RD_KAFKA_RESP_ERR_REPLICA_NOT_AVAILABLE = 9;
+  RD_KAFKA_RESP_ERR_REPLICA_NOT_AVAILABLE(9),
 
   /// Message size too large
-  static const int RD_KAFKA_RESP_ERR_MSG_SIZE_TOO_LARGE = 10;
+  RD_KAFKA_RESP_ERR_MSG_SIZE_TOO_LARGE(10),
 
   /// StaleControllerEpochCode
-  static const int RD_KAFKA_RESP_ERR_STALE_CTRL_EPOCH = 11;
+  RD_KAFKA_RESP_ERR_STALE_CTRL_EPOCH(11),
 
   /// Offset metadata string too large
-  static const int RD_KAFKA_RESP_ERR_OFFSET_METADATA_TOO_LARGE = 12;
+  RD_KAFKA_RESP_ERR_OFFSET_METADATA_TOO_LARGE(12),
 
   /// Broker disconnected before response received
-  static const int RD_KAFKA_RESP_ERR_NETWORK_EXCEPTION = 13;
+  RD_KAFKA_RESP_ERR_NETWORK_EXCEPTION(13),
 
   /// Coordinator load in progress
-  static const int RD_KAFKA_RESP_ERR_COORDINATOR_LOAD_IN_PROGRESS = 14;
+  RD_KAFKA_RESP_ERR_COORDINATOR_LOAD_IN_PROGRESS(14),
 
   /// Coordinator not available
-  static const int RD_KAFKA_RESP_ERR_COORDINATOR_NOT_AVAILABLE = 15;
+  RD_KAFKA_RESP_ERR_COORDINATOR_NOT_AVAILABLE(15),
 
   /// Not coordinator
-  static const int RD_KAFKA_RESP_ERR_NOT_COORDINATOR = 16;
+  RD_KAFKA_RESP_ERR_NOT_COORDINATOR(16),
 
   /// Invalid topic
-  static const int RD_KAFKA_RESP_ERR_TOPIC_EXCEPTION = 17;
+  RD_KAFKA_RESP_ERR_TOPIC_EXCEPTION(17),
 
   /// Message batch larger than configured server segment size
-  static const int RD_KAFKA_RESP_ERR_RECORD_LIST_TOO_LARGE = 18;
+  RD_KAFKA_RESP_ERR_RECORD_LIST_TOO_LARGE(18),
 
   /// Not enough in-sync replicas
-  static const int RD_KAFKA_RESP_ERR_NOT_ENOUGH_REPLICAS = 19;
+  RD_KAFKA_RESP_ERR_NOT_ENOUGH_REPLICAS(19),
 
   /// Message(s) written to insufficient number of in-sync replicas
-  static const int RD_KAFKA_RESP_ERR_NOT_ENOUGH_REPLICAS_AFTER_APPEND = 20;
+  RD_KAFKA_RESP_ERR_NOT_ENOUGH_REPLICAS_AFTER_APPEND(20),
 
   /// Invalid required acks value
-  static const int RD_KAFKA_RESP_ERR_INVALID_REQUIRED_ACKS = 21;
+  RD_KAFKA_RESP_ERR_INVALID_REQUIRED_ACKS(21),
 
   /// Specified group generation id is not valid
-  static const int RD_KAFKA_RESP_ERR_ILLEGAL_GENERATION = 22;
+  RD_KAFKA_RESP_ERR_ILLEGAL_GENERATION(22),
 
   /// Inconsistent group protocol
-  static const int RD_KAFKA_RESP_ERR_INCONSISTENT_GROUP_PROTOCOL = 23;
+  RD_KAFKA_RESP_ERR_INCONSISTENT_GROUP_PROTOCOL(23),
 
   /// Invalid group.id
-  static const int RD_KAFKA_RESP_ERR_INVALID_GROUP_ID = 24;
+  RD_KAFKA_RESP_ERR_INVALID_GROUP_ID(24),
 
   /// Unknown member
-  static const int RD_KAFKA_RESP_ERR_UNKNOWN_MEMBER_ID = 25;
+  RD_KAFKA_RESP_ERR_UNKNOWN_MEMBER_ID(25),
 
   /// Invalid session timeout
-  static const int RD_KAFKA_RESP_ERR_INVALID_SESSION_TIMEOUT = 26;
+  RD_KAFKA_RESP_ERR_INVALID_SESSION_TIMEOUT(26),
 
   /// Group rebalance in progress
-  static const int RD_KAFKA_RESP_ERR_REBALANCE_IN_PROGRESS = 27;
+  RD_KAFKA_RESP_ERR_REBALANCE_IN_PROGRESS(27),
 
   /// Commit offset data size is not valid
-  static const int RD_KAFKA_RESP_ERR_INVALID_COMMIT_OFFSET_SIZE = 28;
+  RD_KAFKA_RESP_ERR_INVALID_COMMIT_OFFSET_SIZE(28),
 
   /// Topic authorization failed
-  static const int RD_KAFKA_RESP_ERR_TOPIC_AUTHORIZATION_FAILED = 29;
+  RD_KAFKA_RESP_ERR_TOPIC_AUTHORIZATION_FAILED(29),
 
   /// Group authorization failed
-  static const int RD_KAFKA_RESP_ERR_GROUP_AUTHORIZATION_FAILED = 30;
+  RD_KAFKA_RESP_ERR_GROUP_AUTHORIZATION_FAILED(30),
 
   /// Cluster authorization failed
-  static const int RD_KAFKA_RESP_ERR_CLUSTER_AUTHORIZATION_FAILED = 31;
+  RD_KAFKA_RESP_ERR_CLUSTER_AUTHORIZATION_FAILED(31),
 
   /// Invalid timestamp
-  static const int RD_KAFKA_RESP_ERR_INVALID_TIMESTAMP = 32;
+  RD_KAFKA_RESP_ERR_INVALID_TIMESTAMP(32),
 
   /// Unsupported SASL mechanism
-  static const int RD_KAFKA_RESP_ERR_UNSUPPORTED_SASL_MECHANISM = 33;
+  RD_KAFKA_RESP_ERR_UNSUPPORTED_SASL_MECHANISM(33),
 
   /// Illegal SASL state
-  static const int RD_KAFKA_RESP_ERR_ILLEGAL_SASL_STATE = 34;
+  RD_KAFKA_RESP_ERR_ILLEGAL_SASL_STATE(34),
 
   /// Unuspported version
-  static const int RD_KAFKA_RESP_ERR_UNSUPPORTED_VERSION = 35;
+  RD_KAFKA_RESP_ERR_UNSUPPORTED_VERSION(35),
 
   /// Topic already exists
-  static const int RD_KAFKA_RESP_ERR_TOPIC_ALREADY_EXISTS = 36;
+  RD_KAFKA_RESP_ERR_TOPIC_ALREADY_EXISTS(36),
 
   /// Invalid number of partitions
-  static const int RD_KAFKA_RESP_ERR_INVALID_PARTITIONS = 37;
+  RD_KAFKA_RESP_ERR_INVALID_PARTITIONS(37),
 
   /// Invalid replication factor
-  static const int RD_KAFKA_RESP_ERR_INVALID_REPLICATION_FACTOR = 38;
+  RD_KAFKA_RESP_ERR_INVALID_REPLICATION_FACTOR(38),
 
   /// Invalid replica assignment
-  static const int RD_KAFKA_RESP_ERR_INVALID_REPLICA_ASSIGNMENT = 39;
+  RD_KAFKA_RESP_ERR_INVALID_REPLICA_ASSIGNMENT(39),
 
   /// Invalid config
-  static const int RD_KAFKA_RESP_ERR_INVALID_CONFIG = 40;
+  RD_KAFKA_RESP_ERR_INVALID_CONFIG(40),
 
   /// Not controller for cluster
-  static const int RD_KAFKA_RESP_ERR_NOT_CONTROLLER = 41;
+  RD_KAFKA_RESP_ERR_NOT_CONTROLLER(41),
 
   /// Invalid request
-  static const int RD_KAFKA_RESP_ERR_INVALID_REQUEST = 42;
+  RD_KAFKA_RESP_ERR_INVALID_REQUEST(42),
 
   /// Message format on broker does not support request
-  static const int RD_KAFKA_RESP_ERR_UNSUPPORTED_FOR_MESSAGE_FORMAT = 43;
+  RD_KAFKA_RESP_ERR_UNSUPPORTED_FOR_MESSAGE_FORMAT(43),
 
   /// Policy violation
-  static const int RD_KAFKA_RESP_ERR_POLICY_VIOLATION = 44;
+  RD_KAFKA_RESP_ERR_POLICY_VIOLATION(44),
 
   /// Broker received an out of order sequence number
-  static const int RD_KAFKA_RESP_ERR_OUT_OF_ORDER_SEQUENCE_NUMBER = 45;
+  RD_KAFKA_RESP_ERR_OUT_OF_ORDER_SEQUENCE_NUMBER(45),
 
   /// Broker received a duplicate sequence number
-  static const int RD_KAFKA_RESP_ERR_DUPLICATE_SEQUENCE_NUMBER = 46;
+  RD_KAFKA_RESP_ERR_DUPLICATE_SEQUENCE_NUMBER(46),
 
   /// Producer attempted an operation with an old epoch
-  static const int RD_KAFKA_RESP_ERR_INVALID_PRODUCER_EPOCH = 47;
+  RD_KAFKA_RESP_ERR_INVALID_PRODUCER_EPOCH(47),
 
   /// Producer attempted a transactional operation in an invalid state
-  static const int RD_KAFKA_RESP_ERR_INVALID_TXN_STATE = 48;
+  RD_KAFKA_RESP_ERR_INVALID_TXN_STATE(48),
 
   /// Producer attempted to use a producer id which is not
   /// currently assigned to its transactional id
-  static const int RD_KAFKA_RESP_ERR_INVALID_PRODUCER_ID_MAPPING = 49;
+  RD_KAFKA_RESP_ERR_INVALID_PRODUCER_ID_MAPPING(49),
 
   /// Transaction timeout is larger than the maximum
   /// value allowed by the broker's max.transaction.timeout.ms
-  static const int RD_KAFKA_RESP_ERR_INVALID_TRANSACTION_TIMEOUT = 50;
+  RD_KAFKA_RESP_ERR_INVALID_TRANSACTION_TIMEOUT(50),
 
   /// Producer attempted to update a transaction while another
   /// concurrent operation on the same transaction was ongoing
-  static const int RD_KAFKA_RESP_ERR_CONCURRENT_TRANSACTIONS = 51;
+  RD_KAFKA_RESP_ERR_CONCURRENT_TRANSACTIONS(51),
 
   /// Indicates that the transaction coordinator sending a
   /// WriteTxnMarker is no longer the current coordinator for a
   /// given producer
-  static const int RD_KAFKA_RESP_ERR_TRANSACTION_COORDINATOR_FENCED = 52;
+  RD_KAFKA_RESP_ERR_TRANSACTION_COORDINATOR_FENCED(52),
 
   /// Transactional Id authorization failed
-  static const int RD_KAFKA_RESP_ERR_TRANSACTIONAL_ID_AUTHORIZATION_FAILED = 53;
+  RD_KAFKA_RESP_ERR_TRANSACTIONAL_ID_AUTHORIZATION_FAILED(53),
 
   /// Security features are disabled
-  static const int RD_KAFKA_RESP_ERR_SECURITY_DISABLED = 54;
+  RD_KAFKA_RESP_ERR_SECURITY_DISABLED(54),
 
   /// Operation not attempted
-  static const int RD_KAFKA_RESP_ERR_OPERATION_NOT_ATTEMPTED = 55;
+  RD_KAFKA_RESP_ERR_OPERATION_NOT_ATTEMPTED(55),
 
   /// Disk error when trying to access log file on the disk
-  static const int RD_KAFKA_RESP_ERR_KAFKA_STORAGE_ERROR = 56;
+  RD_KAFKA_RESP_ERR_KAFKA_STORAGE_ERROR(56),
 
   /// The user-specified log directory is not found in the broker config
-  static const int RD_KAFKA_RESP_ERR_LOG_DIR_NOT_FOUND = 57;
+  RD_KAFKA_RESP_ERR_LOG_DIR_NOT_FOUND(57),
 
   /// SASL Authentication failed
-  static const int RD_KAFKA_RESP_ERR_SASL_AUTHENTICATION_FAILED = 58;
+  RD_KAFKA_RESP_ERR_SASL_AUTHENTICATION_FAILED(58),
 
   /// Unknown Producer Id
-  static const int RD_KAFKA_RESP_ERR_UNKNOWN_PRODUCER_ID = 59;
+  RD_KAFKA_RESP_ERR_UNKNOWN_PRODUCER_ID(59),
 
   /// Partition reassignment is in progress
-  static const int RD_KAFKA_RESP_ERR_REASSIGNMENT_IN_PROGRESS = 60;
+  RD_KAFKA_RESP_ERR_REASSIGNMENT_IN_PROGRESS(60),
 
   /// Delegation Token feature is not enabled
-  static const int RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_AUTH_DISABLED = 61;
+  RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_AUTH_DISABLED(61),
 
   /// Delegation Token is not found on server
-  static const int RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_NOT_FOUND = 62;
+  RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_NOT_FOUND(62),
 
   /// Specified Principal is not valid Owner/Renewer
-  static const int RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_OWNER_MISMATCH = 63;
+  RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_OWNER_MISMATCH(63),
 
   /// Delegation Token requests are not allowed on this connection
-  static const int RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_REQUEST_NOT_ALLOWED = 64;
+  RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_REQUEST_NOT_ALLOWED(64),
 
   /// Delegation Token authorization failed
-  static const int RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_AUTHORIZATION_FAILED = 65;
+  RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_AUTHORIZATION_FAILED(65),
 
   /// Delegation Token is expired
-  static const int RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_EXPIRED = 66;
+  RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_EXPIRED(66),
 
   /// Supplied principalType is not supported
-  static const int RD_KAFKA_RESP_ERR_INVALID_PRINCIPAL_TYPE = 67;
+  RD_KAFKA_RESP_ERR_INVALID_PRINCIPAL_TYPE(67),
 
   /// The group is not empty
-  static const int RD_KAFKA_RESP_ERR_NON_EMPTY_GROUP = 68;
+  RD_KAFKA_RESP_ERR_NON_EMPTY_GROUP(68),
 
   /// The group id does not exist
-  static const int RD_KAFKA_RESP_ERR_GROUP_ID_NOT_FOUND = 69;
+  RD_KAFKA_RESP_ERR_GROUP_ID_NOT_FOUND(69),
 
   /// The fetch session ID was not found
-  static const int RD_KAFKA_RESP_ERR_FETCH_SESSION_ID_NOT_FOUND = 70;
+  RD_KAFKA_RESP_ERR_FETCH_SESSION_ID_NOT_FOUND(70),
 
   /// The fetch session epoch is invalid
-  static const int RD_KAFKA_RESP_ERR_INVALID_FETCH_SESSION_EPOCH = 71;
+  RD_KAFKA_RESP_ERR_INVALID_FETCH_SESSION_EPOCH(71),
 
   /// No matching listener
-  static const int RD_KAFKA_RESP_ERR_LISTENER_NOT_FOUND = 72;
+  RD_KAFKA_RESP_ERR_LISTENER_NOT_FOUND(72),
 
   /// Topic deletion is disabled
-  static const int RD_KAFKA_RESP_ERR_TOPIC_DELETION_DISABLED = 73;
+  RD_KAFKA_RESP_ERR_TOPIC_DELETION_DISABLED(73),
 
   /// Leader epoch is older than broker epoch
-  static const int RD_KAFKA_RESP_ERR_FENCED_LEADER_EPOCH = 74;
+  RD_KAFKA_RESP_ERR_FENCED_LEADER_EPOCH(74),
 
   /// Leader epoch is newer than broker epoch
-  static const int RD_KAFKA_RESP_ERR_UNKNOWN_LEADER_EPOCH = 75;
+  RD_KAFKA_RESP_ERR_UNKNOWN_LEADER_EPOCH(75),
 
   /// Unsupported compression type
-  static const int RD_KAFKA_RESP_ERR_UNSUPPORTED_COMPRESSION_TYPE = 76;
+  RD_KAFKA_RESP_ERR_UNSUPPORTED_COMPRESSION_TYPE(76),
 
   /// Broker epoch has changed
-  static const int RD_KAFKA_RESP_ERR_STALE_BROKER_EPOCH = 77;
+  RD_KAFKA_RESP_ERR_STALE_BROKER_EPOCH(77),
 
   /// Leader high watermark is not caught up
-  static const int RD_KAFKA_RESP_ERR_OFFSET_NOT_AVAILABLE = 78;
+  RD_KAFKA_RESP_ERR_OFFSET_NOT_AVAILABLE(78),
 
   /// Group member needs a valid member ID
-  static const int RD_KAFKA_RESP_ERR_MEMBER_ID_REQUIRED = 79;
+  RD_KAFKA_RESP_ERR_MEMBER_ID_REQUIRED(79),
 
   /// Preferred leader was not available
-  static const int RD_KAFKA_RESP_ERR_PREFERRED_LEADER_NOT_AVAILABLE = 80;
+  RD_KAFKA_RESP_ERR_PREFERRED_LEADER_NOT_AVAILABLE(80),
 
   /// Consumer group has reached maximum size
-  static const int RD_KAFKA_RESP_ERR_GROUP_MAX_SIZE_REACHED = 81;
+  RD_KAFKA_RESP_ERR_GROUP_MAX_SIZE_REACHED(81),
 
   /// Static consumer fenced by other consumer with same
   /// group.instance.id.
-  static const int RD_KAFKA_RESP_ERR_FENCED_INSTANCE_ID = 82;
+  RD_KAFKA_RESP_ERR_FENCED_INSTANCE_ID(82),
 
   /// Eligible partition leaders are not available
-  static const int RD_KAFKA_RESP_ERR_ELIGIBLE_LEADERS_NOT_AVAILABLE = 83;
+  RD_KAFKA_RESP_ERR_ELIGIBLE_LEADERS_NOT_AVAILABLE(83),
 
   /// Leader election not needed for topic partition
-  static const int RD_KAFKA_RESP_ERR_ELECTION_NOT_NEEDED = 84;
+  RD_KAFKA_RESP_ERR_ELECTION_NOT_NEEDED(84),
 
   /// No partition reassignment is in progress
-  static const int RD_KAFKA_RESP_ERR_NO_REASSIGNMENT_IN_PROGRESS = 85;
+  RD_KAFKA_RESP_ERR_NO_REASSIGNMENT_IN_PROGRESS(85),
 
   /// Deleting offsets of a topic while the consumer group is
   /// subscribed to it
-  static const int RD_KAFKA_RESP_ERR_GROUP_SUBSCRIBED_TO_TOPIC = 86;
+  RD_KAFKA_RESP_ERR_GROUP_SUBSCRIBED_TO_TOPIC(86),
 
   /// Broker failed to validate record
-  static const int RD_KAFKA_RESP_ERR_INVALID_RECORD = 87;
+  RD_KAFKA_RESP_ERR_INVALID_RECORD(87),
 
   /// There are unstable offsets that need to be cleared
-  static const int RD_KAFKA_RESP_ERR_UNSTABLE_OFFSET_COMMIT = 88;
+  RD_KAFKA_RESP_ERR_UNSTABLE_OFFSET_COMMIT(88),
 
   /// Throttling quota has been exceeded
-  static const int RD_KAFKA_RESP_ERR_THROTTLING_QUOTA_EXCEEDED = 89;
+  RD_KAFKA_RESP_ERR_THROTTLING_QUOTA_EXCEEDED(89),
 
   /// There is a newer producer with the same transactionalId
   /// which fences the current one
-  static const int RD_KAFKA_RESP_ERR_PRODUCER_FENCED = 90;
+  RD_KAFKA_RESP_ERR_PRODUCER_FENCED(90),
 
   /// Request illegally referred to resource that does not exist
-  static const int RD_KAFKA_RESP_ERR_RESOURCE_NOT_FOUND = 91;
+  RD_KAFKA_RESP_ERR_RESOURCE_NOT_FOUND(91),
 
   /// Request illegally referred to the same resource twice
-  static const int RD_KAFKA_RESP_ERR_DUPLICATE_RESOURCE = 92;
+  RD_KAFKA_RESP_ERR_DUPLICATE_RESOURCE(92),
 
   /// Requested credential would not meet criteria for acceptability
-  static const int RD_KAFKA_RESP_ERR_UNACCEPTABLE_CREDENTIAL = 93;
+  RD_KAFKA_RESP_ERR_UNACCEPTABLE_CREDENTIAL(93),
 
   /// Indicates that the either the sender or recipient of a
   /// voter-only request is not one of the expected voters
-  static const int RD_KAFKA_RESP_ERR_INCONSISTENT_VOTER_SET = 94;
+  RD_KAFKA_RESP_ERR_INCONSISTENT_VOTER_SET(94),
 
   /// Invalid update version
-  static const int RD_KAFKA_RESP_ERR_INVALID_UPDATE_VERSION = 95;
+  RD_KAFKA_RESP_ERR_INVALID_UPDATE_VERSION(95),
 
   /// Unable to update finalized features due to server error
-  static const int RD_KAFKA_RESP_ERR_FEATURE_UPDATE_FAILED = 96;
+  RD_KAFKA_RESP_ERR_FEATURE_UPDATE_FAILED(96),
 
   /// Request principal deserialization failed during forwarding
-  static const int RD_KAFKA_RESP_ERR_PRINCIPAL_DESERIALIZATION_FAILURE = 97;
+  RD_KAFKA_RESP_ERR_PRINCIPAL_DESERIALIZATION_FAILURE(97),
 
   /// Unknown Topic Id
-  static const int RD_KAFKA_RESP_ERR_UNKNOWN_TOPIC_ID = 100;
+  RD_KAFKA_RESP_ERR_UNKNOWN_TOPIC_ID(100),
 
   /// The member epoch is fenced by the group coordinator
-  static const int RD_KAFKA_RESP_ERR_FENCED_MEMBER_EPOCH = 110;
+  RD_KAFKA_RESP_ERR_FENCED_MEMBER_EPOCH(110),
 
   /// The instance ID is still used by another member in the
   /// consumer group
-  static const int RD_KAFKA_RESP_ERR_UNRELEASED_INSTANCE_ID = 111;
+  RD_KAFKA_RESP_ERR_UNRELEASED_INSTANCE_ID(111),
 
   /// The assignor or its version range is not supported by the consumer
   /// group
-  static const int RD_KAFKA_RESP_ERR_UNSUPPORTED_ASSIGNOR = 112;
+  RD_KAFKA_RESP_ERR_UNSUPPORTED_ASSIGNOR(112),
 
   /// The member epoch is stale
-  static const int RD_KAFKA_RESP_ERR_STALE_MEMBER_EPOCH = 113;
+  RD_KAFKA_RESP_ERR_STALE_MEMBER_EPOCH(113),
 
   /// Client sent a push telemetry request with an invalid or outdated
   /// subscription ID.
-  static const int RD_KAFKA_RESP_ERR_UNKNOWN_SUBSCRIPTION_ID = 117;
+  RD_KAFKA_RESP_ERR_UNKNOWN_SUBSCRIPTION_ID(117),
 
   /// Client sent a push telemetry request larger than the maximum size
   /// the broker will accept.
-  static const int RD_KAFKA_RESP_ERR_TELEMETRY_TOO_LARGE = 118;
-  static const int RD_KAFKA_RESP_ERR_END_ALL = 119;
+  RD_KAFKA_RESP_ERR_TELEMETRY_TOO_LARGE(118),
+  RD_KAFKA_RESP_ERR_END_ALL(119);
+
+  final int value;
+  const rd_kafka_resp_err_t(this.value);
+
+  static rd_kafka_resp_err_t fromValue(int value) => switch (value) {
+        -200 => RD_KAFKA_RESP_ERR__BEGIN,
+        -199 => RD_KAFKA_RESP_ERR__BAD_MSG,
+        -198 => RD_KAFKA_RESP_ERR__BAD_COMPRESSION,
+        -197 => RD_KAFKA_RESP_ERR__DESTROY,
+        -196 => RD_KAFKA_RESP_ERR__FAIL,
+        -195 => RD_KAFKA_RESP_ERR__TRANSPORT,
+        -194 => RD_KAFKA_RESP_ERR__CRIT_SYS_RESOURCE,
+        -193 => RD_KAFKA_RESP_ERR__RESOLVE,
+        -192 => RD_KAFKA_RESP_ERR__MSG_TIMED_OUT,
+        -191 => RD_KAFKA_RESP_ERR__PARTITION_EOF,
+        -190 => RD_KAFKA_RESP_ERR__UNKNOWN_PARTITION,
+        -189 => RD_KAFKA_RESP_ERR__FS,
+        -188 => RD_KAFKA_RESP_ERR__UNKNOWN_TOPIC,
+        -187 => RD_KAFKA_RESP_ERR__ALL_BROKERS_DOWN,
+        -186 => RD_KAFKA_RESP_ERR__INVALID_ARG,
+        -185 => RD_KAFKA_RESP_ERR__TIMED_OUT,
+        -184 => RD_KAFKA_RESP_ERR__QUEUE_FULL,
+        -183 => RD_KAFKA_RESP_ERR__ISR_INSUFF,
+        -182 => RD_KAFKA_RESP_ERR__NODE_UPDATE,
+        -181 => RD_KAFKA_RESP_ERR__SSL,
+        -180 => RD_KAFKA_RESP_ERR__WAIT_COORD,
+        -179 => RD_KAFKA_RESP_ERR__UNKNOWN_GROUP,
+        -178 => RD_KAFKA_RESP_ERR__IN_PROGRESS,
+        -177 => RD_KAFKA_RESP_ERR__PREV_IN_PROGRESS,
+        -176 => RD_KAFKA_RESP_ERR__EXISTING_SUBSCRIPTION,
+        -175 => RD_KAFKA_RESP_ERR__ASSIGN_PARTITIONS,
+        -174 => RD_KAFKA_RESP_ERR__REVOKE_PARTITIONS,
+        -173 => RD_KAFKA_RESP_ERR__CONFLICT,
+        -172 => RD_KAFKA_RESP_ERR__STATE,
+        -171 => RD_KAFKA_RESP_ERR__UNKNOWN_PROTOCOL,
+        -170 => RD_KAFKA_RESP_ERR__NOT_IMPLEMENTED,
+        -169 => RD_KAFKA_RESP_ERR__AUTHENTICATION,
+        -168 => RD_KAFKA_RESP_ERR__NO_OFFSET,
+        -167 => RD_KAFKA_RESP_ERR__OUTDATED,
+        -166 => RD_KAFKA_RESP_ERR__TIMED_OUT_QUEUE,
+        -165 => RD_KAFKA_RESP_ERR__UNSUPPORTED_FEATURE,
+        -164 => RD_KAFKA_RESP_ERR__WAIT_CACHE,
+        -163 => RD_KAFKA_RESP_ERR__INTR,
+        -162 => RD_KAFKA_RESP_ERR__KEY_SERIALIZATION,
+        -161 => RD_KAFKA_RESP_ERR__VALUE_SERIALIZATION,
+        -160 => RD_KAFKA_RESP_ERR__KEY_DESERIALIZATION,
+        -159 => RD_KAFKA_RESP_ERR__VALUE_DESERIALIZATION,
+        -158 => RD_KAFKA_RESP_ERR__PARTIAL,
+        -157 => RD_KAFKA_RESP_ERR__READ_ONLY,
+        -156 => RD_KAFKA_RESP_ERR__NOENT,
+        -155 => RD_KAFKA_RESP_ERR__UNDERFLOW,
+        -154 => RD_KAFKA_RESP_ERR__INVALID_TYPE,
+        -153 => RD_KAFKA_RESP_ERR__RETRY,
+        -152 => RD_KAFKA_RESP_ERR__PURGE_QUEUE,
+        -151 => RD_KAFKA_RESP_ERR__PURGE_INFLIGHT,
+        -150 => RD_KAFKA_RESP_ERR__FATAL,
+        -149 => RD_KAFKA_RESP_ERR__INCONSISTENT,
+        -148 => RD_KAFKA_RESP_ERR__GAPLESS_GUARANTEE,
+        -147 => RD_KAFKA_RESP_ERR__MAX_POLL_EXCEEDED,
+        -146 => RD_KAFKA_RESP_ERR__UNKNOWN_BROKER,
+        -145 => RD_KAFKA_RESP_ERR__NOT_CONFIGURED,
+        -144 => RD_KAFKA_RESP_ERR__FENCED,
+        -143 => RD_KAFKA_RESP_ERR__APPLICATION,
+        -142 => RD_KAFKA_RESP_ERR__ASSIGNMENT_LOST,
+        -141 => RD_KAFKA_RESP_ERR__NOOP,
+        -140 => RD_KAFKA_RESP_ERR__AUTO_OFFSET_RESET,
+        -139 => RD_KAFKA_RESP_ERR__LOG_TRUNCATION,
+        -138 => RD_KAFKA_RESP_ERR__INVALID_DIFFERENT_RECORD,
+        -100 => RD_KAFKA_RESP_ERR__END,
+        -1 => RD_KAFKA_RESP_ERR_UNKNOWN,
+        0 => RD_KAFKA_RESP_ERR_NO_ERROR,
+        1 => RD_KAFKA_RESP_ERR_OFFSET_OUT_OF_RANGE,
+        2 => RD_KAFKA_RESP_ERR_INVALID_MSG,
+        3 => RD_KAFKA_RESP_ERR_UNKNOWN_TOPIC_OR_PART,
+        4 => RD_KAFKA_RESP_ERR_INVALID_MSG_SIZE,
+        5 => RD_KAFKA_RESP_ERR_LEADER_NOT_AVAILABLE,
+        6 => RD_KAFKA_RESP_ERR_NOT_LEADER_FOR_PARTITION,
+        7 => RD_KAFKA_RESP_ERR_REQUEST_TIMED_OUT,
+        8 => RD_KAFKA_RESP_ERR_BROKER_NOT_AVAILABLE,
+        9 => RD_KAFKA_RESP_ERR_REPLICA_NOT_AVAILABLE,
+        10 => RD_KAFKA_RESP_ERR_MSG_SIZE_TOO_LARGE,
+        11 => RD_KAFKA_RESP_ERR_STALE_CTRL_EPOCH,
+        12 => RD_KAFKA_RESP_ERR_OFFSET_METADATA_TOO_LARGE,
+        13 => RD_KAFKA_RESP_ERR_NETWORK_EXCEPTION,
+        14 => RD_KAFKA_RESP_ERR_COORDINATOR_LOAD_IN_PROGRESS,
+        15 => RD_KAFKA_RESP_ERR_COORDINATOR_NOT_AVAILABLE,
+        16 => RD_KAFKA_RESP_ERR_NOT_COORDINATOR,
+        17 => RD_KAFKA_RESP_ERR_TOPIC_EXCEPTION,
+        18 => RD_KAFKA_RESP_ERR_RECORD_LIST_TOO_LARGE,
+        19 => RD_KAFKA_RESP_ERR_NOT_ENOUGH_REPLICAS,
+        20 => RD_KAFKA_RESP_ERR_NOT_ENOUGH_REPLICAS_AFTER_APPEND,
+        21 => RD_KAFKA_RESP_ERR_INVALID_REQUIRED_ACKS,
+        22 => RD_KAFKA_RESP_ERR_ILLEGAL_GENERATION,
+        23 => RD_KAFKA_RESP_ERR_INCONSISTENT_GROUP_PROTOCOL,
+        24 => RD_KAFKA_RESP_ERR_INVALID_GROUP_ID,
+        25 => RD_KAFKA_RESP_ERR_UNKNOWN_MEMBER_ID,
+        26 => RD_KAFKA_RESP_ERR_INVALID_SESSION_TIMEOUT,
+        27 => RD_KAFKA_RESP_ERR_REBALANCE_IN_PROGRESS,
+        28 => RD_KAFKA_RESP_ERR_INVALID_COMMIT_OFFSET_SIZE,
+        29 => RD_KAFKA_RESP_ERR_TOPIC_AUTHORIZATION_FAILED,
+        30 => RD_KAFKA_RESP_ERR_GROUP_AUTHORIZATION_FAILED,
+        31 => RD_KAFKA_RESP_ERR_CLUSTER_AUTHORIZATION_FAILED,
+        32 => RD_KAFKA_RESP_ERR_INVALID_TIMESTAMP,
+        33 => RD_KAFKA_RESP_ERR_UNSUPPORTED_SASL_MECHANISM,
+        34 => RD_KAFKA_RESP_ERR_ILLEGAL_SASL_STATE,
+        35 => RD_KAFKA_RESP_ERR_UNSUPPORTED_VERSION,
+        36 => RD_KAFKA_RESP_ERR_TOPIC_ALREADY_EXISTS,
+        37 => RD_KAFKA_RESP_ERR_INVALID_PARTITIONS,
+        38 => RD_KAFKA_RESP_ERR_INVALID_REPLICATION_FACTOR,
+        39 => RD_KAFKA_RESP_ERR_INVALID_REPLICA_ASSIGNMENT,
+        40 => RD_KAFKA_RESP_ERR_INVALID_CONFIG,
+        41 => RD_KAFKA_RESP_ERR_NOT_CONTROLLER,
+        42 => RD_KAFKA_RESP_ERR_INVALID_REQUEST,
+        43 => RD_KAFKA_RESP_ERR_UNSUPPORTED_FOR_MESSAGE_FORMAT,
+        44 => RD_KAFKA_RESP_ERR_POLICY_VIOLATION,
+        45 => RD_KAFKA_RESP_ERR_OUT_OF_ORDER_SEQUENCE_NUMBER,
+        46 => RD_KAFKA_RESP_ERR_DUPLICATE_SEQUENCE_NUMBER,
+        47 => RD_KAFKA_RESP_ERR_INVALID_PRODUCER_EPOCH,
+        48 => RD_KAFKA_RESP_ERR_INVALID_TXN_STATE,
+        49 => RD_KAFKA_RESP_ERR_INVALID_PRODUCER_ID_MAPPING,
+        50 => RD_KAFKA_RESP_ERR_INVALID_TRANSACTION_TIMEOUT,
+        51 => RD_KAFKA_RESP_ERR_CONCURRENT_TRANSACTIONS,
+        52 => RD_KAFKA_RESP_ERR_TRANSACTION_COORDINATOR_FENCED,
+        53 => RD_KAFKA_RESP_ERR_TRANSACTIONAL_ID_AUTHORIZATION_FAILED,
+        54 => RD_KAFKA_RESP_ERR_SECURITY_DISABLED,
+        55 => RD_KAFKA_RESP_ERR_OPERATION_NOT_ATTEMPTED,
+        56 => RD_KAFKA_RESP_ERR_KAFKA_STORAGE_ERROR,
+        57 => RD_KAFKA_RESP_ERR_LOG_DIR_NOT_FOUND,
+        58 => RD_KAFKA_RESP_ERR_SASL_AUTHENTICATION_FAILED,
+        59 => RD_KAFKA_RESP_ERR_UNKNOWN_PRODUCER_ID,
+        60 => RD_KAFKA_RESP_ERR_REASSIGNMENT_IN_PROGRESS,
+        61 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_AUTH_DISABLED,
+        62 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_NOT_FOUND,
+        63 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_OWNER_MISMATCH,
+        64 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_REQUEST_NOT_ALLOWED,
+        65 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_AUTHORIZATION_FAILED,
+        66 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_EXPIRED,
+        67 => RD_KAFKA_RESP_ERR_INVALID_PRINCIPAL_TYPE,
+        68 => RD_KAFKA_RESP_ERR_NON_EMPTY_GROUP,
+        69 => RD_KAFKA_RESP_ERR_GROUP_ID_NOT_FOUND,
+        70 => RD_KAFKA_RESP_ERR_FETCH_SESSION_ID_NOT_FOUND,
+        71 => RD_KAFKA_RESP_ERR_INVALID_FETCH_SESSION_EPOCH,
+        72 => RD_KAFKA_RESP_ERR_LISTENER_NOT_FOUND,
+        73 => RD_KAFKA_RESP_ERR_TOPIC_DELETION_DISABLED,
+        74 => RD_KAFKA_RESP_ERR_FENCED_LEADER_EPOCH,
+        75 => RD_KAFKA_RESP_ERR_UNKNOWN_LEADER_EPOCH,
+        76 => RD_KAFKA_RESP_ERR_UNSUPPORTED_COMPRESSION_TYPE,
+        77 => RD_KAFKA_RESP_ERR_STALE_BROKER_EPOCH,
+        78 => RD_KAFKA_RESP_ERR_OFFSET_NOT_AVAILABLE,
+        79 => RD_KAFKA_RESP_ERR_MEMBER_ID_REQUIRED,
+        80 => RD_KAFKA_RESP_ERR_PREFERRED_LEADER_NOT_AVAILABLE,
+        81 => RD_KAFKA_RESP_ERR_GROUP_MAX_SIZE_REACHED,
+        82 => RD_KAFKA_RESP_ERR_FENCED_INSTANCE_ID,
+        83 => RD_KAFKA_RESP_ERR_ELIGIBLE_LEADERS_NOT_AVAILABLE,
+        84 => RD_KAFKA_RESP_ERR_ELECTION_NOT_NEEDED,
+        85 => RD_KAFKA_RESP_ERR_NO_REASSIGNMENT_IN_PROGRESS,
+        86 => RD_KAFKA_RESP_ERR_GROUP_SUBSCRIBED_TO_TOPIC,
+        87 => RD_KAFKA_RESP_ERR_INVALID_RECORD,
+        88 => RD_KAFKA_RESP_ERR_UNSTABLE_OFFSET_COMMIT,
+        89 => RD_KAFKA_RESP_ERR_THROTTLING_QUOTA_EXCEEDED,
+        90 => RD_KAFKA_RESP_ERR_PRODUCER_FENCED,
+        91 => RD_KAFKA_RESP_ERR_RESOURCE_NOT_FOUND,
+        92 => RD_KAFKA_RESP_ERR_DUPLICATE_RESOURCE,
+        93 => RD_KAFKA_RESP_ERR_UNACCEPTABLE_CREDENTIAL,
+        94 => RD_KAFKA_RESP_ERR_INCONSISTENT_VOTER_SET,
+        95 => RD_KAFKA_RESP_ERR_INVALID_UPDATE_VERSION,
+        96 => RD_KAFKA_RESP_ERR_FEATURE_UPDATE_FAILED,
+        97 => RD_KAFKA_RESP_ERR_PRINCIPAL_DESERIALIZATION_FAILURE,
+        100 => RD_KAFKA_RESP_ERR_UNKNOWN_TOPIC_ID,
+        110 => RD_KAFKA_RESP_ERR_FENCED_MEMBER_EPOCH,
+        111 => RD_KAFKA_RESP_ERR_UNRELEASED_INSTANCE_ID,
+        112 => RD_KAFKA_RESP_ERR_UNSUPPORTED_ASSIGNOR,
+        113 => RD_KAFKA_RESP_ERR_STALE_MEMBER_EPOCH,
+        117 => RD_KAFKA_RESP_ERR_UNKNOWN_SUBSCRIPTION_ID,
+        118 => RD_KAFKA_RESP_ERR_TELEMETRY_TOO_LARGE,
+        119 => RD_KAFKA_RESP_ERR_END_ALL,
+        _ =>
+          throw ArgumentError('Unknown value for rd_kafka_resp_err_t: $value'),
+      };
 }
 
 /// @brief Error code value, name and description.
@@ -17539,8 +17963,10 @@ abstract class rd_kafka_resp_err_t {
 /// the full set of librdkafka error codes.
 final class rd_kafka_err_desc extends ffi.Struct {
   /// < Error code
-  @ffi.Int32()
-  external int code;
+  @ffi.Int()
+  external int codeAsInt;
+
+  rd_kafka_resp_err_t get code => rd_kafka_resp_err_t.fromValue(codeAsInt);
 
   /// < Error name, same as code enum sans prefix
   external ffi.Pointer<ffi.Char> name;
@@ -17548,9 +17974,6 @@ final class rd_kafka_err_desc extends ffi.Struct {
   /// < Human readable error description.
   external ffi.Pointer<ffi.Char> desc;
 }
-
-typedef rd_kafka_t = rd_kafka_s;
-typedef rd_kafka_error_t = rd_kafka_error_s;
 
 /// @brief Generic place holder for a specific Topic+Partition.
 ///
@@ -17578,8 +18001,10 @@ final class rd_kafka_topic_partition_s extends ffi.Struct {
   external ffi.Pointer<ffi.Void> opaque;
 
   /// < Error code, depending on use.
-  @ffi.Int32()
-  external int err;
+  @ffi.Int()
+  external int errAsInt;
+
+  rd_kafka_resp_err_t get err => rd_kafka_resp_err_t.fromValue(errAsInt);
 
   /// < INTERNAL USE ONLY,
   /// INITIALIZE TO ZERO, DO NOT TOUCH,
@@ -17615,56 +18040,78 @@ typedef rd_kafka_topic_partition_list_t = rd_kafka_topic_partition_list_s;
 /// @brief Var-arg tag types
 ///
 /// @sa rd_kafka_producev()
-abstract class rd_kafka_vtype_t {
+enum rd_kafka_vtype_t {
   /// < va-arg sentinel
-  static const int RD_KAFKA_VTYPE_END = 0;
+  RD_KAFKA_VTYPE_END(0),
 
   /// < (const char *) Topic name
-  static const int RD_KAFKA_VTYPE_TOPIC = 1;
+  RD_KAFKA_VTYPE_TOPIC(1),
 
   /// < (rd_kafka_topic_t *) Topic handle
-  static const int RD_KAFKA_VTYPE_RKT = 2;
+  RD_KAFKA_VTYPE_RKT(2),
 
   /// < (int32_t) Partition
-  static const int RD_KAFKA_VTYPE_PARTITION = 3;
+  RD_KAFKA_VTYPE_PARTITION(3),
 
   /// < (void *, size_t) Message value (payload)
-  static const int RD_KAFKA_VTYPE_VALUE = 4;
+  RD_KAFKA_VTYPE_VALUE(4),
 
   /// < (void *, size_t) Message key
-  static const int RD_KAFKA_VTYPE_KEY = 5;
+  RD_KAFKA_VTYPE_KEY(5),
 
   /// < (void *) Per-message application opaque
   /// value. This is the same as
   /// the _private field in
   /// rd_kafka_message_t, also known
   /// as the msg_opaque.
-  static const int RD_KAFKA_VTYPE_OPAQUE = 6;
+  RD_KAFKA_VTYPE_OPAQUE(6),
 
   /// < (int) RD_KAFKA_MSG_F_.. flags
-  static const int RD_KAFKA_VTYPE_MSGFLAGS = 7;
+  RD_KAFKA_VTYPE_MSGFLAGS(7),
 
   /// < (int64_t) Milliseconds since epoch UTC
-  static const int RD_KAFKA_VTYPE_TIMESTAMP = 8;
+  RD_KAFKA_VTYPE_TIMESTAMP(8),
 
   /// < (const char *, const void *, ssize_t)
   /// Message Header
-  static const int RD_KAFKA_VTYPE_HEADER = 9;
+  RD_KAFKA_VTYPE_HEADER(9),
 
   /// < (rd_kafka_headers_t *) Headers list
-  static const int RD_KAFKA_VTYPE_HEADERS = 10;
+  RD_KAFKA_VTYPE_HEADERS(10);
+
+  final int value;
+  const rd_kafka_vtype_t(this.value);
+
+  static rd_kafka_vtype_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_VTYPE_END,
+        1 => RD_KAFKA_VTYPE_TOPIC,
+        2 => RD_KAFKA_VTYPE_RKT,
+        3 => RD_KAFKA_VTYPE_PARTITION,
+        4 => RD_KAFKA_VTYPE_VALUE,
+        5 => RD_KAFKA_VTYPE_KEY,
+        6 => RD_KAFKA_VTYPE_OPAQUE,
+        7 => RD_KAFKA_VTYPE_MSGFLAGS,
+        8 => RD_KAFKA_VTYPE_TIMESTAMP,
+        9 => RD_KAFKA_VTYPE_HEADER,
+        10 => RD_KAFKA_VTYPE_HEADERS,
+        _ => throw ArgumentError('Unknown value for rd_kafka_vtype_t: $value'),
+      };
 }
 
-/// @brief VTYPE + argument container for use with rd_kafka_produce_va()
-///
-/// See RD_KAFKA_V_..() macros below for which union field corresponds
-/// to which RD_KAFKA_VTYPE_...
-final class rd_kafka_vu_s extends ffi.Struct {
-  /// < RD_KAFKA_VTYPE_..
-  @ffi.Int32()
-  external int vtype;
+final class UnnamedStruct1 extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> ptr;
 
-  external UnnamedUnion1 u;
+  @ffi.Size()
+  external int size;
+}
+
+final class UnnamedStruct2 extends ffi.Struct {
+  external ffi.Pointer<ffi.Char> name;
+
+  external ffi.Pointer<ffi.Void> val;
+
+  @ssize_t()
+  external int size;
 }
 
 /// Value union, see RD_KAFKA_V_.. macros for which field to use.
@@ -17695,25 +18142,25 @@ final class UnnamedUnion1 extends ffi.Union {
   external ffi.Array<ffi.Char> _pad;
 }
 
-typedef rd_kafka_topic_t = rd_kafka_topic_s;
+/// @brief VTYPE + argument container for use with rd_kafka_produce_va()
+///
+/// See RD_KAFKA_V_..() macros below for which union field corresponds
+/// to which RD_KAFKA_VTYPE_...
+final class rd_kafka_vu_s extends ffi.Struct {
+  /// < RD_KAFKA_VTYPE_..
+  @ffi.UnsignedInt()
+  external int vtypeAsInt;
 
-final class UnnamedStruct1 extends ffi.Struct {
-  external ffi.Pointer<ffi.Void> ptr;
+  rd_kafka_vtype_t get vtype => rd_kafka_vtype_t.fromValue(vtypeAsInt);
 
-  @ffi.Size()
-  external int size;
+  external UnnamedUnion1 u;
 }
 
-final class UnnamedStruct2 extends ffi.Struct {
-  external ffi.Pointer<ffi.Char> name;
-
-  external ffi.Pointer<ffi.Void> val;
-
-  @ssize_t()
-  external int size;
-}
-
-typedef rd_kafka_headers_t = rd_kafka_headers_s;
+/// @brief VTYPE + argument container for use with rd_kafka_produce_va()
+///
+/// See RD_KAFKA_V_..() macros below for which union field corresponds
+/// to which RD_KAFKA_VTYPE_...
+typedef rd_kafka_vu_t = rd_kafka_vu_s;
 
 /// @brief A Kafka message as returned by the \c rd_kafka_consume*() family
 /// of functions as well as provided to the Producer \c dr_msg_cb().
@@ -17728,8 +18175,10 @@ typedef rd_kafka_headers_t = rd_kafka_headers_s;
 /// rd_kafka_message_destroy() unless otherwise noted.
 final class rd_kafka_message_s extends ffi.Struct {
   /// < Non-zero for error signaling.
-  @ffi.Int32()
-  external int err;
+  @ffi.Int()
+  external int errAsInt;
+
+  rd_kafka_resp_err_t get err => rd_kafka_resp_err_t.fromValue(errAsInt);
 
   /// < Topic
   external ffi.Pointer<rd_kafka_topic_t> rkt;
@@ -17796,44 +18245,59 @@ typedef rd_kafka_message_t = rd_kafka_message_s;
 /// @enum rd_kafka_msg_status_t
 /// @brief Message persistence status can be used by the application to
 /// find out if a produced message was persisted in the topic log.
-abstract class rd_kafka_msg_status_t {
+enum rd_kafka_msg_status_t {
   /// Message was never transmitted to the broker, or failed with
   /// an error indicating it was not written to the log.
   /// Application retry risks ordering, but not duplication.
-  static const int RD_KAFKA_MSG_STATUS_NOT_PERSISTED = 0;
+  RD_KAFKA_MSG_STATUS_NOT_PERSISTED(0),
 
   /// Message was transmitted to broker, but no acknowledgement was
   /// received.
   /// Application retry risks ordering and duplication.
-  static const int RD_KAFKA_MSG_STATUS_POSSIBLY_PERSISTED = 1;
+  RD_KAFKA_MSG_STATUS_POSSIBLY_PERSISTED(1),
 
   /// Message was written to the log and acknowledged by the broker.
   /// No reason for application to retry.
   /// Note: this value should only be trusted with \c acks=all.
-  static const int RD_KAFKA_MSG_STATUS_PERSISTED = 2;
-}
+  RD_KAFKA_MSG_STATUS_PERSISTED(2);
 
-typedef rd_kafka_Uuid_t = rd_kafka_Uuid_s;
+  final int value;
+  const rd_kafka_msg_status_t(this.value);
+
+  static rd_kafka_msg_status_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_MSG_STATUS_NOT_PERSISTED,
+        1 => RD_KAFKA_MSG_STATUS_POSSIBLY_PERSISTED,
+        2 => RD_KAFKA_MSG_STATUS_PERSISTED,
+        _ => throw ArgumentError(
+            'Unknown value for rd_kafka_msg_status_t: $value'),
+      };
+}
 
 /// @enum rd_kafka_conf_res_t
 /// @brief Configuration result type
-abstract class rd_kafka_conf_res_t {
+enum rd_kafka_conf_res_t {
   /// < Unknown configuration name.
-  static const int RD_KAFKA_CONF_UNKNOWN = -2;
+  RD_KAFKA_CONF_UNKNOWN(-2),
 
   /// < Invalid configuration value or
   /// property or value not supported in
   /// this build.
-  static const int RD_KAFKA_CONF_INVALID = -1;
+  RD_KAFKA_CONF_INVALID(-1),
 
   /// < Configuration okay
-  static const int RD_KAFKA_CONF_OK = 0;
-}
+  RD_KAFKA_CONF_OK(0);
 
-typedef rd_kafka_conf_t = rd_kafka_conf_s;
-typedef rd_kafka_event_t = rd_kafka_op_s;
-typedef mode_t = __darwin_mode_t;
-typedef __darwin_mode_t = __uint16_t;
+  final int value;
+  const rd_kafka_conf_res_t(this.value);
+
+  static rd_kafka_conf_res_t fromValue(int value) => switch (value) {
+        -2 => RD_KAFKA_CONF_UNKNOWN,
+        -1 => RD_KAFKA_CONF_INVALID,
+        0 => RD_KAFKA_CONF_OK,
+        _ =>
+          throw ArgumentError('Unknown value for rd_kafka_conf_res_t: $value'),
+      };
+}
 
 /// Forward declaration to avoid netdb.h or winsock includes
 final class addrinfo extends ffi.Opaque {}
@@ -17843,16 +18307,28 @@ final class addrinfo extends ffi.Opaque {}
 /// @brief SSL certificate type
 ///
 /// @sa rd_kafka_conf_set_ssl_cert
-abstract class rd_kafka_cert_type_t {
+enum rd_kafka_cert_type_t {
   /// < Client's public key
-  static const int RD_KAFKA_CERT_PUBLIC_KEY = 0;
+  RD_KAFKA_CERT_PUBLIC_KEY(0),
 
   /// < Client's private key
-  static const int RD_KAFKA_CERT_PRIVATE_KEY = 1;
+  RD_KAFKA_CERT_PRIVATE_KEY(1),
 
   /// < CA certificate
-  static const int RD_KAFKA_CERT_CA = 2;
-  static const int RD_KAFKA_CERT__CNT = 3;
+  RD_KAFKA_CERT_CA(2),
+  RD_KAFKA_CERT__CNT(3);
+
+  final int value;
+  const rd_kafka_cert_type_t(this.value);
+
+  static rd_kafka_cert_type_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_CERT_PUBLIC_KEY,
+        1 => RD_KAFKA_CERT_PRIVATE_KEY,
+        2 => RD_KAFKA_CERT_CA,
+        3 => RD_KAFKA_CERT__CNT,
+        _ =>
+          throw ArgumentError('Unknown value for rd_kafka_cert_type_t: $value'),
+      };
 }
 
 /// @enum rd_kafka_cert_enc_t
@@ -17860,27 +18336,29 @@ abstract class rd_kafka_cert_type_t {
 /// @brief SSL certificate encoding
 ///
 /// @sa rd_kafka_conf_set_ssl_cert
-abstract class rd_kafka_cert_enc_t {
+enum rd_kafka_cert_enc_t {
   /// < PKCS#12
-  static const int RD_KAFKA_CERT_ENC_PKCS12 = 0;
+  RD_KAFKA_CERT_ENC_PKCS12(0),
 
   /// < DER / binary X.509 ASN1
-  static const int RD_KAFKA_CERT_ENC_DER = 1;
+  RD_KAFKA_CERT_ENC_DER(1),
 
   /// < PEM
-  static const int RD_KAFKA_CERT_ENC_PEM = 2;
-  static const int RD_KAFKA_CERT_ENC__CNT = 3;
+  RD_KAFKA_CERT_ENC_PEM(2),
+  RD_KAFKA_CERT_ENC__CNT(3);
+
+  final int value;
+  const rd_kafka_cert_enc_t(this.value);
+
+  static rd_kafka_cert_enc_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_CERT_ENC_PKCS12,
+        1 => RD_KAFKA_CERT_ENC_DER,
+        2 => RD_KAFKA_CERT_ENC_PEM,
+        3 => RD_KAFKA_CERT_ENC__CNT,
+        _ =>
+          throw ArgumentError('Unknown value for rd_kafka_cert_enc_t: $value'),
+      };
 }
-
-typedef rd_kafka_topic_conf_t = rd_kafka_topic_conf_s;
-typedef rd_kafka_queue_t = rd_kafka_queue_s;
-typedef rd_kafka_consumer_group_metadata_t = rd_kafka_consumer_group_metadata_s;
-
-/// @brief VTYPE + argument container for use with rd_kafka_produce_va()
-///
-/// See RD_KAFKA_V_..() macros below for which union field corresponds
-/// to which RD_KAFKA_VTYPE_...
-typedef rd_kafka_vu_t = rd_kafka_vu_s;
 
 /// @brief Broker information
 final class rd_kafka_metadata_broker extends ffi.Struct {
@@ -17896,6 +18374,9 @@ final class rd_kafka_metadata_broker extends ffi.Struct {
   external int port;
 }
 
+/// @brief Broker information
+typedef rd_kafka_metadata_broker_t = rd_kafka_metadata_broker;
+
 /// @brief Partition information
 final class rd_kafka_metadata_partition extends ffi.Struct {
   /// < Partition Id
@@ -17903,8 +18384,10 @@ final class rd_kafka_metadata_partition extends ffi.Struct {
   external int id;
 
   /// < Partition error reported by broker
-  @ffi.Int32()
-  external int err;
+  @ffi.Int()
+  external int errAsInt;
+
+  rd_kafka_resp_err_t get err => rd_kafka_resp_err_t.fromValue(errAsInt);
 
   /// < Leader broker
   @ffi.Int32()
@@ -17925,6 +18408,9 @@ final class rd_kafka_metadata_partition extends ffi.Struct {
   external ffi.Pointer<ffi.Int32> isrs;
 }
 
+/// @brief Partition information
+typedef rd_kafka_metadata_partition_t = rd_kafka_metadata_partition;
+
 /// @brief Topic information
 final class rd_kafka_metadata_topic extends ffi.Struct {
   /// < Topic name
@@ -17938,9 +18424,14 @@ final class rd_kafka_metadata_topic extends ffi.Struct {
   external ffi.Pointer<rd_kafka_metadata_partition> partitions;
 
   /// < Topic error reported by broker
-  @ffi.Int32()
-  external int err;
+  @ffi.Int()
+  external int errAsInt;
+
+  rd_kafka_resp_err_t get err => rd_kafka_resp_err_t.fromValue(errAsInt);
 }
+
+/// @brief Topic information
+typedef rd_kafka_metadata_topic_t = rd_kafka_metadata_topic;
 
 /// @brief Metadata container
 final class rd_kafka_metadata extends ffi.Struct {
@@ -17965,6 +18456,9 @@ final class rd_kafka_metadata extends ffi.Struct {
   /// < Name of originating broker
   external ffi.Pointer<ffi.Char> orig_broker_name;
 }
+
+/// @brief Metadata container
+typedef rd_kafka_metadata_t = rd_kafka_metadata;
 
 final class rd_kafka_Node_s extends ffi.Opaque {}
 
@@ -18005,24 +18499,52 @@ final class rd_kafka_group_member_info extends ffi.Struct {
 /// @enum rd_kafka_consumer_group_state_t
 ///
 /// @brief Consumer group state.
-abstract class rd_kafka_consumer_group_state_t {
-  static const int RD_KAFKA_CONSUMER_GROUP_STATE_UNKNOWN = 0;
-  static const int RD_KAFKA_CONSUMER_GROUP_STATE_PREPARING_REBALANCE = 1;
-  static const int RD_KAFKA_CONSUMER_GROUP_STATE_COMPLETING_REBALANCE = 2;
-  static const int RD_KAFKA_CONSUMER_GROUP_STATE_STABLE = 3;
-  static const int RD_KAFKA_CONSUMER_GROUP_STATE_DEAD = 4;
-  static const int RD_KAFKA_CONSUMER_GROUP_STATE_EMPTY = 5;
-  static const int RD_KAFKA_CONSUMER_GROUP_STATE__CNT = 6;
+enum rd_kafka_consumer_group_state_t {
+  RD_KAFKA_CONSUMER_GROUP_STATE_UNKNOWN(0),
+  RD_KAFKA_CONSUMER_GROUP_STATE_PREPARING_REBALANCE(1),
+  RD_KAFKA_CONSUMER_GROUP_STATE_COMPLETING_REBALANCE(2),
+  RD_KAFKA_CONSUMER_GROUP_STATE_STABLE(3),
+  RD_KAFKA_CONSUMER_GROUP_STATE_DEAD(4),
+  RD_KAFKA_CONSUMER_GROUP_STATE_EMPTY(5),
+  RD_KAFKA_CONSUMER_GROUP_STATE__CNT(6);
+
+  final int value;
+  const rd_kafka_consumer_group_state_t(this.value);
+
+  static rd_kafka_consumer_group_state_t fromValue(int value) =>
+      switch (value) {
+        0 => RD_KAFKA_CONSUMER_GROUP_STATE_UNKNOWN,
+        1 => RD_KAFKA_CONSUMER_GROUP_STATE_PREPARING_REBALANCE,
+        2 => RD_KAFKA_CONSUMER_GROUP_STATE_COMPLETING_REBALANCE,
+        3 => RD_KAFKA_CONSUMER_GROUP_STATE_STABLE,
+        4 => RD_KAFKA_CONSUMER_GROUP_STATE_DEAD,
+        5 => RD_KAFKA_CONSUMER_GROUP_STATE_EMPTY,
+        6 => RD_KAFKA_CONSUMER_GROUP_STATE__CNT,
+        _ => throw ArgumentError(
+            'Unknown value for rd_kafka_consumer_group_state_t: $value'),
+      };
 }
 
 /// @enum rd_kafka_consumer_group_type_t
 ///
 /// @brief Consumer group type.
-abstract class rd_kafka_consumer_group_type_t {
-  static const int RD_KAFKA_CONSUMER_GROUP_TYPE_UNKNOWN = 0;
-  static const int RD_KAFKA_CONSUMER_GROUP_TYPE_CONSUMER = 1;
-  static const int RD_KAFKA_CONSUMER_GROUP_TYPE_CLASSIC = 2;
-  static const int RD_KAFKA_CONSUMER_GROUP_TYPE__CNT = 3;
+enum rd_kafka_consumer_group_type_t {
+  RD_KAFKA_CONSUMER_GROUP_TYPE_UNKNOWN(0),
+  RD_KAFKA_CONSUMER_GROUP_TYPE_CONSUMER(1),
+  RD_KAFKA_CONSUMER_GROUP_TYPE_CLASSIC(2),
+  RD_KAFKA_CONSUMER_GROUP_TYPE__CNT(3);
+
+  final int value;
+  const rd_kafka_consumer_group_type_t(this.value);
+
+  static rd_kafka_consumer_group_type_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_CONSUMER_GROUP_TYPE_UNKNOWN,
+        1 => RD_KAFKA_CONSUMER_GROUP_TYPE_CONSUMER,
+        2 => RD_KAFKA_CONSUMER_GROUP_TYPE_CLASSIC,
+        3 => RD_KAFKA_CONSUMER_GROUP_TYPE__CNT,
+        _ => throw ArgumentError(
+            'Unknown value for rd_kafka_consumer_group_type_t: $value'),
+      };
 }
 
 /// @brief Group information
@@ -18034,8 +18556,10 @@ final class rd_kafka_group_info extends ffi.Struct {
   external ffi.Pointer<ffi.Char> group;
 
   /// < Broker-originated error
-  @ffi.Int32()
-  external int err;
+  @ffi.Int()
+  external int errAsInt;
+
+  rd_kafka_resp_err_t get err => rd_kafka_resp_err_t.fromValue(errAsInt);
 
   /// < Group state
   external ffi.Pointer<ffi.Char> state;
@@ -18071,15 +18595,26 @@ final class rd_kafka_group_list extends ffi.Struct {
 /// @brief librdkafka internal thread type.
 ///
 /// @sa rd_kafka_interceptor_add_on_thread_start()
-abstract class rd_kafka_thread_type_t {
+enum rd_kafka_thread_type_t {
   /// < librdkafka's internal main thread
-  static const int RD_KAFKA_THREAD_MAIN = 0;
+  RD_KAFKA_THREAD_MAIN(0),
 
   /// < Background thread (if enabled)
-  static const int RD_KAFKA_THREAD_BACKGROUND = 1;
+  RD_KAFKA_THREAD_BACKGROUND(1),
 
   /// < Per-broker thread
-  static const int RD_KAFKA_THREAD_BROKER = 2;
+  RD_KAFKA_THREAD_BROKER(2);
+
+  final int value;
+  const rd_kafka_thread_type_t(this.value);
+
+  static rd_kafka_thread_type_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_THREAD_MAIN,
+        1 => RD_KAFKA_THREAD_BACKGROUND,
+        2 => RD_KAFKA_THREAD_BROKER,
+        _ => throw ArgumentError(
+            'Unknown value for rd_kafka_thread_type_t: $value'),
+      };
 }
 
 /// @brief Event types
@@ -18091,6 +18626,15 @@ typedef rd_kafka_CreateTopics_result_t = rd_kafka_event_t;
 
 /// ! DeleteTopics result type
 typedef rd_kafka_DeleteTopics_result_t = rd_kafka_event_t;
+
+/// ! CreateAcls result type
+typedef rd_kafka_CreateAcls_result_t = rd_kafka_event_t;
+
+/// ! DescribeAcls result type
+typedef rd_kafka_DescribeAcls_result_t = rd_kafka_event_t;
+
+/// ! DeleteAcls result type
+typedef rd_kafka_DeleteAcls_result_t = rd_kafka_event_t;
 
 /// ! CreatePartitions result type
 typedef rd_kafka_CreatePartitions_result_t = rd_kafka_event_t;
@@ -18113,35 +18657,23 @@ typedef rd_kafka_ListConsumerGroups_result_t = rd_kafka_event_t;
 /// ! DescribeConsumerGroups result type
 typedef rd_kafka_DescribeConsumerGroups_result_t = rd_kafka_event_t;
 
-/// ! DescribeTopics result type
-typedef rd_kafka_DescribeTopics_result_t = rd_kafka_event_t;
-
-/// ! DescribeCluster result type
-typedef rd_kafka_DescribeCluster_result_t = rd_kafka_event_t;
-
 /// ! DeleteGroups result type
 typedef rd_kafka_DeleteGroups_result_t = rd_kafka_event_t;
 
 /// ! DeleteConsumerGroupOffsets result type
 typedef rd_kafka_DeleteConsumerGroupOffsets_result_t = rd_kafka_event_t;
 
-/// ! CreateAcls result type
-typedef rd_kafka_CreateAcls_result_t = rd_kafka_event_t;
-
-/// ! DescribeAcls result type
-typedef rd_kafka_DescribeAcls_result_t = rd_kafka_event_t;
-
-/// ! DeleteAcls result type
-typedef rd_kafka_DeleteAcls_result_t = rd_kafka_event_t;
+/// ! AlterConsumerGroupOffsets result type
+typedef rd_kafka_AlterConsumerGroupOffsets_result_t = rd_kafka_event_t;
 
 /// ! ListConsumerGroupOffsets result type
 typedef rd_kafka_ListConsumerGroupOffsets_result_t = rd_kafka_event_t;
 
-/// ! AlterConsumerGroupOffsets result type
-typedef rd_kafka_AlterConsumerGroupOffsets_result_t = rd_kafka_event_t;
+/// ! DescribeTopics result type
+typedef rd_kafka_DescribeTopics_result_t = rd_kafka_event_t;
 
-/// ! ListOffsets result type
-typedef rd_kafka_ListOffsets_result_t = rd_kafka_event_t;
+/// ! DescribeCluster result type
+typedef rd_kafka_DescribeCluster_result_t = rd_kafka_event_t;
 
 /// ! DescribeUserScramCredentials result type
 typedef rd_kafka_DescribeUserScramCredentials_result_t = rd_kafka_event_t;
@@ -18149,8 +18681,37 @@ typedef rd_kafka_DescribeUserScramCredentials_result_t = rd_kafka_event_t;
 /// ! AlterUserScramCredentials result type
 typedef rd_kafka_AlterUserScramCredentials_result_t = rd_kafka_event_t;
 
+/// ! ListOffsets result type
+typedef rd_kafka_ListOffsets_result_t = rd_kafka_event_t;
+
 /// ! ElectLeaders result type
 typedef rd_kafka_ElectLeaders_result_t = rd_kafka_event_t;
+
+/// @brief Plugin's configuration initializer method called each time the
+/// library is referenced from configuration (even if previously loaded by
+/// another client instance).
+///
+/// @remark This method MUST be implemented by plugins and have the symbol name
+/// \c conf_init
+///
+/// @param conf Configuration set up to this point.
+/// @param plug_opaquep Plugin can set this pointer to a per-configuration
+/// opaque pointer.
+/// @param errstr String buffer of size \p errstr_size where plugin must write
+/// a human readable error string in the case the initializer
+/// fails (returns non-zero).
+/// @param errstr_size Maximum space (including \0) in \p errstr.
+///
+/// @remark A plugin may add an on_conf_destroy() interceptor to clean up
+/// plugin-specific resources created in the plugin's conf_init() method.
+///
+/// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or an error code on error.
+typedef rd_kafka_plugin_f_conf_init_t = ffi.NativeFunction<
+    ffi.Int Function(
+        ffi.Pointer<rd_kafka_conf_t> conf,
+        ffi.Pointer<ffi.Pointer<ffi.Void>> plug_opaquep,
+        ffi.Pointer<ffi.Char> errstr,
+        ffi.Size errstr_size)>;
 
 /// @brief on_conf_set() is called from rd_kafka_*_conf_set() in the order
 /// the interceptors were added.
@@ -18171,7 +18732,7 @@ typedef rd_kafka_ElectLeaders_result_t = rd_kafka_event_t;
 /// interceptor in the chain, finally ending up at the built-in
 /// configuration handler.
 typedef rd_kafka_interceptor_f_on_conf_set_t = ffi.NativeFunction<
-    ffi.Int32 Function(
+    ffi.Int Function(
         ffi.Pointer<rd_kafka_conf_t> conf,
         ffi.Pointer<ffi.Char> name,
         ffi.Pointer<ffi.Char> val,
@@ -18199,7 +18760,7 @@ typedef rd_kafka_interceptor_f_on_conf_set_t = ffi.NativeFunction<
 /// @remark No on_conf_* interceptors are copied to the new configuration
 /// object on rd_kafka_conf_dup().
 typedef rd_kafka_interceptor_f_on_conf_dup_t = ffi.NativeFunction<
-    ffi.Int32 Function(
+    ffi.Int Function(
         ffi.Pointer<rd_kafka_conf_t> new_conf,
         ffi.Pointer<rd_kafka_conf_t> old_conf,
         ffi.Size filter_cnt,
@@ -18211,7 +18772,7 @@ typedef rd_kafka_interceptor_f_on_conf_dup_t = ffi.NativeFunction<
 ///
 /// @param ic_opaque The interceptor's opaque pointer specified in ..add..().
 typedef rd_kafka_interceptor_f_on_conf_destroy_t
-    = ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<ffi.Void> ic_opaque)>;
+    = ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void> ic_opaque)>;
 
 /// @brief on_new() is called from rd_kafka_new() prior toreturning
 /// the newly created client instance to the application.
@@ -18228,7 +18789,7 @@ typedef rd_kafka_interceptor_f_on_conf_destroy_t
 /// interceptor is called and the interceptor MUST NOT call any
 /// other rk-specific APIs than rd_kafka_interceptor_add..().
 typedef rd_kafka_interceptor_f_on_new_t = ffi.NativeFunction<
-    ffi.Int32 Function(
+    ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Pointer<rd_kafka_conf_t> conf,
         ffi.Pointer<ffi.Void> ic_opaque,
@@ -18241,7 +18802,7 @@ typedef rd_kafka_interceptor_f_on_new_t = ffi.NativeFunction<
 /// @param rk The client instance.
 /// @param ic_opaque The interceptor's opaque pointer specified in ..add..().
 typedef rd_kafka_interceptor_f_on_destroy_t = ffi.NativeFunction<
-    ffi.Int32 Function(
+    ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk, ffi.Pointer<ffi.Void> ic_opaque)>;
 
 /// @brief on_send() is called from rd_kafka_produce*() (et.al) prior to
@@ -18263,7 +18824,7 @@ typedef rd_kafka_interceptor_f_on_destroy_t = ffi.NativeFunction<
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
 typedef rd_kafka_interceptor_f_on_send_t = ffi.NativeFunction<
-    ffi.Int32 Function(
+    ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Pointer<rd_kafka_message_t> rkmessage,
         ffi.Pointer<ffi.Void> ic_opaque)>;
@@ -18289,7 +18850,7 @@ typedef rd_kafka_interceptor_f_on_send_t = ffi.NativeFunction<
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
 typedef rd_kafka_interceptor_f_on_acknowledgement_t = ffi.NativeFunction<
-    ffi.Int32 Function(
+    ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Pointer<rd_kafka_message_t> rkmessage,
         ffi.Pointer<ffi.Void> ic_opaque)>;
@@ -18309,7 +18870,7 @@ typedef rd_kafka_interceptor_f_on_acknowledgement_t = ffi.NativeFunction<
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
 typedef rd_kafka_interceptor_f_on_consume_t = ffi.NativeFunction<
-    ffi.Int32 Function(
+    ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Pointer<rd_kafka_message_t> rkmessage,
         ffi.Pointer<ffi.Void> ic_opaque)>;
@@ -18334,10 +18895,10 @@ typedef rd_kafka_interceptor_f_on_consume_t = ffi.NativeFunction<
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
 typedef rd_kafka_interceptor_f_on_commit_t = ffi.NativeFunction<
-    ffi.Int32 Function(
+    ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
-        ffi.Int32 err,
+        ffi.Int err,
         ffi.Pointer<ffi.Void> ic_opaque)>;
 
 /// @brief on_request_sent() is called when a request has been fully written
@@ -18360,7 +18921,7 @@ typedef rd_kafka_interceptor_f_on_commit_t = ffi.NativeFunction<
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
 typedef rd_kafka_interceptor_f_on_request_sent_t = ffi.NativeFunction<
-    ffi.Int32 Function(
+    ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Int sockfd,
         ffi.Pointer<ffi.Char> brokername,
@@ -18395,7 +18956,7 @@ typedef rd_kafka_interceptor_f_on_request_sent_t = ffi.NativeFunction<
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
 typedef rd_kafka_interceptor_f_on_response_received_t = ffi.NativeFunction<
-    ffi.Int32 Function(
+    ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Int sockfd,
         ffi.Pointer<ffi.Char> brokername,
@@ -18405,7 +18966,7 @@ typedef rd_kafka_interceptor_f_on_response_received_t = ffi.NativeFunction<
         ffi.Int32 CorrId,
         ffi.Size size,
         ffi.Int64 rtt,
-        ffi.Int32 err,
+        ffi.Int err,
         ffi.Pointer<ffi.Void> ic_opaque)>;
 
 /// @brief on_thread_start() is called from a newly created librdkafka-managed
@@ -18423,7 +18984,7 @@ typedef rd_kafka_interceptor_f_on_response_received_t = ffi.NativeFunction<
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
 typedef rd_kafka_interceptor_f_on_thread_start_t = ffi.NativeFunction<
-    ffi.Int32 Function(ffi.Pointer<rd_kafka_t> rk, ffi.Int32 thread_type,
+    ffi.Int Function(ffi.Pointer<rd_kafka_t> rk, ffi.UnsignedInt thread_type,
         ffi.Pointer<ffi.Char> thread_name, ffi.Pointer<ffi.Void> ic_opaque)>;
 
 /// @brief on_thread_exit() is called just prior to a librdkafka-managed
@@ -18444,7 +19005,7 @@ typedef rd_kafka_interceptor_f_on_thread_start_t = ffi.NativeFunction<
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
 typedef rd_kafka_interceptor_f_on_thread_exit_t = ffi.NativeFunction<
-    ffi.Int32 Function(ffi.Pointer<rd_kafka_t> rk, ffi.Int32 thread_type,
+    ffi.Int Function(ffi.Pointer<rd_kafka_t> rk, ffi.UnsignedInt thread_type,
         ffi.Pointer<ffi.Char> thread_name, ffi.Pointer<ffi.Void> ic_opaque)>;
 
 /// @brief on_broker_state_change() is called just after a broker
@@ -18460,7 +19021,7 @@ typedef rd_kafka_interceptor_f_on_thread_exit_t = ffi.NativeFunction<
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
 typedef rd_kafka_interceptor_f_on_broker_state_change_t = ffi.NativeFunction<
-    ffi.Int32 Function(
+    ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Int32 broker_id,
         ffi.Pointer<ffi.Char> secproto,
@@ -18468,100 +19029,119 @@ typedef rd_kafka_interceptor_f_on_broker_state_change_t = ffi.NativeFunction<
         ffi.Int port,
         ffi.Pointer<ffi.Char> state,
         ffi.Pointer<ffi.Void> ic_opaque)>;
-typedef rd_kafka_topic_result_t = rd_kafka_topic_result_s;
-typedef rd_kafka_group_result_t = rd_kafka_group_result_s;
-typedef rd_kafka_topic_partition_result_t = rd_kafka_topic_partition_result_s;
 
 /// @enum rd_kafka_admin_op_t
 ///
 /// @brief Admin operation enum name for use with rd_kafka_AdminOptions_new()
 ///
 /// @sa rd_kafka_AdminOptions_new()
-abstract class rd_kafka_admin_op_t {
+enum rd_kafka_admin_op_t {
   /// < Default value
-  static const int RD_KAFKA_ADMIN_OP_ANY = 0;
+  RD_KAFKA_ADMIN_OP_ANY(0),
 
   /// < CreateTopics
-  static const int RD_KAFKA_ADMIN_OP_CREATETOPICS = 1;
+  RD_KAFKA_ADMIN_OP_CREATETOPICS(1),
 
   /// < DeleteTopics
-  static const int RD_KAFKA_ADMIN_OP_DELETETOPICS = 2;
+  RD_KAFKA_ADMIN_OP_DELETETOPICS(2),
 
   /// < CreatePartitions
-  static const int RD_KAFKA_ADMIN_OP_CREATEPARTITIONS = 3;
+  RD_KAFKA_ADMIN_OP_CREATEPARTITIONS(3),
 
   /// < AlterConfigs
-  static const int RD_KAFKA_ADMIN_OP_ALTERCONFIGS = 4;
+  RD_KAFKA_ADMIN_OP_ALTERCONFIGS(4),
 
   /// < DescribeConfigs
-  static const int RD_KAFKA_ADMIN_OP_DESCRIBECONFIGS = 5;
+  RD_KAFKA_ADMIN_OP_DESCRIBECONFIGS(5),
 
   /// < DeleteRecords
-  static const int RD_KAFKA_ADMIN_OP_DELETERECORDS = 6;
+  RD_KAFKA_ADMIN_OP_DELETERECORDS(6),
 
   /// < DeleteGroups
-  static const int RD_KAFKA_ADMIN_OP_DELETEGROUPS = 7;
+  RD_KAFKA_ADMIN_OP_DELETEGROUPS(7),
 
   /// DeleteConsumerGroupOffsets
-  static const int RD_KAFKA_ADMIN_OP_DELETECONSUMERGROUPOFFSETS = 8;
+  RD_KAFKA_ADMIN_OP_DELETECONSUMERGROUPOFFSETS(8),
 
   /// < CreateAcls
-  static const int RD_KAFKA_ADMIN_OP_CREATEACLS = 9;
+  RD_KAFKA_ADMIN_OP_CREATEACLS(9),
 
   /// < DescribeAcls
-  static const int RD_KAFKA_ADMIN_OP_DESCRIBEACLS = 10;
+  RD_KAFKA_ADMIN_OP_DESCRIBEACLS(10),
 
   /// < DeleteAcls
-  static const int RD_KAFKA_ADMIN_OP_DELETEACLS = 11;
+  RD_KAFKA_ADMIN_OP_DELETEACLS(11),
 
   /// < ListConsumerGroups
-  static const int RD_KAFKA_ADMIN_OP_LISTCONSUMERGROUPS = 12;
+  RD_KAFKA_ADMIN_OP_LISTCONSUMERGROUPS(12),
 
   /// < DescribeConsumerGroups
-  static const int RD_KAFKA_ADMIN_OP_DESCRIBECONSUMERGROUPS = 13;
+  RD_KAFKA_ADMIN_OP_DESCRIBECONSUMERGROUPS(13),
 
   /// ListConsumerGroupOffsets
-  static const int RD_KAFKA_ADMIN_OP_LISTCONSUMERGROUPOFFSETS = 14;
+  RD_KAFKA_ADMIN_OP_LISTCONSUMERGROUPOFFSETS(14),
 
   /// AlterConsumerGroupOffsets
-  static const int RD_KAFKA_ADMIN_OP_ALTERCONSUMERGROUPOFFSETS = 15;
+  RD_KAFKA_ADMIN_OP_ALTERCONSUMERGROUPOFFSETS(15),
 
   /// IncrementalAlterConfigs
-  static const int RD_KAFKA_ADMIN_OP_INCREMENTALALTERCONFIGS = 16;
+  RD_KAFKA_ADMIN_OP_INCREMENTALALTERCONFIGS(16),
 
   /// DescribeUserScramCredentials
-  static const int RD_KAFKA_ADMIN_OP_DESCRIBEUSERSCRAMCREDENTIALS = 17;
+  RD_KAFKA_ADMIN_OP_DESCRIBEUSERSCRAMCREDENTIALS(17),
 
   /// AlterUserScramCredentials
-  static const int RD_KAFKA_ADMIN_OP_ALTERUSERSCRAMCREDENTIALS = 18;
+  RD_KAFKA_ADMIN_OP_ALTERUSERSCRAMCREDENTIALS(18),
 
   /// < DescribeTopics
-  static const int RD_KAFKA_ADMIN_OP_DESCRIBETOPICS = 19;
+  RD_KAFKA_ADMIN_OP_DESCRIBETOPICS(19),
 
   /// < DescribeCluster
-  static const int RD_KAFKA_ADMIN_OP_DESCRIBECLUSTER = 20;
+  RD_KAFKA_ADMIN_OP_DESCRIBECLUSTER(20),
 
   /// < ListOffsets
-  static const int RD_KAFKA_ADMIN_OP_LISTOFFSETS = 21;
+  RD_KAFKA_ADMIN_OP_LISTOFFSETS(21),
 
   /// < ElectLeaders
-  static const int RD_KAFKA_ADMIN_OP_ELECTLEADERS = 22;
+  RD_KAFKA_ADMIN_OP_ELECTLEADERS(22),
 
   /// < Number of ops defined
-  static const int RD_KAFKA_ADMIN_OP__CNT = 23;
+  RD_KAFKA_ADMIN_OP__CNT(23);
+
+  final int value;
+  const rd_kafka_admin_op_t(this.value);
+
+  static rd_kafka_admin_op_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_ADMIN_OP_ANY,
+        1 => RD_KAFKA_ADMIN_OP_CREATETOPICS,
+        2 => RD_KAFKA_ADMIN_OP_DELETETOPICS,
+        3 => RD_KAFKA_ADMIN_OP_CREATEPARTITIONS,
+        4 => RD_KAFKA_ADMIN_OP_ALTERCONFIGS,
+        5 => RD_KAFKA_ADMIN_OP_DESCRIBECONFIGS,
+        6 => RD_KAFKA_ADMIN_OP_DELETERECORDS,
+        7 => RD_KAFKA_ADMIN_OP_DELETEGROUPS,
+        8 => RD_KAFKA_ADMIN_OP_DELETECONSUMERGROUPOFFSETS,
+        9 => RD_KAFKA_ADMIN_OP_CREATEACLS,
+        10 => RD_KAFKA_ADMIN_OP_DESCRIBEACLS,
+        11 => RD_KAFKA_ADMIN_OP_DELETEACLS,
+        12 => RD_KAFKA_ADMIN_OP_LISTCONSUMERGROUPS,
+        13 => RD_KAFKA_ADMIN_OP_DESCRIBECONSUMERGROUPS,
+        14 => RD_KAFKA_ADMIN_OP_LISTCONSUMERGROUPOFFSETS,
+        15 => RD_KAFKA_ADMIN_OP_ALTERCONSUMERGROUPOFFSETS,
+        16 => RD_KAFKA_ADMIN_OP_INCREMENTALALTERCONFIGS,
+        17 => RD_KAFKA_ADMIN_OP_DESCRIBEUSERSCRAMCREDENTIALS,
+        18 => RD_KAFKA_ADMIN_OP_ALTERUSERSCRAMCREDENTIALS,
+        19 => RD_KAFKA_ADMIN_OP_DESCRIBETOPICS,
+        20 => RD_KAFKA_ADMIN_OP_DESCRIBECLUSTER,
+        21 => RD_KAFKA_ADMIN_OP_LISTOFFSETS,
+        22 => RD_KAFKA_ADMIN_OP_ELECTLEADERS,
+        23 => RD_KAFKA_ADMIN_OP__CNT,
+        _ =>
+          throw ArgumentError('Unknown value for rd_kafka_admin_op_t: $value'),
+      };
 }
 
 final class rd_kafka_AdminOptions_s extends ffi.Opaque {}
-
-/// @enum rd_kafka_IsolationLevel_t
-///
-/// @brief IsolationLevel enum name for use with rd_kafka_AdminOptions_new()
-///
-/// @sa rd_kafka_AdminOptions_new()
-abstract class rd_kafka_IsolationLevel_t {
-  static const int RD_KAFKA_ISOLATION_LEVEL_READ_UNCOMMITTED = 0;
-  static const int RD_KAFKA_ISOLATION_LEVEL_READ_COMMITTED = 1;
-}
 
 /// @brief AdminOptions provides a generic mechanism for setting optional
 /// parameters for the Admin API requests.
@@ -18573,39 +19153,81 @@ abstract class rd_kafka_IsolationLevel_t {
 /// Future versions may introduce such enforcement.
 typedef rd_kafka_AdminOptions_t = rd_kafka_AdminOptions_s;
 
+/// @enum rd_kafka_IsolationLevel_t
+///
+/// @brief IsolationLevel enum name for use with rd_kafka_AdminOptions_new()
+///
+/// @sa rd_kafka_AdminOptions_new()
+enum rd_kafka_IsolationLevel_t {
+  RD_KAFKA_ISOLATION_LEVEL_READ_UNCOMMITTED(0),
+  RD_KAFKA_ISOLATION_LEVEL_READ_COMMITTED(1);
+
+  final int value;
+  const rd_kafka_IsolationLevel_t(this.value);
+
+  static rd_kafka_IsolationLevel_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_ISOLATION_LEVEL_READ_UNCOMMITTED,
+        1 => RD_KAFKA_ISOLATION_LEVEL_READ_COMMITTED,
+        _ => throw ArgumentError(
+            'Unknown value for rd_kafka_IsolationLevel_t: $value'),
+      };
+}
+
 /// @enum rd_kafka_AclOperation_t
 /// @brief Apache Kafka ACL operation types. Common type for multiple Admin API
 /// functions.
-abstract class rd_kafka_AclOperation_t {
+enum rd_kafka_AclOperation_t {
   /// < Unknown
-  static const int RD_KAFKA_ACL_OPERATION_UNKNOWN = 0;
-  static const int RD_KAFKA_ACL_OPERATION_ANY = 1;
+  RD_KAFKA_ACL_OPERATION_UNKNOWN(0),
+  RD_KAFKA_ACL_OPERATION_ANY(1),
 
   /// < ALL operation
-  static const int RD_KAFKA_ACL_OPERATION_ALL = 2;
+  RD_KAFKA_ACL_OPERATION_ALL(2),
 
   /// < READ operation
-  static const int RD_KAFKA_ACL_OPERATION_READ = 3;
+  RD_KAFKA_ACL_OPERATION_READ(3),
 
   /// < WRITE operation
-  static const int RD_KAFKA_ACL_OPERATION_WRITE = 4;
+  RD_KAFKA_ACL_OPERATION_WRITE(4),
 
   /// < CREATE operation
-  static const int RD_KAFKA_ACL_OPERATION_CREATE = 5;
+  RD_KAFKA_ACL_OPERATION_CREATE(5),
 
   /// < DELETE operation
-  static const int RD_KAFKA_ACL_OPERATION_DELETE = 6;
+  RD_KAFKA_ACL_OPERATION_DELETE(6),
 
   /// < ALTER operation
-  static const int RD_KAFKA_ACL_OPERATION_ALTER = 7;
+  RD_KAFKA_ACL_OPERATION_ALTER(7),
 
   /// < DESCRIBE operation
-  static const int RD_KAFKA_ACL_OPERATION_DESCRIBE = 8;
-  static const int RD_KAFKA_ACL_OPERATION_CLUSTER_ACTION = 9;
-  static const int RD_KAFKA_ACL_OPERATION_DESCRIBE_CONFIGS = 10;
-  static const int RD_KAFKA_ACL_OPERATION_ALTER_CONFIGS = 11;
-  static const int RD_KAFKA_ACL_OPERATION_IDEMPOTENT_WRITE = 12;
-  static const int RD_KAFKA_ACL_OPERATION__CNT = 13;
+  RD_KAFKA_ACL_OPERATION_DESCRIBE(8),
+  RD_KAFKA_ACL_OPERATION_CLUSTER_ACTION(9),
+  RD_KAFKA_ACL_OPERATION_DESCRIBE_CONFIGS(10),
+  RD_KAFKA_ACL_OPERATION_ALTER_CONFIGS(11),
+  RD_KAFKA_ACL_OPERATION_IDEMPOTENT_WRITE(12),
+  RD_KAFKA_ACL_OPERATION__CNT(13);
+
+  final int value;
+  const rd_kafka_AclOperation_t(this.value);
+
+  static rd_kafka_AclOperation_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_ACL_OPERATION_UNKNOWN,
+        1 => RD_KAFKA_ACL_OPERATION_ANY,
+        2 => RD_KAFKA_ACL_OPERATION_ALL,
+        3 => RD_KAFKA_ACL_OPERATION_READ,
+        4 => RD_KAFKA_ACL_OPERATION_WRITE,
+        5 => RD_KAFKA_ACL_OPERATION_CREATE,
+        6 => RD_KAFKA_ACL_OPERATION_DELETE,
+        7 => RD_KAFKA_ACL_OPERATION_ALTER,
+        8 => RD_KAFKA_ACL_OPERATION_DESCRIBE,
+        9 => RD_KAFKA_ACL_OPERATION_CLUSTER_ACTION,
+        10 => RD_KAFKA_ACL_OPERATION_DESCRIBE_CONFIGS,
+        11 => RD_KAFKA_ACL_OPERATION_ALTER_CONFIGS,
+        12 => RD_KAFKA_ACL_OPERATION_IDEMPOTENT_WRITE,
+        13 => RD_KAFKA_ACL_OPERATION__CNT,
+        _ => throw ArgumentError(
+            'Unknown value for rd_kafka_AclOperation_t: $value'),
+      };
 }
 
 final class rd_kafka_NewTopic_s extends ffi.Opaque {}
@@ -18630,31 +19252,46 @@ typedef rd_kafka_NewPartitions_t = rd_kafka_NewPartitions_s;
 /// @remark These entities relate to the cluster, not the local client.
 ///
 /// @sa rd_kafka_conf_set(), et.al. for local client configuration.
-abstract class rd_kafka_ConfigSource_t {
+enum rd_kafka_ConfigSource_t {
   /// Source unknown, e.g., in the ConfigEntry used for alter requests
   /// where source is not set
-  static const int RD_KAFKA_CONFIG_SOURCE_UNKNOWN_CONFIG = 0;
+  RD_KAFKA_CONFIG_SOURCE_UNKNOWN_CONFIG(0),
 
   /// Dynamic topic config that is configured for a specific topic
-  static const int RD_KAFKA_CONFIG_SOURCE_DYNAMIC_TOPIC_CONFIG = 1;
+  RD_KAFKA_CONFIG_SOURCE_DYNAMIC_TOPIC_CONFIG(1),
 
   /// Dynamic broker config that is configured for a specific broker
-  static const int RD_KAFKA_CONFIG_SOURCE_DYNAMIC_BROKER_CONFIG = 2;
+  RD_KAFKA_CONFIG_SOURCE_DYNAMIC_BROKER_CONFIG(2),
 
   /// Dynamic broker config that is configured as default for all
   /// brokers in the cluster
-  static const int RD_KAFKA_CONFIG_SOURCE_DYNAMIC_DEFAULT_BROKER_CONFIG = 3;
+  RD_KAFKA_CONFIG_SOURCE_DYNAMIC_DEFAULT_BROKER_CONFIG(3),
 
   /// Static broker config provided as broker properties at startup
   /// (e.g. from server.properties file)
-  static const int RD_KAFKA_CONFIG_SOURCE_STATIC_BROKER_CONFIG = 4;
+  RD_KAFKA_CONFIG_SOURCE_STATIC_BROKER_CONFIG(4),
 
   /// Built-in default configuration for configs that have a
   /// default value
-  static const int RD_KAFKA_CONFIG_SOURCE_DEFAULT_CONFIG = 5;
+  RD_KAFKA_CONFIG_SOURCE_DEFAULT_CONFIG(5),
 
   /// Number of source types defined
-  static const int RD_KAFKA_CONFIG_SOURCE__CNT = 6;
+  RD_KAFKA_CONFIG_SOURCE__CNT(6);
+
+  final int value;
+  const rd_kafka_ConfigSource_t(this.value);
+
+  static rd_kafka_ConfigSource_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_CONFIG_SOURCE_UNKNOWN_CONFIG,
+        1 => RD_KAFKA_CONFIG_SOURCE_DYNAMIC_TOPIC_CONFIG,
+        2 => RD_KAFKA_CONFIG_SOURCE_DYNAMIC_BROKER_CONFIG,
+        3 => RD_KAFKA_CONFIG_SOURCE_DYNAMIC_DEFAULT_BROKER_CONFIG,
+        4 => RD_KAFKA_CONFIG_SOURCE_STATIC_BROKER_CONFIG,
+        5 => RD_KAFKA_CONFIG_SOURCE_DEFAULT_CONFIG,
+        6 => RD_KAFKA_CONFIG_SOURCE__CNT,
+        _ => throw ArgumentError(
+            'Unknown value for rd_kafka_ConfigSource_t: $value'),
+      };
 }
 
 final class rd_kafka_ConfigEntry_s extends ffi.Opaque {}
@@ -18664,57 +19301,99 @@ typedef rd_kafka_ConfigEntry_t = rd_kafka_ConfigEntry_s;
 
 /// @enum rd_kafka_ResourceType_t
 /// @brief Apache Kafka resource types
-abstract class rd_kafka_ResourceType_t {
+enum rd_kafka_ResourceType_t {
   /// < Unknown
-  static const int RD_KAFKA_RESOURCE_UNKNOWN = 0;
+  RD_KAFKA_RESOURCE_UNKNOWN(0),
 
   /// < Any (used for lookups)
-  static const int RD_KAFKA_RESOURCE_ANY = 1;
+  RD_KAFKA_RESOURCE_ANY(1),
 
   /// < Topic
-  static const int RD_KAFKA_RESOURCE_TOPIC = 2;
+  RD_KAFKA_RESOURCE_TOPIC(2),
 
   /// < Group
-  static const int RD_KAFKA_RESOURCE_GROUP = 3;
+  RD_KAFKA_RESOURCE_GROUP(3),
 
   /// < Broker
-  static const int RD_KAFKA_RESOURCE_BROKER = 4;
+  RD_KAFKA_RESOURCE_BROKER(4),
 
   /// < Transactional ID
-  static const int RD_KAFKA_RESOURCE_TRANSACTIONAL_ID = 5;
+  RD_KAFKA_RESOURCE_TRANSACTIONAL_ID(5),
 
   /// < Number of resource types defined
-  static const int RD_KAFKA_RESOURCE__CNT = 6;
+  RD_KAFKA_RESOURCE__CNT(6);
+
+  final int value;
+  const rd_kafka_ResourceType_t(this.value);
+
+  static rd_kafka_ResourceType_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_RESOURCE_UNKNOWN,
+        1 => RD_KAFKA_RESOURCE_ANY,
+        2 => RD_KAFKA_RESOURCE_TOPIC,
+        3 => RD_KAFKA_RESOURCE_GROUP,
+        4 => RD_KAFKA_RESOURCE_BROKER,
+        5 => RD_KAFKA_RESOURCE_TRANSACTIONAL_ID,
+        6 => RD_KAFKA_RESOURCE__CNT,
+        _ => throw ArgumentError(
+            'Unknown value for rd_kafka_ResourceType_t: $value'),
+      };
 }
 
 /// @enum rd_kafka_ResourcePatternType_t
 /// @brief Apache Kafka pattern types
-abstract class rd_kafka_ResourcePatternType_t {
+enum rd_kafka_ResourcePatternType_t {
   /// Unknown
-  static const int RD_KAFKA_RESOURCE_PATTERN_UNKNOWN = 0;
+  RD_KAFKA_RESOURCE_PATTERN_UNKNOWN(0),
 
   /// Any (used for lookups)
-  static const int RD_KAFKA_RESOURCE_PATTERN_ANY = 1;
+  RD_KAFKA_RESOURCE_PATTERN_ANY(1),
 
   /// Match: will perform pattern matching
-  static const int RD_KAFKA_RESOURCE_PATTERN_MATCH = 2;
+  RD_KAFKA_RESOURCE_PATTERN_MATCH(2),
 
   /// Literal: A literal resource name
-  static const int RD_KAFKA_RESOURCE_PATTERN_LITERAL = 3;
+  RD_KAFKA_RESOURCE_PATTERN_LITERAL(3),
 
   /// Prefixed: A prefixed resource name
-  static const int RD_KAFKA_RESOURCE_PATTERN_PREFIXED = 4;
-  static const int RD_KAFKA_RESOURCE_PATTERN_TYPE__CNT = 5;
+  RD_KAFKA_RESOURCE_PATTERN_PREFIXED(4),
+  RD_KAFKA_RESOURCE_PATTERN_TYPE__CNT(5);
+
+  final int value;
+  const rd_kafka_ResourcePatternType_t(this.value);
+
+  static rd_kafka_ResourcePatternType_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_RESOURCE_PATTERN_UNKNOWN,
+        1 => RD_KAFKA_RESOURCE_PATTERN_ANY,
+        2 => RD_KAFKA_RESOURCE_PATTERN_MATCH,
+        3 => RD_KAFKA_RESOURCE_PATTERN_LITERAL,
+        4 => RD_KAFKA_RESOURCE_PATTERN_PREFIXED,
+        5 => RD_KAFKA_RESOURCE_PATTERN_TYPE__CNT,
+        _ => throw ArgumentError(
+            'Unknown value for rd_kafka_ResourcePatternType_t: $value'),
+      };
 }
 
 /// @enum rd_kafka_AlterConfigOpType_t
 /// @brief Incremental alter configs operations.
-abstract class rd_kafka_AlterConfigOpType_t {
-  static const int RD_KAFKA_ALTER_CONFIG_OP_TYPE_SET = 0;
-  static const int RD_KAFKA_ALTER_CONFIG_OP_TYPE_DELETE = 1;
-  static const int RD_KAFKA_ALTER_CONFIG_OP_TYPE_APPEND = 2;
-  static const int RD_KAFKA_ALTER_CONFIG_OP_TYPE_SUBTRACT = 3;
-  static const int RD_KAFKA_ALTER_CONFIG_OP_TYPE__CNT = 4;
+enum rd_kafka_AlterConfigOpType_t {
+  RD_KAFKA_ALTER_CONFIG_OP_TYPE_SET(0),
+  RD_KAFKA_ALTER_CONFIG_OP_TYPE_DELETE(1),
+  RD_KAFKA_ALTER_CONFIG_OP_TYPE_APPEND(2),
+  RD_KAFKA_ALTER_CONFIG_OP_TYPE_SUBTRACT(3),
+  RD_KAFKA_ALTER_CONFIG_OP_TYPE__CNT(4);
+
+  final int value;
+  const rd_kafka_AlterConfigOpType_t(this.value);
+
+  static rd_kafka_AlterConfigOpType_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_ALTER_CONFIG_OP_TYPE_SET,
+        1 => RD_KAFKA_ALTER_CONFIG_OP_TYPE_DELETE,
+        2 => RD_KAFKA_ALTER_CONFIG_OP_TYPE_APPEND,
+        3 => RD_KAFKA_ALTER_CONFIG_OP_TYPE_SUBTRACT,
+        4 => RD_KAFKA_ALTER_CONFIG_OP_TYPE__CNT,
+        _ => throw ArgumentError(
+            'Unknown value for rd_kafka_AlterConfigOpType_t: $value'),
+      };
 }
 
 final class rd_kafka_ConfigResource_s extends ffi.Opaque {}
@@ -18729,38 +19408,42 @@ typedef rd_kafka_DeleteRecords_t = rd_kafka_DeleteRecords_s;
 
 final class rd_kafka_TopicCollection_s extends ffi.Opaque {}
 
-final class rd_kafka_TopicPartitionInfo_s extends ffi.Opaque {}
-
-final class rd_kafka_TopicDescription_s extends ffi.Opaque {}
-
 /// @brief Represents a collection of topics, to be passed to DescribeTopics.
 typedef rd_kafka_TopicCollection_t = rd_kafka_TopicCollection_s;
 
-/// @brief DescribeTopics result type.
-typedef rd_kafka_TopicDescription_t = rd_kafka_TopicDescription_s;
+final class rd_kafka_TopicPartitionInfo_s extends ffi.Opaque {}
 
 /// @brief TopicPartition represents a partition in the DescribeTopics result.
 typedef rd_kafka_TopicPartitionInfo_t = rd_kafka_TopicPartitionInfo_s;
 
-final class rd_kafka_ConsumerGroupListing_s extends ffi.Opaque {}
+final class rd_kafka_TopicDescription_s extends ffi.Opaque {}
 
-final class rd_kafka_ListConsumerGroupsResult_s extends ffi.Opaque {}
+/// @brief DescribeTopics result type.
+typedef rd_kafka_TopicDescription_t = rd_kafka_TopicDescription_s;
+
+final class rd_kafka_ConsumerGroupListing_s extends ffi.Opaque {}
 
 /// ! ListConsumerGroups result for a single group
 typedef rd_kafka_ConsumerGroupListing_t = rd_kafka_ConsumerGroupListing_s;
 
+final class rd_kafka_ListConsumerGroupsResult_s extends ffi.Opaque {}
+
+/// ! ListConsumerGroups results and errors
+typedef rd_kafka_ListConsumerGroupsResult_t
+    = rd_kafka_ListConsumerGroupsResult_s;
+
 final class rd_kafka_ConsumerGroupDescription_s extends ffi.Opaque {}
-
-final class rd_kafka_MemberDescription_s extends ffi.Opaque {}
-
-final class rd_kafka_MemberAssignment_s extends ffi.Opaque {}
 
 /// @brief DescribeConsumerGroups result type.
 typedef rd_kafka_ConsumerGroupDescription_t
     = rd_kafka_ConsumerGroupDescription_s;
 
+final class rd_kafka_MemberDescription_s extends ffi.Opaque {}
+
 /// @brief Member description included in ConsumerGroupDescription.
 typedef rd_kafka_MemberDescription_t = rd_kafka_MemberDescription_s;
+
+final class rd_kafka_MemberAssignment_s extends ffi.Opaque {}
 
 /// @brief Member assignment included in MemberDescription.
 typedef rd_kafka_MemberAssignment_t = rd_kafka_MemberAssignment_s;
@@ -18790,10 +19473,21 @@ typedef rd_kafka_DeleteConsumerGroupOffsets_t
 
 /// @enum rd_kafka_OffsetSpec_t
 /// @brief Allows to specify the desired offsets when using ListOffsets.
-abstract class rd_kafka_OffsetSpec_t {
-  static const int RD_KAFKA_OFFSET_SPEC_MAX_TIMESTAMP = -3;
-  static const int RD_KAFKA_OFFSET_SPEC_EARLIEST = -2;
-  static const int RD_KAFKA_OFFSET_SPEC_LATEST = -1;
+enum rd_kafka_OffsetSpec_t {
+  RD_KAFKA_OFFSET_SPEC_MAX_TIMESTAMP(-3),
+  RD_KAFKA_OFFSET_SPEC_EARLIEST(-2),
+  RD_KAFKA_OFFSET_SPEC_LATEST(-1);
+
+  final int value;
+  const rd_kafka_OffsetSpec_t(this.value);
+
+  static rd_kafka_OffsetSpec_t fromValue(int value) => switch (value) {
+        -3 => RD_KAFKA_OFFSET_SPEC_MAX_TIMESTAMP,
+        -2 => RD_KAFKA_OFFSET_SPEC_EARLIEST,
+        -1 => RD_KAFKA_OFFSET_SPEC_LATEST,
+        _ => throw ArgumentError(
+            'Unknown value for rd_kafka_OffsetSpec_t: $value'),
+      };
 }
 
 final class rd_kafka_ListOffsetsResultInfo_s extends ffi.Opaque {}
@@ -18804,11 +19498,23 @@ typedef rd_kafka_ListOffsetsResultInfo_t = rd_kafka_ListOffsetsResultInfo_s;
 
 /// @enum rd_kafka_ScramMechanism_t
 /// @brief Apache Kafka ScramMechanism values.
-abstract class rd_kafka_ScramMechanism_t {
-  static const int RD_KAFKA_SCRAM_MECHANISM_UNKNOWN = 0;
-  static const int RD_KAFKA_SCRAM_MECHANISM_SHA_256 = 1;
-  static const int RD_KAFKA_SCRAM_MECHANISM_SHA_512 = 2;
-  static const int RD_KAFKA_SCRAM_MECHANISM__CNT = 3;
+enum rd_kafka_ScramMechanism_t {
+  RD_KAFKA_SCRAM_MECHANISM_UNKNOWN(0),
+  RD_KAFKA_SCRAM_MECHANISM_SHA_256(1),
+  RD_KAFKA_SCRAM_MECHANISM_SHA_512(2),
+  RD_KAFKA_SCRAM_MECHANISM__CNT(3);
+
+  final int value;
+  const rd_kafka_ScramMechanism_t(this.value);
+
+  static rd_kafka_ScramMechanism_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_SCRAM_MECHANISM_UNKNOWN,
+        1 => RD_KAFKA_SCRAM_MECHANISM_SHA_256,
+        2 => RD_KAFKA_SCRAM_MECHANISM_SHA_512,
+        3 => RD_KAFKA_SCRAM_MECHANISM__CNT,
+        _ => throw ArgumentError(
+            'Unknown value for rd_kafka_ScramMechanism_t: $value'),
+      };
 }
 
 final class rd_kafka_ScramCredentialInfo_s extends ffi.Opaque {}
@@ -18842,28 +19548,39 @@ typedef rd_kafka_AlterUserScramCredentials_result_response_t
 
 final class rd_kafka_AclBinding_s extends ffi.Opaque {}
 
-typedef rd_kafka_acl_result_t = rd_kafka_acl_result_s;
-
-/// @enum rd_kafka_AclPermissionType_t
-/// @brief Apache Kafka ACL permission types.
-abstract class rd_kafka_AclPermissionType_t {
-  /// < Unknown
-  static const int RD_KAFKA_ACL_PERMISSION_TYPE_UNKNOWN = 0;
-  static const int RD_KAFKA_ACL_PERMISSION_TYPE_ANY = 1;
-
-  /// < Disallows access
-  static const int RD_KAFKA_ACL_PERMISSION_TYPE_DENY = 2;
-
-  /// < Grants access.
-  static const int RD_KAFKA_ACL_PERMISSION_TYPE_ALLOW = 3;
-  static const int RD_KAFKA_ACL_PERMISSION_TYPE__CNT = 4;
-}
-
 /// @brief ACL Binding is used to create access control lists.
 typedef rd_kafka_AclBinding_t = rd_kafka_AclBinding_s;
 
 /// @brief ACL Binding filter is used to filter access control lists.
 typedef rd_kafka_AclBindingFilter_t = rd_kafka_AclBinding_t;
+
+/// @enum rd_kafka_AclPermissionType_t
+/// @brief Apache Kafka ACL permission types.
+enum rd_kafka_AclPermissionType_t {
+  /// < Unknown
+  RD_KAFKA_ACL_PERMISSION_TYPE_UNKNOWN(0),
+  RD_KAFKA_ACL_PERMISSION_TYPE_ANY(1),
+
+  /// < Disallows access
+  RD_KAFKA_ACL_PERMISSION_TYPE_DENY(2),
+
+  /// < Grants access.
+  RD_KAFKA_ACL_PERMISSION_TYPE_ALLOW(3),
+  RD_KAFKA_ACL_PERMISSION_TYPE__CNT(4);
+
+  final int value;
+  const rd_kafka_AclPermissionType_t(this.value);
+
+  static rd_kafka_AclPermissionType_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_ACL_PERMISSION_TYPE_UNKNOWN,
+        1 => RD_KAFKA_ACL_PERMISSION_TYPE_ANY,
+        2 => RD_KAFKA_ACL_PERMISSION_TYPE_DENY,
+        3 => RD_KAFKA_ACL_PERMISSION_TYPE_ALLOW,
+        4 => RD_KAFKA_ACL_PERMISSION_TYPE__CNT,
+        _ => throw ArgumentError(
+            'Unknown value for rd_kafka_AclPermissionType_t: $value'),
+      };
+}
 
 final class rd_kafka_DeleteAcls_result_response_s extends ffi.Opaque {}
 
@@ -18873,18 +19590,28 @@ typedef rd_kafka_DeleteAcls_result_response_t
 
 final class rd_kafka_ElectLeaders_s extends ffi.Opaque {}
 
-/// @enum rd_kafka_ElectionType_t
-/// @brief Apache Kafka Election Types
-abstract class rd_kafka_ElectionType_t {
-  /// < Preferred Replica Election
-  static const int RD_KAFKA_ELECTION_TYPE_PREFERRED = 0;
-
-  /// < Unclean Election
-  static const int RD_KAFKA_ELECTION_TYPE_UNCLEAN = 1;
-}
-
 /// @brief Represents elect leaders request.
 typedef rd_kafka_ElectLeaders_t = rd_kafka_ElectLeaders_s;
+
+/// @enum rd_kafka_ElectionType_t
+/// @brief Apache Kafka Election Types
+enum rd_kafka_ElectionType_t {
+  /// < Preferred Replica Election
+  RD_KAFKA_ELECTION_TYPE_PREFERRED(0),
+
+  /// < Unclean Election
+  RD_KAFKA_ELECTION_TYPE_UNCLEAN(1);
+
+  final int value;
+  const rd_kafka_ElectionType_t(this.value);
+
+  static rd_kafka_ElectionType_t fromValue(int value) => switch (value) {
+        0 => RD_KAFKA_ELECTION_TYPE_PREFERRED,
+        1 => RD_KAFKA_ELECTION_TYPE_UNCLEAN,
+        _ => throw ArgumentError(
+            'Unknown value for rd_kafka_ElectionType_t: $value'),
+      };
+}
 
 const int __has_safe_buffers = 1;
 
@@ -18926,21 +19653,37 @@ const int _DARWIN_FEATURE_UNIX_CONFORMANCE = 3;
 
 const int __has_ptrcheck = 0;
 
+const int __has_bounds_safety_attributes = 0;
+
 const int __API_TO_BE_DEPRECATED = 100000;
 
 const int __API_TO_BE_DEPRECATED_MACOS = 100000;
 
+const int __API_TO_BE_DEPRECATED_MACOSAPPLICATIONEXTENSION = 100000;
+
 const int __API_TO_BE_DEPRECATED_IOS = 100000;
+
+const int __API_TO_BE_DEPRECATED_IOSAPPLICATIONEXTENSION = 100000;
 
 const int __API_TO_BE_DEPRECATED_MACCATALYST = 100000;
 
+const int __API_TO_BE_DEPRECATED_MACCATALYSTAPPLICATIONEXTENSION = 100000;
+
 const int __API_TO_BE_DEPRECATED_WATCHOS = 100000;
 
+const int __API_TO_BE_DEPRECATED_WATCHOSAPPLICATIONEXTENSION = 100000;
+
 const int __API_TO_BE_DEPRECATED_TVOS = 100000;
+
+const int __API_TO_BE_DEPRECATED_TVOSAPPLICATIONEXTENSION = 100000;
 
 const int __API_TO_BE_DEPRECATED_DRIVERKIT = 100000;
 
 const int __API_TO_BE_DEPRECATED_VISIONOS = 100000;
+
+const int __API_TO_BE_DEPRECATED_VISIONOSAPPLICATIONEXTENSION = 100000;
+
+const int __API_TO_BE_DEPRECATED_KERNELKIT = 100000;
 
 const int __MAC_10_0 = 1000;
 
@@ -19052,6 +19795,8 @@ const int __MAC_13_5 = 130500;
 
 const int __MAC_13_6 = 130600;
 
+const int __MAC_13_7 = 130700;
+
 const int __MAC_14_0 = 140000;
 
 const int __MAC_14_1 = 140100;
@@ -19064,9 +19809,21 @@ const int __MAC_14_4 = 140400;
 
 const int __MAC_14_5 = 140500;
 
+const int __MAC_14_6 = 140600;
+
+const int __MAC_14_7 = 140700;
+
 const int __MAC_15_0 = 150000;
 
 const int __MAC_15_1 = 150100;
+
+const int __MAC_15_2 = 150200;
+
+const int __MAC_15_3 = 150300;
+
+const int __MAC_15_4 = 150400;
+
+const int __MAC_15_5 = 150500;
 
 const int __IPHONE_2_0 = 20000;
 
@@ -19226,9 +19983,21 @@ const int __IPHONE_17_4 = 170400;
 
 const int __IPHONE_17_5 = 170500;
 
+const int __IPHONE_17_6 = 170600;
+
+const int __IPHONE_17_7 = 170700;
+
 const int __IPHONE_18_0 = 180000;
 
 const int __IPHONE_18_1 = 180100;
+
+const int __IPHONE_18_2 = 180200;
+
+const int __IPHONE_18_3 = 180300;
+
+const int __IPHONE_18_4 = 180400;
+
+const int __IPHONE_18_5 = 180500;
 
 const int __WATCHOS_1_0 = 10000;
 
@@ -19324,9 +20093,21 @@ const int __WATCHOS_10_4 = 100400;
 
 const int __WATCHOS_10_5 = 100500;
 
+const int __WATCHOS_10_6 = 100600;
+
+const int __WATCHOS_10_7 = 100700;
+
 const int __WATCHOS_11_0 = 110000;
 
 const int __WATCHOS_11_1 = 110100;
+
+const int __WATCHOS_11_2 = 110200;
+
+const int __WATCHOS_11_3 = 110300;
+
+const int __WATCHOS_11_4 = 110400;
+
+const int __WATCHOS_11_5 = 110500;
 
 const int __TVOS_9_0 = 90000;
 
@@ -19424,9 +20205,19 @@ const int __TVOS_17_4 = 170400;
 
 const int __TVOS_17_5 = 170500;
 
+const int __TVOS_17_6 = 170600;
+
 const int __TVOS_18_0 = 180000;
 
 const int __TVOS_18_1 = 180100;
+
+const int __TVOS_18_2 = 180200;
+
+const int __TVOS_18_3 = 180300;
+
+const int __TVOS_18_4 = 180400;
+
+const int __TVOS_18_5 = 180500;
 
 const int __BRIDGEOS_2_0 = 20000;
 
@@ -19480,9 +20271,19 @@ const int __BRIDGEOS_8_4 = 80400;
 
 const int __BRIDGEOS_8_5 = 80500;
 
+const int __BRIDGEOS_8_6 = 80600;
+
 const int __BRIDGEOS_9_0 = 90000;
 
 const int __BRIDGEOS_9_1 = 90100;
+
+const int __BRIDGEOS_9_2 = 90200;
+
+const int __BRIDGEOS_9_3 = 90300;
+
+const int __BRIDGEOS_9_4 = 90400;
+
+const int __BRIDGEOS_9_5 = 90500;
 
 const int __DRIVERKIT_19_0 = 190000;
 
@@ -19510,9 +20311,19 @@ const int __DRIVERKIT_23_4 = 230400;
 
 const int __DRIVERKIT_23_5 = 230500;
 
+const int __DRIVERKIT_23_6 = 230600;
+
 const int __DRIVERKIT_24_0 = 240000;
 
 const int __DRIVERKIT_24_1 = 240100;
+
+const int __DRIVERKIT_24_2 = 240200;
+
+const int __DRIVERKIT_24_3 = 240300;
+
+const int __DRIVERKIT_24_4 = 240400;
+
+const int __DRIVERKIT_24_5 = 240500;
 
 const int __VISIONOS_1_0 = 10000;
 
@@ -19520,9 +20331,19 @@ const int __VISIONOS_1_1 = 10100;
 
 const int __VISIONOS_1_2 = 10200;
 
+const int __VISIONOS_1_3 = 10300;
+
 const int __VISIONOS_2_0 = 20000;
 
 const int __VISIONOS_2_1 = 20100;
+
+const int __VISIONOS_2_2 = 20200;
+
+const int __VISIONOS_2_3 = 20300;
+
+const int __VISIONOS_2_4 = 20400;
+
+const int __VISIONOS_2_5 = 20500;
 
 const int MAC_OS_X_VERSION_10_0 = 1000;
 
@@ -19634,6 +20455,8 @@ const int MAC_OS_VERSION_13_5 = 130500;
 
 const int MAC_OS_VERSION_13_6 = 130600;
 
+const int MAC_OS_VERSION_13_7 = 130700;
+
 const int MAC_OS_VERSION_14_0 = 140000;
 
 const int MAC_OS_VERSION_14_1 = 140100;
@@ -19646,13 +20469,31 @@ const int MAC_OS_VERSION_14_4 = 140400;
 
 const int MAC_OS_VERSION_14_5 = 140500;
 
+const int MAC_OS_VERSION_14_6 = 140600;
+
+const int MAC_OS_VERSION_14_7 = 140700;
+
 const int MAC_OS_VERSION_15_0 = 150000;
 
 const int MAC_OS_VERSION_15_1 = 150100;
 
+const int MAC_OS_VERSION_15_2 = 150200;
+
+const int MAC_OS_VERSION_15_3 = 150300;
+
+const int MAC_OS_VERSION_15_4 = 150400;
+
+const int MAC_OS_VERSION_15_5 = 150500;
+
+const int __AVAILABILITY_VERSIONS_VERSION_HASH = 93585900;
+
+const String __AVAILABILITY_VERSIONS_VERSION_STRING = 'Local';
+
+const String __AVAILABILITY_FILE = 'AvailabilityVersions.h';
+
 const int __MAC_OS_X_VERSION_MIN_REQUIRED = 150000;
 
-const int __MAC_OS_X_VERSION_MAX_ALLOWED = 150100;
+const int __MAC_OS_X_VERSION_MAX_ALLOWED = 150500;
 
 const int __ENABLE_LEGACY_MAC_AVAILABILITY = 1;
 
