@@ -52,15 +52,23 @@ class KafkaConsumerTopic extends KafkaTopic {
           // TODO
         }
       } else {
+        final timestampValue = librdkafka.rd_kafka_message_timestamp(
+          message,
+          nullptr,
+        );
+
         final consumerRecord = ConsumerRecord(
           topic: name,
           partition: partition,
           offset: message.ref.offset,
-          timestamp: DateTime
-              .now(), // FIXME!!! HOW TO GET TIMESTAMP FROM message.ref???
+          timestamp:
+              timestampValue == -1
+                  ? DateTime.now()
+                  : DateTime.fromMillisecondsSinceEpoch(timestampValue),
           key: message.ref.key.cast<Uint8>().asTypedList(message.ref.key_len),
-          payload:
-              message.ref.payload.cast<Uint8>().asTypedList(message.ref.len),
+          payload: message.ref.payload.cast<Uint8>().asTypedList(
+            message.ref.len,
+          ),
         );
         messagesOutlet.send(consumerRecord);
         librdkafka.rd_kafka_message_destroy(message);
