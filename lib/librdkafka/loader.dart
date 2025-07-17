@@ -29,7 +29,9 @@ LibRdKafka _verifyVersion(LibRdKafka library) {
 
   if (version != RD_KAFKA_VERSION) {
     throw UnsupportedLibRdKafkaVersion(
-        version: version, supported: RD_KAFKA_VERSION);
+      version: version,
+      supported: RD_KAFKA_VERSION,
+    );
   }
 
   return library;

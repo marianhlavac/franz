@@ -23,21 +23,23 @@ enum KafkaInstanceType { producer, consumer }
 class _KafkaInstance {
   late Pointer<KafkaHandle> _$native;
 
-  _KafkaInstance(
-      {required KafkaInstanceType type,
-      required KafkaConfiguration configuration}) {
+  _KafkaInstance({
+    required KafkaInstanceType type,
+    required KafkaConfiguration configuration,
+  }) {
     final nativeConfiguration = configuration.toNative();
 
     final errHandler = ErrorStringHandler();
 
     _$native = librdkafka.rd_kafka_new(
-        switch (type) {
-          KafkaInstanceType.consumer => rd_kafka_type_t.RD_KAFKA_CONSUMER,
-          KafkaInstanceType.producer => rd_kafka_type_t.RD_KAFKA_PRODUCER,
-        },
-        nativeConfiguration,
-        errHandler.ptr,
-        errHandler.maxLength);
+      switch (type) {
+        KafkaInstanceType.consumer => rd_kafka_type_t.RD_KAFKA_CONSUMER,
+        KafkaInstanceType.producer => rd_kafka_type_t.RD_KAFKA_PRODUCER,
+      },
+      nativeConfiguration,
+      errHandler.ptr,
+      errHandler.maxLength,
+    );
 
     errHandler.dispose();
     // malloc.free(nativeConfiguration);

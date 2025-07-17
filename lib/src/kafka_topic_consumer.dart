@@ -9,20 +9,27 @@ class KafkaConsumerTopic extends KafkaTopic {
   Stream<ConsumerRecord> get stream => _sink.stream;
 
   Future<ActiveConsumer> consumeStart(
-      int partition, ConsumerOffset offset) async {
+    int partition,
+    ConsumerOffset offset,
+  ) async {
     librdkafka.rd_kafka_consume_start(
-        _$native, partition, offset.numericOffset);
+      _$native,
+      partition,
+      offset.numericOffset,
+    );
 
     final messagesSink = ReceivePort();
     final isolate = await Isolate.spawn(
-        (sendPort) => _consumerIsolate(partition, sendPort),
-        messagesSink.sendPort,
-        debugName: "franz-consumer-$name-$partition");
+      (sendPort) => _consumerIsolate(partition, sendPort),
+      messagesSink.sendPort,
+      debugName: "franz-consumer-$name-$partition",
+    );
 
     return ActiveConsumer(
-        messagesSink.asBroadcastStream().cast<ConsumerRecord>(),
-        partition,
-        isolate);
+      messagesSink.asBroadcastStream().cast<ConsumerRecord>(),
+      partition,
+      isolate,
+    );
   }
 
   Future<void> consumeStop(ActiveConsumer activeConsumer) async {
@@ -33,8 +40,11 @@ class KafkaConsumerTopic extends KafkaTopic {
   void _consumerIsolate(int partition, SendPort messagesOutlet) {
     // - This method loops in isolate
     while (true) {
-      final message =
-          librdkafka.rd_kafka_consume(_$native, partition, 1000 /* FIXME */);
+      final message = librdkafka.rd_kafka_consume(
+        _$native,
+        partition,
+        1000 /* FIXME */,
+      );
 
       if (message == nullptr) continue;
 

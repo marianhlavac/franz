@@ -7,11 +7,12 @@ class KafkaServerSslOptions {
   final dynamic key;
   final dynamic cert;
 
-  const KafkaServerSslOptions(
-      {required this.rejectUnauthorized,
-      required this.ca,
-      required this.key,
-      required this.cert});
+  const KafkaServerSslOptions({
+    required this.rejectUnauthorized,
+    required this.ca,
+    required this.key,
+    required this.cert,
+  });
 }
 
 class KafkaServerRetryOptions {
@@ -19,10 +20,11 @@ class KafkaServerRetryOptions {
   final Duration initialRetryTime;
   final int retries;
 
-  const KafkaServerRetryOptions(
-      {required this.maxRetryTime,
-      required this.initialRetryTime,
-      required this.retries});
+  const KafkaServerRetryOptions({
+    required this.maxRetryTime,
+    required this.initialRetryTime,
+    required this.retries,
+  });
 }
 
 const defaultRetryOptions = KafkaServerRetryOptions(
@@ -59,20 +61,17 @@ class KafkaServer {
     Duration requestTimeout = const Duration(seconds: 10),
     KafkaServerRetryOptions retryOptions = defaultRetryOptions,
     bool enforceRequestTimeout = false,
-  }) =>
-      KafkaServer(
-        bootstrapServers: ['$hostname:$port'],
-        clientId: clientId,
-        sslOptions: sslOptions,
-        connectionTimeout: connectionTimeout,
-        requestTimeout: requestTimeout,
-        retryOptions: retryOptions,
-        enforceRequestTimeout: enforceRequestTimeout,
-      );
+  }) => KafkaServer(
+    bootstrapServers: ['$hostname:$port'],
+    clientId: clientId,
+    sslOptions: sslOptions,
+    connectionTimeout: connectionTimeout,
+    requestTimeout: requestTimeout,
+    retryOptions: retryOptions,
+    enforceRequestTimeout: enforceRequestTimeout,
+  );
 
-  KafkaProducer createProducer({
-    bool createTopicsAutomatically = true,
-  }) =>
+  KafkaProducer createProducer({bool createTopicsAutomatically = true}) =>
       KafkaProducer(
         configuration: KafkaConfiguration(
           bootstrapServers: bootstrapServers.join(','),
@@ -84,13 +83,12 @@ class KafkaServer {
   KafkaConsumer createConsumer({
     bool createTopicsAutomatically = true,
     String? groupId,
-  }) =>
-      KafkaConsumer(
-        configuration: KafkaConfiguration(
-          bootstrapServers: bootstrapServers.join(','),
-          clientId: clientId,
-          // autoCreateTopicsEnable: createTopicsAutomatically,
-          groupId: groupId,
-        ),
-      );
+  }) => KafkaConsumer(
+    configuration: KafkaConfiguration(
+      bootstrapServers: bootstrapServers.join(','),
+      clientId: clientId,
+      // autoCreateTopicsEnable: createTopicsAutomatically,
+      groupId: groupId,
+    ),
+  );
 }

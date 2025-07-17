@@ -2,8 +2,10 @@ class UnsupportedLibRdKafkaVersion {
   final int version;
   final int supported;
 
-  UnsupportedLibRdKafkaVersion(
-      {required this.version, required this.supported});
+  UnsupportedLibRdKafkaVersion({
+    required this.version,
+    required this.supported,
+  });
 
   @override
   String toString() =>

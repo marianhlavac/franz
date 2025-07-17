@@ -25,9 +25,10 @@ class KafkaProducerTopic extends KafkaTopic {
     if (keyData != null) malloc.free(keyData);
     malloc.free(messageData);
 
-    if (result < 0 /* FIXME: use const/enum */) {
+    if (result < 0 /* FIXME: use const/enum */ ) {
       throw KafkaProduceError(
-          errorNumber: librdkafka.rd_kafka_errno()); // FIXME: probably wrong
+        errorNumber: librdkafka.rd_kafka_errno(),
+      ); // FIXME: probably wrong
     }
   }
 
@@ -35,10 +36,9 @@ class KafkaProducerTopic extends KafkaTopic {
     required String payload,
     String? key,
     int partition = 0,
-  }) =>
-      produceMessage(
-        payload: utf8.encode(payload),
-        key: key != null ? utf8.encode(key) : null,
-        partition: partition,
-      );
+  }) => produceMessage(
+    payload: utf8.encode(payload),
+    key: key != null ? utf8.encode(key) : null,
+    partition: partition,
+  );
 }

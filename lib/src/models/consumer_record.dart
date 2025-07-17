@@ -23,16 +23,18 @@ class ConsumerRecord<KT, PT> {
 
   String _generateStringPreview(Object? object, int maxLength) {
     return switch (object) {
-      String() => (object.length > maxLength
-          ? '${object.substring(0, maxLength)}...'
-          : object),
-      List<int>() => object
-              .take(maxLength)
-              .map((b) => b.toRadixString(maxLength))
-              .join(' ') +
-          (object.length > maxLength ? '...' : ''),
+      String() =>
+        (object.length > maxLength
+            ? '${object.substring(0, maxLength)}...'
+            : object),
+      List<int>() =>
+        object
+                .take(maxLength)
+                .map((b) => b.toRadixString(maxLength))
+                .join(' ') +
+            (object.length > maxLength ? '...' : ''),
       null => 'null',
-      _ => 'unknown type?'
+      _ => 'unknown type?',
     };
   }
 
@@ -44,14 +46,14 @@ class ConsumerRecord<KT, PT> {
         'topic: $topic[$partition], offset: $offset, timestamp: $timestamp }';
   }
 
-  ConsumerRecord<String, String> toTextRecord(
-          [Codec codec = defaultTextCodec]) =>
-      ConsumerRecord(
-        key: key != null ? codec.decode(key) : null,
-        payload: payload != null ? codec.decode(payload) : null,
-        topic: topic,
-        partition: partition,
-        offset: offset,
-        timestamp: timestamp,
-      );
+  ConsumerRecord<String, String> toTextRecord([
+    Codec codec = defaultTextCodec,
+  ]) => ConsumerRecord(
+    key: key != null ? codec.decode(key) : null,
+    payload: payload != null ? codec.decode(payload) : null,
+    topic: topic,
+    partition: partition,
+    offset: offset,
+    timestamp: timestamp,
+  );
 }

@@ -7,17 +7,16 @@ import 'dart:ffi' as ffi;
 class LibRdKafka {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
-      _lookup;
+  _lookup;
 
   /// The symbols are looked up in [dynamicLibrary].
   LibRdKafka(ffi.DynamicLibrary dynamicLibrary)
-      : _lookup = dynamicLibrary.lookup;
+    : _lookup = dynamicLibrary.lookup;
 
   /// The symbols are looked up with [lookup].
   LibRdKafka.fromLookup(
-      ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
-          lookup)
-      : _lookup = lookup;
+    ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName) lookup,
+  ) : _lookup = lookup;
 
   int renameat(
     int arg0,
@@ -25,39 +24,47 @@ class LibRdKafka {
     int arg2,
     ffi.Pointer<ffi.Char> arg3,
   ) {
-    return _renameat(
-      arg0,
-      arg1,
-      arg2,
-      arg3,
-    );
+    return _renameat(arg0, arg1, arg2, arg3);
   }
 
   late final _renameatPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int,
-              ffi.Pointer<ffi.Char>)>>('renameat');
-  late final _renameat = _renameatPtr.asFunction<
-      int Function(int, ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Int,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int,
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('renameat');
+  late final _renameat =
+      _renameatPtr
+          .asFunction<
+            int Function(int, ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>)
+          >();
 
   int renamex_np(
     ffi.Pointer<ffi.Char> arg0,
     ffi.Pointer<ffi.Char> arg1,
     int arg2,
   ) {
-    return _renamex_np(
-      arg0,
-      arg1,
-      arg2,
-    );
+    return _renamex_np(arg0, arg1, arg2);
   }
 
   late final _renamex_npPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-              ffi.UnsignedInt)>>('renamex_np');
-  late final _renamex_np = _renamex_npPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+        ffi.UnsignedInt,
+      )
+    >
+  >('renamex_np');
+  late final _renamex_np =
+      _renamex_npPtr
+          .asFunction<
+            int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)
+          >();
 
   int renameatx_np(
     int arg0,
@@ -66,34 +73,40 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> arg3,
     int arg4,
   ) {
-    return _renameatx_np(
-      arg0,
-      arg1,
-      arg2,
-      arg3,
-      arg4,
-    );
+    return _renameatx_np(arg0, arg1, arg2, arg3, arg4);
   }
 
   late final _renameatx_npPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, ffi.Int,
-              ffi.Pointer<ffi.Char>, ffi.UnsignedInt)>>('renameatx_np');
-  late final _renameatx_np = _renameatx_npPtr.asFunction<
-      int Function(
-          int, ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>, int)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Int,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int,
+        ffi.Pointer<ffi.Char>,
+        ffi.UnsignedInt,
+      )
+    >
+  >('renameatx_np');
+  late final _renameatx_np =
+      _renameatx_npPtr
+          .asFunction<
+            int Function(
+              int,
+              ffi.Pointer<ffi.Char>,
+              int,
+              ffi.Pointer<ffi.Char>,
+              int,
+            )
+          >();
 
-  int printf(
-    ffi.Pointer<ffi.Char> arg0,
-  ) {
-    return _printf(
-      arg0,
-    );
+  int printf(ffi.Pointer<ffi.Char> arg0) {
+    return _printf(arg0);
   }
 
   late final _printfPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>)>>(
-          'printf');
+        'printf',
+      );
   late final _printf =
       _printfPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
@@ -118,185 +131,158 @@ class LibRdKafka {
 
   set __stderrp(ffi.Pointer<FILE> value) => ___stderrp.value = value;
 
-  void clearerr(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _clearerr(
-      arg0,
-    );
+  void clearerr(ffi.Pointer<FILE> arg0) {
+    return _clearerr(arg0);
   }
 
   late final _clearerrPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<FILE>)>>(
-          'clearerr');
+        'clearerr',
+      );
   late final _clearerr =
       _clearerrPtr.asFunction<void Function(ffi.Pointer<FILE>)>();
 
-  int fclose(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _fclose(
-      arg0,
-    );
+  int fclose(ffi.Pointer<FILE> arg0) {
+    return _fclose(arg0);
   }
 
   late final _fclosePtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>)>>(
-          'fclose');
+        'fclose',
+      );
   late final _fclose = _fclosePtr.asFunction<int Function(ffi.Pointer<FILE>)>();
 
-  int feof(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _feof(
-      arg0,
-    );
+  int feof(ffi.Pointer<FILE> arg0) {
+    return _feof(arg0);
   }
 
   late final _feofPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>)>>('feof');
   late final _feof = _feofPtr.asFunction<int Function(ffi.Pointer<FILE>)>();
 
-  int ferror(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _ferror(
-      arg0,
-    );
+  int ferror(ffi.Pointer<FILE> arg0) {
+    return _ferror(arg0);
   }
 
   late final _ferrorPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>)>>(
-          'ferror');
+        'ferror',
+      );
   late final _ferror = _ferrorPtr.asFunction<int Function(ffi.Pointer<FILE>)>();
 
-  int fflush(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _fflush(
-      arg0,
-    );
+  int fflush(ffi.Pointer<FILE> arg0) {
+    return _fflush(arg0);
   }
 
   late final _fflushPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>)>>(
-          'fflush');
+        'fflush',
+      );
   late final _fflush = _fflushPtr.asFunction<int Function(ffi.Pointer<FILE>)>();
 
-  int fgetc(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _fgetc(
-      arg0,
-    );
+  int fgetc(ffi.Pointer<FILE> arg0) {
+    return _fgetc(arg0);
   }
 
   late final _fgetcPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>)>>('fgetc');
   late final _fgetc = _fgetcPtr.asFunction<int Function(ffi.Pointer<FILE>)>();
 
-  int fgetpos(
-    ffi.Pointer<FILE> arg0,
-    ffi.Pointer<fpos_t> arg1,
-  ) {
-    return _fgetpos(
-      arg0,
-      arg1,
-    );
+  int fgetpos(ffi.Pointer<FILE> arg0, ffi.Pointer<fpos_t> arg1) {
+    return _fgetpos(arg0, arg1);
   }
 
   late final _fgetposPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<fpos_t>)>>('fgetpos');
-  late final _fgetpos = _fgetposPtr
-      .asFunction<int Function(ffi.Pointer<FILE>, ffi.Pointer<fpos_t>)>();
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<fpos_t>)>
+  >('fgetpos');
+  late final _fgetpos =
+      _fgetposPtr
+          .asFunction<int Function(ffi.Pointer<FILE>, ffi.Pointer<fpos_t>)>();
 
   ffi.Pointer<ffi.Char> fgets(
     ffi.Pointer<ffi.Char> arg0,
     int __size,
     ffi.Pointer<FILE> arg2,
   ) {
-    return _fgets(
-      arg0,
-      __size,
-      arg2,
-    );
+    return _fgets(arg0, __size, arg2);
   }
 
   late final _fgetsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<ffi.Char>, ffi.Int, ffi.Pointer<FILE>)>>('fgets');
-  late final _fgets = _fgetsPtr.asFunction<
+    ffi.NativeFunction<
       ffi.Pointer<ffi.Char> Function(
-          ffi.Pointer<ffi.Char>, int, ffi.Pointer<FILE>)>();
+        ffi.Pointer<ffi.Char>,
+        ffi.Int,
+        ffi.Pointer<FILE>,
+      )
+    >
+  >('fgets');
+  late final _fgets =
+      _fgetsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<ffi.Char>,
+              int,
+              ffi.Pointer<FILE>,
+            )
+          >();
 
   ffi.Pointer<FILE> fopen(
     ffi.Pointer<ffi.Char> __filename,
     ffi.Pointer<ffi.Char> __mode,
   ) {
-    return _fopen(
-      __filename,
-      __mode,
-    );
+    return _fopen(__filename, __mode);
   }
 
   late final _fopenPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<FILE> Function(
-              ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>>('fopen');
-  late final _fopen = _fopenPtr.asFunction<
-      ffi.Pointer<FILE> Function(
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)
+    >
+  >('fopen');
+  late final _fopen =
+      _fopenPtr
+          .asFunction<
+            ffi.Pointer<FILE> Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
-  int fprintf(
-    ffi.Pointer<FILE> arg0,
-    ffi.Pointer<ffi.Char> arg1,
-  ) {
-    return _fprintf(
-      arg0,
-      arg1,
-    );
+  int fprintf(ffi.Pointer<FILE> arg0, ffi.Pointer<ffi.Char> arg1) {
+    return _fprintf(arg0, arg1);
   }
 
   late final _fprintfPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)>>('fprintf');
-  late final _fprintf = _fprintfPtr
-      .asFunction<int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)
+    >
+  >('fprintf');
+  late final _fprintf =
+      _fprintfPtr
+          .asFunction<int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)>();
 
-  int fputc(
-    int arg0,
-    ffi.Pointer<FILE> arg1,
-  ) {
-    return _fputc(
-      arg0,
-      arg1,
-    );
+  int fputc(int arg0, ffi.Pointer<FILE> arg1) {
+    return _fputc(arg0, arg1);
   }
 
   late final _fputcPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>>(
-          'fputc');
+        'fputc',
+      );
   late final _fputc =
       _fputcPtr.asFunction<int Function(int, ffi.Pointer<FILE>)>();
 
-  int fputs(
-    ffi.Pointer<ffi.Char> arg0,
-    ffi.Pointer<FILE> arg1,
-  ) {
-    return _fputs(
-      arg0,
-      arg1,
-    );
+  int fputs(ffi.Pointer<ffi.Char> arg0, ffi.Pointer<FILE> arg1) {
+    return _fputs(arg0, arg1);
   }
 
   late final _fputsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<FILE>)>>('fputs');
-  late final _fputs = _fputsPtr
-      .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<FILE>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<FILE>)
+    >
+  >('fputs');
+  late final _fputs =
+      _fputsPtr
+          .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<FILE>)>();
 
   int fread(
     ffi.Pointer<ffi.Void> __ptr,
@@ -304,103 +290,94 @@ class LibRdKafka {
     int __nitems,
     ffi.Pointer<FILE> __stream,
   ) {
-    return _fread(
-      __ptr,
-      __size,
-      __nitems,
-      __stream,
-    );
+    return _fread(__ptr, __size, __nitems, __stream);
   }
 
   late final _freadPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.UnsignedLong Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Size,
-              ffi.Pointer<FILE>)>>('fread');
-  late final _fread = _freadPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Void>, int, int, ffi.Pointer<FILE>)>();
+    ffi.NativeFunction<
+      ffi.UnsignedLong Function(
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Size,
+        ffi.Pointer<FILE>,
+      )
+    >
+  >('fread');
+  late final _fread =
+      _freadPtr
+          .asFunction<
+            int Function(ffi.Pointer<ffi.Void>, int, int, ffi.Pointer<FILE>)
+          >();
 
   ffi.Pointer<FILE> freopen(
     ffi.Pointer<ffi.Char> arg0,
     ffi.Pointer<ffi.Char> arg1,
     ffi.Pointer<FILE> arg2,
   ) {
-    return _freopen(
-      arg0,
-      arg1,
-      arg2,
-    );
+    return _freopen(arg0, arg1, arg2);
   }
 
   late final _freopenPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>, ffi.Pointer<FILE>)>>('freopen');
-  late final _freopen = _freopenPtr.asFunction<
+    ffi.NativeFunction<
       ffi.Pointer<FILE> Function(
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, ffi.Pointer<FILE>)>();
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<FILE>,
+      )
+    >
+  >('freopen');
+  late final _freopen =
+      _freopenPtr
+          .asFunction<
+            ffi.Pointer<FILE> Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<FILE>,
+            )
+          >();
 
-  int fscanf(
-    ffi.Pointer<FILE> arg0,
-    ffi.Pointer<ffi.Char> arg1,
-  ) {
-    return _fscanf(
-      arg0,
-      arg1,
-    );
+  int fscanf(ffi.Pointer<FILE> arg0, ffi.Pointer<ffi.Char> arg1) {
+    return _fscanf(arg0, arg1);
   }
 
   late final _fscanfPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)>>('fscanf');
-  late final _fscanf = _fscanfPtr
-      .asFunction<int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)
+    >
+  >('fscanf');
+  late final _fscanf =
+      _fscanfPtr
+          .asFunction<int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)>();
 
-  int fseek(
-    ffi.Pointer<FILE> arg0,
-    int arg1,
-    int arg2,
-  ) {
-    return _fseek(
-      arg0,
-      arg1,
-      arg2,
-    );
+  int fseek(ffi.Pointer<FILE> arg0, int arg1, int arg2) {
+    return _fseek(arg0, arg1, arg2);
   }
 
   late final _fseekPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<FILE>, ffi.Long, ffi.Int)>>('fseek');
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>, ffi.Long, ffi.Int)>
+  >('fseek');
   late final _fseek =
       _fseekPtr.asFunction<int Function(ffi.Pointer<FILE>, int, int)>();
 
-  int fsetpos(
-    ffi.Pointer<FILE> arg0,
-    ffi.Pointer<fpos_t> arg1,
-  ) {
-    return _fsetpos(
-      arg0,
-      arg1,
-    );
+  int fsetpos(ffi.Pointer<FILE> arg0, ffi.Pointer<fpos_t> arg1) {
+    return _fsetpos(arg0, arg1);
   }
 
   late final _fsetposPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<fpos_t>)>>('fsetpos');
-  late final _fsetpos = _fsetposPtr
-      .asFunction<int Function(ffi.Pointer<FILE>, ffi.Pointer<fpos_t>)>();
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<fpos_t>)>
+  >('fsetpos');
+  late final _fsetpos =
+      _fsetposPtr
+          .asFunction<int Function(ffi.Pointer<FILE>, ffi.Pointer<fpos_t>)>();
 
-  int ftell(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _ftell(
-      arg0,
-    );
+  int ftell(ffi.Pointer<FILE> arg0) {
+    return _ftell(arg0);
   }
 
   late final _ftellPtr =
       _lookup<ffi.NativeFunction<ffi.Long Function(ffi.Pointer<FILE>)>>(
-          'ftell');
+        'ftell',
+      );
   late final _ftell = _ftellPtr.asFunction<int Function(ffi.Pointer<FILE>)>();
 
   int fwrite(
@@ -409,27 +386,27 @@ class LibRdKafka {
     int __nitems,
     ffi.Pointer<FILE> __stream,
   ) {
-    return _fwrite(
-      __ptr,
-      __size,
-      __nitems,
-      __stream,
-    );
+    return _fwrite(__ptr, __size, __nitems, __stream);
   }
 
   late final _fwritePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.UnsignedLong Function(ffi.Pointer<ffi.Void>, ffi.Size, ffi.Size,
-              ffi.Pointer<FILE>)>>('fwrite');
-  late final _fwrite = _fwritePtr.asFunction<
-      int Function(ffi.Pointer<ffi.Void>, int, int, ffi.Pointer<FILE>)>();
+    ffi.NativeFunction<
+      ffi.UnsignedLong Function(
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Size,
+        ffi.Pointer<FILE>,
+      )
+    >
+  >('fwrite');
+  late final _fwrite =
+      _fwritePtr
+          .asFunction<
+            int Function(ffi.Pointer<ffi.Void>, int, int, ffi.Pointer<FILE>)
+          >();
 
-  int getc(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _getc(
-      arg0,
-    );
+  int getc(ffi.Pointer<FILE> arg0) {
+    return _getc(arg0);
   }
 
   late final _getcPtr =
@@ -440,154 +417,124 @@ class LibRdKafka {
     return _getchar();
   }
 
-  late final _getcharPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function()>>('getchar');
+  late final _getcharPtr = _lookup<ffi.NativeFunction<ffi.Int Function()>>(
+    'getchar',
+  );
   late final _getchar = _getcharPtr.asFunction<int Function()>();
 
-  ffi.Pointer<ffi.Char> gets(
-    ffi.Pointer<ffi.Char> arg0,
-  ) {
-    return _gets(
-      arg0,
-    );
+  ffi.Pointer<ffi.Char> gets(ffi.Pointer<ffi.Char> arg0) {
+    return _gets(arg0);
   }
 
   late final _getsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>>('gets');
-  late final _gets = _getsPtr
-      .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>
+  >('gets');
+  late final _gets =
+      _getsPtr
+          .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>();
 
-  void perror(
-    ffi.Pointer<ffi.Char> arg0,
-  ) {
-    return _perror(
-      arg0,
-    );
+  void perror(ffi.Pointer<ffi.Char> arg0) {
+    return _perror(arg0);
   }
 
   late final _perrorPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Char>)>>(
-          'perror');
+        'perror',
+      );
   late final _perror =
       _perrorPtr.asFunction<void Function(ffi.Pointer<ffi.Char>)>();
 
-  int putc(
-    int arg0,
-    ffi.Pointer<FILE> arg1,
-  ) {
-    return _putc(
-      arg0,
-      arg1,
-    );
+  int putc(int arg0, ffi.Pointer<FILE> arg1) {
+    return _putc(arg0, arg1);
   }
 
   late final _putcPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>>(
-          'putc');
+        'putc',
+      );
   late final _putc =
       _putcPtr.asFunction<int Function(int, ffi.Pointer<FILE>)>();
 
-  int putchar(
-    int arg0,
-  ) {
-    return _putchar(
-      arg0,
-    );
+  int putchar(int arg0) {
+    return _putchar(arg0);
   }
 
   late final _putcharPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('putchar');
   late final _putchar = _putcharPtr.asFunction<int Function(int)>();
 
-  int puts(
-    ffi.Pointer<ffi.Char> arg0,
-  ) {
-    return _puts(
-      arg0,
-    );
+  int puts(ffi.Pointer<ffi.Char> arg0) {
+    return _puts(arg0);
   }
 
   late final _putsPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>)>>(
-          'puts');
+        'puts',
+      );
   late final _puts = _putsPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  int remove(
-    ffi.Pointer<ffi.Char> arg0,
-  ) {
-    return _remove(
-      arg0,
-    );
+  int remove(ffi.Pointer<ffi.Char> arg0) {
+    return _remove(arg0);
   }
 
   late final _removePtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>)>>(
-          'remove');
+        'remove',
+      );
   late final _remove =
       _removePtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  int rename(
-    ffi.Pointer<ffi.Char> __old,
-    ffi.Pointer<ffi.Char> __new,
-  ) {
-    return _rename(
-      __old,
-      __new,
-    );
+  int rename(ffi.Pointer<ffi.Char> __old, ffi.Pointer<ffi.Char> __new) {
+    return _rename(__old, __new);
   }
 
   late final _renamePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>>('rename');
-  late final _rename = _renamePtr
-      .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)
+    >
+  >('rename');
+  late final _rename =
+      _renamePtr
+          .asFunction<
+            int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)
+          >();
 
-  void rewind(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _rewind(
-      arg0,
-    );
+  void rewind(ffi.Pointer<FILE> arg0) {
+    return _rewind(arg0);
   }
 
   late final _rewindPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<FILE>)>>(
-          'rewind');
+        'rewind',
+      );
   late final _rewind =
       _rewindPtr.asFunction<void Function(ffi.Pointer<FILE>)>();
 
-  int scanf(
-    ffi.Pointer<ffi.Char> arg0,
-  ) {
-    return _scanf(
-      arg0,
-    );
+  int scanf(ffi.Pointer<ffi.Char> arg0) {
+    return _scanf(arg0);
   }
 
   late final _scanfPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>)>>(
-          'scanf');
+        'scanf',
+      );
   late final _scanf =
       _scanfPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  void setbuf(
-    ffi.Pointer<FILE> arg0,
-    ffi.Pointer<ffi.Char> arg1,
-  ) {
-    return _setbuf(
-      arg0,
-      arg1,
-    );
+  void setbuf(ffi.Pointer<FILE> arg0, ffi.Pointer<ffi.Char> arg1) {
+    return _setbuf(arg0, arg1);
   }
 
   late final _setbufPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)>>('setbuf');
-  late final _setbuf = _setbufPtr
-      .asFunction<void Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)
+    >
+  >('setbuf');
+  late final _setbuf =
+      _setbufPtr
+          .asFunction<
+            void Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>)
+          >();
 
   int setvbuf(
     ffi.Pointer<FILE> arg0,
@@ -595,54 +542,54 @@ class LibRdKafka {
     int arg2,
     int __size,
   ) {
-    return _setvbuf(
-      arg0,
-      arg1,
-      arg2,
-      __size,
-    );
+    return _setvbuf(arg0, arg1, arg2, __size);
   }
 
   late final _setvbufPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, ffi.Int,
-              ffi.Size)>>('setvbuf');
-  late final _setvbuf = _setvbufPtr.asFunction<
-      int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, int, int)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<FILE>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int,
+        ffi.Size,
+      )
+    >
+  >('setvbuf');
+  late final _setvbuf =
+      _setvbufPtr
+          .asFunction<
+            int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, int, int)
+          >();
 
-  int sprintf(
-    ffi.Pointer<ffi.Char> arg0,
-    ffi.Pointer<ffi.Char> arg1,
-  ) {
-    return _sprintf(
-      arg0,
-      arg1,
-    );
+  int sprintf(ffi.Pointer<ffi.Char> arg0, ffi.Pointer<ffi.Char> arg1) {
+    return _sprintf(arg0, arg1);
   }
 
   late final _sprintfPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>>('sprintf');
-  late final _sprintf = _sprintfPtr
-      .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)
+    >
+  >('sprintf');
+  late final _sprintf =
+      _sprintfPtr
+          .asFunction<
+            int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)
+          >();
 
-  int sscanf(
-    ffi.Pointer<ffi.Char> arg0,
-    ffi.Pointer<ffi.Char> arg1,
-  ) {
-    return _sscanf(
-      arg0,
-      arg1,
-    );
+  int sscanf(ffi.Pointer<ffi.Char> arg0, ffi.Pointer<ffi.Char> arg1) {
+    return _sscanf(arg0, arg1);
   }
 
   late final _sscanfPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>>('sscanf');
-  late final _sscanf = _sscanfPtr
-      .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)
+    >
+  >('sscanf');
+  late final _sscanf =
+      _sscanfPtr
+          .asFunction<
+            int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)
+          >();
 
   ffi.Pointer<FILE> tmpfile() {
     return _tmpfile();
@@ -652,33 +599,25 @@ class LibRdKafka {
       _lookup<ffi.NativeFunction<ffi.Pointer<FILE> Function()>>('tmpfile');
   late final _tmpfile = _tmpfilePtr.asFunction<ffi.Pointer<FILE> Function()>();
 
-  ffi.Pointer<ffi.Char> tmpnam(
-    ffi.Pointer<ffi.Char> arg0,
-  ) {
-    return _tmpnam(
-      arg0,
-    );
+  ffi.Pointer<ffi.Char> tmpnam(ffi.Pointer<ffi.Char> arg0) {
+    return _tmpnam(arg0);
   }
 
   late final _tmpnamPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>>('tmpnam');
-  late final _tmpnam = _tmpnamPtr
-      .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>
+  >('tmpnam');
+  late final _tmpnam =
+      _tmpnamPtr
+          .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>();
 
-  int ungetc(
-    int arg0,
-    ffi.Pointer<FILE> arg1,
-  ) {
-    return _ungetc(
-      arg0,
-      arg1,
-    );
+  int ungetc(int arg0, ffi.Pointer<FILE> arg1) {
+    return _ungetc(arg0, arg1);
   }
 
   late final _ungetcPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>>(
-          'ungetc');
+        'ungetc',
+      );
   late final _ungetc =
       _ungetcPtr.asFunction<int Function(int, ffi.Pointer<FILE>)>();
 
@@ -687,33 +626,27 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> arg1,
     va_list arg2,
   ) {
-    return _vfprintf(
-      arg0,
-      arg1,
-      arg2,
-    );
+    return _vfprintf(arg0, arg1, arg2);
   }
 
   late final _vfprintfPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, va_list)>>('vfprintf');
-  late final _vfprintf = _vfprintfPtr.asFunction<
-      int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, va_list)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, va_list)
+    >
+  >('vfprintf');
+  late final _vfprintf =
+      _vfprintfPtr
+          .asFunction<
+            int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, va_list)
+          >();
 
-  int vprintf(
-    ffi.Pointer<ffi.Char> arg0,
-    va_list arg1,
-  ) {
-    return _vprintf(
-      arg0,
-      arg1,
-    );
+  int vprintf(ffi.Pointer<ffi.Char> arg0, va_list arg1) {
+    return _vprintf(arg0, arg1);
   }
 
   late final _vprintfPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, va_list)>>(
-      'vprintf');
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, va_list)>
+  >('vprintf');
   late final _vprintf =
       _vprintfPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, va_list)>();
 
@@ -722,106 +655,93 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> arg1,
     va_list arg2,
   ) {
-    return _vsprintf(
-      arg0,
-      arg1,
-      arg2,
-    );
+    return _vsprintf(arg0, arg1, arg2);
   }
 
   late final _vsprintfPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-              va_list)>>('vsprintf');
-  late final _vsprintf = _vsprintfPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, va_list)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, va_list)
+    >
+  >('vsprintf');
+  late final _vsprintf =
+      _vsprintfPtr
+          .asFunction<
+            int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, va_list)
+          >();
 
-  ffi.Pointer<ffi.Char> ctermid(
-    ffi.Pointer<ffi.Char> arg0,
-  ) {
-    return _ctermid(
-      arg0,
-    );
+  ffi.Pointer<ffi.Char> ctermid(ffi.Pointer<ffi.Char> arg0) {
+    return _ctermid(arg0);
   }
 
   late final _ctermidPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>>('ctermid');
-  late final _ctermid = _ctermidPtr
-      .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>
+  >('ctermid');
+  late final _ctermid =
+      _ctermidPtr
+          .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>();
 
-  ffi.Pointer<FILE> fdopen(
-    int arg0,
-    ffi.Pointer<ffi.Char> arg1,
-  ) {
-    return _fdopen(
-      arg0,
-      arg1,
-    );
+  ffi.Pointer<FILE> fdopen(int arg0, ffi.Pointer<ffi.Char> arg1) {
+    return _fdopen(arg0, arg1);
   }
 
   late final _fdopenPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<FILE> Function(
-              ffi.Int, ffi.Pointer<ffi.Char>)>>('fdopen');
-  late final _fdopen = _fdopenPtr
-      .asFunction<ffi.Pointer<FILE> Function(int, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<FILE> Function(ffi.Int, ffi.Pointer<ffi.Char>)
+    >
+  >('fdopen');
+  late final _fdopen =
+      _fdopenPtr
+          .asFunction<ffi.Pointer<FILE> Function(int, ffi.Pointer<ffi.Char>)>();
 
-  int fileno(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _fileno(
-      arg0,
-    );
+  int fileno(ffi.Pointer<FILE> arg0) {
+    return _fileno(arg0);
   }
 
   late final _filenoPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>)>>(
-          'fileno');
+        'fileno',
+      );
   late final _fileno = _filenoPtr.asFunction<int Function(ffi.Pointer<FILE>)>();
 
-  int pclose(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _pclose(
-      arg0,
-    );
+  int pclose(ffi.Pointer<FILE> arg0) {
+    return _pclose(arg0);
   }
 
   late final _pclosePtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>)>>(
-          'pclose');
+        'pclose',
+      );
   late final _pclose = _pclosePtr.asFunction<int Function(ffi.Pointer<FILE>)>();
 
   ffi.Pointer<FILE> popen(
     ffi.Pointer<ffi.Char> arg0,
     ffi.Pointer<ffi.Char> arg1,
   ) {
-    return _popen(
-      arg0,
-      arg1,
-    );
+    return _popen(arg0, arg1);
   }
 
   late final _popenPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<FILE> Function(
-              ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>>('popen');
-  late final _popen = _popenPtr.asFunction<
-      ffi.Pointer<FILE> Function(
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)
+    >
+  >('popen');
+  late final _popen =
+      _popenPtr
+          .asFunction<
+            ffi.Pointer<FILE> Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
-  int __srget(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return ___srget(
-      arg0,
-    );
+  int __srget(ffi.Pointer<FILE> arg0) {
+    return ___srget(arg0);
   }
 
   late final ___srgetPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>)>>(
-          '__srget');
+        '__srget',
+      );
   late final ___srget =
       ___srgetPtr.asFunction<int Function(ffi.Pointer<FILE>)>();
 
@@ -830,89 +750,72 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> arg1,
     va_list arg2,
   ) {
-    return ___svfscanf(
-      arg0,
-      arg1,
-      arg2,
-    );
+    return ___svfscanf(arg0, arg1, arg2);
   }
 
   late final ___svfscanfPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>,
-              va_list)>>('__svfscanf');
-  late final ___svfscanf = ___svfscanfPtr.asFunction<
-      int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, va_list)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, va_list)
+    >
+  >('__svfscanf');
+  late final ___svfscanf =
+      ___svfscanfPtr
+          .asFunction<
+            int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, va_list)
+          >();
 
-  int __swbuf(
-    int arg0,
-    ffi.Pointer<FILE> arg1,
-  ) {
-    return ___swbuf(
-      arg0,
-      arg1,
-    );
+  int __swbuf(int arg0, ffi.Pointer<FILE> arg1) {
+    return ___swbuf(arg0, arg1);
   }
 
   late final ___swbufPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>>(
-          '__swbuf');
+        '__swbuf',
+      );
   late final ___swbuf =
       ___swbufPtr.asFunction<int Function(int, ffi.Pointer<FILE>)>();
 
-  void flockfile(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _flockfile(
-      arg0,
-    );
+  void flockfile(ffi.Pointer<FILE> arg0) {
+    return _flockfile(arg0);
   }
 
   late final _flockfilePtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<FILE>)>>(
-          'flockfile');
+        'flockfile',
+      );
   late final _flockfile =
       _flockfilePtr.asFunction<void Function(ffi.Pointer<FILE>)>();
 
-  int ftrylockfile(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _ftrylockfile(
-      arg0,
-    );
+  int ftrylockfile(ffi.Pointer<FILE> arg0) {
+    return _ftrylockfile(arg0);
   }
 
   late final _ftrylockfilePtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>)>>(
-          'ftrylockfile');
+        'ftrylockfile',
+      );
   late final _ftrylockfile =
       _ftrylockfilePtr.asFunction<int Function(ffi.Pointer<FILE>)>();
 
-  void funlockfile(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _funlockfile(
-      arg0,
-    );
+  void funlockfile(ffi.Pointer<FILE> arg0) {
+    return _funlockfile(arg0);
   }
 
   late final _funlockfilePtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<FILE>)>>(
-          'funlockfile');
+        'funlockfile',
+      );
   late final _funlockfile =
       _funlockfilePtr.asFunction<void Function(ffi.Pointer<FILE>)>();
 
-  int getc_unlocked(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _getc_unlocked(
-      arg0,
-    );
+  int getc_unlocked(ffi.Pointer<FILE> arg0) {
+    return _getc_unlocked(arg0);
   }
 
   late final _getc_unlockedPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>)>>(
-          'getc_unlocked');
+        'getc_unlocked',
+      );
   late final _getc_unlocked =
       _getc_unlockedPtr.asFunction<int Function(ffi.Pointer<FILE>)>();
 
@@ -925,61 +828,44 @@ class LibRdKafka {
   late final _getchar_unlocked =
       _getchar_unlockedPtr.asFunction<int Function()>();
 
-  int putc_unlocked(
-    int arg0,
-    ffi.Pointer<FILE> arg1,
-  ) {
-    return _putc_unlocked(
-      arg0,
-      arg1,
-    );
+  int putc_unlocked(int arg0, ffi.Pointer<FILE> arg1) {
+    return _putc_unlocked(arg0, arg1);
   }
 
   late final _putc_unlockedPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>>(
-          'putc_unlocked');
+        'putc_unlocked',
+      );
   late final _putc_unlocked =
       _putc_unlockedPtr.asFunction<int Function(int, ffi.Pointer<FILE>)>();
 
-  int putchar_unlocked(
-    int arg0,
-  ) {
-    return _putchar_unlocked(
-      arg0,
-    );
+  int putchar_unlocked(int arg0) {
+    return _putchar_unlocked(arg0);
   }
 
   late final _putchar_unlockedPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>(
-          'putchar_unlocked');
+        'putchar_unlocked',
+      );
   late final _putchar_unlocked =
       _putchar_unlockedPtr.asFunction<int Function(int)>();
 
-  int getw(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _getw(
-      arg0,
-    );
+  int getw(ffi.Pointer<FILE> arg0) {
+    return _getw(arg0);
   }
 
   late final _getwPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>)>>('getw');
   late final _getw = _getwPtr.asFunction<int Function(ffi.Pointer<FILE>)>();
 
-  int putw(
-    int arg0,
-    ffi.Pointer<FILE> arg1,
-  ) {
-    return _putw(
-      arg0,
-      arg1,
-    );
+  int putw(int arg0, ffi.Pointer<FILE> arg1) {
+    return _putw(arg0, arg1);
   }
 
   late final _putwPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<FILE>)>>(
-          'putw');
+        'putw',
+      );
   late final _putw =
       _putwPtr.asFunction<int Function(int, ffi.Pointer<FILE>)>();
 
@@ -987,44 +873,38 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> __dir,
     ffi.Pointer<ffi.Char> __prefix,
   ) {
-    return _tempnam(
-      __dir,
-      __prefix,
-    );
+    return _tempnam(__dir, __prefix);
   }
 
   late final _tempnamPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>>('tempnam');
-  late final _tempnam = _tempnamPtr.asFunction<
+    ffi.NativeFunction<
       ffi.Pointer<ffi.Char> Function(
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('tempnam');
+  late final _tempnam =
+      _tempnamPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
-  int fseeko(
-    ffi.Pointer<FILE> __stream,
-    int __offset,
-    int __whence,
-  ) {
-    return _fseeko(
-      __stream,
-      __offset,
-      __whence,
-    );
+  int fseeko(ffi.Pointer<FILE> __stream, int __offset, int __whence) {
+    return _fseeko(__stream, __offset, __whence);
   }
 
   late final _fseekoPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<FILE>, off_t, ffi.Int)>>('fseeko');
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>, off_t, ffi.Int)>
+  >('fseeko');
   late final _fseeko =
       _fseekoPtr.asFunction<int Function(ffi.Pointer<FILE>, int, int)>();
 
-  int ftello(
-    ffi.Pointer<FILE> __stream,
-  ) {
-    return _ftello(
-      __stream,
-    );
+  int ftello(ffi.Pointer<FILE> __stream) {
+    return _ftello(__stream);
   }
 
   late final _ftelloPtr =
@@ -1036,52 +916,46 @@ class LibRdKafka {
     int __size,
     ffi.Pointer<ffi.Char> __format,
   ) {
-    return _snprintf(
-      __str,
-      __size,
-      __format,
-    );
+    return _snprintf(__str, __size, __format);
   }
 
   late final _snprintfPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size,
-              ffi.Pointer<ffi.Char>)>>('snprintf');
-  late final _snprintf = _snprintfPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size, ffi.Pointer<ffi.Char>)
+    >
+  >('snprintf');
+  late final _snprintf =
+      _snprintfPtr
+          .asFunction<
+            int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>)
+          >();
 
   int vfscanf(
     ffi.Pointer<FILE> __stream,
     ffi.Pointer<ffi.Char> __format,
     va_list arg2,
   ) {
-    return _vfscanf(
-      __stream,
-      __format,
-      arg2,
-    );
+    return _vfscanf(__stream, __format, arg2);
   }
 
   late final _vfscanfPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, va_list)>>('vfscanf');
-  late final _vfscanf = _vfscanfPtr.asFunction<
-      int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, va_list)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, va_list)
+    >
+  >('vfscanf');
+  late final _vfscanf =
+      _vfscanfPtr
+          .asFunction<
+            int Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, va_list)
+          >();
 
-  int vscanf(
-    ffi.Pointer<ffi.Char> __format,
-    va_list arg1,
-  ) {
-    return _vscanf(
-      __format,
-      arg1,
-    );
+  int vscanf(ffi.Pointer<ffi.Char> __format, va_list arg1) {
+    return _vscanf(__format, arg1);
   }
 
   late final _vscanfPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, va_list)>>(
-      'vscanf');
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, va_list)>
+  >('vscanf');
   late final _vscanf =
       _vscanfPtr.asFunction<int Function(ffi.Pointer<ffi.Char>, va_list)>();
 
@@ -1091,75 +965,71 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> __format,
     va_list arg3,
   ) {
-    return _vsnprintf(
-      __str,
-      __size,
-      __format,
-      arg3,
-    );
+    return _vsnprintf(__str, __size, __format, arg3);
   }
 
   late final _vsnprintfPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size,
-              ffi.Pointer<ffi.Char>, va_list)>>('vsnprintf');
-  late final _vsnprintf = _vsnprintfPtr.asFunction<
-      int Function(
-          ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>, va_list)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+        ffi.Pointer<ffi.Char>,
+        va_list,
+      )
+    >
+  >('vsnprintf');
+  late final _vsnprintf =
+      _vsnprintfPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<ffi.Char>,
+              int,
+              ffi.Pointer<ffi.Char>,
+              va_list,
+            )
+          >();
 
   int vsscanf(
     ffi.Pointer<ffi.Char> __str,
     ffi.Pointer<ffi.Char> __format,
     va_list arg2,
   ) {
-    return _vsscanf(
-      __str,
-      __format,
-      arg2,
-    );
+    return _vsscanf(__str, __format, arg2);
   }
 
   late final _vsscanfPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
-              va_list)>>('vsscanf');
-  late final _vsscanf = _vsscanfPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, va_list)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, va_list)
+    >
+  >('vsscanf');
+  late final _vsscanf =
+      _vsscanfPtr
+          .asFunction<
+            int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, va_list)
+          >();
 
-  int dprintf(
-    int arg0,
-    ffi.Pointer<ffi.Char> arg1,
-  ) {
-    return _dprintf(
-      arg0,
-      arg1,
-    );
+  int dprintf(int arg0, ffi.Pointer<ffi.Char> arg1) {
+    return _dprintf(arg0, arg1);
   }
 
   late final _dprintfPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>)>>(
-      'dprintf');
+    ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>)>
+  >('dprintf');
   late final _dprintf =
       _dprintfPtr.asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  int vdprintf(
-    int arg0,
-    ffi.Pointer<ffi.Char> arg1,
-    va_list arg2,
-  ) {
-    return _vdprintf(
-      arg0,
-      arg1,
-      arg2,
-    );
+  int vdprintf(int arg0, ffi.Pointer<ffi.Char> arg1, va_list arg2) {
+    return _vdprintf(arg0, arg1, arg2);
   }
 
   late final _vdprintfPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int, ffi.Pointer<ffi.Char>, va_list)>>('vdprintf');
-  late final _vdprintf = _vdprintfPtr
-      .asFunction<int Function(int, ffi.Pointer<ffi.Char>, va_list)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Char>, va_list)
+    >
+  >('vdprintf');
+  late final _vdprintf =
+      _vdprintfPtr
+          .asFunction<int Function(int, ffi.Pointer<ffi.Char>, va_list)>();
 
   int getdelim(
     ffi.Pointer<ffi.Pointer<ffi.Char>> __linep,
@@ -1167,79 +1037,107 @@ class LibRdKafka {
     int __delimiter,
     ffi.Pointer<FILE> __stream,
   ) {
-    return _getdelim(
-      __linep,
-      __linecapp,
-      __delimiter,
-      __stream,
-    );
+    return _getdelim(__linep, __linecapp, __delimiter, __stream);
   }
 
   late final _getdelimPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Size>, ffi.Int, ffi.Pointer<FILE>)>>('getdelim');
-  late final _getdelim = _getdelimPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>,
-          int, ffi.Pointer<FILE>)>();
+    ffi.NativeFunction<
+      ssize_t Function(
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Pointer<ffi.Size>,
+        ffi.Int,
+        ffi.Pointer<FILE>,
+      )
+    >
+  >('getdelim');
+  late final _getdelim =
+      _getdelimPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>,
+              int,
+              ffi.Pointer<FILE>,
+            )
+          >();
 
   int getline(
     ffi.Pointer<ffi.Pointer<ffi.Char>> __linep,
     ffi.Pointer<ffi.Size> __linecapp,
     ffi.Pointer<FILE> __stream,
   ) {
-    return _getline(
-      __linep,
-      __linecapp,
-      __stream,
-    );
+    return _getline(__linep, __linecapp, __stream);
   }
 
   late final _getlinePtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Size>, ffi.Pointer<FILE>)>>('getline');
-  late final _getline = _getlinePtr.asFunction<
-      int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>,
-          ffi.Pointer<FILE>)>();
+    ffi.NativeFunction<
+      ssize_t Function(
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Pointer<ffi.Size>,
+        ffi.Pointer<FILE>,
+      )
+    >
+  >('getline');
+  late final _getline =
+      _getlinePtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>,
+              ffi.Pointer<FILE>,
+            )
+          >();
 
   ffi.Pointer<FILE> fmemopen(
     ffi.Pointer<ffi.Void> __buf,
     int __size,
     ffi.Pointer<ffi.Char> __mode,
   ) {
-    return _fmemopen(
-      __buf,
-      __size,
-      __mode,
-    );
+    return _fmemopen(__buf, __size, __mode);
   }
 
   late final _fmemopenPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Void>, ffi.Size,
-              ffi.Pointer<ffi.Char>)>>('fmemopen');
-  late final _fmemopen = _fmemopenPtr.asFunction<
+    ffi.NativeFunction<
       ffi.Pointer<FILE> Function(
-          ffi.Pointer<ffi.Void>, int, ffi.Pointer<ffi.Char>)>();
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('fmemopen');
+  late final _fmemopen =
+      _fmemopenPtr
+          .asFunction<
+            ffi.Pointer<FILE> Function(
+              ffi.Pointer<ffi.Void>,
+              int,
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
   ffi.Pointer<FILE> open_memstream(
     ffi.Pointer<ffi.Pointer<ffi.Char>> __bufp,
     ffi.Pointer<ffi.Size> __sizep,
   ) {
-    return _open_memstream(
-      __bufp,
-      __sizep,
-    );
+    return _open_memstream(__bufp, __sizep);
   }
 
   late final _open_memstreamPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Size>)>>('open_memstream');
-  late final _open_memstream = _open_memstreamPtr.asFunction<
+    ffi.NativeFunction<
       ffi.Pointer<FILE> Function(
-          ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('open_memstream');
+  late final _open_memstream =
+      _open_memstreamPtr
+          .asFunction<
+            ffi.Pointer<FILE> Function(
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   late final ffi.Pointer<ffi.Int> _sys_nerr = _lookup<ffi.Int>('sys_nerr');
 
@@ -1257,81 +1155,90 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<ffi.Char>> arg0,
     ffi.Pointer<ffi.Char> arg1,
   ) {
-    return _asprintf(
-      arg0,
-      arg1,
-    );
+    return _asprintf(arg0, arg1);
   }
 
   late final _asprintfPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Char>)>>('asprintf');
-  late final _asprintf = _asprintfPtr.asFunction<
-      int Function(
-          ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('asprintf');
+  late final _asprintf =
+      _asprintfPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
-  ffi.Pointer<ffi.Char> ctermid_r(
-    ffi.Pointer<ffi.Char> arg0,
-  ) {
-    return _ctermid_r(
-      arg0,
-    );
+  ffi.Pointer<ffi.Char> ctermid_r(ffi.Pointer<ffi.Char> arg0) {
+    return _ctermid_r(arg0);
   }
 
   late final _ctermid_rPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>>('ctermid_r');
-  late final _ctermid_r = _ctermid_rPtr
-      .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>
+  >('ctermid_r');
+  late final _ctermid_r =
+      _ctermid_rPtr
+          .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>();
 
   ffi.Pointer<ffi.Char> fgetln(
     ffi.Pointer<FILE> arg0,
     ffi.Pointer<ffi.Size> __len,
   ) {
-    return _fgetln(
-      arg0,
-      __len,
-    );
+    return _fgetln(arg0, __len);
   }
 
   late final _fgetlnPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<FILE>, ffi.Pointer<ffi.Size>)>>('fgetln');
-  late final _fgetln = _fgetlnPtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(
-          ffi.Pointer<FILE>, ffi.Pointer<ffi.Size>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Size>)
+    >
+  >('fgetln');
+  late final _fgetln =
+      _fgetlnPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<FILE>,
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   ffi.Pointer<ffi.Char> fmtcheck(
     ffi.Pointer<ffi.Char> arg0,
     ffi.Pointer<ffi.Char> arg1,
   ) {
-    return _fmtcheck(
-      arg0,
-      arg1,
-    );
+    return _fmtcheck(arg0, arg1);
   }
 
   late final _fmtcheckPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>>('fmtcheck');
-  late final _fmtcheck = _fmtcheckPtr.asFunction<
+    ffi.NativeFunction<
       ffi.Pointer<ffi.Char> Function(
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('fmtcheck');
+  late final _fmtcheck =
+      _fmtcheckPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
-  int fpurge(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _fpurge(
-      arg0,
-    );
+  int fpurge(ffi.Pointer<FILE> arg0) {
+    return _fpurge(arg0);
   }
 
   late final _fpurgePtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>)>>(
-          'fpurge');
+        'fpurge',
+      );
   late final _fpurge = _fpurgePtr.asFunction<int Function(ffi.Pointer<FILE>)>();
 
   void setbuffer(
@@ -1339,31 +1246,28 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> arg1,
     int __size,
   ) {
-    return _setbuffer(
-      arg0,
-      arg1,
-      __size,
-    );
+    return _setbuffer(arg0, arg1, __size);
   }
 
   late final _setbufferPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, ffi.Int)>>('setbuffer');
-  late final _setbuffer = _setbufferPtr.asFunction<
-      void Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, int)>();
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, ffi.Int)
+    >
+  >('setbuffer');
+  late final _setbuffer =
+      _setbufferPtr
+          .asFunction<
+            void Function(ffi.Pointer<FILE>, ffi.Pointer<ffi.Char>, int)
+          >();
 
-  int setlinebuf(
-    ffi.Pointer<FILE> arg0,
-  ) {
-    return _setlinebuf(
-      arg0,
-    );
+  int setlinebuf(ffi.Pointer<FILE> arg0) {
+    return _setlinebuf(arg0);
   }
 
   late final _setlinebufPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<FILE>)>>(
-          'setlinebuf');
+        'setlinebuf',
+      );
   late final _setlinebuf =
       _setlinebufPtr.asFunction<int Function(ffi.Pointer<FILE>)>();
 
@@ -1372,83 +1276,120 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> arg1,
     va_list arg2,
   ) {
-    return _vasprintf(
-      arg0,
-      arg1,
-      arg2,
-    );
+    return _vasprintf(arg0, arg1, arg2);
   }
 
   late final _vasprintfPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Char>, va_list)>>('vasprintf');
-  late final _vasprintf = _vasprintfPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>,
-          va_list)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Pointer<ffi.Char>,
+        va_list,
+      )
+    >
+  >('vasprintf');
+  late final _vasprintf =
+      _vasprintfPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Char>,
+              va_list,
+            )
+          >();
 
   ffi.Pointer<FILE> funopen(
     ffi.Pointer<ffi.Void> arg0,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Int Function(
-                    ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>, ffi.Int)>>
-        arg1,
+      ffi.NativeFunction<
+        ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>, ffi.Int)
+      >
+    >
+    arg1,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Int Function(
-                    ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>, ffi.Int)>>
-        arg2,
+      ffi.NativeFunction<
+        ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>, ffi.Int)
+      >
+    >
+    arg2,
     ffi.Pointer<
-            ffi.NativeFunction<
-                fpos_t Function(ffi.Pointer<ffi.Void>, fpos_t, ffi.Int)>>
-        arg3,
+      ffi.NativeFunction<
+        fpos_t Function(ffi.Pointer<ffi.Void>, fpos_t, ffi.Int)
+      >
+    >
+    arg3,
     ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>)>>
-        arg4,
+    arg4,
   ) {
-    return _funopen(
-      arg0,
-      arg1,
-      arg2,
-      arg3,
-      arg4,
-    );
+    return _funopen(arg0, arg1, arg2, arg3, arg4);
   }
 
   late final _funopenPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<FILE> Function(
+    ffi.NativeFunction<
+      ffi.Pointer<FILE> Function(
+        ffi.Pointer<ffi.Void>,
+        ffi.Pointer<
+          ffi.NativeFunction<
+            ffi.Int Function(
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Int,
+            )
+          >
+        >,
+        ffi.Pointer<
+          ffi.NativeFunction<
+            ffi.Int Function(
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Int,
+            )
+          >
+        >,
+        ffi.Pointer<
+          ffi.NativeFunction<
+            fpos_t Function(ffi.Pointer<ffi.Void>, fpos_t, ffi.Int)
+          >
+        >,
+        ffi.Pointer<
+          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>)>
+        >,
+      )
+    >
+  >('funopen');
+  late final _funopen =
+      _funopenPtr
+          .asFunction<
+            ffi.Pointer<FILE> Function(
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Int Function(ffi.Pointer<ffi.Void>,
-                          ffi.Pointer<ffi.Char>, ffi.Int)>>,
-              ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Int Function(ffi.Pointer<ffi.Void>,
-                          ffi.Pointer<ffi.Char>, ffi.Int)>>,
-              ffi.Pointer<
-                  ffi.NativeFunction<
-                      fpos_t Function(ffi.Pointer<ffi.Void>, fpos_t, ffi.Int)>>,
-              ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Int Function(ffi.Pointer<ffi.Void>)>>)>>('funopen');
-  late final _funopen = _funopenPtr.asFunction<
-      ffi.Pointer<FILE> Function(
-          ffi.Pointer<ffi.Void>,
-          ffi.Pointer<
-              ffi.NativeFunction<
+                ffi.NativeFunction<
                   ffi.Int Function(
-                      ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>, ffi.Int)>>,
-          ffi.Pointer<
-              ffi.NativeFunction<
+                    ffi.Pointer<ffi.Void>,
+                    ffi.Pointer<ffi.Char>,
+                    ffi.Int,
+                  )
+                >
+              >,
+              ffi.Pointer<
+                ffi.NativeFunction<
                   ffi.Int Function(
-                      ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>, ffi.Int)>>,
-          ffi.Pointer<
-              ffi.NativeFunction<
-                  fpos_t Function(ffi.Pointer<ffi.Void>, fpos_t, ffi.Int)>>,
-          ffi.Pointer<
-              ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>)>>)>();
+                    ffi.Pointer<ffi.Void>,
+                    ffi.Pointer<ffi.Char>,
+                    ffi.Int,
+                  )
+                >
+              >,
+              ffi.Pointer<
+                ffi.NativeFunction<
+                  fpos_t Function(ffi.Pointer<ffi.Void>, fpos_t, ffi.Int)
+                >
+              >,
+              ffi.Pointer<
+                ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>)>
+              >,
+            )
+          >();
 
   int __sprintf_chk(
     ffi.Pointer<ffi.Char> arg0,
@@ -1456,20 +1397,24 @@ class LibRdKafka {
     int arg2,
     ffi.Pointer<ffi.Char> arg3,
   ) {
-    return ___sprintf_chk(
-      arg0,
-      arg1,
-      arg2,
-      arg3,
-    );
+    return ___sprintf_chk(arg0, arg1, arg2, arg3);
   }
 
   late final ___sprintf_chkPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int, ffi.Size,
-              ffi.Pointer<ffi.Char>)>>('__sprintf_chk');
-  late final ___sprintf_chk = ___sprintf_chkPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Char>, int, int, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Int,
+        ffi.Size,
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('__sprintf_chk');
+  late final ___sprintf_chk =
+      ___sprintf_chkPtr
+          .asFunction<
+            int Function(ffi.Pointer<ffi.Char>, int, int, ffi.Pointer<ffi.Char>)
+          >();
 
   int __snprintf_chk(
     ffi.Pointer<ffi.Char> arg0,
@@ -1478,22 +1423,31 @@ class LibRdKafka {
     int arg3,
     ffi.Pointer<ffi.Char> arg4,
   ) {
-    return ___snprintf_chk(
-      arg0,
-      __maxlen,
-      arg2,
-      arg3,
-      arg4,
-    );
+    return ___snprintf_chk(arg0, __maxlen, arg2, arg3, arg4);
   }
 
   late final ___snprintf_chkPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size, ffi.Int, ffi.Size,
-              ffi.Pointer<ffi.Char>)>>('__snprintf_chk');
-  late final ___snprintf_chk = ___snprintf_chkPtr.asFunction<
-      int Function(
-          ffi.Pointer<ffi.Char>, int, int, int, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+        ffi.Int,
+        ffi.Size,
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('__snprintf_chk');
+  late final ___snprintf_chk =
+      ___snprintf_chkPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<ffi.Char>,
+              int,
+              int,
+              int,
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
   int __vsprintf_chk(
     ffi.Pointer<ffi.Char> arg0,
@@ -1502,22 +1456,31 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> arg3,
     va_list arg4,
   ) {
-    return ___vsprintf_chk(
-      arg0,
-      arg1,
-      arg2,
-      arg3,
-      arg4,
-    );
+    return ___vsprintf_chk(arg0, arg1, arg2, arg3, arg4);
   }
 
   late final ___vsprintf_chkPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Int, ffi.Size,
-              ffi.Pointer<ffi.Char>, va_list)>>('__vsprintf_chk');
-  late final ___vsprintf_chk = ___vsprintf_chkPtr.asFunction<
-      int Function(
-          ffi.Pointer<ffi.Char>, int, int, ffi.Pointer<ffi.Char>, va_list)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Int,
+        ffi.Size,
+        ffi.Pointer<ffi.Char>,
+        va_list,
+      )
+    >
+  >('__vsprintf_chk');
+  late final ___vsprintf_chk =
+      ___vsprintf_chkPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<ffi.Char>,
+              int,
+              int,
+              ffi.Pointer<ffi.Char>,
+              va_list,
+            )
+          >();
 
   int __vsnprintf_chk(
     ffi.Pointer<ffi.Char> arg0,
@@ -1527,49 +1490,50 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> arg4,
     va_list arg5,
   ) {
-    return ___vsnprintf_chk(
-      arg0,
-      __maxlen,
-      arg2,
-      arg3,
-      arg4,
-      arg5,
-    );
+    return ___vsnprintf_chk(arg0, __maxlen, arg2, arg3, arg4, arg5);
   }
 
   late final ___vsnprintf_chkPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size, ffi.Int, ffi.Size,
-              ffi.Pointer<ffi.Char>, va_list)>>('__vsnprintf_chk');
-  late final ___vsnprintf_chk = ___vsnprintf_chkPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Char>, int, int, int, ffi.Pointer<ffi.Char>,
-          va_list)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+        ffi.Int,
+        ffi.Size,
+        ffi.Pointer<ffi.Char>,
+        va_list,
+      )
+    >
+  >('__vsnprintf_chk');
+  late final ___vsnprintf_chk =
+      ___vsnprintf_chkPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<ffi.Char>,
+              int,
+              int,
+              int,
+              ffi.Pointer<ffi.Char>,
+              va_list,
+            )
+          >();
 
-  int imaxabs(
-    int j,
-  ) {
-    return _imaxabs(
-      j,
-    );
+  int imaxabs(int j) {
+    return _imaxabs(j);
   }
 
   late final _imaxabsPtr =
       _lookup<ffi.NativeFunction<intmax_t Function(intmax_t)>>('imaxabs');
   late final _imaxabs = _imaxabsPtr.asFunction<int Function(int)>();
 
-  imaxdiv_t imaxdiv(
-    int __numer,
-    int __denom,
-  ) {
-    return _imaxdiv(
-      __numer,
-      __denom,
-    );
+  imaxdiv_t imaxdiv(int __numer, int __denom) {
+    return _imaxdiv(__numer, __denom);
   }
 
   late final _imaxdivPtr =
       _lookup<ffi.NativeFunction<imaxdiv_t Function(intmax_t, intmax_t)>>(
-          'imaxdiv');
+        'imaxdiv',
+      );
   late final _imaxdiv = _imaxdivPtr.asFunction<imaxdiv_t Function(int, int)>();
 
   int strtoimax(
@@ -1577,97 +1541,122 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<ffi.Char>> __endptr,
     int __base,
   ) {
-    return _strtoimax(
-      __nptr,
-      __endptr,
-      __base,
-    );
+    return _strtoimax(__nptr, __endptr, __base);
   }
 
   late final _strtoimaxPtr = _lookup<
-      ffi.NativeFunction<
-          intmax_t Function(ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>>('strtoimax');
-  late final _strtoimax = _strtoimaxPtr.asFunction<
-      int Function(
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
+    ffi.NativeFunction<
+      intmax_t Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Int,
+      )
+    >
+  >('strtoimax');
+  late final _strtoimax =
+      _strtoimaxPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              int,
+            )
+          >();
 
   int strtoumax(
     ffi.Pointer<ffi.Char> __nptr,
     ffi.Pointer<ffi.Pointer<ffi.Char>> __endptr,
     int __base,
   ) {
-    return _strtoumax(
-      __nptr,
-      __endptr,
-      __base,
-    );
+    return _strtoumax(__nptr, __endptr, __base);
   }
 
   late final _strtoumaxPtr = _lookup<
-      ffi.NativeFunction<
-          uintmax_t Function(ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Int)>>('strtoumax');
-  late final _strtoumax = _strtoumaxPtr.asFunction<
-      int Function(
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
+    ffi.NativeFunction<
+      uintmax_t Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Int,
+      )
+    >
+  >('strtoumax');
+  late final _strtoumax =
+      _strtoumaxPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              int,
+            )
+          >();
 
   int wcstoimax(
     ffi.Pointer<ffi.WChar> __nptr,
     ffi.Pointer<ffi.Pointer<ffi.WChar>> __endptr,
     int __base,
   ) {
-    return _wcstoimax(
-      __nptr,
-      __endptr,
-      __base,
-    );
+    return _wcstoimax(__nptr, __endptr, __base);
   }
 
   late final _wcstoimaxPtr = _lookup<
-      ffi.NativeFunction<
-          intmax_t Function(ffi.Pointer<ffi.WChar>,
-              ffi.Pointer<ffi.Pointer<ffi.WChar>>, ffi.Int)>>('wcstoimax');
-  late final _wcstoimax = _wcstoimaxPtr.asFunction<
-      int Function(
-          ffi.Pointer<ffi.WChar>, ffi.Pointer<ffi.Pointer<ffi.WChar>>, int)>();
+    ffi.NativeFunction<
+      intmax_t Function(
+        ffi.Pointer<ffi.WChar>,
+        ffi.Pointer<ffi.Pointer<ffi.WChar>>,
+        ffi.Int,
+      )
+    >
+  >('wcstoimax');
+  late final _wcstoimax =
+      _wcstoimaxPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<ffi.WChar>,
+              ffi.Pointer<ffi.Pointer<ffi.WChar>>,
+              int,
+            )
+          >();
 
   int wcstoumax(
     ffi.Pointer<ffi.WChar> __nptr,
     ffi.Pointer<ffi.Pointer<ffi.WChar>> __endptr,
     int __base,
   ) {
-    return _wcstoumax(
-      __nptr,
-      __endptr,
-      __base,
-    );
+    return _wcstoumax(__nptr, __endptr, __base);
   }
 
   late final _wcstoumaxPtr = _lookup<
-      ffi.NativeFunction<
-          uintmax_t Function(ffi.Pointer<ffi.WChar>,
-              ffi.Pointer<ffi.Pointer<ffi.WChar>>, ffi.Int)>>('wcstoumax');
-  late final _wcstoumax = _wcstoumaxPtr.asFunction<
-      int Function(
-          ffi.Pointer<ffi.WChar>, ffi.Pointer<ffi.Pointer<ffi.WChar>>, int)>();
+    ffi.NativeFunction<
+      uintmax_t Function(
+        ffi.Pointer<ffi.WChar>,
+        ffi.Pointer<ffi.Pointer<ffi.WChar>>,
+        ffi.Int,
+      )
+    >
+  >('wcstoumax');
+  late final _wcstoumax =
+      _wcstoumaxPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<ffi.WChar>,
+              ffi.Pointer<ffi.Pointer<ffi.WChar>>,
+              int,
+            )
+          >();
 
   int __darwin_check_fd_set_overflow(
     int arg0,
     ffi.Pointer<ffi.Void> arg1,
     int arg2,
   ) {
-    return ___darwin_check_fd_set_overflow(
-      arg0,
-      arg1,
-      arg2,
-    );
+    return ___darwin_check_fd_set_overflow(arg0, arg1, arg2);
   }
 
   late final ___darwin_check_fd_set_overflowPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Void>,
-              ffi.Int)>>('__darwin_check_fd_set_overflow');
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Int)
+    >
+  >('__darwin_check_fd_set_overflow');
   late final ___darwin_check_fd_set_overflow =
       ___darwin_check_fd_set_overflowPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Void>, int)>();
@@ -1677,54 +1666,41 @@ class LibRdKafka {
     ffi.Pointer<sockaddr> arg1,
     ffi.Pointer<socklen_t> arg2,
   ) {
-    return _accept(
-      arg0,
-      arg1,
-      arg2,
-    );
+    return _accept(arg0, arg1, arg2);
   }
 
   late final _acceptPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>,
-              ffi.Pointer<socklen_t>)>>('accept');
-  late final _accept = _acceptPtr.asFunction<
-      int Function(int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)
+    >
+  >('accept');
+  late final _accept =
+      _acceptPtr
+          .asFunction<
+            int Function(int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)
+          >();
 
-  int bind(
-    int arg0,
-    ffi.Pointer<sockaddr> arg1,
-    int arg2,
-  ) {
-    return _bind(
-      arg0,
-      arg1,
-      arg2,
-    );
+  int bind(int arg0, ffi.Pointer<sockaddr> arg1, int arg2) {
+    return _bind(arg0, arg1, arg2);
   }
 
   late final _bindPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>>('bind');
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, socklen_t)
+    >
+  >('bind');
   late final _bind =
       _bindPtr.asFunction<int Function(int, ffi.Pointer<sockaddr>, int)>();
 
-  int connect(
-    int arg0,
-    ffi.Pointer<sockaddr> arg1,
-    int arg2,
-  ) {
-    return _connect(
-      arg0,
-      arg1,
-      arg2,
-    );
+  int connect(int arg0, ffi.Pointer<sockaddr> arg1, int arg2) {
+    return _connect(arg0, arg1, arg2);
   }
 
   late final _connectPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int, ffi.Pointer<sockaddr>, socklen_t)>>('connect');
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, socklen_t)
+    >
+  >('connect');
   late final _connect =
       _connectPtr.asFunction<int Function(int, ffi.Pointer<sockaddr>, int)>();
 
@@ -1733,38 +1709,38 @@ class LibRdKafka {
     ffi.Pointer<sockaddr> arg1,
     ffi.Pointer<socklen_t> arg2,
   ) {
-    return _getpeername(
-      arg0,
-      arg1,
-      arg2,
-    );
+    return _getpeername(arg0, arg1, arg2);
   }
 
   late final _getpeernamePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>,
-              ffi.Pointer<socklen_t>)>>('getpeername');
-  late final _getpeername = _getpeernamePtr.asFunction<
-      int Function(int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)
+    >
+  >('getpeername');
+  late final _getpeername =
+      _getpeernamePtr
+          .asFunction<
+            int Function(int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)
+          >();
 
   int getsockname(
     int arg0,
     ffi.Pointer<sockaddr> arg1,
     ffi.Pointer<socklen_t> arg2,
   ) {
-    return _getsockname(
-      arg0,
-      arg1,
-      arg2,
-    );
+    return _getsockname(arg0, arg1, arg2);
   }
 
   late final _getsocknamePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>,
-              ffi.Pointer<socklen_t>)>>('getsockname');
-  late final _getsockname = _getsocknamePtr.asFunction<
-      int Function(int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)
+    >
+  >('getsockname');
+  late final _getsockname =
+      _getsocknamePtr
+          .asFunction<
+            int Function(int, ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)
+          >();
 
   int getsockopt(
     int arg0,
@@ -1773,55 +1749,49 @@ class LibRdKafka {
     ffi.Pointer<ffi.Void> arg3,
     ffi.Pointer<socklen_t> arg4,
   ) {
-    return _getsockopt(
-      arg0,
-      arg1,
-      arg2,
-      arg3,
-      arg4,
-    );
+    return _getsockopt(arg0, arg1, arg2, arg3, arg4);
   }
 
   late final _getsockoptPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Void>,
-              ffi.Pointer<socklen_t>)>>('getsockopt');
-  late final _getsockopt = _getsockoptPtr.asFunction<
-      int Function(
-          int, int, int, ffi.Pointer<ffi.Void>, ffi.Pointer<socklen_t>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Int,
+        ffi.Int,
+        ffi.Int,
+        ffi.Pointer<ffi.Void>,
+        ffi.Pointer<socklen_t>,
+      )
+    >
+  >('getsockopt');
+  late final _getsockopt =
+      _getsockoptPtr
+          .asFunction<
+            int Function(
+              int,
+              int,
+              int,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<socklen_t>,
+            )
+          >();
 
-  int listen(
-    int arg0,
-    int arg1,
-  ) {
-    return _listen(
-      arg0,
-      arg1,
-    );
+  int listen(int arg0, int arg1) {
+    return _listen(arg0, arg1);
   }
 
   late final _listenPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>('listen');
   late final _listen = _listenPtr.asFunction<int Function(int, int)>();
 
-  int recv(
-    int arg0,
-    ffi.Pointer<ffi.Void> arg1,
-    int arg2,
-    int arg3,
-  ) {
-    return _recv(
-      arg0,
-      arg1,
-      arg2,
-      arg3,
-    );
+  int recv(int arg0, ffi.Pointer<ffi.Void> arg1, int arg2, int arg3) {
+    return _recv(arg0, arg1, arg2, arg3);
   }
 
   late final _recvPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(
-              ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>>('recv');
+    ffi.NativeFunction<
+      ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)
+    >
+  >('recv');
   late final _recv =
       _recvPtr.asFunction<int Function(int, ffi.Pointer<ffi.Void>, int, int)>();
 
@@ -1833,78 +1803,63 @@ class LibRdKafka {
     ffi.Pointer<sockaddr> arg4,
     ffi.Pointer<socklen_t> arg5,
   ) {
-    return _recvfrom(
-      arg0,
-      arg1,
-      arg2,
-      arg3,
-      arg4,
-      arg5,
-    );
+    return _recvfrom(arg0, arg1, arg2, arg3, arg4, arg5);
   }
 
   late final _recvfromPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int,
-              ffi.Pointer<sockaddr>, ffi.Pointer<socklen_t>)>>('recvfrom');
-  late final _recvfrom = _recvfromPtr.asFunction<
-      int Function(int, ffi.Pointer<ffi.Void>, int, int, ffi.Pointer<sockaddr>,
-          ffi.Pointer<socklen_t>)>();
+    ffi.NativeFunction<
+      ssize_t Function(
+        ffi.Int,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Int,
+        ffi.Pointer<sockaddr>,
+        ffi.Pointer<socklen_t>,
+      )
+    >
+  >('recvfrom');
+  late final _recvfrom =
+      _recvfromPtr
+          .asFunction<
+            int Function(
+              int,
+              ffi.Pointer<ffi.Void>,
+              int,
+              int,
+              ffi.Pointer<sockaddr>,
+              ffi.Pointer<socklen_t>,
+            )
+          >();
 
-  int recvmsg(
-    int arg0,
-    ffi.Pointer<msghdr> arg1,
-    int arg2,
-  ) {
-    return _recvmsg(
-      arg0,
-      arg1,
-      arg2,
-    );
+  int recvmsg(int arg0, ffi.Pointer<msghdr> arg1, int arg2) {
+    return _recvmsg(arg0, arg1, arg2);
   }
 
   late final _recvmsgPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>>('recvmsg');
+    ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>
+  >('recvmsg');
   late final _recvmsg =
       _recvmsgPtr.asFunction<int Function(int, ffi.Pointer<msghdr>, int)>();
 
-  int send(
-    int arg0,
-    ffi.Pointer<ffi.Void> arg1,
-    int arg2,
-    int arg3,
-  ) {
-    return _send(
-      arg0,
-      arg1,
-      arg2,
-      arg3,
-    );
+  int send(int arg0, ffi.Pointer<ffi.Void> arg1, int arg2, int arg3) {
+    return _send(arg0, arg1, arg2, arg3);
   }
 
   late final _sendPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(
-              ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)>>('send');
+    ffi.NativeFunction<
+      ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int)
+    >
+  >('send');
   late final _send =
       _sendPtr.asFunction<int Function(int, ffi.Pointer<ffi.Void>, int, int)>();
 
-  int sendmsg(
-    int arg0,
-    ffi.Pointer<msghdr> arg1,
-    int arg2,
-  ) {
-    return _sendmsg(
-      arg0,
-      arg1,
-      arg2,
-    );
+  int sendmsg(int arg0, ffi.Pointer<msghdr> arg1, int arg2) {
+    return _sendmsg(arg0, arg1, arg2);
   }
 
   late final _sendmsgPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>>('sendmsg');
+    ffi.NativeFunction<ssize_t Function(ffi.Int, ffi.Pointer<msghdr>, ffi.Int)>
+  >('sendmsg');
   late final _sendmsg =
       _sendmsgPtr.asFunction<int Function(int, ffi.Pointer<msghdr>, int)>();
 
@@ -1916,23 +1871,33 @@ class LibRdKafka {
     ffi.Pointer<sockaddr> arg4,
     int arg5,
   ) {
-    return _sendto(
-      arg0,
-      arg1,
-      arg2,
-      arg3,
-      arg4,
-      arg5,
-    );
+    return _sendto(arg0, arg1, arg2, arg3, arg4, arg5);
   }
 
   late final _sendtoPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(ffi.Int, ffi.Pointer<ffi.Void>, ffi.Size, ffi.Int,
-              ffi.Pointer<sockaddr>, socklen_t)>>('sendto');
-  late final _sendto = _sendtoPtr.asFunction<
-      int Function(
-          int, ffi.Pointer<ffi.Void>, int, int, ffi.Pointer<sockaddr>, int)>();
+    ffi.NativeFunction<
+      ssize_t Function(
+        ffi.Int,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Int,
+        ffi.Pointer<sockaddr>,
+        socklen_t,
+      )
+    >
+  >('sendto');
+  late final _sendto =
+      _sendtoPtr
+          .asFunction<
+            int Function(
+              int,
+              ffi.Pointer<ffi.Void>,
+              int,
+              int,
+              ffi.Pointer<sockaddr>,
+              int,
+            )
+          >();
 
   int setsockopt(
     int arg0,
@@ -1941,86 +1906,66 @@ class LibRdKafka {
     ffi.Pointer<ffi.Void> arg3,
     int arg4,
   ) {
-    return _setsockopt(
-      arg0,
-      arg1,
-      arg2,
-      arg3,
-      arg4,
-    );
+    return _setsockopt(arg0, arg1, arg2, arg3, arg4);
   }
 
   late final _setsockoptPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Void>,
-              socklen_t)>>('setsockopt');
-  late final _setsockopt = _setsockoptPtr
-      .asFunction<int Function(int, int, int, ffi.Pointer<ffi.Void>, int)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Int,
+        ffi.Int,
+        ffi.Int,
+        ffi.Pointer<ffi.Void>,
+        socklen_t,
+      )
+    >
+  >('setsockopt');
+  late final _setsockopt =
+      _setsockoptPtr
+          .asFunction<
+            int Function(int, int, int, ffi.Pointer<ffi.Void>, int)
+          >();
 
-  int shutdown(
-    int arg0,
-    int arg1,
-  ) {
-    return _shutdown(
-      arg0,
-      arg1,
-    );
+  int shutdown(int arg0, int arg1) {
+    return _shutdown(arg0, arg1);
   }
 
   late final _shutdownPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int)>>(
-          'shutdown');
+        'shutdown',
+      );
   late final _shutdown = _shutdownPtr.asFunction<int Function(int, int)>();
 
-  int sockatmark(
-    int arg0,
-  ) {
-    return _sockatmark(
-      arg0,
-    );
+  int sockatmark(int arg0) {
+    return _sockatmark(arg0);
   }
 
   late final _sockatmarkPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('sockatmark');
   late final _sockatmark = _sockatmarkPtr.asFunction<int Function(int)>();
 
-  int socket(
-    int arg0,
-    int arg1,
-    int arg2,
-  ) {
-    return _socket(
-      arg0,
-      arg1,
-      arg2,
-    );
+  int socket(int arg0, int arg1, int arg2) {
+    return _socket(arg0, arg1, arg2);
   }
 
   late final _socketPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Int, ffi.Int)>>(
-          'socket');
+        'socket',
+      );
   late final _socket = _socketPtr.asFunction<int Function(int, int, int)>();
 
-  int socketpair(
-    int arg0,
-    int arg1,
-    int arg2,
-    ffi.Pointer<ffi.Int> arg3,
-  ) {
-    return _socketpair(
-      arg0,
-      arg1,
-      arg2,
-      arg3,
-    );
+  int socketpair(int arg0, int arg1, int arg2, ffi.Pointer<ffi.Int> arg3) {
+    return _socketpair(arg0, arg1, arg2, arg3);
   }
 
   late final _socketpairPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Int>)>>('socketpair');
-  late final _socketpair = _socketpairPtr
-      .asFunction<int Function(int, int, int, ffi.Pointer<ffi.Int>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Int, ffi.Int, ffi.Int, ffi.Pointer<ffi.Int>)
+    >
+  >('socketpair');
+  late final _socketpair =
+      _socketpairPtr
+          .asFunction<int Function(int, int, int, ffi.Pointer<ffi.Int>)>();
 
   int sendfile(
     int arg0,
@@ -2030,37 +1975,41 @@ class LibRdKafka {
     ffi.Pointer<sf_hdtr> arg4,
     int arg5,
   ) {
-    return _sendfile(
-      arg0,
-      arg1,
-      arg2,
-      arg3,
-      arg4,
-      arg5,
-    );
+    return _sendfile(arg0, arg1, arg2, arg3, arg4, arg5);
   }
 
   late final _sendfilePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int, ffi.Int, off_t, ffi.Pointer<off_t>,
-              ffi.Pointer<sf_hdtr>, ffi.Int)>>('sendfile');
-  late final _sendfile = _sendfilePtr.asFunction<
-      int Function(
-          int, int, int, ffi.Pointer<off_t>, ffi.Pointer<sf_hdtr>, int)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Int,
+        ffi.Int,
+        off_t,
+        ffi.Pointer<off_t>,
+        ffi.Pointer<sf_hdtr>,
+        ffi.Int,
+      )
+    >
+  >('sendfile');
+  late final _sendfile =
+      _sendfilePtr
+          .asFunction<
+            int Function(
+              int,
+              int,
+              int,
+              ffi.Pointer<off_t>,
+              ffi.Pointer<sf_hdtr>,
+              int,
+            )
+          >();
 
-  void pfctlinput(
-    int arg0,
-    ffi.Pointer<sockaddr> arg1,
-  ) {
-    return _pfctlinput(
-      arg0,
-      arg1,
-    );
+  void pfctlinput(int arg0, ffi.Pointer<sockaddr> arg1) {
+    return _pfctlinput(arg0, arg1);
   }
 
   late final _pfctlinputPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Int, ffi.Pointer<sockaddr>)>>('pfctlinput');
+    ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Pointer<sockaddr>)>
+  >('pfctlinput');
   late final _pfctlinput =
       _pfctlinputPtr.asFunction<void Function(int, ffi.Pointer<sockaddr>)>();
 
@@ -2074,56 +2023,45 @@ class LibRdKafka {
     ffi.Pointer<ffi.Size> arg6,
     ffi.Pointer<sae_connid_t> arg7,
   ) {
-    return _connectx(
-      arg0,
-      arg1,
-      arg2,
-      arg3,
-      arg4,
-      arg5,
-      arg6,
-      arg7,
-    );
+    return _connectx(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
   }
 
   late final _connectxPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int,
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Int,
+        ffi.Pointer<sa_endpoints_t>,
+        sae_associd_t,
+        ffi.UnsignedInt,
+        ffi.Pointer<iovec>,
+        ffi.UnsignedInt,
+        ffi.Pointer<ffi.Size>,
+        ffi.Pointer<sae_connid_t>,
+      )
+    >
+  >('connectx');
+  late final _connectx =
+      _connectxPtr
+          .asFunction<
+            int Function(
+              int,
               ffi.Pointer<sa_endpoints_t>,
-              sae_associd_t,
-              ffi.UnsignedInt,
+              int,
+              int,
               ffi.Pointer<iovec>,
-              ffi.UnsignedInt,
+              int,
               ffi.Pointer<ffi.Size>,
-              ffi.Pointer<sae_connid_t>)>>('connectx');
-  late final _connectx = _connectxPtr.asFunction<
-      int Function(
-          int,
-          ffi.Pointer<sa_endpoints_t>,
-          int,
-          int,
-          ffi.Pointer<iovec>,
-          int,
-          ffi.Pointer<ffi.Size>,
-          ffi.Pointer<sae_connid_t>)>();
+              ffi.Pointer<sae_connid_t>,
+            )
+          >();
 
-  int disconnectx(
-    int arg0,
-    int arg1,
-    int arg2,
-  ) {
-    return _disconnectx(
-      arg0,
-      arg1,
-      arg2,
-    );
+  int disconnectx(int arg0, int arg1, int arg2) {
+    return _disconnectx(arg0, arg1, arg2);
   }
 
   late final _disconnectxPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int, sae_associd_t, sae_connid_t)>>('disconnectx');
+    ffi.NativeFunction<ffi.Int Function(ffi.Int, sae_associd_t, sae_connid_t)>
+  >('disconnectx');
   late final _disconnectx =
       _disconnectxPtr.asFunction<int Function(int, int, int)>();
 
@@ -2151,7 +2089,8 @@ class LibRdKafka {
 
   late final _rd_kafka_version_strPtr =
       _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
-          'rd_kafka_version_str');
+        'rd_kafka_version_str',
+      );
   late final _rd_kafka_version_str =
       _rd_kafka_version_strPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
 
@@ -2165,60 +2104,62 @@ class LibRdKafka {
 
   late final _rd_kafka_get_debug_contextsPtr =
       _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
-          'rd_kafka_get_debug_contexts');
-  late final _rd_kafka_get_debug_contexts = _rd_kafka_get_debug_contextsPtr
-      .asFunction<ffi.Pointer<ffi.Char> Function()>();
+        'rd_kafka_get_debug_contexts',
+      );
+  late final _rd_kafka_get_debug_contexts =
+      _rd_kafka_get_debug_contextsPtr
+          .asFunction<ffi.Pointer<ffi.Char> Function()>();
 
   /// @brief Returns the full list of error codes.
   void rd_kafka_get_err_descs(
     ffi.Pointer<ffi.Pointer<rd_kafka_err_desc>> errdescs,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_get_err_descs(
-      errdescs,
-      cntp,
-    );
+    return _rd_kafka_get_err_descs(errdescs, cntp);
   }
 
   late final _rd_kafka_get_err_descsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<ffi.Pointer<rd_kafka_err_desc>>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_get_err_descs');
-  late final _rd_kafka_get_err_descs = _rd_kafka_get_err_descsPtr.asFunction<
-      void Function(ffi.Pointer<ffi.Pointer<rd_kafka_err_desc>>,
-          ffi.Pointer<ffi.Size>)>();
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<ffi.Pointer<rd_kafka_err_desc>>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_get_err_descs');
+  late final _rd_kafka_get_err_descs =
+      _rd_kafka_get_err_descsPtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<ffi.Pointer<rd_kafka_err_desc>>,
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Returns a human readable representation of a kafka error.
   ///
   /// @param err Error code to translate
-  ffi.Pointer<ffi.Char> rd_kafka_err2str(
-    rd_kafka_resp_err_t err,
-  ) {
-    return _rd_kafka_err2str(
-      err.value,
-    );
+  ffi.Pointer<ffi.Char> rd_kafka_err2str(rd_kafka_resp_err_t err) {
+    return _rd_kafka_err2str(err.value);
   }
 
   late final _rd_kafka_err2strPtr =
       _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int)>>(
-          'rd_kafka_err2str');
+        'rd_kafka_err2str',
+      );
   late final _rd_kafka_err2str =
       _rd_kafka_err2strPtr.asFunction<ffi.Pointer<ffi.Char> Function(int)>();
 
   /// @brief Returns the error code name (enum name).
   ///
   /// @param err Error code to translate
-  ffi.Pointer<ffi.Char> rd_kafka_err2name(
-    rd_kafka_resp_err_t err,
-  ) {
-    return _rd_kafka_err2name(
-      err.value,
-    );
+  ffi.Pointer<ffi.Char> rd_kafka_err2name(rd_kafka_resp_err_t err) {
+    return _rd_kafka_err2name(err.value);
   }
 
   late final _rd_kafka_err2namePtr =
       _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int)>>(
-          'rd_kafka_err2name');
+        'rd_kafka_err2name',
+      );
   late final _rd_kafka_err2name =
       _rd_kafka_err2namePtr.asFunction<ffi.Pointer<ffi.Char> Function(int)>();
 
@@ -2276,17 +2217,14 @@ class LibRdKafka {
   /// set by the legacy librdkafka APIs.
   ///
   /// @sa rd_kafka_last_error()
-  rd_kafka_resp_err_t rd_kafka_errno2err(
-    int errnox,
-  ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_errno2err(
-      errnox,
-    ));
+  rd_kafka_resp_err_t rd_kafka_errno2err(int errnox) {
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_errno2err(errnox));
   }
 
   late final _rd_kafka_errno2errPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>(
-          'rd_kafka_errno2err');
+        'rd_kafka_errno2err',
+      );
   late final _rd_kafka_errno2err =
       _rd_kafka_errno2errPtr.asFunction<int Function(int)>();
 
@@ -2337,19 +2275,21 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_fatal_error(
-      rk,
-      errstr,
-      errstr_size,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_fatal_error(rk, errstr, errstr_size),
+    );
   }
 
   late final _rd_kafka_fatal_errorPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_fatal_error');
-  late final _rd_kafka_fatal_error = _rd_kafka_fatal_errorPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>, int)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>, ffi.Size)
+    >
+  >('rd_kafka_fatal_error');
+  late final _rd_kafka_fatal_error =
+      _rd_kafka_fatal_errorPtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>, int)
+          >();
 
   /// @brief Trigger a fatal error for testing purposes.
   ///
@@ -2371,36 +2311,34 @@ class LibRdKafka {
     rd_kafka_resp_err_t err,
     ffi.Pointer<ffi.Char> reason,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_test_fatal_error(
-      rk,
-      err.value,
-      reason,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_test_fatal_error(rk, err.value, reason),
+    );
   }
 
   late final _rd_kafka_test_fatal_errorPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Int,
-              ffi.Pointer<ffi.Char>)>>('rd_kafka_test_fatal_error');
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Int, ffi.Pointer<ffi.Char>)
+    >
+  >('rd_kafka_test_fatal_error');
   late final _rd_kafka_test_fatal_error =
-      _rd_kafka_test_fatal_errorPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_t>, int, ffi.Pointer<ffi.Char>)>();
+      _rd_kafka_test_fatal_errorPtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_t>, int, ffi.Pointer<ffi.Char>)
+          >();
 
   /// @returns the error code for \p error or RD_KAFKA_RESP_ERR_NO_ERROR if
   /// \p error is NULL.
-  rd_kafka_resp_err_t rd_kafka_error_code(
-    ffi.Pointer<rd_kafka_error_t> error,
-  ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_error_code(
-      error,
-    ));
+  rd_kafka_resp_err_t rd_kafka_error_code(ffi.Pointer<rd_kafka_error_t> error) {
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_error_code(error));
   }
 
   late final _rd_kafka_error_codePtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_error_t>)>>(
-      'rd_kafka_error_code');
-  late final _rd_kafka_error_code = _rd_kafka_error_codePtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_error_t>)>();
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_error_t>)>
+  >('rd_kafka_error_code');
+  late final _rd_kafka_error_code =
+      _rd_kafka_error_codePtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_error_t>)>();
 
   /// @returns the error code name for \p error, e.g, "ERR_UNKNOWN_MEMBER_ID",
   /// or an empty string if \p error is NULL.
@@ -2411,17 +2349,19 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_error_name(
     ffi.Pointer<rd_kafka_error_t> error,
   ) {
-    return _rd_kafka_error_name(
-      error,
-    );
+    return _rd_kafka_error_name(error);
   }
 
   late final _rd_kafka_error_namePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_error_t>)>>('rd_kafka_error_name');
-  late final _rd_kafka_error_name = _rd_kafka_error_namePtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_error_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_error_t>)
+    >
+  >('rd_kafka_error_name');
+  late final _rd_kafka_error_name =
+      _rd_kafka_error_namePtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_error_t>)
+          >();
 
   /// @returns a human readable error string for \p error,
   /// or an empty string if \p error is NULL.
@@ -2430,49 +2370,45 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_error_string(
     ffi.Pointer<rd_kafka_error_t> error,
   ) {
-    return _rd_kafka_error_string(
-      error,
-    );
+    return _rd_kafka_error_string(error);
   }
 
   late final _rd_kafka_error_stringPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_error_t>)>>('rd_kafka_error_string');
-  late final _rd_kafka_error_string = _rd_kafka_error_stringPtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_error_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_error_t>)
+    >
+  >('rd_kafka_error_string');
+  late final _rd_kafka_error_string =
+      _rd_kafka_error_stringPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_error_t>)
+          >();
 
   /// @returns 1 if the error is a fatal error, indicating that the client
   /// instance is no longer usable, else 0 (also if \p error is NULL).
-  int rd_kafka_error_is_fatal(
-    ffi.Pointer<rd_kafka_error_t> error,
-  ) {
-    return _rd_kafka_error_is_fatal(
-      error,
-    );
+  int rd_kafka_error_is_fatal(ffi.Pointer<rd_kafka_error_t> error) {
+    return _rd_kafka_error_is_fatal(error);
   }
 
   late final _rd_kafka_error_is_fatalPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_error_t>)>>(
-      'rd_kafka_error_is_fatal');
-  late final _rd_kafka_error_is_fatal = _rd_kafka_error_is_fatalPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_error_t>)>();
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_error_t>)>
+  >('rd_kafka_error_is_fatal');
+  late final _rd_kafka_error_is_fatal =
+      _rd_kafka_error_is_fatalPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_error_t>)>();
 
   /// @returns 1 if the operation may be retried,
   /// else 0 (also if \p error is NULL).
-  int rd_kafka_error_is_retriable(
-    ffi.Pointer<rd_kafka_error_t> error,
-  ) {
-    return _rd_kafka_error_is_retriable(
-      error,
-    );
+  int rd_kafka_error_is_retriable(ffi.Pointer<rd_kafka_error_t> error) {
+    return _rd_kafka_error_is_retriable(error);
   }
 
   late final _rd_kafka_error_is_retriablePtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_error_t>)>>(
-      'rd_kafka_error_is_retriable');
-  late final _rd_kafka_error_is_retriable = _rd_kafka_error_is_retriablePtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_error_t>)>();
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_error_t>)>
+  >('rd_kafka_error_is_retriable');
+  late final _rd_kafka_error_is_retriable =
+      _rd_kafka_error_is_retriablePtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_error_t>)>();
 
   /// @returns 1 if the error is an abortable transaction error in which case
   /// the application must call rd_kafka_abort_transaction() and
@@ -2482,17 +2418,13 @@ class LibRdKafka {
   ///
   /// @remark The return value of this method is only valid for errors returned
   /// by the transactional API.
-  int rd_kafka_error_txn_requires_abort(
-    ffi.Pointer<rd_kafka_error_t> error,
-  ) {
-    return _rd_kafka_error_txn_requires_abort(
-      error,
-    );
+  int rd_kafka_error_txn_requires_abort(ffi.Pointer<rd_kafka_error_t> error) {
+    return _rd_kafka_error_txn_requires_abort(error);
   }
 
   late final _rd_kafka_error_txn_requires_abortPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_error_t>)>>(
-      'rd_kafka_error_txn_requires_abort');
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_error_t>)>
+  >('rd_kafka_error_txn_requires_abort');
   late final _rd_kafka_error_txn_requires_abort =
       _rd_kafka_error_txn_requires_abortPtr
           .asFunction<int Function(ffi.Pointer<rd_kafka_error_t>)>();
@@ -2500,19 +2432,16 @@ class LibRdKafka {
   /// @brief Free and destroy an error object.
   ///
   /// @remark As a conveniance it is permitted to pass a NULL \p error.
-  void rd_kafka_error_destroy(
-    ffi.Pointer<rd_kafka_error_t> error,
-  ) {
-    return _rd_kafka_error_destroy(
-      error,
-    );
+  void rd_kafka_error_destroy(ffi.Pointer<rd_kafka_error_t> error) {
+    return _rd_kafka_error_destroy(error);
   }
 
   late final _rd_kafka_error_destroyPtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_error_t>)>>(
-      'rd_kafka_error_destroy');
-  late final _rd_kafka_error_destroy = _rd_kafka_error_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_error_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_error_t>)>
+  >('rd_kafka_error_destroy');
+  late final _rd_kafka_error_destroy =
+      _rd_kafka_error_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_error_t>)>();
 
   /// @brief Create a new error object with error \p code and optional
   /// human readable error string in \p fmt.
@@ -2524,33 +2453,33 @@ class LibRdKafka {
     rd_kafka_resp_err_t code,
     ffi.Pointer<ffi.Char> fmt,
   ) {
-    return _rd_kafka_error_new(
-      code.value,
-      fmt,
-    );
+    return _rd_kafka_error_new(code.value, fmt);
   }
 
   late final _rd_kafka_error_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Int, ffi.Pointer<ffi.Char>)>>('rd_kafka_error_new');
-  late final _rd_kafka_error_new = _rd_kafka_error_newPtr.asFunction<
-      ffi.Pointer<rd_kafka_error_t> Function(int, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(ffi.Int, ffi.Pointer<ffi.Char>)
+    >
+  >('rd_kafka_error_new');
+  late final _rd_kafka_error_new =
+      _rd_kafka_error_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(int, ffi.Pointer<ffi.Char>)
+          >();
 
   /// @brief Destroy a rd_kafka_topic_partition_t.
   /// @remark This must not be called for elements in a topic partition list.
   void rd_kafka_topic_partition_destroy(
     ffi.Pointer<rd_kafka_topic_partition_t> rktpar,
   ) {
-    return _rd_kafka_topic_partition_destroy(
-      rktpar,
-    );
+    return _rd_kafka_topic_partition_destroy(rktpar);
   }
 
   late final _rd_kafka_topic_partition_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<rd_kafka_topic_partition_t>)>>(
-      'rd_kafka_topic_partition_destroy');
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<rd_kafka_topic_partition_t>)
+    >
+  >('rd_kafka_topic_partition_destroy');
   late final _rd_kafka_topic_partition_destroy =
       _rd_kafka_topic_partition_destroyPtr
           .asFunction<void Function(ffi.Pointer<rd_kafka_topic_partition_t>)>();
@@ -2565,19 +2494,19 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_topic_partition_t> rktpar,
     int leader_epoch,
   ) {
-    return _rd_kafka_topic_partition_set_leader_epoch(
-      rktpar,
-      leader_epoch,
-    );
+    return _rd_kafka_topic_partition_set_leader_epoch(rktpar, leader_epoch);
   }
 
   late final _rd_kafka_topic_partition_set_leader_epochPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<rd_kafka_topic_partition_t>,
-              ffi.Int32)>>('rd_kafka_topic_partition_set_leader_epoch');
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<rd_kafka_topic_partition_t>, ffi.Int32)
+    >
+  >('rd_kafka_topic_partition_set_leader_epoch');
   late final _rd_kafka_topic_partition_set_leader_epoch =
-      _rd_kafka_topic_partition_set_leader_epochPtr.asFunction<
-          void Function(ffi.Pointer<rd_kafka_topic_partition_t>, int)>();
+      _rd_kafka_topic_partition_set_leader_epochPtr
+          .asFunction<
+            void Function(ffi.Pointer<rd_kafka_topic_partition_t>, int)
+          >();
 
   /// @returns the offset leader epoch, if relevant and known,
   /// else -1.
@@ -2588,15 +2517,14 @@ class LibRdKafka {
   int rd_kafka_topic_partition_get_leader_epoch(
     ffi.Pointer<rd_kafka_topic_partition_t> rktpar,
   ) {
-    return _rd_kafka_topic_partition_get_leader_epoch(
-      rktpar,
-    );
+    return _rd_kafka_topic_partition_get_leader_epoch(rktpar);
   }
 
   late final _rd_kafka_topic_partition_get_leader_epochPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_topic_partition_t>)>>(
-      'rd_kafka_topic_partition_get_leader_epoch');
+    ffi.NativeFunction<
+      ffi.Int32 Function(ffi.Pointer<rd_kafka_topic_partition_t>)
+    >
+  >('rd_kafka_topic_partition_get_leader_epoch');
   late final _rd_kafka_topic_partition_get_leader_epoch =
       _rd_kafka_topic_partition_get_leader_epochPtr
           .asFunction<int Function(ffi.Pointer<rd_kafka_topic_partition_t>)>();
@@ -2614,38 +2542,38 @@ class LibRdKafka {
   /// in use by a list and the list itself.
   /// @sa     rd_kafka_topic_partition_list_add()
   ffi.Pointer<rd_kafka_topic_partition_list_t>
-      rd_kafka_topic_partition_list_new(
-    int size,
-  ) {
-    return _rd_kafka_topic_partition_list_new(
-      size,
-    );
+  rd_kafka_topic_partition_list_new(int size) {
+    return _rd_kafka_topic_partition_list_new(size);
   }
 
   late final _rd_kafka_topic_partition_list_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
-              ffi.Int)>>('rd_kafka_topic_partition_list_new');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_topic_partition_list_t> Function(ffi.Int)
+    >
+  >('rd_kafka_topic_partition_list_new');
   late final _rd_kafka_topic_partition_list_new =
-      _rd_kafka_topic_partition_list_newPtr.asFunction<
-          ffi.Pointer<rd_kafka_topic_partition_list_t> Function(int)>();
+      _rd_kafka_topic_partition_list_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_topic_partition_list_t> Function(int)
+          >();
 
   /// @brief Free all resources used by the list and the list itself.
   void rd_kafka_topic_partition_list_destroy(
     ffi.Pointer<rd_kafka_topic_partition_list_t> rkparlist,
   ) {
-    return _rd_kafka_topic_partition_list_destroy(
-      rkparlist,
-    );
+    return _rd_kafka_topic_partition_list_destroy(rkparlist);
   }
 
   late final _rd_kafka_topic_partition_list_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
-      'rd_kafka_topic_partition_list_destroy');
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<rd_kafka_topic_partition_list_t>)
+    >
+  >('rd_kafka_topic_partition_list_destroy');
   late final _rd_kafka_topic_partition_list_destroy =
-      _rd_kafka_topic_partition_list_destroyPtr.asFunction<
-          void Function(ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+      _rd_kafka_topic_partition_list_destroyPtr
+          .asFunction<
+            void Function(ffi.Pointer<rd_kafka_topic_partition_list_t>)
+          >();
 
   /// @brief Add topic+partition to list
   ///
@@ -2659,25 +2587,27 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> topic,
     int partition,
   ) {
-    return _rd_kafka_topic_partition_list_add(
-      rktparlist,
-      topic,
-      partition,
-    );
+    return _rd_kafka_topic_partition_list_add(rktparlist, topic, partition);
   }
 
   late final _rd_kafka_topic_partition_list_addPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_topic_partition_t> Function(
-              ffi.Pointer<rd_kafka_topic_partition_list_t>,
-              ffi.Pointer<ffi.Char>,
-              ffi.Int32)>>('rd_kafka_topic_partition_list_add');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_topic_partition_t> Function(
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int32,
+      )
+    >
+  >('rd_kafka_topic_partition_list_add');
   late final _rd_kafka_topic_partition_list_add =
-      _rd_kafka_topic_partition_list_addPtr.asFunction<
-          ffi.Pointer<rd_kafka_topic_partition_t> Function(
+      _rd_kafka_topic_partition_list_addPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_topic_partition_t> Function(
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
               ffi.Pointer<ffi.Char>,
-              int)>();
+              int,
+            )
+          >();
 
   /// @brief Add range of partitions from \p start to \p stop inclusive.
   ///
@@ -2700,16 +2630,25 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_topic_partition_list_add_rangePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int32,
+        ffi.Int32,
+      )
+    >
+  >('rd_kafka_topic_partition_list_add_range');
+  late final _rd_kafka_topic_partition_list_add_range =
+      _rd_kafka_topic_partition_list_add_rangePtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
               ffi.Pointer<ffi.Char>,
-              ffi.Int32,
-              ffi.Int32)>>('rd_kafka_topic_partition_list_add_range');
-  late final _rd_kafka_topic_partition_list_add_range =
-      _rd_kafka_topic_partition_list_add_rangePtr.asFunction<
-          void Function(ffi.Pointer<rd_kafka_topic_partition_list_t>,
-              ffi.Pointer<ffi.Char>, int, int)>();
+              int,
+              int,
+            )
+          >();
 
   /// @brief Delete partition from list.
   ///
@@ -2725,23 +2664,27 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> topic,
     int partition,
   ) {
-    return _rd_kafka_topic_partition_list_del(
-      rktparlist,
-      topic,
-      partition,
-    );
+    return _rd_kafka_topic_partition_list_del(rktparlist, topic, partition);
   }
 
   late final _rd_kafka_topic_partition_list_delPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int32,
+      )
+    >
+  >('rd_kafka_topic_partition_list_del');
+  late final _rd_kafka_topic_partition_list_del =
+      _rd_kafka_topic_partition_list_delPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
               ffi.Pointer<ffi.Char>,
-              ffi.Int32)>>('rd_kafka_topic_partition_list_del');
-  late final _rd_kafka_topic_partition_list_del =
-      _rd_kafka_topic_partition_list_delPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_topic_partition_list_t>,
-              ffi.Pointer<ffi.Char>, int)>();
+              int,
+            )
+          >();
 
   /// @brief Delete partition from list by elems[] index.
   ///
@@ -2752,19 +2695,19 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_topic_partition_list_t> rktparlist,
     int idx,
   ) {
-    return _rd_kafka_topic_partition_list_del_by_idx(
-      rktparlist,
-      idx,
-    );
+    return _rd_kafka_topic_partition_list_del_by_idx(rktparlist, idx);
   }
 
   late final _rd_kafka_topic_partition_list_del_by_idxPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<rd_kafka_topic_partition_list_t>,
-              ffi.Int)>>('rd_kafka_topic_partition_list_del_by_idx');
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<rd_kafka_topic_partition_list_t>, ffi.Int)
+    >
+  >('rd_kafka_topic_partition_list_del_by_idx');
   late final _rd_kafka_topic_partition_list_del_by_idx =
-      _rd_kafka_topic_partition_list_del_by_idxPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_topic_partition_list_t>, int)>();
+      _rd_kafka_topic_partition_list_del_by_idxPtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_topic_partition_list_t>, int)
+          >();
 
   /// @brief Make a copy of an existing list.
   ///
@@ -2772,23 +2715,26 @@ class LibRdKafka {
   ///
   /// @returns A new list fully populated to be identical to \p src
   ffi.Pointer<rd_kafka_topic_partition_list_t>
-      rd_kafka_topic_partition_list_copy(
+  rd_kafka_topic_partition_list_copy(
     ffi.Pointer<rd_kafka_topic_partition_list_t> src,
   ) {
-    return _rd_kafka_topic_partition_list_copy(
-      src,
-    );
+    return _rd_kafka_topic_partition_list_copy(src);
   }
 
   late final _rd_kafka_topic_partition_list_copyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
-                  ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
-      'rd_kafka_topic_partition_list_copy');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+      )
+    >
+  >('rd_kafka_topic_partition_list_copy');
   late final _rd_kafka_topic_partition_list_copy =
-      _rd_kafka_topic_partition_list_copyPtr.asFunction<
-          ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
-              ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+      _rd_kafka_topic_partition_list_copyPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
+              ffi.Pointer<rd_kafka_topic_partition_list_t>,
+            )
+          >();
 
   /// @brief Set offset to \p offset for \p topic and \p partition
   ///
@@ -2801,26 +2747,36 @@ class LibRdKafka {
     int partition,
     int offset,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_topic_partition_list_set_offset(
-      rktparlist,
-      topic,
-      partition,
-      offset,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_topic_partition_list_set_offset(
+        rktparlist,
+        topic,
+        partition,
+        offset,
+      ),
+    );
   }
 
   late final _rd_kafka_topic_partition_list_set_offsetPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int32,
+        ffi.Int64,
+      )
+    >
+  >('rd_kafka_topic_partition_list_set_offset');
+  late final _rd_kafka_topic_partition_list_set_offset =
+      _rd_kafka_topic_partition_list_set_offsetPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
               ffi.Pointer<ffi.Char>,
-              ffi.Int32,
-              ffi.Int64)>>('rd_kafka_topic_partition_list_set_offset');
-  late final _rd_kafka_topic_partition_list_set_offset =
-      _rd_kafka_topic_partition_list_set_offsetPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_topic_partition_list_t>,
-              ffi.Pointer<ffi.Char>, int, int)>();
+              int,
+              int,
+            )
+          >();
 
   /// @brief Find element by \p topic and \p partition.
   ///
@@ -2830,25 +2786,27 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> topic,
     int partition,
   ) {
-    return _rd_kafka_topic_partition_list_find(
-      rktparlist,
-      topic,
-      partition,
-    );
+    return _rd_kafka_topic_partition_list_find(rktparlist, topic, partition);
   }
 
   late final _rd_kafka_topic_partition_list_findPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_topic_partition_t> Function(
-              ffi.Pointer<rd_kafka_topic_partition_list_t>,
-              ffi.Pointer<ffi.Char>,
-              ffi.Int32)>>('rd_kafka_topic_partition_list_find');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_topic_partition_t> Function(
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int32,
+      )
+    >
+  >('rd_kafka_topic_partition_list_find');
   late final _rd_kafka_topic_partition_list_find =
-      _rd_kafka_topic_partition_list_findPtr.asFunction<
-          ffi.Pointer<rd_kafka_topic_partition_t> Function(
+      _rd_kafka_topic_partition_list_findPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_topic_partition_t> Function(
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
               ffi.Pointer<ffi.Char>,
-              int)>();
+              int,
+            )
+          >();
 
   /// @brief Sort list using comparator \p cmp.
   ///
@@ -2859,95 +2817,103 @@ class LibRdKafka {
   void rd_kafka_topic_partition_list_sort(
     ffi.Pointer<rd_kafka_topic_partition_list_t> rktparlist,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Int Function(ffi.Pointer<ffi.Void> a,
-                    ffi.Pointer<ffi.Void> b, ffi.Pointer<ffi.Void> cmp_opaque)>>
-        cmp,
+      ffi.NativeFunction<
+        ffi.Int Function(
+          ffi.Pointer<ffi.Void> a,
+          ffi.Pointer<ffi.Void> b,
+          ffi.Pointer<ffi.Void> cmp_opaque,
+        )
+      >
+    >
+    cmp,
     ffi.Pointer<ffi.Void> cmp_opaque,
   ) {
-    return _rd_kafka_topic_partition_list_sort(
-      rktparlist,
-      cmp,
-      cmp_opaque,
-    );
+    return _rd_kafka_topic_partition_list_sort(rktparlist, cmp, cmp_opaque);
   }
 
   late final _rd_kafka_topic_partition_list_sortPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<rd_kafka_topic_partition_list_t>,
-              ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Int Function(
-                          ffi.Pointer<ffi.Void> a,
-                          ffi.Pointer<ffi.Void> b,
-                          ffi.Pointer<ffi.Void> cmp_opaque)>>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_topic_partition_list_sort');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+        ffi.Pointer<
+          ffi.NativeFunction<
+            ffi.Int Function(
+              ffi.Pointer<ffi.Void> a,
+              ffi.Pointer<ffi.Void> b,
+              ffi.Pointer<ffi.Void> cmp_opaque,
+            )
+          >
+        >,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_topic_partition_list_sort');
   late final _rd_kafka_topic_partition_list_sort =
-      _rd_kafka_topic_partition_list_sortPtr.asFunction<
-          void Function(
+      _rd_kafka_topic_partition_list_sortPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Int Function(
-                          ffi.Pointer<ffi.Void> a,
-                          ffi.Pointer<ffi.Void> b,
-                          ffi.Pointer<ffi.Void> cmp_opaque)>>,
-              ffi.Pointer<ffi.Void>)>();
+                ffi.NativeFunction<
+                  ffi.Int Function(
+                    ffi.Pointer<ffi.Void> a,
+                    ffi.Pointer<ffi.Void> b,
+                    ffi.Pointer<ffi.Void> cmp_opaque,
+                  )
+                >
+              >,
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Create a new headers list.
   ///
   /// @param initial_count Preallocate space for this number of headers.
   /// Any number of headers may be added, updated and
   /// removed regardless of the initial count.
-  ffi.Pointer<rd_kafka_headers_t> rd_kafka_headers_new(
-    int initial_count,
-  ) {
-    return _rd_kafka_headers_new(
-      initial_count,
-    );
+  ffi.Pointer<rd_kafka_headers_t> rd_kafka_headers_new(int initial_count) {
+    return _rd_kafka_headers_new(initial_count);
   }
 
   late final _rd_kafka_headers_newPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Pointer<rd_kafka_headers_t> Function(ffi.Size)>>(
-      'rd_kafka_headers_new');
-  late final _rd_kafka_headers_new = _rd_kafka_headers_newPtr
-      .asFunction<ffi.Pointer<rd_kafka_headers_t> Function(int)>();
+    ffi.NativeFunction<ffi.Pointer<rd_kafka_headers_t> Function(ffi.Size)>
+  >('rd_kafka_headers_new');
+  late final _rd_kafka_headers_new =
+      _rd_kafka_headers_newPtr
+          .asFunction<ffi.Pointer<rd_kafka_headers_t> Function(int)>();
 
   /// @brief Destroy the headers list. The object and any returned value pointers
   /// are not usable after this call.
-  void rd_kafka_headers_destroy(
-    ffi.Pointer<rd_kafka_headers_t> hdrs,
-  ) {
-    return _rd_kafka_headers_destroy(
-      hdrs,
-    );
+  void rd_kafka_headers_destroy(ffi.Pointer<rd_kafka_headers_t> hdrs) {
+    return _rd_kafka_headers_destroy(hdrs);
   }
 
   late final _rd_kafka_headers_destroyPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_headers_t>)>>(
-      'rd_kafka_headers_destroy');
-  late final _rd_kafka_headers_destroy = _rd_kafka_headers_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_headers_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_headers_t>)>
+  >('rd_kafka_headers_destroy');
+  late final _rd_kafka_headers_destroy =
+      _rd_kafka_headers_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_headers_t>)>();
 
   /// @brief Make a copy of headers list \p src.
   ffi.Pointer<rd_kafka_headers_t> rd_kafka_headers_copy(
     ffi.Pointer<rd_kafka_headers_t> src,
   ) {
-    return _rd_kafka_headers_copy(
-      src,
-    );
+    return _rd_kafka_headers_copy(src);
   }
 
   late final _rd_kafka_headers_copyPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_headers_t> Function(
-              ffi.Pointer<rd_kafka_headers_t>)>>('rd_kafka_headers_copy');
-  late final _rd_kafka_headers_copy = _rd_kafka_headers_copyPtr.asFunction<
-      ffi.Pointer<rd_kafka_headers_t> Function(
-          ffi.Pointer<rd_kafka_headers_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_headers_t> Function(ffi.Pointer<rd_kafka_headers_t>)
+    >
+  >('rd_kafka_headers_copy');
+  late final _rd_kafka_headers_copy =
+      _rd_kafka_headers_copyPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_headers_t> Function(
+              ffi.Pointer<rd_kafka_headers_t>,
+            )
+          >();
 
   /// @brief Add header with name \p name and value \p val (copied) of size
   /// \p size (not including null-terminator).
@@ -2971,26 +2937,33 @@ class LibRdKafka {
     ffi.Pointer<ffi.Void> value,
     Dart__darwin_ssize_t value_size,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_header_add(
-      hdrs,
-      name,
-      name_size,
-      value,
-      value_size,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_header_add(hdrs, name, name_size, value, value_size),
+    );
   }
 
   late final _rd_kafka_header_addPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_headers_t>,
+        ffi.Pointer<ffi.Char>,
+        ssize_t,
+        ffi.Pointer<ffi.Void>,
+        ssize_t,
+      )
+    >
+  >('rd_kafka_header_add');
+  late final _rd_kafka_header_add =
+      _rd_kafka_header_addPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_headers_t>,
               ffi.Pointer<ffi.Char>,
-              ssize_t,
+              int,
               ffi.Pointer<ffi.Void>,
-              ssize_t)>>('rd_kafka_header_add');
-  late final _rd_kafka_header_add = _rd_kafka_header_addPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_headers_t>, ffi.Pointer<ffi.Char>, int,
-          ffi.Pointer<ffi.Void>, int)>();
+              int,
+            )
+          >();
 
   /// @brief Remove all headers for the given key (if any).
   ///
@@ -3001,18 +2974,19 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_headers_t> hdrs,
     ffi.Pointer<ffi.Char> name,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_header_remove(
-      hdrs,
-      name,
-    ));
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_header_remove(hdrs, name));
   }
 
   late final _rd_kafka_header_removePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<rd_kafka_headers_t>,
-              ffi.Pointer<ffi.Char>)>>('rd_kafka_header_remove');
-  late final _rd_kafka_header_remove = _rd_kafka_header_removePtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_headers_t>, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<rd_kafka_headers_t>, ffi.Pointer<ffi.Char>)
+    >
+  >('rd_kafka_header_remove');
+  late final _rd_kafka_header_remove =
+      _rd_kafka_header_removePtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_headers_t>, ffi.Pointer<ffi.Char>)
+          >();
 
   /// @brief Find last header in list \p hdrs matching \p name.
   ///
@@ -3035,25 +3009,31 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<ffi.Void>> valuep,
     ffi.Pointer<ffi.Size> sizep,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_header_get_last(
-      hdrs,
-      name,
-      valuep,
-      sizep,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_header_get_last(hdrs, name, valuep, sizep),
+    );
   }
 
   late final _rd_kafka_header_get_lastPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_headers_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Pointer<ffi.Void>>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_header_get_last');
+  late final _rd_kafka_header_get_last =
+      _rd_kafka_header_get_lastPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_headers_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Void>>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_header_get_last');
-  late final _rd_kafka_header_get_last =
-      _rd_kafka_header_get_lastPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_headers_t>, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Pointer<ffi.Void>>, ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Iterator for headers matching \p name.
   ///
@@ -3073,26 +3053,33 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<ffi.Void>> valuep,
     ffi.Pointer<ffi.Size> sizep,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_header_get(
-      hdrs,
-      idx,
-      name,
-      valuep,
-      sizep,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_header_get(hdrs, idx, name, valuep, sizep),
+    );
   }
 
   late final _rd_kafka_header_getPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_headers_t>,
+        ffi.Size,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Pointer<ffi.Void>>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_header_get');
+  late final _rd_kafka_header_get =
+      _rd_kafka_header_getPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_headers_t>,
-              ffi.Size,
+              int,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Void>>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_header_get');
-  late final _rd_kafka_header_get = _rd_kafka_header_getPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_headers_t>, int, ffi.Pointer<ffi.Char>,
-          ffi.Pointer<ffi.Pointer<ffi.Void>>, ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Iterator for all headers.
   ///
@@ -3106,46 +3093,45 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<ffi.Void>> valuep,
     ffi.Pointer<ffi.Size> sizep,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_header_get_all(
-      hdrs,
-      idx,
-      namep,
-      valuep,
-      sizep,
-    ));
-  }
-
-  late final _rd_kafka_header_get_allPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_headers_t>,
-              ffi.Size,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Pointer<ffi.Void>>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_header_get_all');
-  late final _rd_kafka_header_get_all = _rd_kafka_header_get_allPtr.asFunction<
-      int Function(
-          ffi.Pointer<rd_kafka_headers_t>,
-          int,
-          ffi.Pointer<ffi.Pointer<ffi.Char>>,
-          ffi.Pointer<ffi.Pointer<ffi.Void>>,
-          ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Frees resources for \p rkmessage and hands ownership back to rdkafka.
-  void rd_kafka_message_destroy(
-    ffi.Pointer<rd_kafka_message_t> rkmessage,
-  ) {
-    return _rd_kafka_message_destroy(
-      rkmessage,
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_header_get_all(hdrs, idx, namep, valuep, sizep),
     );
   }
 
+  late final _rd_kafka_header_get_allPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_headers_t>,
+        ffi.Size,
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Pointer<ffi.Pointer<ffi.Void>>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_header_get_all');
+  late final _rd_kafka_header_get_all =
+      _rd_kafka_header_get_allPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_headers_t>,
+              int,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Pointer<ffi.Void>>,
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
+
+  /// @brief Frees resources for \p rkmessage and hands ownership back to rdkafka.
+  void rd_kafka_message_destroy(ffi.Pointer<rd_kafka_message_t> rkmessage) {
+    return _rd_kafka_message_destroy(rkmessage);
+  }
+
   late final _rd_kafka_message_destroyPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_message_t>)>>(
-      'rd_kafka_message_destroy');
-  late final _rd_kafka_message_destroy = _rd_kafka_message_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_message_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_message_t>)>
+  >('rd_kafka_message_destroy');
+  late final _rd_kafka_message_destroy =
+      _rd_kafka_message_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_message_t>)>();
 
   /// @brief Returns the error string for an errored rd_kafka_message_t or NULL if
   /// there was no error.
@@ -3154,17 +3140,19 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_message_errstr(
     ffi.Pointer<rd_kafka_message_t> rkmessage,
   ) {
-    return _rd_kafka_message_errstr(
-      rkmessage,
-    );
+    return _rd_kafka_message_errstr(rkmessage);
   }
 
   late final _rd_kafka_message_errstrPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_message_t>)>>('rd_kafka_message_errstr');
-  late final _rd_kafka_message_errstr = _rd_kafka_message_errstrPtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_message_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_message_t>)
+    >
+  >('rd_kafka_message_errstr');
+  late final _rd_kafka_message_errstr =
+      _rd_kafka_message_errstrPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_message_t>)
+          >();
 
   /// @brief Returns the error string for an errored produced rd_kafka_message_t or
   /// NULL if there was no error.
@@ -3173,18 +3161,19 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_message_produce_errstr(
     ffi.Pointer<rd_kafka_message_t> rkmessage,
   ) {
-    return _rd_kafka_message_produce_errstr(
-      rkmessage,
-    );
+    return _rd_kafka_message_produce_errstr(rkmessage);
   }
 
   late final _rd_kafka_message_produce_errstrPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_message_t>)>>(
-      'rd_kafka_message_produce_errstr');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_message_t>)
+    >
+  >('rd_kafka_message_produce_errstr');
   late final _rd_kafka_message_produce_errstr =
-      _rd_kafka_message_produce_errstrPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_message_t>)>();
+      _rd_kafka_message_produce_errstrPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_message_t>)
+          >();
 
   /// @brief Returns the message timestamp for a consumed message.
   ///
@@ -3199,58 +3188,55 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_message_t> rkmessage,
     ffi.Pointer<ffi.UnsignedInt> tstype,
   ) {
-    return _rd_kafka_message_timestamp(
-      rkmessage,
-      tstype,
-    );
+    return _rd_kafka_message_timestamp(rkmessage, tstype);
   }
 
   late final _rd_kafka_message_timestampPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int64 Function(ffi.Pointer<rd_kafka_message_t>,
-              ffi.Pointer<ffi.UnsignedInt>)>>('rd_kafka_message_timestamp');
+    ffi.NativeFunction<
+      ffi.Int64 Function(
+        ffi.Pointer<rd_kafka_message_t>,
+        ffi.Pointer<ffi.UnsignedInt>,
+      )
+    >
+  >('rd_kafka_message_timestamp');
   late final _rd_kafka_message_timestamp =
-      _rd_kafka_message_timestampPtr.asFunction<
-          int Function(
-              ffi.Pointer<rd_kafka_message_t>, ffi.Pointer<ffi.UnsignedInt>)>();
+      _rd_kafka_message_timestampPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_message_t>,
+              ffi.Pointer<ffi.UnsignedInt>,
+            )
+          >();
 
   /// @brief Returns the latency for a produced message measured from
   /// the produce() call.
   ///
   /// @returns the latency in microseconds, or -1 if not available.
-  int rd_kafka_message_latency(
-    ffi.Pointer<rd_kafka_message_t> rkmessage,
-  ) {
-    return _rd_kafka_message_latency(
-      rkmessage,
-    );
+  int rd_kafka_message_latency(ffi.Pointer<rd_kafka_message_t> rkmessage) {
+    return _rd_kafka_message_latency(rkmessage);
   }
 
   late final _rd_kafka_message_latencyPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int64 Function(ffi.Pointer<rd_kafka_message_t>)>>(
-      'rd_kafka_message_latency');
-  late final _rd_kafka_message_latency = _rd_kafka_message_latencyPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_message_t>)>();
+    ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<rd_kafka_message_t>)>
+  >('rd_kafka_message_latency');
+  late final _rd_kafka_message_latency =
+      _rd_kafka_message_latencyPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_message_t>)>();
 
   /// @brief Returns the broker id of the broker the message was produced to
   /// or fetched from.
   ///
   /// @returns a broker id if known, else -1.
-  int rd_kafka_message_broker_id(
-    ffi.Pointer<rd_kafka_message_t> rkmessage,
-  ) {
-    return _rd_kafka_message_broker_id(
-      rkmessage,
-    );
+  int rd_kafka_message_broker_id(ffi.Pointer<rd_kafka_message_t> rkmessage) {
+    return _rd_kafka_message_broker_id(rkmessage);
   }
 
   late final _rd_kafka_message_broker_idPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int32 Function(ffi.Pointer<rd_kafka_message_t>)>>(
-      'rd_kafka_message_broker_id');
-  late final _rd_kafka_message_broker_id = _rd_kafka_message_broker_idPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_message_t>)>();
+    ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<rd_kafka_message_t>)>
+  >('rd_kafka_message_broker_id');
+  late final _rd_kafka_message_broker_id =
+      _rd_kafka_message_broker_idPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_message_t>)>();
 
   /// @brief Get the message header list.
   ///
@@ -3270,21 +3256,27 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_message_t> rkmessage,
     ffi.Pointer<ffi.Pointer<rd_kafka_headers_t>> hdrsp,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_message_headers(
-      rkmessage,
-      hdrsp,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_message_headers(rkmessage, hdrsp),
+    );
   }
 
   late final _rd_kafka_message_headersPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_message_t>,
-                  ffi.Pointer<ffi.Pointer<rd_kafka_headers_t>>)>>(
-      'rd_kafka_message_headers');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_message_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_headers_t>>,
+      )
+    >
+  >('rd_kafka_message_headers');
   late final _rd_kafka_message_headers =
-      _rd_kafka_message_headersPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_message_t>,
-              ffi.Pointer<ffi.Pointer<rd_kafka_headers_t>>)>();
+      _rd_kafka_message_headersPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_message_t>,
+              ffi.Pointer<ffi.Pointer<rd_kafka_headers_t>>,
+            )
+          >();
 
   /// @brief Get the message header list and detach the list from the message
   /// making the application the owner of the headers.
@@ -3299,21 +3291,27 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_message_t> rkmessage,
     ffi.Pointer<ffi.Pointer<rd_kafka_headers_t>> hdrsp,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_message_detach_headers(
-      rkmessage,
-      hdrsp,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_message_detach_headers(rkmessage, hdrsp),
+    );
   }
 
   late final _rd_kafka_message_detach_headersPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_message_t>,
-                  ffi.Pointer<ffi.Pointer<rd_kafka_headers_t>>)>>(
-      'rd_kafka_message_detach_headers');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_message_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_headers_t>>,
+      )
+    >
+  >('rd_kafka_message_detach_headers');
   late final _rd_kafka_message_detach_headers =
-      _rd_kafka_message_detach_headersPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_message_t>,
-              ffi.Pointer<ffi.Pointer<rd_kafka_headers_t>>)>();
+      _rd_kafka_message_detach_headersPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_message_t>,
+              ffi.Pointer<ffi.Pointer<rd_kafka_headers_t>>,
+            )
+          >();
 
   /// @brief Replace the message's current headers with a new list.
   ///
@@ -3329,39 +3327,39 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_message_t> rkmessage,
     ffi.Pointer<rd_kafka_headers_t> hdrs,
   ) {
-    return _rd_kafka_message_set_headers(
-      rkmessage,
-      hdrs,
-    );
+    return _rd_kafka_message_set_headers(rkmessage, hdrs);
   }
 
   late final _rd_kafka_message_set_headersPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<rd_kafka_message_t>,
-                  ffi.Pointer<rd_kafka_headers_t>)>>(
-      'rd_kafka_message_set_headers');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_message_t>,
+        ffi.Pointer<rd_kafka_headers_t>,
+      )
+    >
+  >('rd_kafka_message_set_headers');
   late final _rd_kafka_message_set_headers =
-      _rd_kafka_message_set_headersPtr.asFunction<
-          void Function(ffi.Pointer<rd_kafka_message_t>,
-              ffi.Pointer<rd_kafka_headers_t>)>();
+      _rd_kafka_message_set_headersPtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<rd_kafka_message_t>,
+              ffi.Pointer<rd_kafka_headers_t>,
+            )
+          >();
 
   /// @brief Returns the number of header key/value pairs
   ///
   /// @param hdrs   Headers to count
-  int rd_kafka_header_cnt(
-    ffi.Pointer<rd_kafka_headers_t> hdrs,
-  ) {
-    return _rd_kafka_header_cnt(
-      hdrs,
-    );
+  int rd_kafka_header_cnt(ffi.Pointer<rd_kafka_headers_t> hdrs) {
+    return _rd_kafka_header_cnt(hdrs);
   }
 
   late final _rd_kafka_header_cntPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Size Function(ffi.Pointer<rd_kafka_headers_t>)>>(
-      'rd_kafka_header_cnt');
-  late final _rd_kafka_header_cnt = _rd_kafka_header_cntPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_headers_t>)>();
+    ffi.NativeFunction<ffi.Size Function(ffi.Pointer<rd_kafka_headers_t>)>
+  >('rd_kafka_header_cnt');
+  late final _rd_kafka_header_cnt =
+      _rd_kafka_header_cntPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_headers_t>)>();
 
   /// @brief Returns the message's persistence status in the topic log.
   ///
@@ -3370,37 +3368,33 @@ class LibRdKafka {
   rd_kafka_msg_status_t rd_kafka_message_status(
     ffi.Pointer<rd_kafka_message_t> rkmessage,
   ) {
-    return rd_kafka_msg_status_t.fromValue(_rd_kafka_message_status(
-      rkmessage,
-    ));
+    return rd_kafka_msg_status_t.fromValue(_rd_kafka_message_status(rkmessage));
   }
 
   late final _rd_kafka_message_statusPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.UnsignedInt Function(
-              ffi.Pointer<rd_kafka_message_t>)>>('rd_kafka_message_status');
-  late final _rd_kafka_message_status = _rd_kafka_message_statusPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_message_t>)>();
+    ffi.NativeFunction<
+      ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_message_t>)
+    >
+  >('rd_kafka_message_status');
+  late final _rd_kafka_message_status =
+      _rd_kafka_message_statusPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_message_t>)>();
 
   /// @returns the message's partition leader epoch at the time the message was
   /// fetched and if known, else -1.
   ///
   /// @remark This API must only be used on consumed messages without error.
   /// @remark Requires broker version >= 2.10 (KIP-320).
-  int rd_kafka_message_leader_epoch(
-    ffi.Pointer<rd_kafka_message_t> rkmessage,
-  ) {
-    return _rd_kafka_message_leader_epoch(
-      rkmessage,
-    );
+  int rd_kafka_message_leader_epoch(ffi.Pointer<rd_kafka_message_t> rkmessage) {
+    return _rd_kafka_message_leader_epoch(rkmessage);
   }
 
   late final _rd_kafka_message_leader_epochPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int32 Function(ffi.Pointer<rd_kafka_message_t>)>>(
-      'rd_kafka_message_leader_epoch');
-  late final _rd_kafka_message_leader_epoch = _rd_kafka_message_leader_epochPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_message_t>)>();
+    ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<rd_kafka_message_t>)>
+  >('rd_kafka_message_leader_epoch');
+  late final _rd_kafka_message_leader_epoch =
+      _rd_kafka_message_leader_epochPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_message_t>)>();
 
   /// @brief Computes base64 encoding for the given uuid string.
   /// @param uuid UUID for which base64 encoding is required.
@@ -3410,34 +3404,32 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_Uuid_base64str(
     ffi.Pointer<rd_kafka_Uuid_t> uuid,
   ) {
-    return _rd_kafka_Uuid_base64str(
-      uuid,
-    );
+    return _rd_kafka_Uuid_base64str(uuid);
   }
 
   late final _rd_kafka_Uuid_base64strPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_Uuid_t>)>>('rd_kafka_Uuid_base64str');
-  late final _rd_kafka_Uuid_base64str = _rd_kafka_Uuid_base64strPtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_Uuid_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_Uuid_t>)
+    >
+  >('rd_kafka_Uuid_base64str');
+  late final _rd_kafka_Uuid_base64str =
+      _rd_kafka_Uuid_base64strPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_Uuid_t>)
+          >();
 
   /// @brief Gets least significant 64 bits for the given UUID.
   ///
   /// @param uuid UUID
   ///
   /// @return least significant 64 bits for the given UUID.
-  int rd_kafka_Uuid_least_significant_bits(
-    ffi.Pointer<rd_kafka_Uuid_t> uuid,
-  ) {
-    return _rd_kafka_Uuid_least_significant_bits(
-      uuid,
-    );
+  int rd_kafka_Uuid_least_significant_bits(ffi.Pointer<rd_kafka_Uuid_t> uuid) {
+    return _rd_kafka_Uuid_least_significant_bits(uuid);
   }
 
   late final _rd_kafka_Uuid_least_significant_bitsPtr = _lookup<
-          ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<rd_kafka_Uuid_t>)>>(
-      'rd_kafka_Uuid_least_significant_bits');
+    ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<rd_kafka_Uuid_t>)>
+  >('rd_kafka_Uuid_least_significant_bits');
   late final _rd_kafka_Uuid_least_significant_bits =
       _rd_kafka_Uuid_least_significant_bitsPtr
           .asFunction<int Function(ffi.Pointer<rd_kafka_Uuid_t>)>();
@@ -3447,17 +3439,13 @@ class LibRdKafka {
   /// @param uuid UUID
   ///
   /// @return most significant 64 bits for the given UUID.
-  int rd_kafka_Uuid_most_significant_bits(
-    ffi.Pointer<rd_kafka_Uuid_t> uuid,
-  ) {
-    return _rd_kafka_Uuid_most_significant_bits(
-      uuid,
-    );
+  int rd_kafka_Uuid_most_significant_bits(ffi.Pointer<rd_kafka_Uuid_t> uuid) {
+    return _rd_kafka_Uuid_most_significant_bits(uuid);
   }
 
   late final _rd_kafka_Uuid_most_significant_bitsPtr = _lookup<
-          ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<rd_kafka_Uuid_t>)>>(
-      'rd_kafka_Uuid_most_significant_bits');
+    ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<rd_kafka_Uuid_t>)>
+  >('rd_kafka_Uuid_most_significant_bits');
   late final _rd_kafka_Uuid_most_significant_bits =
       _rd_kafka_Uuid_most_significant_bitsPtr
           .asFunction<int Function(ffi.Pointer<rd_kafka_Uuid_t>)>();
@@ -3473,18 +3461,17 @@ class LibRdKafka {
     int most_significant_bits,
     int least_significant_bits,
   ) {
-    return _rd_kafka_Uuid_new(
-      most_significant_bits,
-      least_significant_bits,
-    );
+    return _rd_kafka_Uuid_new(most_significant_bits, least_significant_bits);
   }
 
   late final _rd_kafka_Uuid_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_Uuid_t> Function(
-              ffi.Int64, ffi.Int64)>>('rd_kafka_Uuid_new');
-  late final _rd_kafka_Uuid_new = _rd_kafka_Uuid_newPtr
-      .asFunction<ffi.Pointer<rd_kafka_Uuid_t> Function(int, int)>();
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_Uuid_t> Function(ffi.Int64, ffi.Int64)
+    >
+  >('rd_kafka_Uuid_new');
+  late final _rd_kafka_Uuid_new =
+      _rd_kafka_Uuid_newPtr
+          .asFunction<ffi.Pointer<rd_kafka_Uuid_t> Function(int, int)>();
 
   /// @brief Copies the given UUID.
   ///
@@ -3495,34 +3482,33 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_Uuid_t> rd_kafka_Uuid_copy(
     ffi.Pointer<rd_kafka_Uuid_t> uuid,
   ) {
-    return _rd_kafka_Uuid_copy(
-      uuid,
-    );
+    return _rd_kafka_Uuid_copy(uuid);
   }
 
   late final _rd_kafka_Uuid_copyPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_Uuid_t> Function(
-              ffi.Pointer<rd_kafka_Uuid_t>)>>('rd_kafka_Uuid_copy');
-  late final _rd_kafka_Uuid_copy = _rd_kafka_Uuid_copyPtr.asFunction<
-      ffi.Pointer<rd_kafka_Uuid_t> Function(ffi.Pointer<rd_kafka_Uuid_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_Uuid_t> Function(ffi.Pointer<rd_kafka_Uuid_t>)
+    >
+  >('rd_kafka_Uuid_copy');
+  late final _rd_kafka_Uuid_copy =
+      _rd_kafka_Uuid_copyPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_Uuid_t> Function(ffi.Pointer<rd_kafka_Uuid_t>)
+          >();
 
   /// @brief Destroy the provided uuid.
   ///
   /// @param uuid UUID
-  void rd_kafka_Uuid_destroy(
-    ffi.Pointer<rd_kafka_Uuid_t> uuid,
-  ) {
-    return _rd_kafka_Uuid_destroy(
-      uuid,
-    );
+  void rd_kafka_Uuid_destroy(ffi.Pointer<rd_kafka_Uuid_t> uuid) {
+    return _rd_kafka_Uuid_destroy(uuid);
   }
 
   late final _rd_kafka_Uuid_destroyPtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_Uuid_t>)>>(
-      'rd_kafka_Uuid_destroy');
-  late final _rd_kafka_Uuid_destroy = _rd_kafka_Uuid_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_Uuid_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_Uuid_t>)>
+  >('rd_kafka_Uuid_destroy');
+  late final _rd_kafka_Uuid_destroy =
+      _rd_kafka_Uuid_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_Uuid_t>)>();
 
   /// @brief Create configuration object.
   ///
@@ -3561,24 +3547,23 @@ class LibRdKafka {
 
   late final _rd_kafka_conf_newPtr =
       _lookup<ffi.NativeFunction<ffi.Pointer<rd_kafka_conf_t> Function()>>(
-          'rd_kafka_conf_new');
-  late final _rd_kafka_conf_new = _rd_kafka_conf_newPtr
-      .asFunction<ffi.Pointer<rd_kafka_conf_t> Function()>();
+        'rd_kafka_conf_new',
+      );
+  late final _rd_kafka_conf_new =
+      _rd_kafka_conf_newPtr
+          .asFunction<ffi.Pointer<rd_kafka_conf_t> Function()>();
 
   /// @brief Destroys a conf object.
-  void rd_kafka_conf_destroy(
-    ffi.Pointer<rd_kafka_conf_t> conf,
-  ) {
-    return _rd_kafka_conf_destroy(
-      conf,
-    );
+  void rd_kafka_conf_destroy(ffi.Pointer<rd_kafka_conf_t> conf) {
+    return _rd_kafka_conf_destroy(conf);
   }
 
   late final _rd_kafka_conf_destroyPtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_conf_t>)>>(
-      'rd_kafka_conf_destroy');
-  late final _rd_kafka_conf_destroy = _rd_kafka_conf_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_conf_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_conf_t>)>
+  >('rd_kafka_conf_destroy');
+  late final _rd_kafka_conf_destroy =
+      _rd_kafka_conf_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_conf_t>)>();
 
   /// @brief Creates a copy/duplicate of configuration object \p conf
   ///
@@ -3587,17 +3572,19 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_conf_t> rd_kafka_conf_dup(
     ffi.Pointer<rd_kafka_conf_t> conf,
   ) {
-    return _rd_kafka_conf_dup(
-      conf,
-    );
+    return _rd_kafka_conf_dup(conf);
   }
 
   late final _rd_kafka_conf_dupPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_conf_t> Function(
-              ffi.Pointer<rd_kafka_conf_t>)>>('rd_kafka_conf_dup');
-  late final _rd_kafka_conf_dup = _rd_kafka_conf_dupPtr.asFunction<
-      ffi.Pointer<rd_kafka_conf_t> Function(ffi.Pointer<rd_kafka_conf_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_conf_t> Function(ffi.Pointer<rd_kafka_conf_t>)
+    >
+  >('rd_kafka_conf_dup');
+  late final _rd_kafka_conf_dup =
+      _rd_kafka_conf_dupPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_conf_t> Function(ffi.Pointer<rd_kafka_conf_t>)
+          >();
 
   /// @brief Same as rd_kafka_conf_dup() but with an array of property name
   /// prefixes to filter out (ignore) when copying.
@@ -3606,23 +3593,27 @@ class LibRdKafka {
     int filter_cnt,
     ffi.Pointer<ffi.Pointer<ffi.Char>> filter,
   ) {
-    return _rd_kafka_conf_dup_filter(
-      conf,
-      filter_cnt,
-      filter,
-    );
+    return _rd_kafka_conf_dup_filter(conf, filter_cnt, filter);
   }
 
   late final _rd_kafka_conf_dup_filterPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_conf_t> Function(
-              ffi.Pointer<rd_kafka_conf_t>,
-              ffi.Size,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>)>>('rd_kafka_conf_dup_filter');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_conf_t> Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Size,
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+      )
+    >
+  >('rd_kafka_conf_dup_filter');
   late final _rd_kafka_conf_dup_filter =
-      _rd_kafka_conf_dup_filterPtr.asFunction<
-          ffi.Pointer<rd_kafka_conf_t> Function(ffi.Pointer<rd_kafka_conf_t>,
-              int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+      _rd_kafka_conf_dup_filterPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_conf_t> Function(
+              ffi.Pointer<rd_kafka_conf_t>,
+              int,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+            )
+          >();
 
   /// @returns the configuration object used by an rd_kafka_t instance.
   /// For use with rd_kafka_conf_get(), et.al., to extract configuration
@@ -3630,20 +3621,20 @@ class LibRdKafka {
   ///
   /// @remark the returned object is read-only and its lifetime is the same
   /// as the rd_kafka_t object.
-  ffi.Pointer<rd_kafka_conf_t> rd_kafka_conf(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return _rd_kafka_conf(
-      rk,
-    );
+  ffi.Pointer<rd_kafka_conf_t> rd_kafka_conf(ffi.Pointer<rd_kafka_t> rk) {
+    return _rd_kafka_conf(rk);
   }
 
   late final _rd_kafka_confPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_conf_t> Function(
-              ffi.Pointer<rd_kafka_t>)>>('rd_kafka_conf');
-  late final _rd_kafka_conf = _rd_kafka_confPtr.asFunction<
-      ffi.Pointer<rd_kafka_conf_t> Function(ffi.Pointer<rd_kafka_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_conf_t> Function(ffi.Pointer<rd_kafka_t>)
+    >
+  >('rd_kafka_conf');
+  late final _rd_kafka_conf =
+      _rd_kafka_confPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_conf_t> Function(ffi.Pointer<rd_kafka_t>)
+          >();
 
   /// @brief Sets a configuration property.
   ///
@@ -3669,46 +3660,47 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return rd_kafka_conf_res_t.fromValue(_rd_kafka_conf_set(
-      conf,
-      name,
-      value,
-      errstr,
-      errstr_size,
-    ));
+    return rd_kafka_conf_res_t.fromValue(
+      _rd_kafka_conf_set(conf, name, value, errstr, errstr_size),
+    );
   }
 
   late final _rd_kafka_conf_setPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_conf_set');
+  late final _rd_kafka_conf_set =
+      _rd_kafka_conf_setPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_conf_set');
-  late final _rd_kafka_conf_set = _rd_kafka_conf_setPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_conf_t>, ffi.Pointer<ffi.Char>,
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
+              int,
+            )
+          >();
 
   /// @brief Enable event sourcing.
   /// \p events is a bitmask of \c RD_KAFKA_EVENT_* of events to enable
   /// for consumption by `rd_kafka_queue_poll()`.
-  void rd_kafka_conf_set_events(
-    ffi.Pointer<rd_kafka_conf_t> conf,
-    int events,
-  ) {
-    return _rd_kafka_conf_set_events(
-      conf,
-      events,
-    );
+  void rd_kafka_conf_set_events(ffi.Pointer<rd_kafka_conf_t> conf, int events) {
+    return _rd_kafka_conf_set_events(conf, events);
   }
 
   late final _rd_kafka_conf_set_eventsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<rd_kafka_conf_t>,
-              ffi.Int)>>('rd_kafka_conf_set_events');
-  late final _rd_kafka_conf_set_events = _rd_kafka_conf_set_eventsPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_conf_t>, int)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_conf_t>, ffi.Int)>
+  >('rd_kafka_conf_set_events');
+  late final _rd_kafka_conf_set_events =
+      _rd_kafka_conf_set_eventsPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_conf_t>, int)>();
 
   /// @brief Generic event callback to be used with the event API to trigger
   /// callbacks for \c rd_kafka_event_t objects from a background
@@ -3746,87 +3738,110 @@ class LibRdKafka {
   void rd_kafka_conf_set_background_event_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(
-                    ffi.Pointer<rd_kafka_t> rk,
-                    ffi.Pointer<rd_kafka_event_t> rkev,
-                    ffi.Pointer<ffi.Void> opaque)>>
-        event_cb,
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<rd_kafka_t> rk,
+          ffi.Pointer<rd_kafka_event_t> rkev,
+          ffi.Pointer<ffi.Void> opaque,
+        )
+      >
+    >
+    event_cb,
   ) {
-    return _rd_kafka_conf_set_background_event_cb(
-      conf,
-      event_cb,
-    );
+    return _rd_kafka_conf_set_background_event_cb(conf, event_cb);
   }
 
   late final _rd_kafka_conf_set_background_event_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Void Function(
-                              ffi.Pointer<rd_kafka_t> rk,
-                              ffi.Pointer<rd_kafka_event_t> rkev,
-                              ffi.Pointer<ffi.Void> opaque)>>)>>(
-      'rd_kafka_conf_set_background_event_cb');
+            ffi.Void Function(
+              ffi.Pointer<rd_kafka_t> rk,
+              ffi.Pointer<rd_kafka_event_t> rkev,
+              ffi.Pointer<ffi.Void> opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_background_event_cb');
   late final _rd_kafka_conf_set_background_event_cb =
-      _rd_kafka_conf_set_background_event_cbPtr.asFunction<
-          void Function(
+      _rd_kafka_conf_set_background_event_cbPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(
-                          ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Pointer<rd_kafka_event_t> rkev,
-                          ffi.Pointer<ffi.Void> opaque)>>)>();
+                ffi.NativeFunction<
+                  ffi.Void Function(
+                    ffi.Pointer<rd_kafka_t> rk,
+                    ffi.Pointer<rd_kafka_event_t> rkev,
+                    ffi.Pointer<ffi.Void> opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @deprecated See rd_kafka_conf_set_dr_msg_cb()
   void rd_kafka_conf_set_dr_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<rd_kafka_t> rk,
+          ffi.Pointer<ffi.Void> payload,
+          ffi.Size len,
+          ffi.Int err,
+          ffi.Pointer<ffi.Void> opaque,
+          ffi.Pointer<ffi.Void> msg_opaque,
+        )
+      >
+    >
+    dr_cb,
+  ) {
+    return _rd_kafka_conf_set_dr_cb(conf, dr_cb);
+  }
+
+  late final _rd_kafka_conf_set_dr_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
+          ffi.NativeFunction<
+            ffi.Void Function(
+              ffi.Pointer<rd_kafka_t> rk,
+              ffi.Pointer<ffi.Void> payload,
+              ffi.Size len,
+              ffi.Int err,
+              ffi.Pointer<ffi.Void> opaque,
+              ffi.Pointer<ffi.Void> msg_opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_dr_cb');
+  late final _rd_kafka_conf_set_dr_cb =
+      _rd_kafka_conf_set_dr_cbPtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<rd_kafka_conf_t>,
+              ffi.Pointer<
+                ffi.NativeFunction<
+                  ffi.Void Function(
                     ffi.Pointer<rd_kafka_t> rk,
                     ffi.Pointer<ffi.Void> payload,
                     ffi.Size len,
                     ffi.Int err,
                     ffi.Pointer<ffi.Void> opaque,
-                    ffi.Pointer<ffi.Void> msg_opaque)>>
-        dr_cb,
-  ) {
-    return _rd_kafka_conf_set_dr_cb(
-      conf,
-      dr_cb,
-    );
-  }
-
-  late final _rd_kafka_conf_set_dr_cbPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Void Function(
-                              ffi.Pointer<rd_kafka_t> rk,
-                              ffi.Pointer<ffi.Void> payload,
-                              ffi.Size len,
-                              ffi.Int err,
-                              ffi.Pointer<ffi.Void> opaque,
-                              ffi.Pointer<ffi.Void> msg_opaque)>>)>>(
-      'rd_kafka_conf_set_dr_cb');
-  late final _rd_kafka_conf_set_dr_cb = _rd_kafka_conf_set_dr_cbPtr.asFunction<
-      void Function(
-          ffi.Pointer<rd_kafka_conf_t>,
-          ffi.Pointer<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Pointer<rd_kafka_t> rk,
-                      ffi.Pointer<ffi.Void> payload,
-                      ffi.Size len,
-                      ffi.Int err,
-                      ffi.Pointer<ffi.Void> opaque,
-                      ffi.Pointer<ffi.Void> msg_opaque)>>)>();
+                    ffi.Pointer<ffi.Void> msg_opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief \b Producer: Set delivery report callback in provided \p conf object.
   ///
@@ -3859,40 +3874,51 @@ class LibRdKafka {
   void rd_kafka_conf_set_dr_msg_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(
-                    ffi.Pointer<rd_kafka_t> rk,
-                    ffi.Pointer<rd_kafka_message_t> rkmessage,
-                    ffi.Pointer<ffi.Void> opaque)>>
-        dr_msg_cb,
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<rd_kafka_t> rk,
+          ffi.Pointer<rd_kafka_message_t> rkmessage,
+          ffi.Pointer<ffi.Void> opaque,
+        )
+      >
+    >
+    dr_msg_cb,
   ) {
-    return _rd_kafka_conf_set_dr_msg_cb(
-      conf,
-      dr_msg_cb,
-    );
+    return _rd_kafka_conf_set_dr_msg_cb(conf, dr_msg_cb);
   }
 
   late final _rd_kafka_conf_set_dr_msg_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Void Function(
-                              ffi.Pointer<rd_kafka_t> rk,
-                              ffi.Pointer<rd_kafka_message_t> rkmessage,
-                              ffi.Pointer<ffi.Void> opaque)>>)>>(
-      'rd_kafka_conf_set_dr_msg_cb');
+            ffi.Void Function(
+              ffi.Pointer<rd_kafka_t> rk,
+              ffi.Pointer<rd_kafka_message_t> rkmessage,
+              ffi.Pointer<ffi.Void> opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_dr_msg_cb');
   late final _rd_kafka_conf_set_dr_msg_cb =
-      _rd_kafka_conf_set_dr_msg_cbPtr.asFunction<
-          void Function(
+      _rd_kafka_conf_set_dr_msg_cbPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(
-                          ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Pointer<rd_kafka_message_t> rkmessage,
-                          ffi.Pointer<ffi.Void> opaque)>>)>();
+                ffi.NativeFunction<
+                  ffi.Void Function(
+                    ffi.Pointer<rd_kafka_t> rk,
+                    ffi.Pointer<rd_kafka_message_t> rkmessage,
+                    ffi.Pointer<ffi.Void> opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief \b Consumer: Set consume callback for use with
   /// rd_kafka_consumer_poll()
@@ -3902,36 +3928,48 @@ class LibRdKafka {
   void rd_kafka_conf_set_consume_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(ffi.Pointer<rd_kafka_message_t> rkmessage,
-                    ffi.Pointer<ffi.Void> opaque)>>
-        consume_cb,
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<rd_kafka_message_t> rkmessage,
+          ffi.Pointer<ffi.Void> opaque,
+        )
+      >
+    >
+    consume_cb,
   ) {
-    return _rd_kafka_conf_set_consume_cb(
-      conf,
-      consume_cb,
-    );
+    return _rd_kafka_conf_set_consume_cb(conf, consume_cb);
   }
 
   late final _rd_kafka_conf_set_consume_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Void Function(
-                              ffi.Pointer<rd_kafka_message_t> rkmessage,
-                              ffi.Pointer<ffi.Void> opaque)>>)>>(
-      'rd_kafka_conf_set_consume_cb');
+            ffi.Void Function(
+              ffi.Pointer<rd_kafka_message_t> rkmessage,
+              ffi.Pointer<ffi.Void> opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_consume_cb');
   late final _rd_kafka_conf_set_consume_cb =
-      _rd_kafka_conf_set_consume_cbPtr.asFunction<
-          void Function(
+      _rd_kafka_conf_set_consume_cbPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(
-                          ffi.Pointer<rd_kafka_message_t> rkmessage,
-                          ffi.Pointer<ffi.Void> opaque)>>)>();
+                ffi.NativeFunction<
+                  ffi.Void Function(
+                    ffi.Pointer<rd_kafka_message_t> rkmessage,
+                    ffi.Pointer<ffi.Void> opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief \b Consumer: Set rebalance callback for use with
   /// coordinated consumer group balancing.
@@ -4038,45 +4076,54 @@ class LibRdKafka {
   void rd_kafka_conf_set_rebalance_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(
-                    ffi.Pointer<rd_kafka_t> rk,
-                    ffi.Int err,
-                    ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
-                    ffi.Pointer<ffi.Void> opaque)>>
-        rebalance_cb,
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<rd_kafka_t> rk,
+          ffi.Int err,
+          ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
+          ffi.Pointer<ffi.Void> opaque,
+        )
+      >
+    >
+    rebalance_cb,
   ) {
-    return _rd_kafka_conf_set_rebalance_cb(
-      conf,
-      rebalance_cb,
-    );
+    return _rd_kafka_conf_set_rebalance_cb(conf, rebalance_cb);
   }
 
   late final _rd_kafka_conf_set_rebalance_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Void Function(
-                              ffi.Pointer<rd_kafka_t> rk,
-                              ffi.Int err,
-                              ffi.Pointer<rd_kafka_topic_partition_list_t>
-                                  partitions,
-                              ffi.Pointer<ffi.Void> opaque)>>)>>(
-      'rd_kafka_conf_set_rebalance_cb');
+            ffi.Void Function(
+              ffi.Pointer<rd_kafka_t> rk,
+              ffi.Int err,
+              ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
+              ffi.Pointer<ffi.Void> opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_rebalance_cb');
   late final _rd_kafka_conf_set_rebalance_cb =
-      _rd_kafka_conf_set_rebalance_cbPtr.asFunction<
-          void Function(
+      _rd_kafka_conf_set_rebalance_cbPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(
-                          ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Int err,
-                          ffi.Pointer<rd_kafka_topic_partition_list_t>
-                              partitions,
-                          ffi.Pointer<ffi.Void> opaque)>>)>();
+                ffi.NativeFunction<
+                  ffi.Void Function(
+                    ffi.Pointer<rd_kafka_t> rk,
+                    ffi.Int err,
+                    ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
+                    ffi.Pointer<ffi.Void> opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief \b Consumer: Set offset commit callback for use with consumer groups.
   ///
@@ -4096,45 +4143,54 @@ class LibRdKafka {
   void rd_kafka_conf_set_offset_commit_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<rd_kafka_t> rk,
+          ffi.Int err,
+          ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
+          ffi.Pointer<ffi.Void> opaque,
+        )
+      >
+    >
+    offset_commit_cb,
+  ) {
+    return _rd_kafka_conf_set_offset_commit_cb(conf, offset_commit_cb);
+  }
+
+  late final _rd_kafka_conf_set_offset_commit_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
+          ffi.NativeFunction<
+            ffi.Void Function(
+              ffi.Pointer<rd_kafka_t> rk,
+              ffi.Int err,
+              ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
+              ffi.Pointer<ffi.Void> opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_offset_commit_cb');
+  late final _rd_kafka_conf_set_offset_commit_cb =
+      _rd_kafka_conf_set_offset_commit_cbPtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<rd_kafka_conf_t>,
+              ffi.Pointer<
+                ffi.NativeFunction<
+                  ffi.Void Function(
                     ffi.Pointer<rd_kafka_t> rk,
                     ffi.Int err,
                     ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
-                    ffi.Pointer<ffi.Void> opaque)>>
-        offset_commit_cb,
-  ) {
-    return _rd_kafka_conf_set_offset_commit_cb(
-      conf,
-      offset_commit_cb,
-    );
-  }
-
-  late final _rd_kafka_conf_set_offset_commit_cbPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Pointer<rd_kafka_conf_t>,
-                      ffi.Pointer<
-                          ffi.NativeFunction<
-                              ffi.Void Function(
-                                  ffi.Pointer<rd_kafka_t> rk,
-                                  ffi.Int err,
-                                  ffi.Pointer<rd_kafka_topic_partition_list_t>
-                                      offsets,
-                                  ffi.Pointer<ffi.Void> opaque)>>)>>(
-          'rd_kafka_conf_set_offset_commit_cb');
-  late final _rd_kafka_conf_set_offset_commit_cb =
-      _rd_kafka_conf_set_offset_commit_cbPtr.asFunction<
-          void Function(
-              ffi.Pointer<rd_kafka_conf_t>,
-              ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(
-                          ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Int err,
-                          ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
-                          ffi.Pointer<ffi.Void> opaque)>>)>();
+                    ffi.Pointer<ffi.Void> opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief Set error callback in provided conf object.
   ///
@@ -4159,43 +4215,54 @@ class LibRdKafka {
   void rd_kafka_conf_set_error_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(
-                    ffi.Pointer<rd_kafka_t> rk,
-                    ffi.Int err,
-                    ffi.Pointer<ffi.Char> reason,
-                    ffi.Pointer<ffi.Void> opaque)>>
-        error_cb,
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<rd_kafka_t> rk,
+          ffi.Int err,
+          ffi.Pointer<ffi.Char> reason,
+          ffi.Pointer<ffi.Void> opaque,
+        )
+      >
+    >
+    error_cb,
   ) {
-    return _rd_kafka_conf_set_error_cb(
-      conf,
-      error_cb,
-    );
+    return _rd_kafka_conf_set_error_cb(conf, error_cb);
   }
 
   late final _rd_kafka_conf_set_error_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Void Function(
-                              ffi.Pointer<rd_kafka_t> rk,
-                              ffi.Int err,
-                              ffi.Pointer<ffi.Char> reason,
-                              ffi.Pointer<ffi.Void> opaque)>>)>>(
-      'rd_kafka_conf_set_error_cb');
+            ffi.Void Function(
+              ffi.Pointer<rd_kafka_t> rk,
+              ffi.Int err,
+              ffi.Pointer<ffi.Char> reason,
+              ffi.Pointer<ffi.Void> opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_error_cb');
   late final _rd_kafka_conf_set_error_cb =
-      _rd_kafka_conf_set_error_cbPtr.asFunction<
-          void Function(
+      _rd_kafka_conf_set_error_cbPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(
-                          ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Int err,
-                          ffi.Pointer<ffi.Char> reason,
-                          ffi.Pointer<ffi.Void> opaque)>>)>();
+                ffi.NativeFunction<
+                  ffi.Void Function(
+                    ffi.Pointer<rd_kafka_t> rk,
+                    ffi.Int err,
+                    ffi.Pointer<ffi.Char> reason,
+                    ffi.Pointer<ffi.Void> opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief Set throttle callback.
   ///
@@ -4215,46 +4282,57 @@ class LibRdKafka {
   void rd_kafka_conf_set_throttle_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<rd_kafka_t> rk,
+          ffi.Pointer<ffi.Char> broker_name,
+          ffi.Int32 broker_id,
+          ffi.Int throttle_time_ms,
+          ffi.Pointer<ffi.Void> opaque,
+        )
+      >
+    >
+    throttle_cb,
+  ) {
+    return _rd_kafka_conf_set_throttle_cb(conf, throttle_cb);
+  }
+
+  late final _rd_kafka_conf_set_throttle_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
+          ffi.NativeFunction<
+            ffi.Void Function(
+              ffi.Pointer<rd_kafka_t> rk,
+              ffi.Pointer<ffi.Char> broker_name,
+              ffi.Int32 broker_id,
+              ffi.Int throttle_time_ms,
+              ffi.Pointer<ffi.Void> opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_throttle_cb');
+  late final _rd_kafka_conf_set_throttle_cb =
+      _rd_kafka_conf_set_throttle_cbPtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<rd_kafka_conf_t>,
+              ffi.Pointer<
+                ffi.NativeFunction<
+                  ffi.Void Function(
                     ffi.Pointer<rd_kafka_t> rk,
                     ffi.Pointer<ffi.Char> broker_name,
                     ffi.Int32 broker_id,
                     ffi.Int throttle_time_ms,
-                    ffi.Pointer<ffi.Void> opaque)>>
-        throttle_cb,
-  ) {
-    return _rd_kafka_conf_set_throttle_cb(
-      conf,
-      throttle_cb,
-    );
-  }
-
-  late final _rd_kafka_conf_set_throttle_cbPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Void Function(
-                              ffi.Pointer<rd_kafka_t> rk,
-                              ffi.Pointer<ffi.Char> broker_name,
-                              ffi.Int32 broker_id,
-                              ffi.Int throttle_time_ms,
-                              ffi.Pointer<ffi.Void> opaque)>>)>>(
-      'rd_kafka_conf_set_throttle_cb');
-  late final _rd_kafka_conf_set_throttle_cb =
-      _rd_kafka_conf_set_throttle_cbPtr.asFunction<
-          void Function(
-              ffi.Pointer<rd_kafka_conf_t>,
-              ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(
-                          ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Pointer<ffi.Char> broker_name,
-                          ffi.Int32 broker_id,
-                          ffi.Int throttle_time_ms,
-                          ffi.Pointer<ffi.Void> opaque)>>)>();
+                    ffi.Pointer<ffi.Void> opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief Set logger callback.
   ///
@@ -4273,40 +4351,54 @@ class LibRdKafka {
   void rd_kafka_conf_set_log_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(ffi.Pointer<rd_kafka_t> rk, ffi.Int level,
-                    ffi.Pointer<ffi.Char> fac, ffi.Pointer<ffi.Char> buf)>>
-        log_cb,
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<rd_kafka_t> rk,
+          ffi.Int level,
+          ffi.Pointer<ffi.Char> fac,
+          ffi.Pointer<ffi.Char> buf,
+        )
+      >
+    >
+    log_cb,
   ) {
-    return _rd_kafka_conf_set_log_cb(
-      conf,
-      log_cb,
-    );
+    return _rd_kafka_conf_set_log_cb(conf, log_cb);
   }
 
   late final _rd_kafka_conf_set_log_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Void Function(
-                              ffi.Pointer<rd_kafka_t> rk,
-                              ffi.Int level,
-                              ffi.Pointer<ffi.Char> fac,
-                              ffi.Pointer<ffi.Char> buf)>>)>>(
-      'rd_kafka_conf_set_log_cb');
+            ffi.Void Function(
+              ffi.Pointer<rd_kafka_t> rk,
+              ffi.Int level,
+              ffi.Pointer<ffi.Char> fac,
+              ffi.Pointer<ffi.Char> buf,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_log_cb');
   late final _rd_kafka_conf_set_log_cb =
-      _rd_kafka_conf_set_log_cbPtr.asFunction<
-          void Function(
+      _rd_kafka_conf_set_log_cbPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(
-                          ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Int level,
-                          ffi.Pointer<ffi.Char> fac,
-                          ffi.Pointer<ffi.Char> buf)>>)>();
+                ffi.NativeFunction<
+                  ffi.Void Function(
+                    ffi.Pointer<rd_kafka_t> rk,
+                    ffi.Int level,
+                    ffi.Pointer<ffi.Char> fac,
+                    ffi.Pointer<ffi.Char> buf,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief Set statistics callback in provided conf object.
   ///
@@ -4331,43 +4423,54 @@ class LibRdKafka {
   void rd_kafka_conf_set_stats_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Int Function(
-                    ffi.Pointer<rd_kafka_t> rk,
-                    ffi.Pointer<ffi.Char> json,
-                    ffi.Size json_len,
-                    ffi.Pointer<ffi.Void> opaque)>>
-        stats_cb,
+      ffi.NativeFunction<
+        ffi.Int Function(
+          ffi.Pointer<rd_kafka_t> rk,
+          ffi.Pointer<ffi.Char> json,
+          ffi.Size json_len,
+          ffi.Pointer<ffi.Void> opaque,
+        )
+      >
+    >
+    stats_cb,
   ) {
-    return _rd_kafka_conf_set_stats_cb(
-      conf,
-      stats_cb,
-    );
+    return _rd_kafka_conf_set_stats_cb(conf, stats_cb);
   }
 
   late final _rd_kafka_conf_set_stats_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Int Function(
-                              ffi.Pointer<rd_kafka_t> rk,
-                              ffi.Pointer<ffi.Char> json,
-                              ffi.Size json_len,
-                              ffi.Pointer<ffi.Void> opaque)>>)>>(
-      'rd_kafka_conf_set_stats_cb');
+            ffi.Int Function(
+              ffi.Pointer<rd_kafka_t> rk,
+              ffi.Pointer<ffi.Char> json,
+              ffi.Size json_len,
+              ffi.Pointer<ffi.Void> opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_stats_cb');
   late final _rd_kafka_conf_set_stats_cb =
-      _rd_kafka_conf_set_stats_cbPtr.asFunction<
-          void Function(
+      _rd_kafka_conf_set_stats_cbPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Int Function(
-                          ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Pointer<ffi.Char> json,
-                          ffi.Size json_len,
-                          ffi.Pointer<ffi.Void> opaque)>>)>();
+                ffi.NativeFunction<
+                  ffi.Int Function(
+                    ffi.Pointer<rd_kafka_t> rk,
+                    ffi.Pointer<ffi.Char> json,
+                    ffi.Size json_len,
+                    ffi.Pointer<ffi.Void> opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief Set SASL/OAUTHBEARER token refresh callback in provided conf object.
   ///
@@ -4419,12 +4522,15 @@ class LibRdKafka {
   void rd_kafka_conf_set_oauthbearer_token_refresh_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(
-                    ffi.Pointer<rd_kafka_t> rk,
-                    ffi.Pointer<ffi.Char> oauthbearer_config,
-                    ffi.Pointer<ffi.Void> opaque)>>
-        oauthbearer_token_refresh_cb,
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<rd_kafka_t> rk,
+          ffi.Pointer<ffi.Char> oauthbearer_config,
+          ffi.Pointer<ffi.Void> opaque,
+        )
+      >
+    >
+    oauthbearer_token_refresh_cb,
   ) {
     return _rd_kafka_conf_set_oauthbearer_token_refresh_cb(
       conf,
@@ -4433,26 +4539,37 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_conf_set_oauthbearer_token_refresh_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Void Function(
-                              ffi.Pointer<rd_kafka_t> rk,
-                              ffi.Pointer<ffi.Char> oauthbearer_config,
-                              ffi.Pointer<ffi.Void> opaque)>>)>>(
-      'rd_kafka_conf_set_oauthbearer_token_refresh_cb');
+            ffi.Void Function(
+              ffi.Pointer<rd_kafka_t> rk,
+              ffi.Pointer<ffi.Char> oauthbearer_config,
+              ffi.Pointer<ffi.Void> opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_oauthbearer_token_refresh_cb');
   late final _rd_kafka_conf_set_oauthbearer_token_refresh_cb =
-      _rd_kafka_conf_set_oauthbearer_token_refresh_cbPtr.asFunction<
-          void Function(
+      _rd_kafka_conf_set_oauthbearer_token_refresh_cbPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(
-                          ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Pointer<ffi.Char> oauthbearer_config,
-                          ffi.Pointer<ffi.Void> opaque)>>)>();
+                ffi.NativeFunction<
+                  ffi.Void Function(
+                    ffi.Pointer<rd_kafka_t> rk,
+                    ffi.Pointer<ffi.Char> oauthbearer_config,
+                    ffi.Pointer<ffi.Void> opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief Enable/disable creation of a queue specific to SASL events
   /// and callbacks.
@@ -4482,16 +4599,12 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_conf_t> conf,
     int enable,
   ) {
-    return _rd_kafka_conf_enable_sasl_queue(
-      conf,
-      enable,
-    );
+    return _rd_kafka_conf_enable_sasl_queue(conf, enable);
   }
 
   late final _rd_kafka_conf_enable_sasl_queuePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<rd_kafka_conf_t>,
-              ffi.Int)>>('rd_kafka_conf_enable_sasl_queue');
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_conf_t>, ffi.Int)>
+  >('rd_kafka_conf_enable_sasl_queue');
   late final _rd_kafka_conf_enable_sasl_queue =
       _rd_kafka_conf_enable_sasl_queuePtr
           .asFunction<void Function(ffi.Pointer<rd_kafka_conf_t>, int)>();
@@ -4514,37 +4627,54 @@ class LibRdKafka {
   void rd_kafka_conf_set_socket_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Int Function(ffi.Int domain, ffi.Int type, ffi.Int protocol,
-                    ffi.Pointer<ffi.Void> opaque)>>
-        socket_cb,
+      ffi.NativeFunction<
+        ffi.Int Function(
+          ffi.Int domain,
+          ffi.Int type,
+          ffi.Int protocol,
+          ffi.Pointer<ffi.Void> opaque,
+        )
+      >
+    >
+    socket_cb,
   ) {
-    return _rd_kafka_conf_set_socket_cb(
-      conf,
-      socket_cb,
-    );
+    return _rd_kafka_conf_set_socket_cb(conf, socket_cb);
   }
 
   late final _rd_kafka_conf_set_socket_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Int Function(
-                              ffi.Int domain,
-                              ffi.Int type,
-                              ffi.Int protocol,
-                              ffi.Pointer<ffi.Void> opaque)>>)>>(
-      'rd_kafka_conf_set_socket_cb');
+            ffi.Int Function(
+              ffi.Int domain,
+              ffi.Int type,
+              ffi.Int protocol,
+              ffi.Pointer<ffi.Void> opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_socket_cb');
   late final _rd_kafka_conf_set_socket_cb =
-      _rd_kafka_conf_set_socket_cbPtr.asFunction<
-          void Function(
+      _rd_kafka_conf_set_socket_cbPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Int Function(ffi.Int domain, ffi.Int type,
-                          ffi.Int protocol, ffi.Pointer<ffi.Void> opaque)>>)>();
+                ffi.NativeFunction<
+                  ffi.Int Function(
+                    ffi.Int domain,
+                    ffi.Int type,
+                    ffi.Int protocol,
+                    ffi.Pointer<ffi.Void> opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief Set connect callback.
   ///
@@ -4562,46 +4692,57 @@ class LibRdKafka {
   void rd_kafka_conf_set_connect_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Int Function(
+      ffi.NativeFunction<
+        ffi.Int Function(
+          ffi.Int sockfd,
+          ffi.Pointer<sockaddr> addr,
+          ffi.Int addrlen,
+          ffi.Pointer<ffi.Char> id,
+          ffi.Pointer<ffi.Void> opaque,
+        )
+      >
+    >
+    connect_cb,
+  ) {
+    return _rd_kafka_conf_set_connect_cb(conf, connect_cb);
+  }
+
+  late final _rd_kafka_conf_set_connect_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
+          ffi.NativeFunction<
+            ffi.Int Function(
+              ffi.Int sockfd,
+              ffi.Pointer<sockaddr> addr,
+              ffi.Int addrlen,
+              ffi.Pointer<ffi.Char> id,
+              ffi.Pointer<ffi.Void> opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_connect_cb');
+  late final _rd_kafka_conf_set_connect_cb =
+      _rd_kafka_conf_set_connect_cbPtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<rd_kafka_conf_t>,
+              ffi.Pointer<
+                ffi.NativeFunction<
+                  ffi.Int Function(
                     ffi.Int sockfd,
                     ffi.Pointer<sockaddr> addr,
                     ffi.Int addrlen,
                     ffi.Pointer<ffi.Char> id,
-                    ffi.Pointer<ffi.Void> opaque)>>
-        connect_cb,
-  ) {
-    return _rd_kafka_conf_set_connect_cb(
-      conf,
-      connect_cb,
-    );
-  }
-
-  late final _rd_kafka_conf_set_connect_cbPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Int Function(
-                              ffi.Int sockfd,
-                              ffi.Pointer<sockaddr> addr,
-                              ffi.Int addrlen,
-                              ffi.Pointer<ffi.Char> id,
-                              ffi.Pointer<ffi.Void> opaque)>>)>>(
-      'rd_kafka_conf_set_connect_cb');
-  late final _rd_kafka_conf_set_connect_cb =
-      _rd_kafka_conf_set_connect_cbPtr.asFunction<
-          void Function(
-              ffi.Pointer<rd_kafka_conf_t>,
-              ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Int Function(
-                          ffi.Int sockfd,
-                          ffi.Pointer<sockaddr> addr,
-                          ffi.Int addrlen,
-                          ffi.Pointer<ffi.Char> id,
-                          ffi.Pointer<ffi.Void> opaque)>>)>();
+                    ffi.Pointer<ffi.Void> opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief Set close socket callback.
   ///
@@ -4614,33 +4755,39 @@ class LibRdKafka {
   void rd_kafka_conf_set_closesocket_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Int Function(ffi.Int sockfd, ffi.Pointer<ffi.Void> opaque)>>
-        closesocket_cb,
+      ffi.NativeFunction<
+        ffi.Int Function(ffi.Int sockfd, ffi.Pointer<ffi.Void> opaque)
+      >
+    >
+    closesocket_cb,
   ) {
-    return _rd_kafka_conf_set_closesocket_cb(
-      conf,
-      closesocket_cb,
-    );
+    return _rd_kafka_conf_set_closesocket_cb(conf, closesocket_cb);
   }
 
   late final _rd_kafka_conf_set_closesocket_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Int Function(ffi.Int sockfd,
-                              ffi.Pointer<ffi.Void> opaque)>>)>>(
-      'rd_kafka_conf_set_closesocket_cb');
+            ffi.Int Function(ffi.Int sockfd, ffi.Pointer<ffi.Void> opaque)
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_closesocket_cb');
   late final _rd_kafka_conf_set_closesocket_cb =
-      _rd_kafka_conf_set_closesocket_cbPtr.asFunction<
-          void Function(
+      _rd_kafka_conf_set_closesocket_cbPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Int Function(
-                          ffi.Int sockfd, ffi.Pointer<ffi.Void> opaque)>>)>();
+                ffi.NativeFunction<
+                  ffi.Int Function(ffi.Int sockfd, ffi.Pointer<ffi.Void> opaque)
+                >
+              >,
+            )
+          >();
 
   /// @brief Set open callback.
   ///
@@ -4660,40 +4807,54 @@ class LibRdKafka {
   void rd_kafka_conf_set_open_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Int Function(ffi.Pointer<ffi.Char> pathname, ffi.Int flags,
-                    mode_t mode, ffi.Pointer<ffi.Void> opaque)>>
-        open_cb,
+      ffi.NativeFunction<
+        ffi.Int Function(
+          ffi.Pointer<ffi.Char> pathname,
+          ffi.Int flags,
+          mode_t mode,
+          ffi.Pointer<ffi.Void> opaque,
+        )
+      >
+    >
+    open_cb,
   ) {
-    return _rd_kafka_conf_set_open_cb(
-      conf,
-      open_cb,
-    );
+    return _rd_kafka_conf_set_open_cb(conf, open_cb);
   }
 
   late final _rd_kafka_conf_set_open_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Int Function(
-                              ffi.Pointer<ffi.Char> pathname,
-                              ffi.Int flags,
-                              mode_t mode,
-                              ffi.Pointer<ffi.Void> opaque)>>)>>(
-      'rd_kafka_conf_set_open_cb');
+            ffi.Int Function(
+              ffi.Pointer<ffi.Char> pathname,
+              ffi.Int flags,
+              mode_t mode,
+              ffi.Pointer<ffi.Void> opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_open_cb');
   late final _rd_kafka_conf_set_open_cb =
-      _rd_kafka_conf_set_open_cbPtr.asFunction<
-          void Function(
+      _rd_kafka_conf_set_open_cbPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Int Function(
-                          ffi.Pointer<ffi.Char> pathname,
-                          ffi.Int flags,
-                          mode_t mode,
-                          ffi.Pointer<ffi.Void> opaque)>>)>();
+                ffi.NativeFunction<
+                  ffi.Int Function(
+                    ffi.Pointer<ffi.Char> pathname,
+                    ffi.Int flags,
+                    mode_t mode,
+                    ffi.Pointer<ffi.Void> opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief Set address resolution callback.
   ///
@@ -4715,46 +4876,57 @@ class LibRdKafka {
   void rd_kafka_conf_set_resolve_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Int Function(
+      ffi.NativeFunction<
+        ffi.Int Function(
+          ffi.Pointer<ffi.Char> node,
+          ffi.Pointer<ffi.Char> service,
+          ffi.Pointer<addrinfo> hints,
+          ffi.Pointer<ffi.Pointer<addrinfo>> res,
+          ffi.Pointer<ffi.Void> opaque,
+        )
+      >
+    >
+    resolve_cb,
+  ) {
+    return _rd_kafka_conf_set_resolve_cb(conf, resolve_cb);
+  }
+
+  late final _rd_kafka_conf_set_resolve_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
+          ffi.NativeFunction<
+            ffi.Int Function(
+              ffi.Pointer<ffi.Char> node,
+              ffi.Pointer<ffi.Char> service,
+              ffi.Pointer<addrinfo> hints,
+              ffi.Pointer<ffi.Pointer<addrinfo>> res,
+              ffi.Pointer<ffi.Void> opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_resolve_cb');
+  late final _rd_kafka_conf_set_resolve_cb =
+      _rd_kafka_conf_set_resolve_cbPtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<rd_kafka_conf_t>,
+              ffi.Pointer<
+                ffi.NativeFunction<
+                  ffi.Int Function(
                     ffi.Pointer<ffi.Char> node,
                     ffi.Pointer<ffi.Char> service,
                     ffi.Pointer<addrinfo> hints,
                     ffi.Pointer<ffi.Pointer<addrinfo>> res,
-                    ffi.Pointer<ffi.Void> opaque)>>
-        resolve_cb,
-  ) {
-    return _rd_kafka_conf_set_resolve_cb(
-      conf,
-      resolve_cb,
-    );
-  }
-
-  late final _rd_kafka_conf_set_resolve_cbPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Int Function(
-                              ffi.Pointer<ffi.Char> node,
-                              ffi.Pointer<ffi.Char> service,
-                              ffi.Pointer<addrinfo> hints,
-                              ffi.Pointer<ffi.Pointer<addrinfo>> res,
-                              ffi.Pointer<ffi.Void> opaque)>>)>>(
-      'rd_kafka_conf_set_resolve_cb');
-  late final _rd_kafka_conf_set_resolve_cb =
-      _rd_kafka_conf_set_resolve_cbPtr.asFunction<
-          void Function(
-              ffi.Pointer<rd_kafka_conf_t>,
-              ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Int Function(
-                          ffi.Pointer<ffi.Char> node,
-                          ffi.Pointer<ffi.Char> service,
-                          ffi.Pointer<addrinfo> hints,
-                          ffi.Pointer<ffi.Pointer<addrinfo>> res,
-                          ffi.Pointer<ffi.Void> opaque)>>)>();
+                    ffi.Pointer<ffi.Void> opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief Sets the verification callback of the broker certificate
   ///
@@ -4798,8 +4970,59 @@ class LibRdKafka {
   rd_kafka_conf_res_t rd_kafka_conf_set_ssl_cert_verify_cb(
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Int Function(
+      ffi.NativeFunction<
+        ffi.Int Function(
+          ffi.Pointer<rd_kafka_t> rk,
+          ffi.Pointer<ffi.Char> broker_name,
+          ffi.Int32 broker_id,
+          ffi.Pointer<ffi.Int> x509_error,
+          ffi.Int depth,
+          ffi.Pointer<ffi.Char> buf,
+          ffi.Size size,
+          ffi.Pointer<ffi.Char> errstr,
+          ffi.Size errstr_size,
+          ffi.Pointer<ffi.Void> opaque,
+        )
+      >
+    >
+    ssl_cert_verify_cb,
+  ) {
+    return rd_kafka_conf_res_t.fromValue(
+      _rd_kafka_conf_set_ssl_cert_verify_cb(conf, ssl_cert_verify_cb),
+    );
+  }
+
+  late final _rd_kafka_conf_set_ssl_cert_verify_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<
+          ffi.NativeFunction<
+            ffi.Int Function(
+              ffi.Pointer<rd_kafka_t> rk,
+              ffi.Pointer<ffi.Char> broker_name,
+              ffi.Int32 broker_id,
+              ffi.Pointer<ffi.Int> x509_error,
+              ffi.Int depth,
+              ffi.Pointer<ffi.Char> buf,
+              ffi.Size size,
+              ffi.Pointer<ffi.Char> errstr,
+              ffi.Size errstr_size,
+              ffi.Pointer<ffi.Void> opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_conf_set_ssl_cert_verify_cb');
+  late final _rd_kafka_conf_set_ssl_cert_verify_cb =
+      _rd_kafka_conf_set_ssl_cert_verify_cbPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_conf_t>,
+              ffi.Pointer<
+                ffi.NativeFunction<
+                  ffi.Int Function(
                     ffi.Pointer<rd_kafka_t> rk,
                     ffi.Pointer<ffi.Char> broker_name,
                     ffi.Int32 broker_id,
@@ -4809,50 +5032,12 @@ class LibRdKafka {
                     ffi.Size size,
                     ffi.Pointer<ffi.Char> errstr,
                     ffi.Size errstr_size,
-                    ffi.Pointer<ffi.Void> opaque)>>
-        ssl_cert_verify_cb,
-  ) {
-    return rd_kafka_conf_res_t.fromValue(_rd_kafka_conf_set_ssl_cert_verify_cb(
-      conf,
-      ssl_cert_verify_cb,
-    ));
-  }
-
-  late final _rd_kafka_conf_set_ssl_cert_verify_cbPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Int Function(
-                              ffi.Pointer<rd_kafka_t> rk,
-                              ffi.Pointer<ffi.Char> broker_name,
-                              ffi.Int32 broker_id,
-                              ffi.Pointer<ffi.Int> x509_error,
-                              ffi.Int depth,
-                              ffi.Pointer<ffi.Char> buf,
-                              ffi.Size size,
-                              ffi.Pointer<ffi.Char> errstr,
-                              ffi.Size errstr_size,
-                              ffi.Pointer<ffi.Void> opaque)>>)>>(
-      'rd_kafka_conf_set_ssl_cert_verify_cb');
-  late final _rd_kafka_conf_set_ssl_cert_verify_cb =
-      _rd_kafka_conf_set_ssl_cert_verify_cbPtr.asFunction<
-          int Function(
-              ffi.Pointer<rd_kafka_conf_t>,
-              ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Int Function(
-                          ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Pointer<ffi.Char> broker_name,
-                          ffi.Int32 broker_id,
-                          ffi.Pointer<ffi.Int> x509_error,
-                          ffi.Int depth,
-                          ffi.Pointer<ffi.Char> buf,
-                          ffi.Size size,
-                          ffi.Pointer<ffi.Char> errstr,
-                          ffi.Size errstr_size,
-                          ffi.Pointer<ffi.Void> opaque)>>)>();
+                    ffi.Pointer<ffi.Void> opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief Set certificate/key \p cert_type from the \p cert_enc encoded
   /// memory at \p buffer of \p size bytes.
@@ -4903,31 +5088,45 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return rd_kafka_conf_res_t.fromValue(_rd_kafka_conf_set_ssl_cert(
-      conf,
-      cert_type.value,
-      cert_enc.value,
-      buffer,
-      size,
-      errstr,
-      errstr_size,
-    ));
+    return rd_kafka_conf_res_t.fromValue(
+      _rd_kafka_conf_set_ssl_cert(
+        conf,
+        cert_type.value,
+        cert_enc.value,
+        buffer,
+        size,
+        errstr,
+        errstr_size,
+      ),
+    );
   }
 
   late final _rd_kafka_conf_set_ssl_certPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_conf_t>,
-              ffi.UnsignedInt,
-              ffi.UnsignedInt,
-              ffi.Pointer<ffi.Void>,
-              ffi.Size,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_conf_set_ssl_cert');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.UnsignedInt,
+        ffi.UnsignedInt,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_conf_set_ssl_cert');
   late final _rd_kafka_conf_set_ssl_cert =
-      _rd_kafka_conf_set_ssl_certPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_conf_t>, int, int,
-              ffi.Pointer<ffi.Void>, int, ffi.Pointer<ffi.Char>, int)>();
+      _rd_kafka_conf_set_ssl_certPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_conf_t>,
+              int,
+              int,
+              ffi.Pointer<ffi.Void>,
+              int,
+              ffi.Pointer<ffi.Char>,
+              int,
+            )
+          >();
 
   /// @brief Set callback_data for OpenSSL engine.
   ///
@@ -4945,20 +5144,19 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<ffi.Void> callback_data,
   ) {
-    return _rd_kafka_conf_set_engine_callback_data(
-      conf,
-      callback_data,
-    );
+    return _rd_kafka_conf_set_engine_callback_data(conf, callback_data);
   }
 
   late final _rd_kafka_conf_set_engine_callback_dataPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_conf_t>, ffi.Pointer<ffi.Void>)>>(
-      'rd_kafka_conf_set_engine_callback_data');
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<rd_kafka_conf_t>, ffi.Pointer<ffi.Void>)
+    >
+  >('rd_kafka_conf_set_engine_callback_data');
   late final _rd_kafka_conf_set_engine_callback_data =
-      _rd_kafka_conf_set_engine_callback_dataPtr.asFunction<
-          void Function(ffi.Pointer<rd_kafka_conf_t>, ffi.Pointer<ffi.Void>)>();
+      _rd_kafka_conf_set_engine_callback_dataPtr
+          .asFunction<
+            void Function(ffi.Pointer<rd_kafka_conf_t>, ffi.Pointer<ffi.Void>)
+          >();
 
   /// @brief Sets the application's opaque pointer that will be passed to callbacks
   ///
@@ -4967,36 +5165,34 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<ffi.Void> opaque,
   ) {
-    return _rd_kafka_conf_set_opaque(
-      conf,
-      opaque,
-    );
+    return _rd_kafka_conf_set_opaque(conf, opaque);
   }
 
   late final _rd_kafka_conf_set_opaquePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<rd_kafka_conf_t>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_conf_set_opaque');
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<rd_kafka_conf_t>, ffi.Pointer<ffi.Void>)
+    >
+  >('rd_kafka_conf_set_opaque');
   late final _rd_kafka_conf_set_opaque =
-      _rd_kafka_conf_set_opaquePtr.asFunction<
-          void Function(ffi.Pointer<rd_kafka_conf_t>, ffi.Pointer<ffi.Void>)>();
+      _rd_kafka_conf_set_opaquePtr
+          .asFunction<
+            void Function(ffi.Pointer<rd_kafka_conf_t>, ffi.Pointer<ffi.Void>)
+          >();
 
   /// @brief Retrieves the opaque pointer previously set
   /// with rd_kafka_conf_set_opaque()
-  ffi.Pointer<ffi.Void> rd_kafka_opaque(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return _rd_kafka_opaque(
-      rk,
-    );
+  ffi.Pointer<ffi.Void> rd_kafka_opaque(ffi.Pointer<rd_kafka_t> rk) {
+    return _rd_kafka_opaque(rk);
   }
 
   late final _rd_kafka_opaquePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Void> Function(
-              ffi.Pointer<rd_kafka_t>)>>('rd_kafka_opaque');
-  late final _rd_kafka_opaque = _rd_kafka_opaquePtr
-      .asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<rd_kafka_t>)>();
+    ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<rd_kafka_t>)>
+  >('rd_kafka_opaque');
+  late final _rd_kafka_opaque =
+      _rd_kafka_opaquePtr
+          .asFunction<
+            ffi.Pointer<ffi.Void> Function(ffi.Pointer<rd_kafka_t>)
+          >();
 
   /// @brief Sets the default topic configuration to use for automatically
   /// subscribed topics (e.g., through pattern-matched topics).
@@ -5013,21 +5209,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<rd_kafka_topic_conf_t> tconf,
   ) {
-    return _rd_kafka_conf_set_default_topic_conf(
-      conf,
-      tconf,
-    );
+    return _rd_kafka_conf_set_default_topic_conf(conf, tconf);
   }
 
   late final _rd_kafka_conf_set_default_topic_confPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<rd_kafka_topic_conf_t>)>>(
-      'rd_kafka_conf_set_default_topic_conf');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<rd_kafka_topic_conf_t>,
+      )
+    >
+  >('rd_kafka_conf_set_default_topic_conf');
   late final _rd_kafka_conf_set_default_topic_conf =
-      _rd_kafka_conf_set_default_topic_confPtr.asFunction<
-          void Function(ffi.Pointer<rd_kafka_conf_t>,
-              ffi.Pointer<rd_kafka_topic_conf_t>)>();
+      _rd_kafka_conf_set_default_topic_confPtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<rd_kafka_conf_t>,
+              ffi.Pointer<rd_kafka_topic_conf_t>,
+            )
+          >();
 
   /// @brief Gets the default topic configuration as previously set with
   /// rd_kafka_conf_set_default_topic_conf() or that was implicitly created
@@ -5042,20 +5242,21 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_topic_conf_t> rd_kafka_conf_get_default_topic_conf(
     ffi.Pointer<rd_kafka_conf_t> conf,
   ) {
-    return _rd_kafka_conf_get_default_topic_conf(
-      conf,
-    );
+    return _rd_kafka_conf_get_default_topic_conf(conf);
   }
 
   late final _rd_kafka_conf_get_default_topic_confPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_topic_conf_t> Function(
-                  ffi.Pointer<rd_kafka_conf_t>)>>(
-      'rd_kafka_conf_get_default_topic_conf');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_topic_conf_t> Function(ffi.Pointer<rd_kafka_conf_t>)
+    >
+  >('rd_kafka_conf_get_default_topic_conf');
   late final _rd_kafka_conf_get_default_topic_conf =
-      _rd_kafka_conf_get_default_topic_confPtr.asFunction<
-          ffi.Pointer<rd_kafka_topic_conf_t> Function(
-              ffi.Pointer<rd_kafka_conf_t>)>();
+      _rd_kafka_conf_get_default_topic_confPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_topic_conf_t> Function(
+              ffi.Pointer<rd_kafka_conf_t>,
+            )
+          >();
 
   /// @brief Retrieve configuration value for property \p name.
   ///
@@ -5080,24 +5281,31 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> dest,
     ffi.Pointer<ffi.Size> dest_size,
   ) {
-    return rd_kafka_conf_res_t.fromValue(_rd_kafka_conf_get(
-      conf,
-      name,
-      dest,
-      dest_size,
-    ));
+    return rd_kafka_conf_res_t.fromValue(
+      _rd_kafka_conf_get(conf, name, dest, dest_size),
+    );
   }
 
   late final _rd_kafka_conf_getPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_conf_get');
+  late final _rd_kafka_conf_get =
+      _rd_kafka_conf_getPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_conf_get');
-  late final _rd_kafka_conf_get = _rd_kafka_conf_getPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_conf_t>, ffi.Pointer<ffi.Char>,
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Retrieve topic configuration value for property \p name.
   ///
@@ -5108,24 +5316,31 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> dest,
     ffi.Pointer<ffi.Size> dest_size,
   ) {
-    return rd_kafka_conf_res_t.fromValue(_rd_kafka_topic_conf_get(
-      conf,
-      name,
-      dest,
-      dest_size,
-    ));
+    return rd_kafka_conf_res_t.fromValue(
+      _rd_kafka_topic_conf_get(conf, name, dest, dest_size),
+    );
   }
 
   late final _rd_kafka_topic_conf_getPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_topic_conf_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_topic_conf_get');
+  late final _rd_kafka_topic_conf_get =
+      _rd_kafka_topic_conf_getPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_topic_conf_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_topic_conf_get');
-  late final _rd_kafka_topic_conf_get = _rd_kafka_topic_conf_getPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_topic_conf_t>, ffi.Pointer<ffi.Char>,
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Dump the configuration properties and values of \p conf to an array
   /// with \"key\", \"value\" pairs.
@@ -5137,20 +5352,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_conf_t> conf,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_conf_dump(
-      conf,
-      cntp,
-    );
+    return _rd_kafka_conf_dump(conf, cntp);
   }
 
   late final _rd_kafka_conf_dumpPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<ffi.Char>> Function(
-              ffi.Pointer<rd_kafka_conf_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_conf_dump');
-  late final _rd_kafka_conf_dump = _rd_kafka_conf_dumpPtr.asFunction<
+    ffi.NativeFunction<
       ffi.Pointer<ffi.Pointer<ffi.Char>> Function(
-          ffi.Pointer<rd_kafka_conf_t>, ffi.Pointer<ffi.Size>)>();
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_conf_dump');
+  late final _rd_kafka_conf_dump =
+      _rd_kafka_conf_dumpPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<ffi.Char>> Function(
+              ffi.Pointer<rd_kafka_conf_t>,
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Dump the topic configuration properties and values of \p conf
   /// to an array with \"key\", \"value\" pairs.
@@ -5162,21 +5382,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_topic_conf_t> conf,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_topic_conf_dump(
-      conf,
-      cntp,
-    );
+    return _rd_kafka_topic_conf_dump(conf, cntp);
   }
 
   late final _rd_kafka_topic_conf_dumpPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<ffi.Char>> Function(
-              ffi.Pointer<rd_kafka_topic_conf_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_topic_conf_dump');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<ffi.Char>> Function(
+        ffi.Pointer<rd_kafka_topic_conf_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_topic_conf_dump');
   late final _rd_kafka_topic_conf_dump =
-      _rd_kafka_topic_conf_dumpPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<ffi.Char>> Function(
-              ffi.Pointer<rd_kafka_topic_conf_t>, ffi.Pointer<ffi.Size>)>();
+      _rd_kafka_topic_conf_dumpPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<ffi.Char>> Function(
+              ffi.Pointer<rd_kafka_topic_conf_t>,
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Frees a configuration dump returned from `rd_kafka_conf_dump()` or
   /// `rd_kafka_topic_conf_dump().
@@ -5184,37 +5408,34 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<ffi.Char>> arr,
     int cnt,
   ) {
-    return _rd_kafka_conf_dump_free(
-      arr,
-      cnt,
-    );
+    return _rd_kafka_conf_dump_free(arr, cnt);
   }
 
   late final _rd_kafka_conf_dump_freePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Size)>>('rd_kafka_conf_dump_free');
-  late final _rd_kafka_conf_dump_free = _rd_kafka_conf_dump_freePtr
-      .asFunction<void Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Size)
+    >
+  >('rd_kafka_conf_dump_free');
+  late final _rd_kafka_conf_dump_free =
+      _rd_kafka_conf_dump_freePtr
+          .asFunction<void Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
 
   /// @brief Prints a table to \p fp of all supported configuration properties,
   /// their default values as well as a description.
   ///
   /// @remark All properties and properties and values are shown, even those
   /// that have been disabled at build time due to missing dependencies.
-  void rd_kafka_conf_properties_show(
-    ffi.Pointer<FILE> fp,
-  ) {
-    return _rd_kafka_conf_properties_show(
-      fp,
-    );
+  void rd_kafka_conf_properties_show(ffi.Pointer<FILE> fp) {
+    return _rd_kafka_conf_properties_show(fp);
   }
 
   late final _rd_kafka_conf_properties_showPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<FILE>)>>(
-          'rd_kafka_conf_properties_show');
-  late final _rd_kafka_conf_properties_show = _rd_kafka_conf_properties_showPtr
-      .asFunction<void Function(ffi.Pointer<FILE>)>();
+        'rd_kafka_conf_properties_show',
+      );
+  late final _rd_kafka_conf_properties_show =
+      _rd_kafka_conf_properties_showPtr
+          .asFunction<void Function(ffi.Pointer<FILE>)>();
 
   /// @brief Create topic configuration object
   ///
@@ -5224,62 +5445,66 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_topic_conf_newPtr = _lookup<
-          ffi.NativeFunction<ffi.Pointer<rd_kafka_topic_conf_t> Function()>>(
-      'rd_kafka_topic_conf_new');
-  late final _rd_kafka_topic_conf_new = _rd_kafka_topic_conf_newPtr
-      .asFunction<ffi.Pointer<rd_kafka_topic_conf_t> Function()>();
+    ffi.NativeFunction<ffi.Pointer<rd_kafka_topic_conf_t> Function()>
+  >('rd_kafka_topic_conf_new');
+  late final _rd_kafka_topic_conf_new =
+      _rd_kafka_topic_conf_newPtr
+          .asFunction<ffi.Pointer<rd_kafka_topic_conf_t> Function()>();
 
   /// @brief Creates a copy/duplicate of topic configuration object \p conf.
   ffi.Pointer<rd_kafka_topic_conf_t> rd_kafka_topic_conf_dup(
     ffi.Pointer<rd_kafka_topic_conf_t> conf,
   ) {
-    return _rd_kafka_topic_conf_dup(
-      conf,
-    );
+    return _rd_kafka_topic_conf_dup(conf);
   }
 
   late final _rd_kafka_topic_conf_dupPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_topic_conf_t> Function(
-              ffi.Pointer<rd_kafka_topic_conf_t>)>>('rd_kafka_topic_conf_dup');
-  late final _rd_kafka_topic_conf_dup = _rd_kafka_topic_conf_dupPtr.asFunction<
+    ffi.NativeFunction<
       ffi.Pointer<rd_kafka_topic_conf_t> Function(
-          ffi.Pointer<rd_kafka_topic_conf_t>)>();
+        ffi.Pointer<rd_kafka_topic_conf_t>,
+      )
+    >
+  >('rd_kafka_topic_conf_dup');
+  late final _rd_kafka_topic_conf_dup =
+      _rd_kafka_topic_conf_dupPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_topic_conf_t> Function(
+              ffi.Pointer<rd_kafka_topic_conf_t>,
+            )
+          >();
 
   /// @brief Creates a copy/duplicate of \p rk 's default topic configuration
   /// object.
   ffi.Pointer<rd_kafka_topic_conf_t> rd_kafka_default_topic_conf_dup(
     ffi.Pointer<rd_kafka_t> rk,
   ) {
-    return _rd_kafka_default_topic_conf_dup(
-      rk,
-    );
+    return _rd_kafka_default_topic_conf_dup(rk);
   }
 
   late final _rd_kafka_default_topic_conf_dupPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_topic_conf_t> Function(
-              ffi.Pointer<rd_kafka_t>)>>('rd_kafka_default_topic_conf_dup');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_topic_conf_t> Function(ffi.Pointer<rd_kafka_t>)
+    >
+  >('rd_kafka_default_topic_conf_dup');
   late final _rd_kafka_default_topic_conf_dup =
-      _rd_kafka_default_topic_conf_dupPtr.asFunction<
-          ffi.Pointer<rd_kafka_topic_conf_t> Function(
-              ffi.Pointer<rd_kafka_t>)>();
+      _rd_kafka_default_topic_conf_dupPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_topic_conf_t> Function(ffi.Pointer<rd_kafka_t>)
+          >();
 
   /// @brief Destroys a topic conf object.
   void rd_kafka_topic_conf_destroy(
     ffi.Pointer<rd_kafka_topic_conf_t> topic_conf,
   ) {
-    return _rd_kafka_topic_conf_destroy(
-      topic_conf,
-    );
+    return _rd_kafka_topic_conf_destroy(topic_conf);
   }
 
   late final _rd_kafka_topic_conf_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<rd_kafka_topic_conf_t>)>>(
-      'rd_kafka_topic_conf_destroy');
-  late final _rd_kafka_topic_conf_destroy = _rd_kafka_topic_conf_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_topic_conf_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_topic_conf_t>)>
+  >('rd_kafka_topic_conf_destroy');
+  late final _rd_kafka_topic_conf_destroy =
+      _rd_kafka_topic_conf_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_topic_conf_t>)>();
 
   /// @brief Sets a single rd_kafka_topic_conf_t value by property name.
   ///
@@ -5294,26 +5519,33 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return rd_kafka_conf_res_t.fromValue(_rd_kafka_topic_conf_set(
-      conf,
-      name,
-      value,
-      errstr,
-      errstr_size,
-    ));
+    return rd_kafka_conf_res_t.fromValue(
+      _rd_kafka_topic_conf_set(conf, name, value, errstr, errstr_size),
+    );
   }
 
   late final _rd_kafka_topic_conf_setPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_topic_conf_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_topic_conf_set');
+  late final _rd_kafka_topic_conf_set =
+      _rd_kafka_topic_conf_setPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_topic_conf_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_topic_conf_set');
-  late final _rd_kafka_topic_conf_set = _rd_kafka_topic_conf_setPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_topic_conf_t>, ffi.Pointer<ffi.Char>,
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
+              int,
+            )
+          >();
 
   /// @brief Sets the application's opaque pointer that will be passed to all topic
   /// callbacks as the \c rkt_opaque argument.
@@ -5323,20 +5555,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_topic_conf_t> conf,
     ffi.Pointer<ffi.Void> rkt_opaque,
   ) {
-    return _rd_kafka_topic_conf_set_opaque(
-      conf,
-      rkt_opaque,
-    );
+    return _rd_kafka_topic_conf_set_opaque(conf, rkt_opaque);
   }
 
   late final _rd_kafka_topic_conf_set_opaquePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<rd_kafka_topic_conf_t>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_topic_conf_set_opaque');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_topic_conf_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_topic_conf_set_opaque');
   late final _rd_kafka_topic_conf_set_opaque =
-      _rd_kafka_topic_conf_set_opaquePtr.asFunction<
-          void Function(
-              ffi.Pointer<rd_kafka_topic_conf_t>, ffi.Pointer<ffi.Void>)>();
+      _rd_kafka_topic_conf_set_opaquePtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<rd_kafka_topic_conf_t>,
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief \b Producer: Set partitioner callback in provided topic conf object.
   ///
@@ -5358,49 +5595,60 @@ class LibRdKafka {
   void rd_kafka_topic_conf_set_partitioner_cb(
     ffi.Pointer<rd_kafka_topic_conf_t> topic_conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Int32 Function(
+      ffi.NativeFunction<
+        ffi.Int32 Function(
+          ffi.Pointer<rd_kafka_topic_t> rkt,
+          ffi.Pointer<ffi.Void> keydata,
+          ffi.Size keylen,
+          ffi.Int32 partition_cnt,
+          ffi.Pointer<ffi.Void> rkt_opaque,
+          ffi.Pointer<ffi.Void> msg_opaque,
+        )
+      >
+    >
+    partitioner,
+  ) {
+    return _rd_kafka_topic_conf_set_partitioner_cb(topic_conf, partitioner);
+  }
+
+  late final _rd_kafka_topic_conf_set_partitioner_cbPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_topic_conf_t>,
+        ffi.Pointer<
+          ffi.NativeFunction<
+            ffi.Int32 Function(
+              ffi.Pointer<rd_kafka_topic_t> rkt,
+              ffi.Pointer<ffi.Void> keydata,
+              ffi.Size keylen,
+              ffi.Int32 partition_cnt,
+              ffi.Pointer<ffi.Void> rkt_opaque,
+              ffi.Pointer<ffi.Void> msg_opaque,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_topic_conf_set_partitioner_cb');
+  late final _rd_kafka_topic_conf_set_partitioner_cb =
+      _rd_kafka_topic_conf_set_partitioner_cbPtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<rd_kafka_topic_conf_t>,
+              ffi.Pointer<
+                ffi.NativeFunction<
+                  ffi.Int32 Function(
                     ffi.Pointer<rd_kafka_topic_t> rkt,
                     ffi.Pointer<ffi.Void> keydata,
                     ffi.Size keylen,
                     ffi.Int32 partition_cnt,
                     ffi.Pointer<ffi.Void> rkt_opaque,
-                    ffi.Pointer<ffi.Void> msg_opaque)>>
-        partitioner,
-  ) {
-    return _rd_kafka_topic_conf_set_partitioner_cb(
-      topic_conf,
-      partitioner,
-    );
-  }
-
-  late final _rd_kafka_topic_conf_set_partitioner_cbPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_topic_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Int32 Function(
-                              ffi.Pointer<rd_kafka_topic_t> rkt,
-                              ffi.Pointer<ffi.Void> keydata,
-                              ffi.Size keylen,
-                              ffi.Int32 partition_cnt,
-                              ffi.Pointer<ffi.Void> rkt_opaque,
-                              ffi.Pointer<ffi.Void> msg_opaque)>>)>>(
-      'rd_kafka_topic_conf_set_partitioner_cb');
-  late final _rd_kafka_topic_conf_set_partitioner_cb =
-      _rd_kafka_topic_conf_set_partitioner_cbPtr.asFunction<
-          void Function(
-              ffi.Pointer<rd_kafka_topic_conf_t>,
-              ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Int32 Function(
-                          ffi.Pointer<rd_kafka_topic_t> rkt,
-                          ffi.Pointer<ffi.Void> keydata,
-                          ffi.Size keylen,
-                          ffi.Int32 partition_cnt,
-                          ffi.Pointer<ffi.Void> rkt_opaque,
-                          ffi.Pointer<ffi.Void> msg_opaque)>>)>();
+                    ffi.Pointer<ffi.Void> msg_opaque,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief \b Producer: Set message queueing order comparator callback.
   ///
@@ -5428,34 +5676,48 @@ class LibRdKafka {
   void rd_kafka_topic_conf_set_msg_order_cmp(
     ffi.Pointer<rd_kafka_topic_conf_t> topic_conf,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Int Function(ffi.Pointer<rd_kafka_message_t> a,
-                    ffi.Pointer<rd_kafka_message_t> b)>>
-        msg_order_cmp,
+      ffi.NativeFunction<
+        ffi.Int Function(
+          ffi.Pointer<rd_kafka_message_t> a,
+          ffi.Pointer<rd_kafka_message_t> b,
+        )
+      >
+    >
+    msg_order_cmp,
   ) {
-    return _rd_kafka_topic_conf_set_msg_order_cmp(
-      topic_conf,
-      msg_order_cmp,
-    );
+    return _rd_kafka_topic_conf_set_msg_order_cmp(topic_conf, msg_order_cmp);
   }
 
   late final _rd_kafka_topic_conf_set_msg_order_cmpPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_topic_conf_t>,
+        ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_topic_conf_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Int Function(ffi.Pointer<rd_kafka_message_t> a,
-                              ffi.Pointer<rd_kafka_message_t> b)>>)>>(
-      'rd_kafka_topic_conf_set_msg_order_cmp');
+            ffi.Int Function(
+              ffi.Pointer<rd_kafka_message_t> a,
+              ffi.Pointer<rd_kafka_message_t> b,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_topic_conf_set_msg_order_cmp');
   late final _rd_kafka_topic_conf_set_msg_order_cmp =
-      _rd_kafka_topic_conf_set_msg_order_cmpPtr.asFunction<
-          void Function(
+      _rd_kafka_topic_conf_set_msg_order_cmpPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_topic_conf_t>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Int Function(ffi.Pointer<rd_kafka_message_t> a,
-                          ffi.Pointer<rd_kafka_message_t> b)>>)>();
+                ffi.NativeFunction<
+                  ffi.Int Function(
+                    ffi.Pointer<rd_kafka_message_t> a,
+                    ffi.Pointer<rd_kafka_message_t> b,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief Check if partition is available (has a leader broker).
   ///
@@ -5466,16 +5728,14 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_topic_t> rkt,
     int partition,
   ) {
-    return _rd_kafka_topic_partition_available(
-      rkt,
-      partition,
-    );
+    return _rd_kafka_topic_partition_available(rkt, partition);
   }
 
   late final _rd_kafka_topic_partition_availablePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<rd_kafka_topic_t>,
-              ffi.Int32)>>('rd_kafka_topic_partition_available');
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Int32)
+    >
+  >('rd_kafka_topic_partition_available');
   late final _rd_kafka_topic_partition_available =
       _rd_kafka_topic_partition_availablePtr
           .asFunction<int Function(ffi.Pointer<rd_kafka_topic_t>, int)>();
@@ -5509,18 +5769,29 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_msg_partitioner_randomPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int32 Function(
+    ffi.NativeFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<rd_kafka_topic_t>,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Int32,
+        ffi.Pointer<ffi.Void>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_msg_partitioner_random');
+  late final _rd_kafka_msg_partitioner_random =
+      _rd_kafka_msg_partitioner_randomPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_topic_t>,
               ffi.Pointer<ffi.Void>,
-              ffi.Size,
-              ffi.Int32,
+              int,
+              int,
               ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_msg_partitioner_random');
-  late final _rd_kafka_msg_partitioner_random =
-      _rd_kafka_msg_partitioner_randomPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Pointer<ffi.Void>,
-              int, int, ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Consistent partitioner.
   ///
@@ -5552,18 +5823,29 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_msg_partitioner_consistentPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int32 Function(
+    ffi.NativeFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<rd_kafka_topic_t>,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Int32,
+        ffi.Pointer<ffi.Void>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_msg_partitioner_consistent');
+  late final _rd_kafka_msg_partitioner_consistent =
+      _rd_kafka_msg_partitioner_consistentPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_topic_t>,
               ffi.Pointer<ffi.Void>,
-              ffi.Size,
-              ffi.Int32,
+              int,
+              int,
               ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_msg_partitioner_consistent');
-  late final _rd_kafka_msg_partitioner_consistent =
-      _rd_kafka_msg_partitioner_consistentPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Pointer<ffi.Void>,
-              int, int, ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Consistent-Random partitioner.
   ///
@@ -5597,19 +5879,29 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_msg_partitioner_consistent_randomPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int32 Function(
-                  ffi.Pointer<rd_kafka_topic_t>,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Size,
-                  ffi.Int32,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Pointer<ffi.Void>)>>(
-      'rd_kafka_msg_partitioner_consistent_random');
+    ffi.NativeFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<rd_kafka_topic_t>,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Int32,
+        ffi.Pointer<ffi.Void>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_msg_partitioner_consistent_random');
   late final _rd_kafka_msg_partitioner_consistent_random =
-      _rd_kafka_msg_partitioner_consistent_randomPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Pointer<ffi.Void>,
-              int, int, ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+      _rd_kafka_msg_partitioner_consistent_randomPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_topic_t>,
+              ffi.Pointer<ffi.Void>,
+              int,
+              int,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Murmur2 partitioner (Java compatible).
   ///
@@ -5641,18 +5933,29 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_msg_partitioner_murmur2Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int32 Function(
+    ffi.NativeFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<rd_kafka_topic_t>,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Int32,
+        ffi.Pointer<ffi.Void>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_msg_partitioner_murmur2');
+  late final _rd_kafka_msg_partitioner_murmur2 =
+      _rd_kafka_msg_partitioner_murmur2Ptr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_topic_t>,
               ffi.Pointer<ffi.Void>,
-              ffi.Size,
-              ffi.Int32,
+              int,
+              int,
               ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_msg_partitioner_murmur2');
-  late final _rd_kafka_msg_partitioner_murmur2 =
-      _rd_kafka_msg_partitioner_murmur2Ptr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Pointer<ffi.Void>,
-              int, int, ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Consistent-Random Murmur2 partitioner (Java compatible).
   ///
@@ -5685,19 +5988,29 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_msg_partitioner_murmur2_randomPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int32 Function(
-                  ffi.Pointer<rd_kafka_topic_t>,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Size,
-                  ffi.Int32,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Pointer<ffi.Void>)>>(
-      'rd_kafka_msg_partitioner_murmur2_random');
+    ffi.NativeFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<rd_kafka_topic_t>,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Int32,
+        ffi.Pointer<ffi.Void>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_msg_partitioner_murmur2_random');
   late final _rd_kafka_msg_partitioner_murmur2_random =
-      _rd_kafka_msg_partitioner_murmur2_randomPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Pointer<ffi.Void>,
-              int, int, ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+      _rd_kafka_msg_partitioner_murmur2_randomPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_topic_t>,
+              ffi.Pointer<ffi.Void>,
+              int,
+              int,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief FNV-1a partitioner.
   ///
@@ -5729,18 +6042,29 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_msg_partitioner_fnv1aPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int32 Function(
+    ffi.NativeFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<rd_kafka_topic_t>,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Int32,
+        ffi.Pointer<ffi.Void>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_msg_partitioner_fnv1a');
+  late final _rd_kafka_msg_partitioner_fnv1a =
+      _rd_kafka_msg_partitioner_fnv1aPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_topic_t>,
               ffi.Pointer<ffi.Void>,
-              ffi.Size,
-              ffi.Int32,
+              int,
+              int,
               ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_msg_partitioner_fnv1a');
-  late final _rd_kafka_msg_partitioner_fnv1a =
-      _rd_kafka_msg_partitioner_fnv1aPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Pointer<ffi.Void>,
-              int, int, ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Consistent-Random FNV-1a partitioner.
   ///
@@ -5773,18 +6097,29 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_msg_partitioner_fnv1a_randomPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int32 Function(
+    ffi.NativeFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<rd_kafka_topic_t>,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Int32,
+        ffi.Pointer<ffi.Void>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_msg_partitioner_fnv1a_random');
+  late final _rd_kafka_msg_partitioner_fnv1a_random =
+      _rd_kafka_msg_partitioner_fnv1a_randomPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_topic_t>,
               ffi.Pointer<ffi.Void>,
-              ffi.Size,
-              ffi.Int32,
+              int,
+              int,
               ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_msg_partitioner_fnv1a_random');
-  late final _rd_kafka_msg_partitioner_fnv1a_random =
-      _rd_kafka_msg_partitioner_fnv1a_randomPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Pointer<ffi.Void>,
-              int, int, ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Creates a new Kafka handle and starts its operation according to the
   /// specified \p type (\p RD_KAFKA_CONSUMER or \p RD_KAFKA_PRODUCER).
@@ -5816,24 +6151,29 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return _rd_kafka_new(
-      type.value,
-      conf,
-      errstr,
-      errstr_size,
-    );
+    return _rd_kafka_new(type.value, conf, errstr, errstr_size);
   }
 
   late final _rd_kafka_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_t> Function(
-              ffi.UnsignedInt,
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_t> Function(
+        ffi.UnsignedInt,
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_new');
+  late final _rd_kafka_new =
+      _rd_kafka_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_t> Function(
+              int,
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_new');
-  late final _rd_kafka_new = _rd_kafka_newPtr.asFunction<
-      ffi.Pointer<rd_kafka_t> Function(
-          int, ffi.Pointer<rd_kafka_conf_t>, ffi.Pointer<ffi.Char>, int)>();
+              int,
+            )
+          >();
 
   /// @brief Destroy Kafka handle.
   ///
@@ -5847,66 +6187,51 @@ class LibRdKafka {
   /// RD_KAFKA_DESTROY_F_NO_CONSUMER_CLOSE to avoid this behaviour.
   ///
   /// @sa rd_kafka_destroy_flags()
-  void rd_kafka_destroy(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return _rd_kafka_destroy(
-      rk,
-    );
+  void rd_kafka_destroy(ffi.Pointer<rd_kafka_t> rk) {
+    return _rd_kafka_destroy(rk);
   }
 
   late final _rd_kafka_destroyPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_t>)>>(
-          'rd_kafka_destroy');
+        'rd_kafka_destroy',
+      );
   late final _rd_kafka_destroy =
       _rd_kafka_destroyPtr.asFunction<void Function(ffi.Pointer<rd_kafka_t>)>();
 
   /// @brief Destroy Kafka handle according to specified destroy flags
-  void rd_kafka_destroy_flags(
-    ffi.Pointer<rd_kafka_t> rk,
-    int flags,
-  ) {
-    return _rd_kafka_destroy_flags(
-      rk,
-      flags,
-    );
+  void rd_kafka_destroy_flags(ffi.Pointer<rd_kafka_t> rk, int flags) {
+    return _rd_kafka_destroy_flags(rk, flags);
   }
 
   late final _rd_kafka_destroy_flagsPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_t>, ffi.Int)>>(
-      'rd_kafka_destroy_flags');
-  late final _rd_kafka_destroy_flags = _rd_kafka_destroy_flagsPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_t>, int)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_t>, ffi.Int)>
+  >('rd_kafka_destroy_flags');
+  late final _rd_kafka_destroy_flags =
+      _rd_kafka_destroy_flagsPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_t>, int)>();
 
   /// @brief Returns Kafka handle name.
-  ffi.Pointer<ffi.Char> rd_kafka_name(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return _rd_kafka_name(
-      rk,
-    );
+  ffi.Pointer<ffi.Char> rd_kafka_name(ffi.Pointer<rd_kafka_t> rk) {
+    return _rd_kafka_name(rk);
   }
 
   late final _rd_kafka_namePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_t>)>>('rd_kafka_name');
-  late final _rd_kafka_name = _rd_kafka_namePtr
-      .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_t>)>();
+    ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_t>)>
+  >('rd_kafka_name');
+  late final _rd_kafka_name =
+      _rd_kafka_namePtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_t>)
+          >();
 
   /// @brief Returns Kafka handle type.
-  rd_kafka_type_t rd_kafka_type(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return rd_kafka_type_t.fromValue(_rd_kafka_type(
-      rk,
-    ));
+  rd_kafka_type_t rd_kafka_type(ffi.Pointer<rd_kafka_t> rk) {
+    return rd_kafka_type_t.fromValue(_rd_kafka_type(rk));
   }
 
   late final _rd_kafka_typePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_t>)>>('rd_kafka_type');
+    ffi.NativeFunction<ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_t>)>
+  >('rd_kafka_type');
   late final _rd_kafka_type =
       _rd_kafka_typePtr.asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
 
@@ -5918,20 +6243,18 @@ class LibRdKafka {
   /// member id, or NULL if not available.
   /// The application must free the string with \p free() or
   /// rd_kafka_mem_free()
-  ffi.Pointer<ffi.Char> rd_kafka_memberid(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return _rd_kafka_memberid(
-      rk,
-    );
+  ffi.Pointer<ffi.Char> rd_kafka_memberid(ffi.Pointer<rd_kafka_t> rk) {
+    return _rd_kafka_memberid(rk);
   }
 
   late final _rd_kafka_memberidPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_t>)>>('rd_kafka_memberid');
-  late final _rd_kafka_memberid = _rd_kafka_memberidPtr
-      .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_t>)>();
+    ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_t>)>
+  >('rd_kafka_memberid');
+  late final _rd_kafka_memberid =
+      _rd_kafka_memberidPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_t>)
+          >();
 
   /// @brief Returns the ClusterId as reported in broker metadata.
   ///
@@ -5953,18 +6276,19 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     int timeout_ms,
   ) {
-    return _rd_kafka_clusterid(
-      rk,
-      timeout_ms,
-    );
+    return _rd_kafka_clusterid(rk, timeout_ms);
   }
 
   late final _rd_kafka_clusteridPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_t>, ffi.Int)>>('rd_kafka_clusterid');
-  late final _rd_kafka_clusterid = _rd_kafka_clusteridPtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_t>, int)>();
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_t>, ffi.Int)
+    >
+  >('rd_kafka_clusterid');
+  late final _rd_kafka_clusterid =
+      _rd_kafka_clusteridPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_t>, int)
+          >();
 
   /// @brief Returns the current ControllerId as reported in broker metadata.
   ///
@@ -5979,22 +6303,16 @@ class LibRdKafka {
   ///
   /// @returns the controller broker id (>= 0), or -1 if no ControllerId could be
   /// retrieved in the allotted timespan.
-  int rd_kafka_controllerid(
-    ffi.Pointer<rd_kafka_t> rk,
-    int timeout_ms,
-  ) {
-    return _rd_kafka_controllerid(
-      rk,
-      timeout_ms,
-    );
+  int rd_kafka_controllerid(ffi.Pointer<rd_kafka_t> rk, int timeout_ms) {
+    return _rd_kafka_controllerid(rk, timeout_ms);
   }
 
   late final _rd_kafka_controlleridPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int32 Function(
-              ffi.Pointer<rd_kafka_t>, ffi.Int)>>('rd_kafka_controllerid');
-  late final _rd_kafka_controllerid = _rd_kafka_controlleridPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_t>, int)>();
+    ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<rd_kafka_t>, ffi.Int)>
+  >('rd_kafka_controllerid');
+  late final _rd_kafka_controllerid =
+      _rd_kafka_controlleridPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_t>, int)>();
 
   /// @brief Creates a new topic handle for topic named \p topic.
   ///
@@ -6020,22 +6338,27 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> topic,
     ffi.Pointer<rd_kafka_topic_conf_t> conf,
   ) {
-    return _rd_kafka_topic_new(
-      rk,
-      topic,
-      conf,
-    );
+    return _rd_kafka_topic_new(rk, topic, conf);
   }
 
   late final _rd_kafka_topic_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_topic_t> Function(
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_topic_t> Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_topic_conf_t>,
+      )
+    >
+  >('rd_kafka_topic_new');
+  late final _rd_kafka_topic_new =
+      _rd_kafka_topic_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_topic_t> Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
-              ffi.Pointer<rd_kafka_topic_conf_t>)>>('rd_kafka_topic_new');
-  late final _rd_kafka_topic_new = _rd_kafka_topic_newPtr.asFunction<
-      ffi.Pointer<rd_kafka_topic_t> Function(ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<ffi.Char>, ffi.Pointer<rd_kafka_topic_conf_t>)>();
+              ffi.Pointer<rd_kafka_topic_conf_t>,
+            )
+          >();
 
   /// @brief Loose application's topic handle refcount as previously created
   /// with `rd_kafka_topic_new()`.
@@ -6043,52 +6366,51 @@ class LibRdKafka {
   /// @remark Since topic objects are refcounted (both internally and for the app)
   /// the topic object might not actually be destroyed by this call,
   /// but the application must consider the object destroyed.
-  void rd_kafka_topic_destroy(
-    ffi.Pointer<rd_kafka_topic_t> rkt,
-  ) {
-    return _rd_kafka_topic_destroy(
-      rkt,
-    );
+  void rd_kafka_topic_destroy(ffi.Pointer<rd_kafka_topic_t> rkt) {
+    return _rd_kafka_topic_destroy(rkt);
   }
 
   late final _rd_kafka_topic_destroyPtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_topic_t>)>>(
-      'rd_kafka_topic_destroy');
-  late final _rd_kafka_topic_destroy = _rd_kafka_topic_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_topic_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_topic_t>)>
+  >('rd_kafka_topic_destroy');
+  late final _rd_kafka_topic_destroy =
+      _rd_kafka_topic_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_topic_t>)>();
 
   /// @brief Returns the topic name.
-  ffi.Pointer<ffi.Char> rd_kafka_topic_name(
-    ffi.Pointer<rd_kafka_topic_t> rkt,
-  ) {
-    return _rd_kafka_topic_name(
-      rkt,
-    );
+  ffi.Pointer<ffi.Char> rd_kafka_topic_name(ffi.Pointer<rd_kafka_topic_t> rkt) {
+    return _rd_kafka_topic_name(rkt);
   }
 
   late final _rd_kafka_topic_namePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_topic_t>)>>('rd_kafka_topic_name');
-  late final _rd_kafka_topic_name = _rd_kafka_topic_namePtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_topic_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_topic_t>)
+    >
+  >('rd_kafka_topic_name');
+  late final _rd_kafka_topic_name =
+      _rd_kafka_topic_namePtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_topic_t>)
+          >();
 
   /// @brief Get the \p rkt_opaque pointer that was set in the topic configuration
   /// with rd_kafka_topic_conf_set_opaque().
   ffi.Pointer<ffi.Void> rd_kafka_topic_opaque(
     ffi.Pointer<rd_kafka_topic_t> rkt,
   ) {
-    return _rd_kafka_topic_opaque(
-      rkt,
-    );
+    return _rd_kafka_topic_opaque(rkt);
   }
 
   late final _rd_kafka_topic_opaquePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Void> Function(
-              ffi.Pointer<rd_kafka_topic_t>)>>('rd_kafka_topic_opaque');
-  late final _rd_kafka_topic_opaque = _rd_kafka_topic_opaquePtr.asFunction<
-      ffi.Pointer<ffi.Void> Function(ffi.Pointer<rd_kafka_topic_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Void> Function(ffi.Pointer<rd_kafka_topic_t>)
+    >
+  >('rd_kafka_topic_opaque');
+  late final _rd_kafka_topic_opaque =
+      _rd_kafka_topic_opaquePtr
+          .asFunction<
+            ffi.Pointer<ffi.Void> Function(ffi.Pointer<rd_kafka_topic_t>)
+          >();
 
   /// @brief Polls the provided kafka handle for events.
   ///
@@ -6115,21 +6437,16 @@ class LibRdKafka {
   /// (rd_kafka_conf_set_oauthbearer_token_refresh_cb()) [all]
   ///
   /// @returns the number of events served.
-  int rd_kafka_poll(
-    ffi.Pointer<rd_kafka_t> rk,
-    int timeout_ms,
-  ) {
-    return _rd_kafka_poll(
-      rk,
-      timeout_ms,
-    );
+  int rd_kafka_poll(ffi.Pointer<rd_kafka_t> rk, int timeout_ms) {
+    return _rd_kafka_poll(rk, timeout_ms);
   }
 
   late final _rd_kafka_pollPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Int)>>('rd_kafka_poll');
-  late final _rd_kafka_poll = _rd_kafka_pollPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_t>, int)>();
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Int)>
+  >('rd_kafka_poll');
+  late final _rd_kafka_poll =
+      _rd_kafka_pollPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_t>, int)>();
 
   /// @brief Cancels the current callback dispatcher (rd_kafka_poll(),
   /// rd_kafka_consume_callback(), etc).
@@ -6139,17 +6456,14 @@ class LibRdKafka {
   /// events.
   ///
   /// @remark This function MUST ONLY be called from within a librdkafka callback.
-  void rd_kafka_yield(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return _rd_kafka_yield(
-      rk,
-    );
+  void rd_kafka_yield(ffi.Pointer<rd_kafka_t> rk) {
+    return _rd_kafka_yield(rk);
   }
 
   late final _rd_kafka_yieldPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_t>)>>(
-          'rd_kafka_yield');
+        'rd_kafka_yield',
+      );
   late final _rd_kafka_yield =
       _rd_kafka_yieldPtr.asFunction<void Function(ffi.Pointer<rd_kafka_t>)>();
 
@@ -6162,21 +6476,27 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_pause_partitions(
-      rk,
-      partitions,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_pause_partitions(rk, partitions),
+    );
   }
 
   late final _rd_kafka_pause_partitionsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
-      'rd_kafka_pause_partitions');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+      )
+    >
+  >('rd_kafka_pause_partitions');
   late final _rd_kafka_pause_partitions =
-      _rd_kafka_pause_partitionsPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+      _rd_kafka_pause_partitionsPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_t>,
+              ffi.Pointer<rd_kafka_topic_partition_list_t>,
+            )
+          >();
 
   /// @brief Resume producing consumption for the provided list of partitions.
   ///
@@ -6187,21 +6507,27 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_resume_partitions(
-      rk,
-      partitions,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_resume_partitions(rk, partitions),
+    );
   }
 
   late final _rd_kafka_resume_partitionsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
-      'rd_kafka_resume_partitions');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+      )
+    >
+  >('rd_kafka_resume_partitions');
   late final _rd_kafka_resume_partitions =
-      _rd_kafka_resume_partitionsPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+      _rd_kafka_resume_partitionsPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_t>,
+              ffi.Pointer<rd_kafka_topic_partition_list_t>,
+            )
+          >();
 
   /// @brief Query broker for low (oldest/beginning) and high (newest/end) offsets
   /// for partition.
@@ -6217,29 +6543,42 @@ class LibRdKafka {
     ffi.Pointer<ffi.Int64> high,
     int timeout_ms,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_query_watermark_offsets(
-      rk,
-      topic,
-      partition,
-      low,
-      high,
-      timeout_ms,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_query_watermark_offsets(
+        rk,
+        topic,
+        partition,
+        low,
+        high,
+        timeout_ms,
+      ),
+    );
   }
 
   late final _rd_kafka_query_watermark_offsetsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int32,
+        ffi.Pointer<ffi.Int64>,
+        ffi.Pointer<ffi.Int64>,
+        ffi.Int,
+      )
+    >
+  >('rd_kafka_query_watermark_offsets');
+  late final _rd_kafka_query_watermark_offsets =
+      _rd_kafka_query_watermark_offsetsPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
-              ffi.Int32,
+              int,
               ffi.Pointer<ffi.Int64>,
               ffi.Pointer<ffi.Int64>,
-              ffi.Int)>>('rd_kafka_query_watermark_offsets');
-  late final _rd_kafka_query_watermark_offsets =
-      _rd_kafka_query_watermark_offsetsPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>, int,
-              ffi.Pointer<ffi.Int64>, ffi.Pointer<ffi.Int64>, int)>();
+              int,
+            )
+          >();
 
   /// @brief Get last known low (oldest/beginning) and high (newest/end) offsets
   /// for partition.
@@ -6262,27 +6601,33 @@ class LibRdKafka {
     ffi.Pointer<ffi.Int64> low,
     ffi.Pointer<ffi.Int64> high,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_get_watermark_offsets(
-      rk,
-      topic,
-      partition,
-      low,
-      high,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_get_watermark_offsets(rk, topic, partition, low, high),
+    );
   }
 
   late final _rd_kafka_get_watermark_offsetsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int32,
+        ffi.Pointer<ffi.Int64>,
+        ffi.Pointer<ffi.Int64>,
+      )
+    >
+  >('rd_kafka_get_watermark_offsets');
+  late final _rd_kafka_get_watermark_offsets =
+      _rd_kafka_get_watermark_offsetsPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
-              ffi.Int32,
+              int,
               ffi.Pointer<ffi.Int64>,
-              ffi.Pointer<ffi.Int64>)>>('rd_kafka_get_watermark_offsets');
-  late final _rd_kafka_get_watermark_offsets =
-      _rd_kafka_get_watermark_offsetsPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>, int,
-              ffi.Pointer<ffi.Int64>, ffi.Pointer<ffi.Int64>)>();
+              ffi.Pointer<ffi.Int64>,
+            )
+          >();
 
   /// @brief Look up the offsets for the given partitions by timestamp.
   ///
@@ -6312,23 +6657,29 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
     int timeout_ms,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_offsets_for_times(
-      rk,
-      offsets,
-      timeout_ms,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_offsets_for_times(rk, offsets, timeout_ms),
+    );
   }
 
   late final _rd_kafka_offsets_for_timesPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+        ffi.Int,
+      )
+    >
+  >('rd_kafka_offsets_for_times');
+  late final _rd_kafka_offsets_for_times =
+      _rd_kafka_offsets_for_timesPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
-              ffi.Int)>>('rd_kafka_offsets_for_times');
-  late final _rd_kafka_offsets_for_times =
-      _rd_kafka_offsets_for_timesPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<rd_kafka_topic_partition_list_t>, int)>();
+              int,
+            )
+          >();
 
   /// @brief Allocate and zero memory using the same allocator librdkafka uses.
   ///
@@ -6346,19 +6697,23 @@ class LibRdKafka {
     int num,
     int size,
   ) {
-    return _rd_kafka_mem_calloc(
-      rk,
-      num,
-      size,
-    );
+    return _rd_kafka_mem_calloc(rk, num, size);
   }
 
   late final _rd_kafka_mem_callocPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Void> Function(ffi.Pointer<rd_kafka_t>, ffi.Size,
-              ffi.Size)>>('rd_kafka_mem_calloc');
-  late final _rd_kafka_mem_calloc = _rd_kafka_mem_callocPtr.asFunction<
-      ffi.Pointer<ffi.Void> Function(ffi.Pointer<rd_kafka_t>, int, int)>();
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Void> Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Size,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_mem_calloc');
+  late final _rd_kafka_mem_calloc =
+      _rd_kafka_mem_callocPtr
+          .asFunction<
+            ffi.Pointer<ffi.Void> Function(ffi.Pointer<rd_kafka_t>, int, int)
+          >();
 
   /// @brief Allocate memory using the same allocator librdkafka uses.
   ///
@@ -6375,18 +6730,19 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     int size,
   ) {
-    return _rd_kafka_mem_malloc(
-      rk,
-      size,
-    );
+    return _rd_kafka_mem_malloc(rk, size);
   }
 
   late final _rd_kafka_mem_mallocPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Void> Function(
-              ffi.Pointer<rd_kafka_t>, ffi.Size)>>('rd_kafka_mem_malloc');
-  late final _rd_kafka_mem_malloc = _rd_kafka_mem_mallocPtr.asFunction<
-      ffi.Pointer<ffi.Void> Function(ffi.Pointer<rd_kafka_t>, int)>();
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Void> Function(ffi.Pointer<rd_kafka_t>, ffi.Size)
+    >
+  >('rd_kafka_mem_malloc');
+  late final _rd_kafka_mem_malloc =
+      _rd_kafka_mem_mallocPtr
+          .asFunction<
+            ffi.Pointer<ffi.Void> Function(ffi.Pointer<rd_kafka_t>, int)
+          >();
 
   /// @brief Free pointer returned by librdkafka
   ///
@@ -6406,51 +6762,49 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Void> ptr,
   ) {
-    return _rd_kafka_mem_free(
-      rk,
-      ptr,
-    );
+    return _rd_kafka_mem_free(rk, ptr);
   }
 
   late final _rd_kafka_mem_freePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_mem_free');
-  late final _rd_kafka_mem_free = _rd_kafka_mem_freePtr.asFunction<
-      void Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Void>)>();
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Void>)
+    >
+  >('rd_kafka_mem_free');
+  late final _rd_kafka_mem_free =
+      _rd_kafka_mem_freePtr
+          .asFunction<
+            void Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Void>)
+          >();
 
   /// @brief Create a new message queue.
   ///
   /// See rd_kafka_consume_start_queue(), rd_kafka_consume_queue(), et.al.
-  ffi.Pointer<rd_kafka_queue_t> rd_kafka_queue_new(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return _rd_kafka_queue_new(
-      rk,
-    );
+  ffi.Pointer<rd_kafka_queue_t> rd_kafka_queue_new(ffi.Pointer<rd_kafka_t> rk) {
+    return _rd_kafka_queue_new(rk);
   }
 
   late final _rd_kafka_queue_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_queue_t> Function(
-              ffi.Pointer<rd_kafka_t>)>>('rd_kafka_queue_new');
-  late final _rd_kafka_queue_new = _rd_kafka_queue_newPtr.asFunction<
-      ffi.Pointer<rd_kafka_queue_t> Function(ffi.Pointer<rd_kafka_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_queue_t> Function(ffi.Pointer<rd_kafka_t>)
+    >
+  >('rd_kafka_queue_new');
+  late final _rd_kafka_queue_new =
+      _rd_kafka_queue_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_queue_t> Function(ffi.Pointer<rd_kafka_t>)
+          >();
 
   /// Destroy a queue, purging all of its enqueued messages.
-  void rd_kafka_queue_destroy(
-    ffi.Pointer<rd_kafka_queue_t> rkqu,
-  ) {
-    return _rd_kafka_queue_destroy(
-      rkqu,
-    );
+  void rd_kafka_queue_destroy(ffi.Pointer<rd_kafka_queue_t> rkqu) {
+    return _rd_kafka_queue_destroy(rkqu);
   }
 
   late final _rd_kafka_queue_destroyPtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_queue_t>)>>(
-      'rd_kafka_queue_destroy');
-  late final _rd_kafka_queue_destroy = _rd_kafka_queue_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_queue_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_queue_t>)>
+  >('rd_kafka_queue_destroy');
+  late final _rd_kafka_queue_destroy =
+      _rd_kafka_queue_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_queue_t>)>();
 
   /// @returns a reference to the main librdkafka event queue.
   /// This is the queue served by rd_kafka_poll().
@@ -6459,17 +6813,19 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_queue_t> rd_kafka_queue_get_main(
     ffi.Pointer<rd_kafka_t> rk,
   ) {
-    return _rd_kafka_queue_get_main(
-      rk,
-    );
+    return _rd_kafka_queue_get_main(rk);
   }
 
   late final _rd_kafka_queue_get_mainPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_queue_t> Function(
-              ffi.Pointer<rd_kafka_t>)>>('rd_kafka_queue_get_main');
-  late final _rd_kafka_queue_get_main = _rd_kafka_queue_get_mainPtr.asFunction<
-      ffi.Pointer<rd_kafka_queue_t> Function(ffi.Pointer<rd_kafka_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_queue_t> Function(ffi.Pointer<rd_kafka_t>)
+    >
+  >('rd_kafka_queue_get_main');
+  late final _rd_kafka_queue_get_main =
+      _rd_kafka_queue_get_mainPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_queue_t> Function(ffi.Pointer<rd_kafka_t>)
+          >();
 
   /// @returns a reference to the SASL callback queue, if a SASL mechanism
   /// with callbacks is configured (currently only OAUTHBEARER), else
@@ -6481,17 +6837,19 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_queue_t> rd_kafka_queue_get_sasl(
     ffi.Pointer<rd_kafka_t> rk,
   ) {
-    return _rd_kafka_queue_get_sasl(
-      rk,
-    );
+    return _rd_kafka_queue_get_sasl(rk);
   }
 
   late final _rd_kafka_queue_get_saslPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_queue_t> Function(
-              ffi.Pointer<rd_kafka_t>)>>('rd_kafka_queue_get_sasl');
-  late final _rd_kafka_queue_get_sasl = _rd_kafka_queue_get_saslPtr.asFunction<
-      ffi.Pointer<rd_kafka_queue_t> Function(ffi.Pointer<rd_kafka_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_queue_t> Function(ffi.Pointer<rd_kafka_t>)
+    >
+  >('rd_kafka_queue_get_sasl');
+  late final _rd_kafka_queue_get_sasl =
+      _rd_kafka_queue_get_saslPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_queue_t> Function(ffi.Pointer<rd_kafka_t>)
+          >();
 
   /// @brief Enable SASL OAUTHBEARER refresh callbacks on the librdkafka
   /// background thread.
@@ -6509,18 +6867,19 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_error_t> rd_kafka_sasl_background_callbacks_enable(
     ffi.Pointer<rd_kafka_t> rk,
   ) {
-    return _rd_kafka_sasl_background_callbacks_enable(
-      rk,
-    );
+    return _rd_kafka_sasl_background_callbacks_enable(rk);
   }
 
   late final _rd_kafka_sasl_background_callbacks_enablePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>)>>(
-      'rd_kafka_sasl_background_callbacks_enable');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>)
+    >
+  >('rd_kafka_sasl_background_callbacks_enable');
   late final _rd_kafka_sasl_background_callbacks_enable =
-      _rd_kafka_sasl_background_callbacks_enablePtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>)>();
+      _rd_kafka_sasl_background_callbacks_enablePtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>)
+          >();
 
   /// @brief Sets SASL credentials used for SASL PLAIN and SCRAM mechanisms by
   /// this Kafka client.
@@ -6539,23 +6898,27 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> username,
     ffi.Pointer<ffi.Char> password,
   ) {
-    return _rd_kafka_sasl_set_credentials(
-      rk,
-      username,
-      password,
-    );
+    return _rd_kafka_sasl_set_credentials(rk, username, password);
   }
 
   late final _rd_kafka_sasl_set_credentialsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('rd_kafka_sasl_set_credentials');
+  late final _rd_kafka_sasl_set_credentials =
+      _rd_kafka_sasl_set_credentialsPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>>('rd_kafka_sasl_set_credentials');
-  late final _rd_kafka_sasl_set_credentials =
-      _rd_kafka_sasl_set_credentialsPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
   /// @returns a reference to the librdkafka consumer queue.
   /// This is the queue served by rd_kafka_consumer_poll().
@@ -6573,18 +6936,19 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_queue_t> rd_kafka_queue_get_consumer(
     ffi.Pointer<rd_kafka_t> rk,
   ) {
-    return _rd_kafka_queue_get_consumer(
-      rk,
-    );
+    return _rd_kafka_queue_get_consumer(rk);
   }
 
   late final _rd_kafka_queue_get_consumerPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_queue_t> Function(
-              ffi.Pointer<rd_kafka_t>)>>('rd_kafka_queue_get_consumer');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_queue_t> Function(ffi.Pointer<rd_kafka_t>)
+    >
+  >('rd_kafka_queue_get_consumer');
   late final _rd_kafka_queue_get_consumer =
-      _rd_kafka_queue_get_consumerPtr.asFunction<
-          ffi.Pointer<rd_kafka_queue_t> Function(ffi.Pointer<rd_kafka_t>)>();
+      _rd_kafka_queue_get_consumerPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_queue_t> Function(ffi.Pointer<rd_kafka_t>)
+          >();
 
   /// @returns a reference to the partition's queue, or NULL if
   /// partition is invalid.
@@ -6599,23 +6963,27 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> topic,
     int partition,
   ) {
-    return _rd_kafka_queue_get_partition(
-      rk,
-      topic,
-      partition,
-    );
+    return _rd_kafka_queue_get_partition(rk, topic, partition);
   }
 
   late final _rd_kafka_queue_get_partitionPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_queue_t> Function(
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_queue_t> Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int32,
+      )
+    >
+  >('rd_kafka_queue_get_partition');
+  late final _rd_kafka_queue_get_partition =
+      _rd_kafka_queue_get_partitionPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_queue_t> Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
-              ffi.Int32)>>('rd_kafka_queue_get_partition');
-  late final _rd_kafka_queue_get_partition =
-      _rd_kafka_queue_get_partitionPtr.asFunction<
-          ffi.Pointer<rd_kafka_queue_t> Function(
-              ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>, int)>();
+              int,
+            )
+          >();
 
   /// @returns a reference to the background thread queue, or NULL if the
   /// background queue is not enabled.
@@ -6640,18 +7008,19 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_queue_t> rd_kafka_queue_get_background(
     ffi.Pointer<rd_kafka_t> rk,
   ) {
-    return _rd_kafka_queue_get_background(
-      rk,
-    );
+    return _rd_kafka_queue_get_background(rk);
   }
 
   late final _rd_kafka_queue_get_backgroundPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_queue_t> Function(
-              ffi.Pointer<rd_kafka_t>)>>('rd_kafka_queue_get_background');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_queue_t> Function(ffi.Pointer<rd_kafka_t>)
+    >
+  >('rd_kafka_queue_get_background');
   late final _rd_kafka_queue_get_background =
-      _rd_kafka_queue_get_backgroundPtr.asFunction<
-          ffi.Pointer<rd_kafka_queue_t> Function(ffi.Pointer<rd_kafka_t>)>();
+      _rd_kafka_queue_get_backgroundPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_queue_t> Function(ffi.Pointer<rd_kafka_t>)
+          >();
 
   /// @brief Forward/re-route queue \p src to \p dst.
   /// If \p dst is \c NULL the forwarding is removed.
@@ -6665,19 +7034,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_queue_t> src,
     ffi.Pointer<rd_kafka_queue_t> dst,
   ) {
-    return _rd_kafka_queue_forward(
-      src,
-      dst,
-    );
+    return _rd_kafka_queue_forward(src, dst);
   }
 
   late final _rd_kafka_queue_forwardPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<rd_kafka_queue_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_queue_forward');
-  late final _rd_kafka_queue_forward = _rd_kafka_queue_forwardPtr.asFunction<
-      void Function(
-          ffi.Pointer<rd_kafka_queue_t>, ffi.Pointer<rd_kafka_queue_t>)>();
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_queue_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_queue_forward');
+  late final _rd_kafka_queue_forward =
+      _rd_kafka_queue_forwardPtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<rd_kafka_queue_t>,
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Forward librdkafka logs (and debug) to the specified queue
   /// for serving with one of the ..poll() calls.
@@ -6699,33 +7074,31 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_set_log_queue(
-      rk,
-      rkqu,
-    ));
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_set_log_queue(rk, rkqu));
   }
 
   late final _rd_kafka_set_log_queuePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_set_log_queue');
-  late final _rd_kafka_set_log_queue = _rd_kafka_set_log_queuePtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<rd_kafka_queue_t>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<rd_kafka_queue_t>)
+    >
+  >('rd_kafka_set_log_queue');
+  late final _rd_kafka_set_log_queue =
+      _rd_kafka_set_log_queuePtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<rd_kafka_queue_t>)
+          >();
 
   /// @returns the current number of elements in queue.
-  int rd_kafka_queue_length(
-    ffi.Pointer<rd_kafka_queue_t> rkqu,
-  ) {
-    return _rd_kafka_queue_length(
-      rkqu,
-    );
+  int rd_kafka_queue_length(ffi.Pointer<rd_kafka_queue_t> rkqu) {
+    return _rd_kafka_queue_length(rkqu);
   }
 
   late final _rd_kafka_queue_lengthPtr = _lookup<
-          ffi.NativeFunction<ffi.Size Function(ffi.Pointer<rd_kafka_queue_t>)>>(
-      'rd_kafka_queue_length');
-  late final _rd_kafka_queue_length = _rd_kafka_queue_lengthPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_queue_t>)>();
+    ffi.NativeFunction<ffi.Size Function(ffi.Pointer<rd_kafka_queue_t>)>
+  >('rd_kafka_queue_length');
+  late final _rd_kafka_queue_length =
+      _rd_kafka_queue_lengthPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_queue_t>)>();
 
   /// @brief Enable IO event triggering for queue.
   ///
@@ -6748,25 +7121,29 @@ class LibRdKafka {
     ffi.Pointer<ffi.Void> payload,
     int size,
   ) {
-    return _rd_kafka_queue_io_event_enable(
-      rkqu,
-      fd,
-      payload,
-      size,
-    );
+    return _rd_kafka_queue_io_event_enable(rkqu, fd, payload, size);
   }
 
   late final _rd_kafka_queue_io_event_enablePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<rd_kafka_queue_t>,
-              ffi.Int,
-              ffi.Pointer<ffi.Void>,
-              ffi.Size)>>('rd_kafka_queue_io_event_enable');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_queue_t>,
+        ffi.Int,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_queue_io_event_enable');
   late final _rd_kafka_queue_io_event_enable =
-      _rd_kafka_queue_io_event_enablePtr.asFunction<
-          void Function(ffi.Pointer<rd_kafka_queue_t>, int,
-              ffi.Pointer<ffi.Void>, int)>();
+      _rd_kafka_queue_io_event_enablePtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<rd_kafka_queue_t>,
+              int,
+              ffi.Pointer<ffi.Void>,
+              int,
+            )
+          >();
 
   /// @brief Enable callback event triggering for queue.
   ///
@@ -6785,56 +7162,67 @@ class LibRdKafka {
   void rd_kafka_queue_cb_event_enable(
     ffi.Pointer<rd_kafka_queue_t> rkqu,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(ffi.Pointer<rd_kafka_t> rk,
-                    ffi.Pointer<ffi.Void> qev_opaque)>>
-        event_cb,
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<rd_kafka_t> rk,
+          ffi.Pointer<ffi.Void> qev_opaque,
+        )
+      >
+    >
+    event_cb,
     ffi.Pointer<ffi.Void> qev_opaque,
   ) {
-    return _rd_kafka_queue_cb_event_enable(
-      rkqu,
-      event_cb,
-      qev_opaque,
-    );
+    return _rd_kafka_queue_cb_event_enable(rkqu, event_cb, qev_opaque);
   }
 
   late final _rd_kafka_queue_cb_event_enablePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<rd_kafka_queue_t>,
-              ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Pointer<ffi.Void> qev_opaque)>>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_queue_cb_event_enable');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_queue_t>,
+        ffi.Pointer<
+          ffi.NativeFunction<
+            ffi.Void Function(
+              ffi.Pointer<rd_kafka_t> rk,
+              ffi.Pointer<ffi.Void> qev_opaque,
+            )
+          >
+        >,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_queue_cb_event_enable');
   late final _rd_kafka_queue_cb_event_enable =
-      _rd_kafka_queue_cb_event_enablePtr.asFunction<
-          void Function(
+      _rd_kafka_queue_cb_event_enablePtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_queue_t>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Pointer<ffi.Void> qev_opaque)>>,
-              ffi.Pointer<ffi.Void>)>();
+                ffi.NativeFunction<
+                  ffi.Void Function(
+                    ffi.Pointer<rd_kafka_t> rk,
+                    ffi.Pointer<ffi.Void> qev_opaque,
+                  )
+                >
+              >,
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Cancels the current rd_kafka_queue_poll() on \p rkqu.
   ///
   /// An application may use this from another thread to force
   /// an immediate return to the calling code (caller of rd_kafka_queue_poll()).
   /// Must not be used from signal handlers since that may cause deadlocks.
-  void rd_kafka_queue_yield(
-    ffi.Pointer<rd_kafka_queue_t> rkqu,
-  ) {
-    return _rd_kafka_queue_yield(
-      rkqu,
-    );
+  void rd_kafka_queue_yield(ffi.Pointer<rd_kafka_queue_t> rkqu) {
+    return _rd_kafka_queue_yield(rkqu);
   }
 
   late final _rd_kafka_queue_yieldPtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_queue_t>)>>(
-      'rd_kafka_queue_yield');
-  late final _rd_kafka_queue_yield = _rd_kafka_queue_yieldPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_queue_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_queue_t>)>
+  >('rd_kafka_queue_yield');
+  late final _rd_kafka_queue_yield =
+      _rd_kafka_queue_yieldPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_queue_t>)>();
 
   /// @brief Start consuming messages for topic \p rkt and \p partition
   /// at offset \p offset which may either be an absolute \c (0..N)
@@ -6872,19 +7260,17 @@ class LibRdKafka {
     int partition,
     int offset,
   ) {
-    return _rd_kafka_consume_start(
-      rkt,
-      partition,
-      offset,
-    );
+    return _rd_kafka_consume_start(rkt, partition, offset);
   }
 
   late final _rd_kafka_consume_startPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Int32,
-              ffi.Int64)>>('rd_kafka_consume_start');
-  late final _rd_kafka_consume_start = _rd_kafka_consume_startPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_topic_t>, int, int)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Int32, ffi.Int64)
+    >
+  >('rd_kafka_consume_start');
+  late final _rd_kafka_consume_start =
+      _rd_kafka_consume_startPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_topic_t>, int, int)>();
 
   /// @brief Same as rd_kafka_consume_start() but re-routes incoming messages to
   /// the provided queue \p rkqu (which must have been previously allocated
@@ -6904,22 +7290,29 @@ class LibRdKafka {
     int offset,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_consume_start_queue(
-      rkt,
-      partition,
-      offset,
-      rkqu,
-    );
+    return _rd_kafka_consume_start_queue(rkt, partition, offset, rkqu);
   }
 
   late final _rd_kafka_consume_start_queuePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Int32, ffi.Int64,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_consume_start_queue');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_topic_t>,
+        ffi.Int32,
+        ffi.Int64,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_consume_start_queue');
   late final _rd_kafka_consume_start_queue =
-      _rd_kafka_consume_start_queuePtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_topic_t>, int, int,
-              ffi.Pointer<rd_kafka_queue_t>)>();
+      _rd_kafka_consume_start_queuePtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_topic_t>,
+              int,
+              int,
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Stop consuming messages for topic \p rkt and \p partition, purging
   /// all messages currently in the local queue.
@@ -6932,22 +7325,18 @@ class LibRdKafka {
   /// `rd_kafka_destroy()` on the main object handle.
   ///
   /// @returns 0 on success or -1 on error (see `errno`).
-  int rd_kafka_consume_stop(
-    ffi.Pointer<rd_kafka_topic_t> rkt,
-    int partition,
-  ) {
-    return _rd_kafka_consume_stop(
-      rkt,
-      partition,
-    );
+  int rd_kafka_consume_stop(ffi.Pointer<rd_kafka_topic_t> rkt, int partition) {
+    return _rd_kafka_consume_stop(rkt, partition);
   }
 
   late final _rd_kafka_consume_stopPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<rd_kafka_topic_t>,
-              ffi.Int32)>>('rd_kafka_consume_stop');
-  late final _rd_kafka_consume_stop = _rd_kafka_consume_stopPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_topic_t>, int)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Int32)
+    >
+  >('rd_kafka_consume_stop');
+  late final _rd_kafka_consume_stop =
+      _rd_kafka_consume_stopPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_topic_t>, int)>();
 
   /// @brief Seek consumer for topic+partition to \p offset which is either an
   /// absolute or logical offset.
@@ -6981,20 +7370,26 @@ class LibRdKafka {
     int offset,
     int timeout_ms,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_seek(
-      rkt,
-      partition,
-      offset,
-      timeout_ms,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_seek(rkt, partition, offset, timeout_ms),
+    );
   }
 
   late final _rd_kafka_seekPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Int32, ffi.Int64,
-              ffi.Int)>>('rd_kafka_seek');
-  late final _rd_kafka_seek = _rd_kafka_seekPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_topic_t>, int, int, int)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_topic_t>,
+        ffi.Int32,
+        ffi.Int64,
+        ffi.Int,
+      )
+    >
+  >('rd_kafka_seek');
+  late final _rd_kafka_seek =
+      _rd_kafka_seekPtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_topic_t>, int, int, int)
+          >();
 
   /// @brief Seek consumer for partitions in \p partitions to the per-partition
   /// offset in the \c .offset field of \p partitions.
@@ -7030,23 +7425,27 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
     int timeout_ms,
   ) {
-    return _rd_kafka_seek_partitions(
-      rk,
-      partitions,
-      timeout_ms,
-    );
+    return _rd_kafka_seek_partitions(rk, partitions, timeout_ms);
   }
 
   late final _rd_kafka_seek_partitionsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+        ffi.Int,
+      )
+    >
+  >('rd_kafka_seek_partitions');
+  late final _rd_kafka_seek_partitions =
+      _rd_kafka_seek_partitionsPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
-              ffi.Int)>>('rd_kafka_seek_partitions');
-  late final _rd_kafka_seek_partitions =
-      _rd_kafka_seek_partitionsPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<rd_kafka_topic_partition_list_t>, int)>();
+              int,
+            )
+          >();
 
   /// @brief Consume a single message from topic \p rkt and \p partition
   ///
@@ -7075,22 +7474,27 @@ class LibRdKafka {
     int partition,
     int timeout_ms,
   ) {
-    return _rd_kafka_consume(
-      rkt,
-      partition,
-      timeout_ms,
-    );
+    return _rd_kafka_consume(rkt, partition, timeout_ms);
   }
 
   late final _rd_kafka_consumePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_message_t> Function(
-              ffi.Pointer<rd_kafka_topic_t>,
-              ffi.Int32,
-              ffi.Int)>>('rd_kafka_consume');
-  late final _rd_kafka_consume = _rd_kafka_consumePtr.asFunction<
+    ffi.NativeFunction<
       ffi.Pointer<rd_kafka_message_t> Function(
-          ffi.Pointer<rd_kafka_topic_t>, int, int)>();
+        ffi.Pointer<rd_kafka_topic_t>,
+        ffi.Int32,
+        ffi.Int,
+      )
+    >
+  >('rd_kafka_consume');
+  late final _rd_kafka_consume =
+      _rd_kafka_consumePtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_message_t> Function(
+              ffi.Pointer<rd_kafka_topic_t>,
+              int,
+              int,
+            )
+          >();
 
   /// @brief Consume up to \p rkmessages_size from topic \p rkt and \p partition
   /// putting a pointer to each message in the application provided
@@ -7132,16 +7536,27 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_consume_batchPtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(
+    ffi.NativeFunction<
+      ssize_t Function(
+        ffi.Pointer<rd_kafka_topic_t>,
+        ffi.Int32,
+        ffi.Int,
+        ffi.Pointer<ffi.Pointer<rd_kafka_message_t>>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_consume_batch');
+  late final _rd_kafka_consume_batch =
+      _rd_kafka_consume_batchPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_topic_t>,
-              ffi.Int32,
-              ffi.Int,
+              int,
+              int,
               ffi.Pointer<ffi.Pointer<rd_kafka_message_t>>,
-              ffi.Size)>>('rd_kafka_consume_batch');
-  late final _rd_kafka_consume_batch = _rd_kafka_consume_batchPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_topic_t>, int, int,
-          ffi.Pointer<ffi.Pointer<rd_kafka_message_t>>, int)>();
+              int,
+            )
+          >();
 
   /// @brief Consumes messages from topic \p rkt and \p partition, calling
   /// the provided callback for each consumed messsage.
@@ -7179,10 +7594,14 @@ class LibRdKafka {
     int partition,
     int timeout_ms,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(ffi.Pointer<rd_kafka_message_t> rkmessage,
-                    ffi.Pointer<ffi.Void> commit_opaque)>>
-        consume_cb,
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<rd_kafka_message_t> rkmessage,
+          ffi.Pointer<ffi.Void> commit_opaque,
+        )
+      >
+    >
+    consume_cb,
     ffi.Pointer<ffi.Void> commit_opaque,
   ) {
     return _rd_kafka_consume_callback(
@@ -7195,29 +7614,41 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_consume_callbackPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_topic_t>,
-              ffi.Int32,
-              ffi.Int,
-              ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(
-                          ffi.Pointer<rd_kafka_message_t> rkmessage,
-                          ffi.Pointer<ffi.Void> commit_opaque)>>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_consume_callback');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_topic_t>,
+        ffi.Int32,
+        ffi.Int,
+        ffi.Pointer<
+          ffi.NativeFunction<
+            ffi.Void Function(
+              ffi.Pointer<rd_kafka_message_t> rkmessage,
+              ffi.Pointer<ffi.Void> commit_opaque,
+            )
+          >
+        >,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_consume_callback');
   late final _rd_kafka_consume_callback =
-      _rd_kafka_consume_callbackPtr.asFunction<
-          int Function(
+      _rd_kafka_consume_callbackPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_topic_t>,
               int,
               int,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(
-                          ffi.Pointer<rd_kafka_message_t> rkmessage,
-                          ffi.Pointer<ffi.Void> commit_opaque)>>,
-              ffi.Pointer<ffi.Void>)>();
+                ffi.NativeFunction<
+                  ffi.Void Function(
+                    ffi.Pointer<rd_kafka_message_t> rkmessage,
+                    ffi.Pointer<ffi.Void> commit_opaque,
+                  )
+                >
+              >,
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Consume from queue
   ///
@@ -7226,20 +7657,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_queue_t> rkqu,
     int timeout_ms,
   ) {
-    return _rd_kafka_consume_queue(
-      rkqu,
-      timeout_ms,
-    );
+    return _rd_kafka_consume_queue(rkqu, timeout_ms);
   }
 
   late final _rd_kafka_consume_queuePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_message_t> Function(
-              ffi.Pointer<rd_kafka_queue_t>,
-              ffi.Int)>>('rd_kafka_consume_queue');
-  late final _rd_kafka_consume_queue = _rd_kafka_consume_queuePtr.asFunction<
+    ffi.NativeFunction<
       ffi.Pointer<rd_kafka_message_t> Function(
-          ffi.Pointer<rd_kafka_queue_t>, int)>();
+        ffi.Pointer<rd_kafka_queue_t>,
+        ffi.Int,
+      )
+    >
+  >('rd_kafka_consume_queue');
+  late final _rd_kafka_consume_queue =
+      _rd_kafka_consume_queuePtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_message_t> Function(
+              ffi.Pointer<rd_kafka_queue_t>,
+              int,
+            )
+          >();
 
   /// @brief Consume batch of messages from queue
   ///
@@ -7259,16 +7695,25 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_consume_batch_queuePtr = _lookup<
-      ffi.NativeFunction<
-          ssize_t Function(
-              ffi.Pointer<rd_kafka_queue_t>,
-              ffi.Int,
-              ffi.Pointer<ffi.Pointer<rd_kafka_message_t>>,
-              ffi.Size)>>('rd_kafka_consume_batch_queue');
+    ffi.NativeFunction<
+      ssize_t Function(
+        ffi.Pointer<rd_kafka_queue_t>,
+        ffi.Int,
+        ffi.Pointer<ffi.Pointer<rd_kafka_message_t>>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_consume_batch_queue');
   late final _rd_kafka_consume_batch_queue =
-      _rd_kafka_consume_batch_queuePtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_queue_t>, int,
-              ffi.Pointer<ffi.Pointer<rd_kafka_message_t>>, int)>();
+      _rd_kafka_consume_batch_queuePtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_queue_t>,
+              int,
+              ffi.Pointer<ffi.Pointer<rd_kafka_message_t>>,
+              int,
+            )
+          >();
 
   /// @brief Consume multiple messages from queue with callback
   ///
@@ -7281,10 +7726,14 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_queue_t> rkqu,
     int timeout_ms,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(ffi.Pointer<rd_kafka_message_t> rkmessage,
-                    ffi.Pointer<ffi.Void> commit_opaque)>>
-        consume_cb,
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<rd_kafka_message_t> rkmessage,
+          ffi.Pointer<ffi.Void> commit_opaque,
+        )
+      >
+    >
+    consume_cb,
     ffi.Pointer<ffi.Void> commit_opaque,
   ) {
     return _rd_kafka_consume_callback_queue(
@@ -7296,27 +7745,39 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_consume_callback_queuePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_queue_t>,
-              ffi.Int,
-              ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(
-                          ffi.Pointer<rd_kafka_message_t> rkmessage,
-                          ffi.Pointer<ffi.Void> commit_opaque)>>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_consume_callback_queue');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_queue_t>,
+        ffi.Int,
+        ffi.Pointer<
+          ffi.NativeFunction<
+            ffi.Void Function(
+              ffi.Pointer<rd_kafka_message_t> rkmessage,
+              ffi.Pointer<ffi.Void> commit_opaque,
+            )
+          >
+        >,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_consume_callback_queue');
   late final _rd_kafka_consume_callback_queue =
-      _rd_kafka_consume_callback_queuePtr.asFunction<
-          int Function(
+      _rd_kafka_consume_callback_queuePtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_queue_t>,
               int,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(
-                          ffi.Pointer<rd_kafka_message_t> rkmessage,
-                          ffi.Pointer<ffi.Void> commit_opaque)>>,
-              ffi.Pointer<ffi.Void>)>();
+                ffi.NativeFunction<
+                  ffi.Void Function(
+                    ffi.Pointer<rd_kafka_message_t> rkmessage,
+                    ffi.Pointer<ffi.Void> commit_opaque,
+                  )
+                >
+              >,
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Store offset \p offset + 1 for topic \p rkt partition \p partition.
   ///
@@ -7346,19 +7807,19 @@ class LibRdKafka {
     int partition,
     int offset,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_offset_store(
-      rkt,
-      partition,
-      offset,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_offset_store(rkt, partition, offset),
+    );
   }
 
   late final _rd_kafka_offset_storePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Int32,
-              ffi.Int64)>>('rd_kafka_offset_store');
-  late final _rd_kafka_offset_store = _rd_kafka_offset_storePtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_topic_t>, int, int)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<rd_kafka_topic_t>, ffi.Int32, ffi.Int64)
+    >
+  >('rd_kafka_offset_store');
+  late final _rd_kafka_offset_store =
+      _rd_kafka_offset_storePtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_topic_t>, int, int)>();
 
   /// @brief Store offsets for next auto-commit for one or more partitions.
   ///
@@ -7394,20 +7855,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_offsets_store(
-      rk,
-      offsets,
-    ));
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_offsets_store(rk, offsets));
   }
 
   late final _rd_kafka_offsets_storePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
-      'rd_kafka_offsets_store');
-  late final _rd_kafka_offsets_store = _rd_kafka_offsets_storePtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+      )
+    >
+  >('rd_kafka_offsets_store');
+  late final _rd_kafka_offsets_store =
+      _rd_kafka_offsets_storePtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_t>,
+              ffi.Pointer<rd_kafka_topic_partition_list_t>,
+            )
+          >();
 
   /// @brief Store offset +1 for the consumed message.
   ///
@@ -7430,20 +7896,21 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_error_t> rd_kafka_offset_store_message(
     ffi.Pointer<rd_kafka_message_t> rkmessage,
   ) {
-    return _rd_kafka_offset_store_message(
-      rkmessage,
-    );
+    return _rd_kafka_offset_store_message(rkmessage);
   }
 
   late final _rd_kafka_offset_store_messagePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_error_t> Function(
-                  ffi.Pointer<rd_kafka_message_t>)>>(
-      'rd_kafka_offset_store_message');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_message_t>)
+    >
+  >('rd_kafka_offset_store_message');
   late final _rd_kafka_offset_store_message =
-      _rd_kafka_offset_store_messagePtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_message_t>)>();
+      _rd_kafka_offset_store_messagePtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_message_t>,
+            )
+          >();
 
   /// @brief Subscribe to topic set using balanced consumer groups.
   ///
@@ -7487,35 +7954,38 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> topics,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_subscribe(
-      rk,
-      topics,
-    ));
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_subscribe(rk, topics));
   }
 
   late final _rd_kafka_subscribePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
-      'rd_kafka_subscribe');
-  late final _rd_kafka_subscribe = _rd_kafka_subscribePtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+      )
+    >
+  >('rd_kafka_subscribe');
+  late final _rd_kafka_subscribe =
+      _rd_kafka_subscribePtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_t>,
+              ffi.Pointer<rd_kafka_topic_partition_list_t>,
+            )
+          >();
 
   /// @brief Unsubscribe from the current subscription set.
-  rd_kafka_resp_err_t rd_kafka_unsubscribe(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_unsubscribe(
-      rk,
-    ));
+  rd_kafka_resp_err_t rd_kafka_unsubscribe(ffi.Pointer<rd_kafka_t> rk) {
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_unsubscribe(rk));
   }
 
   late final _rd_kafka_unsubscribePtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>)>>(
-          'rd_kafka_unsubscribe');
-  late final _rd_kafka_unsubscribe = _rd_kafka_unsubscribePtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
+        'rd_kafka_unsubscribe',
+      );
+  late final _rd_kafka_unsubscribe =
+      _rd_kafka_unsubscribePtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
 
   /// @brief Returns the current topic subscription
   ///
@@ -7528,20 +7998,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_list_t>> topics,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_subscription(
-      rk,
-      topics,
-    ));
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_subscription(rk, topics));
   }
 
   late final _rd_kafka_subscriptionPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_list_t>>)>>(
-      'rd_kafka_subscription');
-  late final _rd_kafka_subscription = _rd_kafka_subscriptionPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_list_t>>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_list_t>>,
+      )
+    >
+  >('rd_kafka_subscription');
+  late final _rd_kafka_subscription =
+      _rd_kafka_subscriptionPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_t>,
+              ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_list_t>>,
+            )
+          >();
 
   /// @brief Poll the consumer for messages or events.
   ///
@@ -7574,18 +8049,22 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     int timeout_ms,
   ) {
-    return _rd_kafka_consumer_poll(
-      rk,
-      timeout_ms,
-    );
+    return _rd_kafka_consumer_poll(rk, timeout_ms);
   }
 
   late final _rd_kafka_consumer_pollPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_message_t> Function(
-              ffi.Pointer<rd_kafka_t>, ffi.Int)>>('rd_kafka_consumer_poll');
-  late final _rd_kafka_consumer_poll = _rd_kafka_consumer_pollPtr.asFunction<
-      ffi.Pointer<rd_kafka_message_t> Function(ffi.Pointer<rd_kafka_t>, int)>();
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_message_t> Function(ffi.Pointer<rd_kafka_t>, ffi.Int)
+    >
+  >('rd_kafka_consumer_poll');
+  late final _rd_kafka_consumer_poll =
+      _rd_kafka_consumer_pollPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_message_t> Function(
+              ffi.Pointer<rd_kafka_t>,
+              int,
+            )
+          >();
 
   /// @brief Close the consumer.
   ///
@@ -7601,19 +8080,17 @@ class LibRdKafka {
   ///
   /// @remark The application still needs to call rd_kafka_destroy() after
   /// this call finishes to clean up the underlying handle resources.
-  rd_kafka_resp_err_t rd_kafka_consumer_close(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_consumer_close(
-      rk,
-    ));
+  rd_kafka_resp_err_t rd_kafka_consumer_close(ffi.Pointer<rd_kafka_t> rk) {
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_consumer_close(rk));
   }
 
   late final _rd_kafka_consumer_closePtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>)>>(
-          'rd_kafka_consumer_close');
-  late final _rd_kafka_consumer_close = _rd_kafka_consumer_closePtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
+        'rd_kafka_consumer_close',
+      );
+  late final _rd_kafka_consumer_close =
+      _rd_kafka_consumer_closePtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
 
   /// @brief Asynchronously close the consumer.
   ///
@@ -7634,20 +8111,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_consumer_close_queue(
-      rk,
-      rkqu,
-    );
+    return _rd_kafka_consumer_close_queue(rk, rkqu);
   }
 
   late final _rd_kafka_consumer_close_queuePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_consumer_close_queue');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_consumer_close_queue');
   late final _rd_kafka_consumer_close_queue =
-      _rd_kafka_consumer_close_queuePtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_t>, ffi.Pointer<rd_kafka_queue_t>)>();
+      _rd_kafka_consumer_close_queuePtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_t>,
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @returns 1 if the consumer is closed, else 0.
   ///
@@ -7655,19 +8137,17 @@ class LibRdKafka {
   /// when the consumer has been closed.
   ///
   /// @sa rd_kafka_consumer_close_queue()
-  int rd_kafka_consumer_closed(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return _rd_kafka_consumer_closed(
-      rk,
-    );
+  int rd_kafka_consumer_closed(ffi.Pointer<rd_kafka_t> rk) {
+    return _rd_kafka_consumer_closed(rk);
   }
 
   late final _rd_kafka_consumer_closedPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>)>>(
-          'rd_kafka_consumer_closed');
-  late final _rd_kafka_consumer_closed = _rd_kafka_consumer_closedPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
+        'rd_kafka_consumer_closed',
+      );
+  late final _rd_kafka_consumer_closed =
+      _rd_kafka_consumer_closedPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
 
   /// @brief Incrementally add \p partitions to the current assignment.
   ///
@@ -7688,21 +8168,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
   ) {
-    return _rd_kafka_incremental_assign(
-      rk,
-      partitions,
-    );
+    return _rd_kafka_incremental_assign(rk, partitions);
   }
 
   late final _rd_kafka_incremental_assignPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
-      'rd_kafka_incremental_assign');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+      )
+    >
+  >('rd_kafka_incremental_assign');
   late final _rd_kafka_incremental_assign =
-      _rd_kafka_incremental_assignPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+      _rd_kafka_incremental_assignPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_t>,
+              ffi.Pointer<rd_kafka_topic_partition_list_t>,
+            )
+          >();
 
   /// @brief Incrementally remove \p partitions from the current assignment.
   ///
@@ -7723,21 +8207,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
   ) {
-    return _rd_kafka_incremental_unassign(
-      rk,
-      partitions,
-    );
+    return _rd_kafka_incremental_unassign(rk, partitions);
   }
 
   late final _rd_kafka_incremental_unassignPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
-      'rd_kafka_incremental_unassign');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+      )
+    >
+  >('rd_kafka_incremental_unassign');
   late final _rd_kafka_incremental_unassign =
-      _rd_kafka_incremental_unassignPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+      _rd_kafka_incremental_unassignPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_t>,
+              ffi.Pointer<rd_kafka_topic_partition_list_t>,
+            )
+          >();
 
   /// @brief The rebalance protocol currently in use. This will be
   /// "NONE" if the consumer has not (yet) joined a group, else it will
@@ -7753,17 +8241,17 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_rebalance_protocol(
     ffi.Pointer<rd_kafka_t> rk,
   ) {
-    return _rd_kafka_rebalance_protocol(
-      rk,
-    );
+    return _rd_kafka_rebalance_protocol(rk);
   }
 
   late final _rd_kafka_rebalance_protocolPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_t>)>>('rd_kafka_rebalance_protocol');
-  late final _rd_kafka_rebalance_protocol = _rd_kafka_rebalance_protocolPtr
-      .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_t>)>();
+    ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_t>)>
+  >('rd_kafka_rebalance_protocol');
+  late final _rd_kafka_rebalance_protocol =
+      _rd_kafka_rebalance_protocolPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_t>)
+          >();
 
   /// @brief Atomic assignment of partitions to consume.
   ///
@@ -7787,20 +8275,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_assign(
-      rk,
-      partitions,
-    ));
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_assign(rk, partitions));
   }
 
   late final _rd_kafka_assignPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
-      'rd_kafka_assign');
-  late final _rd_kafka_assign = _rd_kafka_assignPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+      )
+    >
+  >('rd_kafka_assign');
+  late final _rd_kafka_assign =
+      _rd_kafka_assignPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_t>,
+              ffi.Pointer<rd_kafka_topic_partition_list_t>,
+            )
+          >();
 
   /// @brief Returns the current partition assignment as set by rd_kafka_assign()
   /// or rd_kafka_incremental_assign().
@@ -7820,20 +8313,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_list_t>> partitions,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_assignment(
-      rk,
-      partitions,
-    ));
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_assignment(rk, partitions));
   }
 
   late final _rd_kafka_assignmentPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_list_t>>)>>(
-      'rd_kafka_assignment');
-  late final _rd_kafka_assignment = _rd_kafka_assignmentPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_list_t>>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_list_t>>,
+      )
+    >
+  >('rd_kafka_assignment');
+  late final _rd_kafka_assignment =
+      _rd_kafka_assignmentPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_t>,
+              ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_list_t>>,
+            )
+          >();
 
   /// @brief Check whether the consumer considers the current assignment to
   /// have been lost involuntarily. This method is only applicable for
@@ -7849,19 +8347,17 @@ class LibRdKafka {
   ///
   /// @returns Returns 1 if the current partition assignment is considered
   /// lost, 0 otherwise.
-  int rd_kafka_assignment_lost(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return _rd_kafka_assignment_lost(
-      rk,
-    );
+  int rd_kafka_assignment_lost(ffi.Pointer<rd_kafka_t> rk) {
+    return _rd_kafka_assignment_lost(rk);
   }
 
   late final _rd_kafka_assignment_lostPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>)>>(
-          'rd_kafka_assignment_lost');
-  late final _rd_kafka_assignment_lost = _rd_kafka_assignment_lostPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
+        'rd_kafka_assignment_lost',
+      );
+  late final _rd_kafka_assignment_lost =
+      _rd_kafka_assignment_lostPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
 
   /// @brief Commit offsets on broker for the provided list of partitions.
   ///
@@ -7901,22 +8397,27 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
     int async$,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_commit(
-      rk,
-      offsets,
-      async$,
-    ));
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_commit(rk, offsets, async$));
   }
 
   late final _rd_kafka_commitPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+        ffi.Int,
+      )
+    >
+  >('rd_kafka_commit');
+  late final _rd_kafka_commit =
+      _rd_kafka_commitPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
-              ffi.Int)>>('rd_kafka_commit');
-  late final _rd_kafka_commit = _rd_kafka_commitPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<rd_kafka_topic_partition_list_t>, int)>();
+              int,
+            )
+          >();
 
   /// @brief Commit message's offset on broker for the message's partition.
   /// The committed offset is the message's offset + 1.
@@ -7927,22 +8428,29 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_message_t> rkmessage,
     int async$,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_commit_message(
-      rk,
-      rkmessage,
-      async$,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_commit_message(rk, rkmessage, async$),
+    );
   }
 
   late final _rd_kafka_commit_messagePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_message_t>,
+        ffi.Int,
+      )
+    >
+  >('rd_kafka_commit_message');
+  late final _rd_kafka_commit_message =
+      _rd_kafka_commit_messagePtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_message_t>,
-              ffi.Int)>>('rd_kafka_commit_message');
-  late final _rd_kafka_commit_message = _rd_kafka_commit_messagePtr.asFunction<
-      int Function(
-          ffi.Pointer<rd_kafka_t>, ffi.Pointer<rd_kafka_message_t>, int)>();
+              int,
+            )
+          >();
 
   /// @brief Commit offsets on broker for the provided list of partitions.
   ///
@@ -7969,51 +8477,63 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(
-                    ffi.Pointer<rd_kafka_t> rk,
-                    ffi.Int err,
-                    ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
-                    ffi.Pointer<ffi.Void> commit_opaque)>>
-        cb,
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<rd_kafka_t> rk,
+          ffi.Int err,
+          ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
+          ffi.Pointer<ffi.Void> commit_opaque,
+        )
+      >
+    >
+    cb,
     ffi.Pointer<ffi.Void> commit_opaque,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_commit_queue(
-      rk,
-      offsets,
-      rkqu,
-      cb,
-      commit_opaque,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_commit_queue(rk, offsets, rkqu, cb, commit_opaque),
+    );
   }
 
   late final _rd_kafka_commit_queuePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+        ffi.Pointer<
+          ffi.NativeFunction<
+            ffi.Void Function(
+              ffi.Pointer<rd_kafka_t> rk,
+              ffi.Int err,
+              ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
+              ffi.Pointer<ffi.Void> commit_opaque,
+            )
+          >
+        >,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_commit_queue');
+  late final _rd_kafka_commit_queue =
+      _rd_kafka_commit_queuePtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
               ffi.Pointer<rd_kafka_queue_t>,
               ffi.Pointer<
-                  ffi.NativeFunction<
-                      ffi.Void Function(
-                          ffi.Pointer<rd_kafka_t> rk,
-                          ffi.Int err,
-                          ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
-                          ffi.Pointer<ffi.Void> commit_opaque)>>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_commit_queue');
-  late final _rd_kafka_commit_queue = _rd_kafka_commit_queuePtr.asFunction<
-      int Function(
-          ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<rd_kafka_topic_partition_list_t>,
-          ffi.Pointer<rd_kafka_queue_t>,
-          ffi.Pointer<
-              ffi.NativeFunction<
+                ffi.NativeFunction<
                   ffi.Void Function(
-                      ffi.Pointer<rd_kafka_t> rk,
-                      ffi.Int err,
-                      ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
-                      ffi.Pointer<ffi.Void> commit_opaque)>>,
-          ffi.Pointer<ffi.Void>)>();
+                    ffi.Pointer<rd_kafka_t> rk,
+                    ffi.Int err,
+                    ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
+                    ffi.Pointer<ffi.Void> commit_opaque,
+                  )
+                >
+              >,
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Retrieve committed offsets for topics+partitions.
   ///
@@ -8035,22 +8555,29 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
     int timeout_ms,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_committed(
-      rk,
-      partitions,
-      timeout_ms,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_committed(rk, partitions, timeout_ms),
+    );
   }
 
   late final _rd_kafka_committedPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+        ffi.Int,
+      )
+    >
+  >('rd_kafka_committed');
+  late final _rd_kafka_committed =
+      _rd_kafka_committedPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
-              ffi.Int)>>('rd_kafka_committed');
-  late final _rd_kafka_committed = _rd_kafka_committedPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<rd_kafka_topic_partition_list_t>, int)>();
+              int,
+            )
+          >();
 
   /// @brief Retrieve current positions (offsets) for topics+partitions.
   ///
@@ -8070,20 +8597,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_position(
-      rk,
-      partitions,
-    ));
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_position(rk, partitions));
   }
 
   late final _rd_kafka_positionPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
-      'rd_kafka_position');
-  late final _rd_kafka_position = _rd_kafka_positionPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+      )
+    >
+  >('rd_kafka_position');
+  late final _rd_kafka_position =
+      _rd_kafka_positionPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_t>,
+              ffi.Pointer<rd_kafka_topic_partition_list_t>,
+            )
+          >();
 
   /// @returns the current consumer group metadata associated with this consumer,
   /// or NULL if \p rk is not a consumer configured with a \c group.id.
@@ -8095,22 +8627,24 @@ class LibRdKafka {
   ///
   /// @sa rd_kafka_send_offsets_to_transaction()
   ffi.Pointer<rd_kafka_consumer_group_metadata_t>
-      rd_kafka_consumer_group_metadata(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return _rd_kafka_consumer_group_metadata(
-      rk,
-    );
+  rd_kafka_consumer_group_metadata(ffi.Pointer<rd_kafka_t> rk) {
+    return _rd_kafka_consumer_group_metadata(rk);
   }
 
   late final _rd_kafka_consumer_group_metadataPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_consumer_group_metadata_t> Function(
-              ffi.Pointer<rd_kafka_t>)>>('rd_kafka_consumer_group_metadata');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_consumer_group_metadata_t> Function(
+        ffi.Pointer<rd_kafka_t>,
+      )
+    >
+  >('rd_kafka_consumer_group_metadata');
   late final _rd_kafka_consumer_group_metadata =
-      _rd_kafka_consumer_group_metadataPtr.asFunction<
-          ffi.Pointer<rd_kafka_consumer_group_metadata_t> Function(
-              ffi.Pointer<rd_kafka_t>)>();
+      _rd_kafka_consumer_group_metadataPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_consumer_group_metadata_t> Function(
+              ffi.Pointer<rd_kafka_t>,
+            )
+          >();
 
   /// @brief Create a new consumer group metadata object.
   /// This is typically only used for writing tests.
@@ -8120,22 +8654,24 @@ class LibRdKafka {
   /// @remark The returned pointer must be freed by the application using
   /// rd_kafka_consumer_group_metadata_destroy().
   ffi.Pointer<rd_kafka_consumer_group_metadata_t>
-      rd_kafka_consumer_group_metadata_new(
-    ffi.Pointer<ffi.Char> group_id,
-  ) {
-    return _rd_kafka_consumer_group_metadata_new(
-      group_id,
-    );
+  rd_kafka_consumer_group_metadata_new(ffi.Pointer<ffi.Char> group_id) {
+    return _rd_kafka_consumer_group_metadata_new(group_id);
   }
 
   late final _rd_kafka_consumer_group_metadata_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_consumer_group_metadata_t> Function(
-              ffi.Pointer<ffi.Char>)>>('rd_kafka_consumer_group_metadata_new');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_consumer_group_metadata_t> Function(
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('rd_kafka_consumer_group_metadata_new');
   late final _rd_kafka_consumer_group_metadata_new =
-      _rd_kafka_consumer_group_metadata_newPtr.asFunction<
-          ffi.Pointer<rd_kafka_consumer_group_metadata_t> Function(
-              ffi.Pointer<ffi.Char>)>();
+      _rd_kafka_consumer_group_metadata_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_consumer_group_metadata_t> Function(
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
   /// @brief Create a new consumer group metadata object.
   /// This is typically only used for writing tests.
@@ -8148,7 +8684,7 @@ class LibRdKafka {
   /// @remark The returned pointer must be freed by the application using
   /// rd_kafka_consumer_group_metadata_destroy().
   ffi.Pointer<rd_kafka_consumer_group_metadata_t>
-      rd_kafka_consumer_group_metadata_new_with_genid(
+  rd_kafka_consumer_group_metadata_new_with_genid(
     ffi.Pointer<ffi.Char> group_id,
     int generation_id,
     ffi.Pointer<ffi.Char> member_id,
@@ -8163,20 +8699,25 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_consumer_group_metadata_new_with_genidPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_consumer_group_metadata_t> Function(
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Int32,
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<ffi.Char>)>>(
-      'rd_kafka_consumer_group_metadata_new_with_genid');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_consumer_group_metadata_t> Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Int32,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('rd_kafka_consumer_group_metadata_new_with_genid');
   late final _rd_kafka_consumer_group_metadata_new_with_genid =
-      _rd_kafka_consumer_group_metadata_new_with_genidPtr.asFunction<
-          ffi.Pointer<rd_kafka_consumer_group_metadata_t> Function(
+      _rd_kafka_consumer_group_metadata_new_with_genidPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_consumer_group_metadata_t> Function(
               ffi.Pointer<ffi.Char>,
               int,
               ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>();
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
   /// @brief Get group id of a group metadata.
   ///
@@ -8188,20 +8729,23 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_consumer_group_metadata_group_id(
     ffi.Pointer<rd_kafka_consumer_group_metadata_t> group_metadata,
   ) {
-    return _rd_kafka_consumer_group_metadata_group_id(
-      group_metadata,
-    );
+    return _rd_kafka_consumer_group_metadata_group_id(group_metadata);
   }
 
   late final _rd_kafka_consumer_group_metadata_group_idPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>>(
-      'rd_kafka_consumer_group_metadata_group_id');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(
+        ffi.Pointer<rd_kafka_consumer_group_metadata_t>,
+      )
+    >
+  >('rd_kafka_consumer_group_metadata_group_id');
   late final _rd_kafka_consumer_group_metadata_group_id =
-      _rd_kafka_consumer_group_metadata_group_idPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>();
+      _rd_kafka_consumer_group_metadata_group_idPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_consumer_group_metadata_t>,
+            )
+          >();
 
   /// @brief Get group instance id of a group metadata.
   ///
@@ -8214,20 +8758,23 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_consumer_group_metadata_group_instance_id(
     ffi.Pointer<rd_kafka_consumer_group_metadata_t> group_metadata,
   ) {
-    return _rd_kafka_consumer_group_metadata_group_instance_id(
-      group_metadata,
-    );
+    return _rd_kafka_consumer_group_metadata_group_instance_id(group_metadata);
   }
 
   late final _rd_kafka_consumer_group_metadata_group_instance_idPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>>(
-      'rd_kafka_consumer_group_metadata_group_instance_id');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(
+        ffi.Pointer<rd_kafka_consumer_group_metadata_t>,
+      )
+    >
+  >('rd_kafka_consumer_group_metadata_group_instance_id');
   late final _rd_kafka_consumer_group_metadata_group_instance_id =
-      _rd_kafka_consumer_group_metadata_group_instance_idPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>();
+      _rd_kafka_consumer_group_metadata_group_instance_idPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_consumer_group_metadata_t>,
+            )
+          >();
 
   /// @brief Get member id of a group metadata.
   ///
@@ -8239,20 +8786,23 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_consumer_group_metadata_member_id(
     ffi.Pointer<rd_kafka_consumer_group_metadata_t> group_metadata,
   ) {
-    return _rd_kafka_consumer_group_metadata_member_id(
-      group_metadata,
-    );
+    return _rd_kafka_consumer_group_metadata_member_id(group_metadata);
   }
 
   late final _rd_kafka_consumer_group_metadata_member_idPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>>(
-      'rd_kafka_consumer_group_metadata_member_id');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(
+        ffi.Pointer<rd_kafka_consumer_group_metadata_t>,
+      )
+    >
+  >('rd_kafka_consumer_group_metadata_member_id');
   late final _rd_kafka_consumer_group_metadata_member_id =
-      _rd_kafka_consumer_group_metadata_member_idPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>();
+      _rd_kafka_consumer_group_metadata_member_idPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_consumer_group_metadata_t>,
+            )
+          >();
 
   /// @brief Get the generation id (classic protocol)
   /// or member epoch (consumer protocol) of a group metadata.
@@ -8264,38 +8814,38 @@ class LibRdKafka {
   int rd_kafka_consumer_group_metadata_generation_id(
     ffi.Pointer<rd_kafka_consumer_group_metadata_t> group_metadata,
   ) {
-    return _rd_kafka_consumer_group_metadata_generation_id(
-      group_metadata,
-    );
+    return _rd_kafka_consumer_group_metadata_generation_id(group_metadata);
   }
 
   late final _rd_kafka_consumer_group_metadata_generation_idPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int32 Function(
-                  ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>>(
-      'rd_kafka_consumer_group_metadata_generation_id');
+    ffi.NativeFunction<
+      ffi.Int32 Function(ffi.Pointer<rd_kafka_consumer_group_metadata_t>)
+    >
+  >('rd_kafka_consumer_group_metadata_generation_id');
   late final _rd_kafka_consumer_group_metadata_generation_id =
-      _rd_kafka_consumer_group_metadata_generation_idPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>();
+      _rd_kafka_consumer_group_metadata_generation_idPtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_consumer_group_metadata_t>)
+          >();
 
   /// @brief Frees the consumer group metadata object as returned by
   /// rd_kafka_consumer_group_metadata().
   void rd_kafka_consumer_group_metadata_destroy(
     ffi.Pointer<rd_kafka_consumer_group_metadata_t> arg0,
   ) {
-    return _rd_kafka_consumer_group_metadata_destroy(
-      arg0,
-    );
+    return _rd_kafka_consumer_group_metadata_destroy(arg0);
   }
 
   late final _rd_kafka_consumer_group_metadata_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>>(
-      'rd_kafka_consumer_group_metadata_destroy');
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<rd_kafka_consumer_group_metadata_t>)
+    >
+  >('rd_kafka_consumer_group_metadata_destroy');
   late final _rd_kafka_consumer_group_metadata_destroy =
-      _rd_kafka_consumer_group_metadata_destroyPtr.asFunction<
-          void Function(ffi.Pointer<rd_kafka_consumer_group_metadata_t>)>();
+      _rd_kafka_consumer_group_metadata_destroyPtr
+          .asFunction<
+            void Function(ffi.Pointer<rd_kafka_consumer_group_metadata_t>)
+          >();
 
   /// @brief Serialize the consumer group metadata to a binary format.
   /// This is mainly for client binding use and not for application use.
@@ -8320,26 +8870,27 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<ffi.Void>> bufferp,
     ffi.Pointer<ffi.Size> sizep,
   ) {
-    return _rd_kafka_consumer_group_metadata_write(
-      cgmd,
-      bufferp,
-      sizep,
-    );
+    return _rd_kafka_consumer_group_metadata_write(cgmd, bufferp, sizep);
   }
 
   late final _rd_kafka_consumer_group_metadata_writePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_error_t> Function(
-                  ffi.Pointer<rd_kafka_consumer_group_metadata_t>,
-                  ffi.Pointer<ffi.Pointer<ffi.Void>>,
-                  ffi.Pointer<ffi.Size>)>>(
-      'rd_kafka_consumer_group_metadata_write');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_consumer_group_metadata_t>,
+        ffi.Pointer<ffi.Pointer<ffi.Void>>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_consumer_group_metadata_write');
   late final _rd_kafka_consumer_group_metadata_write =
-      _rd_kafka_consumer_group_metadata_writePtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
+      _rd_kafka_consumer_group_metadata_writePtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
               ffi.Pointer<rd_kafka_consumer_group_metadata_t>,
               ffi.Pointer<ffi.Pointer<ffi.Void>>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Reads serialized consumer group metadata and returns a
   /// consumer group metadata object.
@@ -8364,25 +8915,27 @@ class LibRdKafka {
     ffi.Pointer<ffi.Void> buffer,
     int size,
   ) {
-    return _rd_kafka_consumer_group_metadata_read(
-      cgmdp,
-      buffer,
-      size,
-    );
+    return _rd_kafka_consumer_group_metadata_read(cgmdp, buffer, size);
   }
 
   late final _rd_kafka_consumer_group_metadata_readPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<ffi.Pointer<rd_kafka_consumer_group_metadata_t>>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Size)>>('rd_kafka_consumer_group_metadata_read');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<ffi.Pointer<rd_kafka_consumer_group_metadata_t>>,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_consumer_group_metadata_read');
   late final _rd_kafka_consumer_group_metadata_read =
-      _rd_kafka_consumer_group_metadata_readPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
+      _rd_kafka_consumer_group_metadata_readPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
               ffi.Pointer<ffi.Pointer<rd_kafka_consumer_group_metadata_t>>,
               ffi.Pointer<ffi.Void>,
-              int)>();
+              int,
+            )
+          >();
 
   /// @brief Produce and send a single message to broker.
   ///
@@ -8505,26 +9058,33 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_producePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_topic_t>,
+        ffi.Int32,
+        ffi.Int,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Pointer<ffi.Void>,
+        ffi.Size,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_produce');
+  late final _rd_kafka_produce =
+      _rd_kafka_producePtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_topic_t>,
-              ffi.Int32,
-              ffi.Int,
+              int,
+              int,
               ffi.Pointer<ffi.Void>,
-              ffi.Size,
+              int,
               ffi.Pointer<ffi.Void>,
-              ffi.Size,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_produce');
-  late final _rd_kafka_produce = _rd_kafka_producePtr.asFunction<
-      int Function(
-          ffi.Pointer<rd_kafka_topic_t>,
-          int,
-          int,
-          ffi.Pointer<ffi.Void>,
-          int,
-          ffi.Pointer<ffi.Void>,
-          int,
-          ffi.Pointer<ffi.Void>)>();
+              int,
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Produce and send a single message to broker.
   ///
@@ -8537,17 +9097,14 @@ class LibRdKafka {
   /// _V_HEADERS are mixed.
   ///
   /// @sa rd_kafka_produce, rd_kafka_produceva, RD_KAFKA_V_END
-  rd_kafka_resp_err_t rd_kafka_producev(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_producev(
-      rk,
-    ));
+  rd_kafka_resp_err_t rd_kafka_producev(ffi.Pointer<rd_kafka_t> rk) {
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_producev(rk));
   }
 
   late final _rd_kafka_producevPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>)>>(
-          'rd_kafka_producev');
+        'rd_kafka_producev',
+      );
   late final _rd_kafka_producev =
       _rd_kafka_producevPtr.asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
 
@@ -8565,20 +9122,27 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_vu_t> vus,
     int cnt,
   ) {
-    return _rd_kafka_produceva(
-      rk,
-      vus,
-      cnt,
-    );
+    return _rd_kafka_produceva(rk, vus, cnt);
   }
 
   late final _rd_kafka_producevaPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<rd_kafka_vu_t>, ffi.Size)>>('rd_kafka_produceva');
-  late final _rd_kafka_produceva = _rd_kafka_producevaPtr.asFunction<
+    ffi.NativeFunction<
       ffi.Pointer<rd_kafka_error_t> Function(
-          ffi.Pointer<rd_kafka_t>, ffi.Pointer<rd_kafka_vu_t>, int)>();
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_vu_t>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_produceva');
+  late final _rd_kafka_produceva =
+      _rd_kafka_producevaPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_t>,
+              ffi.Pointer<rd_kafka_vu_t>,
+              int,
+            )
+          >();
 
   /// @brief Produce multiple messages.
   ///
@@ -8624,16 +9188,27 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_produce_batchPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_topic_t>,
+        ffi.Int32,
+        ffi.Int,
+        ffi.Pointer<rd_kafka_message_t>,
+        ffi.Int,
+      )
+    >
+  >('rd_kafka_produce_batch');
+  late final _rd_kafka_produce_batch =
+      _rd_kafka_produce_batchPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_topic_t>,
-              ffi.Int32,
-              ffi.Int,
+              int,
+              int,
               ffi.Pointer<rd_kafka_message_t>,
-              ffi.Int)>>('rd_kafka_produce_batch');
-  late final _rd_kafka_produce_batch = _rd_kafka_produce_batchPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_topic_t>, int, int,
-          ffi.Pointer<rd_kafka_message_t>, int)>();
+              int,
+            )
+          >();
 
   /// @brief Wait until all outstanding produce requests, et.al, are completed.
   /// This should typically be done prior to destroying a producer instance
@@ -8661,18 +9236,15 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     int timeout_ms,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_flush(
-      rk,
-      timeout_ms,
-    ));
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_flush(rk, timeout_ms));
   }
 
   late final _rd_kafka_flushPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Int)>>(
-      'rd_kafka_flush');
-  late final _rd_kafka_flush = _rd_kafka_flushPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_t>, int)>();
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Int)>
+  >('rd_kafka_flush');
+  late final _rd_kafka_flush =
+      _rd_kafka_flushPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_t>, int)>();
 
   /// @brief Purge messages currently handled by the producer instance.
   ///
@@ -8706,18 +9278,15 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     int purge_flags,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_purge(
-      rk,
-      purge_flags,
-    ));
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_purge(rk, purge_flags));
   }
 
   late final _rd_kafka_purgePtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Int)>>(
-      'rd_kafka_purge');
-  late final _rd_kafka_purge = _rd_kafka_purgePtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_t>, int)>();
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Int)>
+  >('rd_kafka_purge');
+  late final _rd_kafka_purge =
+      _rd_kafka_purgePtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_t>, int)>();
 
   /// @brief Request Metadata from broker.
   ///
@@ -8744,61 +9313,61 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<rd_kafka_metadata>> metadatap,
     int timeout_ms,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_metadata$1(
-      rk,
-      all_topics,
-      only_rkt,
-      metadatap,
-      timeout_ms,
-    ));
-  }
-
-  late final _rd_kafka_metadata$1Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_t>,
-              ffi.Int,
-              ffi.Pointer<rd_kafka_topic_t>,
-              ffi.Pointer<ffi.Pointer<rd_kafka_metadata>>,
-              ffi.Int)>>('rd_kafka_metadata');
-  late final _rd_kafka_metadata$1 = _rd_kafka_metadata$1Ptr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_t>, int, ffi.Pointer<rd_kafka_topic_t>,
-          ffi.Pointer<ffi.Pointer<rd_kafka_metadata>>, int)>();
-
-  /// @brief Release metadata memory.
-  void rd_kafka_metadata_destroy(
-    ffi.Pointer<rd_kafka_metadata> metadata,
-  ) {
-    return _rd_kafka_metadata_destroy(
-      metadata,
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_metadata$1(rk, all_topics, only_rkt, metadatap, timeout_ms),
     );
   }
 
+  late final _rd_kafka_metadata$1Ptr = _lookup<
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Int,
+        ffi.Pointer<rd_kafka_topic_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_metadata>>,
+        ffi.Int,
+      )
+    >
+  >('rd_kafka_metadata');
+  late final _rd_kafka_metadata$1 =
+      _rd_kafka_metadata$1Ptr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_t>,
+              int,
+              ffi.Pointer<rd_kafka_topic_t>,
+              ffi.Pointer<ffi.Pointer<rd_kafka_metadata>>,
+              int,
+            )
+          >();
+
+  /// @brief Release metadata memory.
+  void rd_kafka_metadata_destroy(ffi.Pointer<rd_kafka_metadata> metadata) {
+    return _rd_kafka_metadata_destroy(metadata);
+  }
+
   late final _rd_kafka_metadata_destroyPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_metadata>)>>(
-      'rd_kafka_metadata_destroy');
-  late final _rd_kafka_metadata_destroy = _rd_kafka_metadata_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_metadata>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_metadata>)>
+  >('rd_kafka_metadata_destroy');
+  late final _rd_kafka_metadata_destroy =
+      _rd_kafka_metadata_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_metadata>)>();
 
   /// @brief Get the id of \p node.
   ///
   /// @param node The Node instance.
   ///
   /// @return The node id.
-  int rd_kafka_Node_id(
-    ffi.Pointer<rd_kafka_Node_t> node,
-  ) {
-    return _rd_kafka_Node_id(
-      node,
-    );
+  int rd_kafka_Node_id(ffi.Pointer<rd_kafka_Node_t> node) {
+    return _rd_kafka_Node_id(node);
   }
 
   late final _rd_kafka_Node_idPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_Node_t>)>>(
-      'rd_kafka_Node_id');
-  late final _rd_kafka_Node_id = _rd_kafka_Node_idPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_Node_t>)>();
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_Node_t>)>
+  >('rd_kafka_Node_id');
+  late final _rd_kafka_Node_id =
+      _rd_kafka_Node_idPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_Node_t>)>();
 
   /// @brief Get the host of \p node.
   ///
@@ -8808,60 +9377,56 @@ class LibRdKafka {
   ///
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p node object.
-  ffi.Pointer<ffi.Char> rd_kafka_Node_host(
-    ffi.Pointer<rd_kafka_Node_t> node,
-  ) {
-    return _rd_kafka_Node_host(
-      node,
-    );
+  ffi.Pointer<ffi.Char> rd_kafka_Node_host(ffi.Pointer<rd_kafka_Node_t> node) {
+    return _rd_kafka_Node_host(node);
   }
 
   late final _rd_kafka_Node_hostPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_Node_t>)>>('rd_kafka_Node_host');
-  late final _rd_kafka_Node_host = _rd_kafka_Node_hostPtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_Node_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_Node_t>)
+    >
+  >('rd_kafka_Node_host');
+  late final _rd_kafka_Node_host =
+      _rd_kafka_Node_hostPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_Node_t>)
+          >();
 
   /// @brief Get the port of \p node.
   ///
   /// @param node The Node instance.
   ///
   /// @return The node port.
-  int rd_kafka_Node_port(
-    ffi.Pointer<rd_kafka_Node_t> node,
-  ) {
-    return _rd_kafka_Node_port(
-      node,
-    );
+  int rd_kafka_Node_port(ffi.Pointer<rd_kafka_Node_t> node) {
+    return _rd_kafka_Node_port(node);
   }
 
   late final _rd_kafka_Node_portPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Uint16 Function(ffi.Pointer<rd_kafka_Node_t>)>>(
-      'rd_kafka_Node_port');
-  late final _rd_kafka_Node_port = _rd_kafka_Node_portPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_Node_t>)>();
+    ffi.NativeFunction<ffi.Uint16 Function(ffi.Pointer<rd_kafka_Node_t>)>
+  >('rd_kafka_Node_port');
+  late final _rd_kafka_Node_port =
+      _rd_kafka_Node_portPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_Node_t>)>();
 
   /// @brief Get the rack of \p node.
   ///
   /// @param node The Node instance
   ///
   /// @return The node rack id. May be NULL.
-  ffi.Pointer<ffi.Char> rd_kafka_Node_rack(
-    ffi.Pointer<rd_kafka_Node_t> node,
-  ) {
-    return _rd_kafka_Node_rack(
-      node,
-    );
+  ffi.Pointer<ffi.Char> rd_kafka_Node_rack(ffi.Pointer<rd_kafka_Node_t> node) {
+    return _rd_kafka_Node_rack(node);
   }
 
   late final _rd_kafka_Node_rackPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_Node_t>)>>('rd_kafka_Node_rack');
-  late final _rd_kafka_Node_rack = _rd_kafka_Node_rackPtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_Node_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_Node_t>)
+    >
+  >('rd_kafka_Node_rack');
+  late final _rd_kafka_Node_rack =
+      _rd_kafka_Node_rackPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_Node_t>)
+          >();
 
   /// @brief List and describe client groups in cluster.
   ///
@@ -8897,24 +9462,31 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<rd_kafka_group_list>> grplistp,
     int timeout_ms,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_list_groups(
-      rk,
-      group,
-      grplistp,
-      timeout_ms,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_list_groups(rk, group, grplistp, timeout_ms),
+    );
   }
 
   late final _rd_kafka_list_groupsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_group_list>>,
+        ffi.Int,
+      )
+    >
+  >('rd_kafka_list_groups');
+  late final _rd_kafka_list_groups =
+      _rd_kafka_list_groupsPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<rd_kafka_group_list>>,
-              ffi.Int)>>('rd_kafka_list_groups');
-  late final _rd_kafka_list_groups = _rd_kafka_list_groupsPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>,
-          ffi.Pointer<ffi.Pointer<rd_kafka_group_list>>, int)>();
+              int,
+            )
+          >();
 
   /// @brief Returns a name for a state code.
   ///
@@ -8924,14 +9496,12 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_consumer_group_state_name(
     rd_kafka_consumer_group_state_t state,
   ) {
-    return _rd_kafka_consumer_group_state_name(
-      state.value,
-    );
+    return _rd_kafka_consumer_group_state_name(state.value);
   }
 
   late final _rd_kafka_consumer_group_state_namePtr = _lookup<
-          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>>(
-      'rd_kafka_consumer_group_state_name');
+    ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>
+  >('rd_kafka_consumer_group_state_name');
   late final _rd_kafka_consumer_group_state_name =
       _rd_kafka_consumer_group_state_namePtr
           .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
@@ -8944,15 +9514,14 @@ class LibRdKafka {
   rd_kafka_consumer_group_state_t rd_kafka_consumer_group_state_code(
     ffi.Pointer<ffi.Char> name,
   ) {
-    return rd_kafka_consumer_group_state_t
-        .fromValue(_rd_kafka_consumer_group_state_code(
-      name,
-    ));
+    return rd_kafka_consumer_group_state_t.fromValue(
+      _rd_kafka_consumer_group_state_code(name),
+    );
   }
 
   late final _rd_kafka_consumer_group_state_codePtr = _lookup<
-          ffi.NativeFunction<ffi.UnsignedInt Function(ffi.Pointer<ffi.Char>)>>(
-      'rd_kafka_consumer_group_state_code');
+    ffi.NativeFunction<ffi.UnsignedInt Function(ffi.Pointer<ffi.Char>)>
+  >('rd_kafka_consumer_group_state_code');
   late final _rd_kafka_consumer_group_state_code =
       _rd_kafka_consumer_group_state_codePtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
@@ -8965,14 +9534,12 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_consumer_group_type_name(
     rd_kafka_consumer_group_type_t type,
   ) {
-    return _rd_kafka_consumer_group_type_name(
-      type.value,
-    );
+    return _rd_kafka_consumer_group_type_name(type.value);
   }
 
   late final _rd_kafka_consumer_group_type_namePtr = _lookup<
-          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>>(
-      'rd_kafka_consumer_group_type_name');
+    ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>
+  >('rd_kafka_consumer_group_type_name');
   late final _rd_kafka_consumer_group_type_name =
       _rd_kafka_consumer_group_type_namePtr
           .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
@@ -8987,34 +9554,29 @@ class LibRdKafka {
   rd_kafka_consumer_group_type_t rd_kafka_consumer_group_type_code(
     ffi.Pointer<ffi.Char> name,
   ) {
-    return rd_kafka_consumer_group_type_t
-        .fromValue(_rd_kafka_consumer_group_type_code(
-      name,
-    ));
+    return rd_kafka_consumer_group_type_t.fromValue(
+      _rd_kafka_consumer_group_type_code(name),
+    );
   }
 
   late final _rd_kafka_consumer_group_type_codePtr = _lookup<
-          ffi.NativeFunction<ffi.UnsignedInt Function(ffi.Pointer<ffi.Char>)>>(
-      'rd_kafka_consumer_group_type_code');
+    ffi.NativeFunction<ffi.UnsignedInt Function(ffi.Pointer<ffi.Char>)>
+  >('rd_kafka_consumer_group_type_code');
   late final _rd_kafka_consumer_group_type_code =
       _rd_kafka_consumer_group_type_codePtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
   /// @brief Release list memory
-  void rd_kafka_group_list_destroy(
-    ffi.Pointer<rd_kafka_group_list> grplist,
-  ) {
-    return _rd_kafka_group_list_destroy(
-      grplist,
-    );
+  void rd_kafka_group_list_destroy(ffi.Pointer<rd_kafka_group_list> grplist) {
+    return _rd_kafka_group_list_destroy(grplist);
   }
 
   late final _rd_kafka_group_list_destroyPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_group_list>)>>(
-      'rd_kafka_group_list_destroy');
-  late final _rd_kafka_group_list_destroy = _rd_kafka_group_list_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_group_list>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_group_list>)>
+  >('rd_kafka_group_list_destroy');
+  late final _rd_kafka_group_list_destroy =
+      _rd_kafka_group_list_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_group_list>)>();
 
   /// @brief Adds one or more brokers to the kafka handle's list of initial
   /// bootstrap brokers.
@@ -9050,18 +9612,19 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> brokerlist,
   ) {
-    return _rd_kafka_brokers_add(
-      rk,
-      brokerlist,
-    );
+    return _rd_kafka_brokers_add(rk, brokerlist);
   }
 
   late final _rd_kafka_brokers_addPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<ffi.Char>)>>('rd_kafka_brokers_add');
-  late final _rd_kafka_brokers_add = _rd_kafka_brokers_addPtr.asFunction<
-      int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>)>();
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>)
+    >
+  >('rd_kafka_brokers_add');
+  late final _rd_kafka_brokers_add =
+      _rd_kafka_brokers_addPtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>)
+          >();
 
   /// @brief Set logger function.
   ///
@@ -9076,39 +9639,54 @@ class LibRdKafka {
   void rd_kafka_set_logger(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<
-            ffi.NativeFunction<
-                ffi.Void Function(ffi.Pointer<rd_kafka_t> rk, ffi.Int level,
-                    ffi.Pointer<ffi.Char> fac, ffi.Pointer<ffi.Char> buf)>>
-        func,
+      ffi.NativeFunction<
+        ffi.Void Function(
+          ffi.Pointer<rd_kafka_t> rk,
+          ffi.Int level,
+          ffi.Pointer<ffi.Char> fac,
+          ffi.Pointer<ffi.Char> buf,
+        )
+      >
+    >
+    func,
   ) {
-    return _rd_kafka_set_logger(
-      rk,
-      func,
-    );
+    return _rd_kafka_set_logger(rk, func);
   }
 
   late final _rd_kafka_set_loggerPtr = _lookup<
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<
-                      ffi.NativeFunction<
-                          ffi.Void Function(
-                              ffi.Pointer<rd_kafka_t> rk,
-                              ffi.Int level,
-                              ffi.Pointer<ffi.Char> fac,
-                              ffi.Pointer<ffi.Char> buf)>>)>>(
-      'rd_kafka_set_logger');
-  late final _rd_kafka_set_logger = _rd_kafka_set_loggerPtr.asFunction<
-      void Function(
-          ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<
-              ffi.NativeFunction<
+            ffi.Void Function(
+              ffi.Pointer<rd_kafka_t> rk,
+              ffi.Int level,
+              ffi.Pointer<ffi.Char> fac,
+              ffi.Pointer<ffi.Char> buf,
+            )
+          >
+        >,
+      )
+    >
+  >('rd_kafka_set_logger');
+  late final _rd_kafka_set_logger =
+      _rd_kafka_set_loggerPtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<rd_kafka_t>,
+              ffi.Pointer<
+                ffi.NativeFunction<
                   ffi.Void Function(
-                      ffi.Pointer<rd_kafka_t> rk,
-                      ffi.Int level,
-                      ffi.Pointer<ffi.Char> fac,
-                      ffi.Pointer<ffi.Char> buf)>>)>();
+                    ffi.Pointer<rd_kafka_t> rk,
+                    ffi.Int level,
+                    ffi.Pointer<ffi.Char> fac,
+                    ffi.Pointer<ffi.Char> buf,
+                  )
+                >
+              >,
+            )
+          >();
 
   /// @brief Specifies the maximum logging level emitted by
   /// internal kafka logging and debugging.
@@ -9117,22 +9695,16 @@ class LibRdKafka {
   ///
   /// @remark If the \p \"debug\" configuration property is set the log level is
   /// automatically adjusted to \c LOG_DEBUG (7).
-  void rd_kafka_set_log_level(
-    ffi.Pointer<rd_kafka_t> rk,
-    int level,
-  ) {
-    return _rd_kafka_set_log_level(
-      rk,
-      level,
-    );
+  void rd_kafka_set_log_level(ffi.Pointer<rd_kafka_t> rk, int level) {
+    return _rd_kafka_set_log_level(rk, level);
   }
 
   late final _rd_kafka_set_log_levelPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_t>, ffi.Int)>>(
-      'rd_kafka_set_log_level');
-  late final _rd_kafka_set_log_level = _rd_kafka_set_log_levelPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_t>, int)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_t>, ffi.Int)>
+  >('rd_kafka_set_log_level');
+  late final _rd_kafka_set_log_level =
+      _rd_kafka_set_log_levelPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_t>, int)>();
 
   /// @brief Builtin (default) log sink: print to stderr
   void rd_kafka_log_print(
@@ -9141,24 +9713,29 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> fac,
     ffi.Pointer<ffi.Char> buf,
   ) {
-    return _rd_kafka_log_print(
-      rk,
-      level,
-      fac,
-      buf,
-    );
+    return _rd_kafka_log_print(rk, level, fac, buf);
   }
 
   late final _rd_kafka_log_printPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Int,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('rd_kafka_log_print');
+  late final _rd_kafka_log_print =
+      _rd_kafka_log_printPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
-              ffi.Int,
+              int,
               ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>>('rd_kafka_log_print');
-  late final _rd_kafka_log_print = _rd_kafka_log_printPtr.asFunction<
-      void Function(ffi.Pointer<rd_kafka_t>, int, ffi.Pointer<ffi.Char>,
-          ffi.Pointer<ffi.Char>)>();
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
   /// @brief Builtin log sink: print to syslog.
   /// @remark This logger is only available if librdkafka was built
@@ -9169,24 +9746,29 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> fac,
     ffi.Pointer<ffi.Char> buf,
   ) {
-    return _rd_kafka_log_syslog(
-      rk,
-      level,
-      fac,
-      buf,
-    );
+    return _rd_kafka_log_syslog(rk, level, fac, buf);
   }
 
   late final _rd_kafka_log_syslogPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Int,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('rd_kafka_log_syslog');
+  late final _rd_kafka_log_syslog =
+      _rd_kafka_log_syslogPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
-              ffi.Int,
+              int,
               ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>>('rd_kafka_log_syslog');
-  late final _rd_kafka_log_syslog = _rd_kafka_log_syslogPtr.asFunction<
-      void Function(ffi.Pointer<rd_kafka_t>, int, ffi.Pointer<ffi.Char>,
-          ffi.Pointer<ffi.Char>)>();
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
   /// @brief Returns the current out queue length.
   ///
@@ -9208,17 +9790,14 @@ class LibRdKafka {
   /// @returns number of messages and events waiting in queues.
   ///
   /// @sa rd_kafka_flush()
-  int rd_kafka_outq_len(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return _rd_kafka_outq_len(
-      rk,
-    );
+  int rd_kafka_outq_len(ffi.Pointer<rd_kafka_t> rk) {
+    return _rd_kafka_outq_len(rk);
   }
 
   late final _rd_kafka_outq_lenPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>)>>(
-          'rd_kafka_outq_len');
+        'rd_kafka_outq_len',
+      );
   late final _rd_kafka_outq_len =
       _rd_kafka_outq_lenPtr.asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
 
@@ -9226,22 +9805,20 @@ class LibRdKafka {
   ///
   /// This is only useful for debugging rdkafka, showing state and statistics
   /// for brokers, topics, partitions, etc.
-  void rd_kafka_dump(
-    ffi.Pointer<FILE> fp,
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return _rd_kafka_dump(
-      fp,
-      rk,
-    );
+  void rd_kafka_dump(ffi.Pointer<FILE> fp, ffi.Pointer<rd_kafka_t> rk) {
+    return _rd_kafka_dump(fp, rk);
   }
 
   late final _rd_kafka_dumpPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<FILE>, ffi.Pointer<rd_kafka_t>)>>('rd_kafka_dump');
-  late final _rd_kafka_dump = _rd_kafka_dumpPtr
-      .asFunction<void Function(ffi.Pointer<FILE>, ffi.Pointer<rd_kafka_t>)>();
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<FILE>, ffi.Pointer<rd_kafka_t>)
+    >
+  >('rd_kafka_dump');
+  late final _rd_kafka_dump =
+      _rd_kafka_dumpPtr
+          .asFunction<
+            void Function(ffi.Pointer<FILE>, ffi.Pointer<rd_kafka_t>)
+          >();
 
   /// @brief Retrieve the current number of threads in use by librdkafka.
   ///
@@ -9261,17 +9838,14 @@ class LibRdKafka {
   /// timeout was reached.
   ///
   /// @remark This function is deprecated.
-  int rd_kafka_wait_destroyed(
-    int timeout_ms,
-  ) {
-    return _rd_kafka_wait_destroyed(
-      timeout_ms,
-    );
+  int rd_kafka_wait_destroyed(int timeout_ms) {
+    return _rd_kafka_wait_destroyed(timeout_ms);
   }
 
   late final _rd_kafka_wait_destroyedPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>(
-          'rd_kafka_wait_destroyed');
+        'rd_kafka_wait_destroyed',
+      );
   late final _rd_kafka_wait_destroyed =
       _rd_kafka_wait_destroyedPtr.asFunction<int Function(int)>();
 
@@ -9292,38 +9866,34 @@ class LibRdKafka {
   ///
   /// @warning It is not permitted to call rd_kafka_poll() after directing the
   /// main queue with rd_kafka_poll_set_consumer().
-  rd_kafka_resp_err_t rd_kafka_poll_set_consumer(
-    ffi.Pointer<rd_kafka_t> rk,
-  ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_poll_set_consumer(
-      rk,
-    ));
+  rd_kafka_resp_err_t rd_kafka_poll_set_consumer(ffi.Pointer<rd_kafka_t> rk) {
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_poll_set_consumer(rk));
   }
 
   late final _rd_kafka_poll_set_consumerPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_t>)>>(
-          'rd_kafka_poll_set_consumer');
-  late final _rd_kafka_poll_set_consumer = _rd_kafka_poll_set_consumerPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
+        'rd_kafka_poll_set_consumer',
+      );
+  late final _rd_kafka_poll_set_consumer =
+      _rd_kafka_poll_set_consumerPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_t>)>();
 
   /// @returns the event type for the given event.
   ///
   /// @remark As a convenience it is okay to pass \p rkev as NULL in which case
   /// RD_KAFKA_EVENT_NONE is returned.
-  int rd_kafka_event_type(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_type(
-      rkev,
-    );
+  int rd_kafka_event_type(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_type(rkev);
   }
 
   late final _rd_kafka_event_typePtr = _lookup<
-      ffi.NativeFunction<
-          rd_kafka_event_type_t Function(
-              ffi.Pointer<rd_kafka_event_t>)>>('rd_kafka_event_type');
-  late final _rd_kafka_event_type = _rd_kafka_event_typePtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_event_t>)>();
+    ffi.NativeFunction<
+      rd_kafka_event_type_t Function(ffi.Pointer<rd_kafka_event_t>)
+    >
+  >('rd_kafka_event_type');
+  late final _rd_kafka_event_type =
+      _rd_kafka_event_typePtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_event_t>)>();
 
   /// @returns the event type's name for the given event.
   ///
@@ -9332,17 +9902,19 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_event_name(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_name(
-      rkev,
-    );
+    return _rd_kafka_event_name(rkev);
   }
 
   late final _rd_kafka_event_namePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_event_t>)>>('rd_kafka_event_name');
-  late final _rd_kafka_event_name = _rd_kafka_event_namePtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_event_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_event_t>)
+    >
+  >('rd_kafka_event_name');
+  late final _rd_kafka_event_name =
+      _rd_kafka_event_namePtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_event_t>)
+          >();
 
   /// @brief Destroy an event.
   ///
@@ -9351,19 +9923,16 @@ class LibRdKafka {
   ///
   /// @remark As a convenience it is okay to pass \p rkev as NULL in which case
   /// no action is performed.
-  void rd_kafka_event_destroy(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_destroy(
-      rkev,
-    );
+  void rd_kafka_event_destroy(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_destroy(rkev);
   }
 
   late final _rd_kafka_event_destroyPtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_destroy');
-  late final _rd_kafka_event_destroy = _rd_kafka_event_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_event_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_event_t>)>
+  >('rd_kafka_event_destroy');
+  late final _rd_kafka_event_destroy =
+      _rd_kafka_event_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_event_t>)>();
 
   /// @returns the next message from an event.
   ///
@@ -9381,19 +9950,21 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_message_t> rd_kafka_event_message_next(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_message_next(
-      rkev,
-    );
+    return _rd_kafka_event_message_next(rkev);
   }
 
   late final _rd_kafka_event_message_nextPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_message_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>>('rd_kafka_event_message_next');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_message_t> Function(ffi.Pointer<rd_kafka_event_t>)
+    >
+  >('rd_kafka_event_message_next');
   late final _rd_kafka_event_message_next =
-      _rd_kafka_event_message_nextPtr.asFunction<
-          ffi.Pointer<rd_kafka_message_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_message_nextPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_message_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Extacts \p size message(s) from the event into the
   /// pre-allocated array \p rkmessages.
@@ -9411,42 +9982,43 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<rd_kafka_message_t>> rkmessages,
     int size,
   ) {
-    return _rd_kafka_event_message_array(
-      rkev,
-      rkmessages,
-      size,
-    );
+    return _rd_kafka_event_message_array(rkev, rkmessages, size);
   }
 
   late final _rd_kafka_event_message_arrayPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Size Function(
+    ffi.NativeFunction<
+      ffi.Size Function(
+        ffi.Pointer<rd_kafka_event_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_message_t>>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_event_message_array');
+  late final _rd_kafka_event_message_array =
+      _rd_kafka_event_message_arrayPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_event_t>,
               ffi.Pointer<ffi.Pointer<rd_kafka_message_t>>,
-              ffi.Size)>>('rd_kafka_event_message_array');
-  late final _rd_kafka_event_message_array =
-      _rd_kafka_event_message_arrayPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_event_t>,
-              ffi.Pointer<ffi.Pointer<rd_kafka_message_t>>, int)>();
+              int,
+            )
+          >();
 
   /// @returns the number of remaining messages in the event.
   ///
   /// Event types:
   /// - RD_KAFKA_EVENT_FETCH  (1 message)
   /// - RD_KAFKA_EVENT_DR     (>=1 message(s))
-  int rd_kafka_event_message_count(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_message_count(
-      rkev,
-    );
+  int rd_kafka_event_message_count(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_message_count(rkev);
   }
 
   late final _rd_kafka_event_message_countPtr = _lookup<
-          ffi.NativeFunction<ffi.Size Function(ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_message_count');
-  late final _rd_kafka_event_message_count = _rd_kafka_event_message_countPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_event_t>)>();
+    ffi.NativeFunction<ffi.Size Function(ffi.Pointer<rd_kafka_event_t>)>
+  >('rd_kafka_event_message_count');
+  late final _rd_kafka_event_message_count =
+      _rd_kafka_event_message_countPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_event_t>)>();
 
   /// @returns the associated configuration string for the event, or NULL
   /// if the configuration property is not set or if
@@ -9460,18 +10032,19 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_event_config_string(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_config_string(
-      rkev,
-    );
+    return _rd_kafka_event_config_string(rkev);
   }
 
   late final _rd_kafka_event_config_stringPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_event_t>)>>('rd_kafka_event_config_string');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_event_t>)
+    >
+  >('rd_kafka_event_config_string');
   late final _rd_kafka_event_config_string =
-      _rd_kafka_event_config_stringPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_config_stringPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_event_t>)
+          >();
 
   /// @returns the error code for the event.
   ///
@@ -9479,19 +10052,16 @@ class LibRdKafka {
   ///
   /// Event types:
   /// - all
-  rd_kafka_resp_err_t rd_kafka_event_error(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_event_error(
-      rkev,
-    ));
+  rd_kafka_resp_err_t rd_kafka_event_error(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return rd_kafka_resp_err_t.fromValue(_rd_kafka_event_error(rkev));
   }
 
   late final _rd_kafka_event_errorPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_error');
-  late final _rd_kafka_event_error = _rd_kafka_event_errorPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_event_t>)>();
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_event_t>)>
+  >('rd_kafka_event_error');
+  late final _rd_kafka_event_error =
+      _rd_kafka_event_errorPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_event_t>)>();
 
   /// @returns the error string (if any).
   /// An application should check that rd_kafka_event_error() returns
@@ -9502,18 +10072,19 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_event_error_string(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_error_string(
-      rkev,
-    );
+    return _rd_kafka_event_error_string(rkev);
   }
 
   late final _rd_kafka_event_error_stringPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_event_t>)>>('rd_kafka_event_error_string');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_event_t>)
+    >
+  >('rd_kafka_event_error_string');
   late final _rd_kafka_event_error_string =
-      _rd_kafka_event_error_stringPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_error_stringPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_event_t>)
+          >();
 
   /// @returns 1 if the error is a fatal error, else 0.
   ///
@@ -9521,19 +10092,16 @@ class LibRdKafka {
   /// - RD_KAFKA_EVENT_ERROR
   ///
   /// @sa rd_kafka_fatal_error()
-  int rd_kafka_event_error_is_fatal(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_error_is_fatal(
-      rkev,
-    );
+  int rd_kafka_event_error_is_fatal(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_error_is_fatal(rkev);
   }
 
   late final _rd_kafka_event_error_is_fatalPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_error_is_fatal');
-  late final _rd_kafka_event_error_is_fatal = _rd_kafka_event_error_is_fatalPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_event_t>)>();
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_event_t>)>
+  >('rd_kafka_event_error_is_fatal');
+  late final _rd_kafka_event_error_is_fatal =
+      _rd_kafka_event_error_is_fatalPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_event_t>)>();
 
   /// @returns the event opaque (if any) as passed to rd_kafka_commit() (et.al) or
   /// rd_kafka_AdminOptions_set_opaque(), depending on event type.
@@ -9563,17 +10131,19 @@ class LibRdKafka {
   ffi.Pointer<ffi.Void> rd_kafka_event_opaque(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_opaque(
-      rkev,
-    );
+    return _rd_kafka_event_opaque(rkev);
   }
 
   late final _rd_kafka_event_opaquePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Void> Function(
-              ffi.Pointer<rd_kafka_event_t>)>>('rd_kafka_event_opaque');
-  late final _rd_kafka_event_opaque = _rd_kafka_event_opaquePtr.asFunction<
-      ffi.Pointer<ffi.Void> Function(ffi.Pointer<rd_kafka_event_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Void> Function(ffi.Pointer<rd_kafka_event_t>)
+    >
+  >('rd_kafka_event_opaque');
+  late final _rd_kafka_event_opaque =
+      _rd_kafka_event_opaquePtr
+          .asFunction<
+            ffi.Pointer<ffi.Void> Function(ffi.Pointer<rd_kafka_event_t>)
+          >();
 
   /// @brief Extract log message from the event.
   ///
@@ -9587,27 +10157,29 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<ffi.Char>> str,
     ffi.Pointer<ffi.Int> level,
   ) {
-    return _rd_kafka_event_log(
-      rkev,
-      fac,
-      str,
-      level,
-    );
+    return _rd_kafka_event_log(rkev, fac, str, level);
   }
 
   late final _rd_kafka_event_logPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_event_t>,
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Pointer<ffi.Int>,
+      )
+    >
+  >('rd_kafka_event_log');
+  late final _rd_kafka_event_log =
+      _rd_kafka_event_logPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_event_t>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Int>)>>('rd_kafka_event_log');
-  late final _rd_kafka_event_log = _rd_kafka_event_logPtr.asFunction<
-      int Function(
-          ffi.Pointer<rd_kafka_event_t>,
-          ffi.Pointer<ffi.Pointer<ffi.Char>>,
-          ffi.Pointer<ffi.Pointer<ffi.Char>>,
-          ffi.Pointer<ffi.Int>)>();
+              ffi.Pointer<ffi.Int>,
+            )
+          >();
 
   /// @brief Extract log debug context from event.
   ///
@@ -9623,21 +10195,27 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> dst,
     int dstsize,
   ) {
-    return _rd_kafka_event_debug_contexts(
-      rkev,
-      dst,
-      dstsize,
-    );
+    return _rd_kafka_event_debug_contexts(rkev, dst, dstsize);
   }
 
   late final _rd_kafka_event_debug_contextsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<rd_kafka_event_t>, ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_event_debug_contexts');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_event_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_event_debug_contexts');
   late final _rd_kafka_event_debug_contexts =
-      _rd_kafka_event_debug_contextsPtr.asFunction<
-          int Function(
-              ffi.Pointer<rd_kafka_event_t>, ffi.Pointer<ffi.Char>, int)>();
+      _rd_kafka_event_debug_contextsPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_event_t>,
+              ffi.Pointer<ffi.Char>,
+              int,
+            )
+          >();
 
   /// @brief Extract stats from the event.
   ///
@@ -9651,17 +10229,19 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_event_stats(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_stats(
-      rkev,
-    );
+    return _rd_kafka_event_stats(rkev);
   }
 
   late final _rd_kafka_event_statsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_event_t>)>>('rd_kafka_event_stats');
-  late final _rd_kafka_event_stats = _rd_kafka_event_statsPtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_event_t>)>();
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_event_t>)
+    >
+  >('rd_kafka_event_stats');
+  late final _rd_kafka_event_stats =
+      _rd_kafka_event_statsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_event_t>)
+          >();
 
   /// @returns the topic partition list from the event.
   ///
@@ -9672,23 +10252,24 @@ class LibRdKafka {
   /// - RD_KAFKA_EVENT_REBALANCE
   /// - RD_KAFKA_EVENT_OFFSET_COMMIT
   ffi.Pointer<rd_kafka_topic_partition_list_t>
-      rd_kafka_event_topic_partition_list(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_topic_partition_list(
-      rkev,
-    );
+  rd_kafka_event_topic_partition_list(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_topic_partition_list(rkev);
   }
 
   late final _rd_kafka_event_topic_partition_listPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_topic_partition_list');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_topic_partition_list');
   late final _rd_kafka_event_topic_partition_list =
-      _rd_kafka_event_topic_partition_listPtr.asFunction<
-          ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_topic_partition_listPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @returns a newly allocated topic_partition container, if applicable for the
   /// event type, else NULL.
@@ -9701,20 +10282,23 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_topic_partition_t> rd_kafka_event_topic_partition(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_topic_partition(
-      rkev,
-    );
+    return _rd_kafka_event_topic_partition(rkev);
   }
 
   late final _rd_kafka_event_topic_partitionPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_topic_partition_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_topic_partition');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_topic_partition_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_topic_partition');
   late final _rd_kafka_event_topic_partition =
-      _rd_kafka_event_topic_partitionPtr.asFunction<
-          ffi.Pointer<rd_kafka_topic_partition_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_topic_partitionPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_topic_partition_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get CreateTopics result.
   ///
@@ -9724,23 +10308,24 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_CREATETOPICS_RESULT
   ffi.Pointer<rd_kafka_CreateTopics_result_t>
-      rd_kafka_event_CreateTopics_result(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_CreateTopics_result(
-      rkev,
-    );
+  rd_kafka_event_CreateTopics_result(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_CreateTopics_result(rkev);
   }
 
   late final _rd_kafka_event_CreateTopics_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_CreateTopics_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_CreateTopics_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_CreateTopics_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_CreateTopics_result');
   late final _rd_kafka_event_CreateTopics_result =
-      _rd_kafka_event_CreateTopics_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_CreateTopics_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_CreateTopics_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_CreateTopics_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get DeleteTopics result.
   ///
@@ -9750,23 +10335,24 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_DELETETOPICS_RESULT
   ffi.Pointer<rd_kafka_DeleteTopics_result_t>
-      rd_kafka_event_DeleteTopics_result(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_DeleteTopics_result(
-      rkev,
-    );
+  rd_kafka_event_DeleteTopics_result(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_DeleteTopics_result(rkev);
   }
 
   late final _rd_kafka_event_DeleteTopics_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_DeleteTopics_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_DeleteTopics_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_DeleteTopics_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_DeleteTopics_result');
   late final _rd_kafka_event_DeleteTopics_result =
-      _rd_kafka_event_DeleteTopics_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_DeleteTopics_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_DeleteTopics_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_DeleteTopics_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get CreatePartitions result.
   ///
@@ -9776,23 +10362,24 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_CREATEPARTITIONS_RESULT
   ffi.Pointer<rd_kafka_CreatePartitions_result_t>
-      rd_kafka_event_CreatePartitions_result(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_CreatePartitions_result(
-      rkev,
-    );
+  rd_kafka_event_CreatePartitions_result(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_CreatePartitions_result(rkev);
   }
 
   late final _rd_kafka_event_CreatePartitions_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_CreatePartitions_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_CreatePartitions_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_CreatePartitions_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_CreatePartitions_result');
   late final _rd_kafka_event_CreatePartitions_result =
-      _rd_kafka_event_CreatePartitions_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_CreatePartitions_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_CreatePartitions_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_CreatePartitions_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get AlterConfigs result.
   ///
@@ -9802,23 +10389,24 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_ALTERCONFIGS_RESULT
   ffi.Pointer<rd_kafka_AlterConfigs_result_t>
-      rd_kafka_event_AlterConfigs_result(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_AlterConfigs_result(
-      rkev,
-    );
+  rd_kafka_event_AlterConfigs_result(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_AlterConfigs_result(rkev);
   }
 
   late final _rd_kafka_event_AlterConfigs_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_AlterConfigs_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_AlterConfigs_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_AlterConfigs_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_AlterConfigs_result');
   late final _rd_kafka_event_AlterConfigs_result =
-      _rd_kafka_event_AlterConfigs_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_AlterConfigs_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_AlterConfigs_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_AlterConfigs_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get IncrementalAlterConfigs result.
   ///
@@ -9828,23 +10416,26 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_INCREMENTALALTERCONFIGS_RESULT
   ffi.Pointer<rd_kafka_IncrementalAlterConfigs_result_t>
-      rd_kafka_event_IncrementalAlterConfigs_result(
+  rd_kafka_event_IncrementalAlterConfigs_result(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_IncrementalAlterConfigs_result(
-      rkev,
-    );
+    return _rd_kafka_event_IncrementalAlterConfigs_result(rkev);
   }
 
   late final _rd_kafka_event_IncrementalAlterConfigs_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_IncrementalAlterConfigs_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_IncrementalAlterConfigs_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_IncrementalAlterConfigs_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_IncrementalAlterConfigs_result');
   late final _rd_kafka_event_IncrementalAlterConfigs_result =
-      _rd_kafka_event_IncrementalAlterConfigs_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_IncrementalAlterConfigs_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_IncrementalAlterConfigs_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_IncrementalAlterConfigs_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get DescribeConfigs result.
   ///
@@ -9854,23 +10445,24 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_DESCRIBECONFIGS_RESULT
   ffi.Pointer<rd_kafka_DescribeConfigs_result_t>
-      rd_kafka_event_DescribeConfigs_result(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_DescribeConfigs_result(
-      rkev,
-    );
+  rd_kafka_event_DescribeConfigs_result(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_DescribeConfigs_result(rkev);
   }
 
   late final _rd_kafka_event_DescribeConfigs_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_DescribeConfigs_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_DescribeConfigs_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_DescribeConfigs_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_DescribeConfigs_result');
   late final _rd_kafka_event_DescribeConfigs_result =
-      _rd_kafka_event_DescribeConfigs_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_DescribeConfigs_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_DescribeConfigs_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_DescribeConfigs_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @returns the result of a DeleteRecords request, or NULL if event is of
   /// different type.
@@ -9878,23 +10470,24 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_DELETERECORDS_RESULT
   ffi.Pointer<rd_kafka_DeleteRecords_result_t>
-      rd_kafka_event_DeleteRecords_result(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_DeleteRecords_result(
-      rkev,
-    );
+  rd_kafka_event_DeleteRecords_result(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_DeleteRecords_result(rkev);
   }
 
   late final _rd_kafka_event_DeleteRecords_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_DeleteRecords_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_DeleteRecords_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_DeleteRecords_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_DeleteRecords_result');
   late final _rd_kafka_event_DeleteRecords_result =
-      _rd_kafka_event_DeleteRecords_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_DeleteRecords_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_DeleteRecords_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_DeleteRecords_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get ListConsumerGroups result.
   ///
@@ -9907,23 +10500,24 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_LISTCONSUMERGROUPS_RESULT
   ffi.Pointer<rd_kafka_ListConsumerGroups_result_t>
-      rd_kafka_event_ListConsumerGroups_result(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_ListConsumerGroups_result(
-      rkev,
-    );
+  rd_kafka_event_ListConsumerGroups_result(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_ListConsumerGroups_result(rkev);
   }
 
   late final _rd_kafka_event_ListConsumerGroups_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_ListConsumerGroups_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_ListConsumerGroups_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_ListConsumerGroups_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_ListConsumerGroups_result');
   late final _rd_kafka_event_ListConsumerGroups_result =
-      _rd_kafka_event_ListConsumerGroups_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_ListConsumerGroups_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_ListConsumerGroups_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_ListConsumerGroups_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get DescribeConsumerGroups result.
   ///
@@ -9936,23 +10530,26 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_DESCRIBECONSUMERGROUPS_RESULT
   ffi.Pointer<rd_kafka_DescribeConsumerGroups_result_t>
-      rd_kafka_event_DescribeConsumerGroups_result(
+  rd_kafka_event_DescribeConsumerGroups_result(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_DescribeConsumerGroups_result(
-      rkev,
-    );
+    return _rd_kafka_event_DescribeConsumerGroups_result(rkev);
   }
 
   late final _rd_kafka_event_DescribeConsumerGroups_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_DescribeConsumerGroups_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_DescribeConsumerGroups_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_DescribeConsumerGroups_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_DescribeConsumerGroups_result');
   late final _rd_kafka_event_DescribeConsumerGroups_result =
-      _rd_kafka_event_DescribeConsumerGroups_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_DescribeConsumerGroups_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_DescribeConsumerGroups_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_DescribeConsumerGroups_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get DescribeTopics result.
   ///
@@ -9965,23 +10562,24 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_DESCRIBETOPICS_RESULT
   ffi.Pointer<rd_kafka_DescribeTopics_result_t>
-      rd_kafka_event_DescribeTopics_result(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_DescribeTopics_result(
-      rkev,
-    );
+  rd_kafka_event_DescribeTopics_result(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_DescribeTopics_result(rkev);
   }
 
   late final _rd_kafka_event_DescribeTopics_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_DescribeTopics_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_DescribeTopics_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_DescribeTopics_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_DescribeTopics_result');
   late final _rd_kafka_event_DescribeTopics_result =
-      _rd_kafka_event_DescribeTopics_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_DescribeTopics_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_DescribeTopics_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_DescribeTopics_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get DescribeCluster result.
   ///
@@ -9994,23 +10592,24 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_DESCRIBECLUSTER_RESULT
   ffi.Pointer<rd_kafka_DescribeCluster_result_t>
-      rd_kafka_event_DescribeCluster_result(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_DescribeCluster_result(
-      rkev,
-    );
+  rd_kafka_event_DescribeCluster_result(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_DescribeCluster_result(rkev);
   }
 
   late final _rd_kafka_event_DescribeCluster_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_DescribeCluster_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_DescribeCluster_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_DescribeCluster_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_DescribeCluster_result');
   late final _rd_kafka_event_DescribeCluster_result =
-      _rd_kafka_event_DescribeCluster_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_DescribeCluster_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_DescribeCluster_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_DescribeCluster_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get DeleteGroups result.
   ///
@@ -10020,23 +10619,24 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_DELETEGROUPS_RESULT
   ffi.Pointer<rd_kafka_DeleteGroups_result_t>
-      rd_kafka_event_DeleteGroups_result(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_DeleteGroups_result(
-      rkev,
-    );
+  rd_kafka_event_DeleteGroups_result(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_DeleteGroups_result(rkev);
   }
 
   late final _rd_kafka_event_DeleteGroups_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_DeleteGroups_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_DeleteGroups_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_DeleteGroups_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_DeleteGroups_result');
   late final _rd_kafka_event_DeleteGroups_result =
-      _rd_kafka_event_DeleteGroups_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_DeleteGroups_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_DeleteGroups_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_DeleteGroups_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get DeleteConsumerGroupOffsets result.
   ///
@@ -10046,23 +10646,26 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_DELETECONSUMERGROUPOFFSETS_RESULT
   ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_result_t>
-      rd_kafka_event_DeleteConsumerGroupOffsets_result(
+  rd_kafka_event_DeleteConsumerGroupOffsets_result(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_DeleteConsumerGroupOffsets_result(
-      rkev,
-    );
+    return _rd_kafka_event_DeleteConsumerGroupOffsets_result(rkev);
   }
 
   late final _rd_kafka_event_DeleteConsumerGroupOffsets_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_result_t>
-                  Function(ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_DeleteConsumerGroupOffsets_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_DeleteConsumerGroupOffsets_result');
   late final _rd_kafka_event_DeleteConsumerGroupOffsets_result =
-      _rd_kafka_event_DeleteConsumerGroupOffsets_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_DeleteConsumerGroupOffsets_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @returns the result of a CreateAcls request, or NULL if event is of
   /// different type.
@@ -10072,20 +10675,23 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_CreateAcls_result_t> rd_kafka_event_CreateAcls_result(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_CreateAcls_result(
-      rkev,
-    );
+    return _rd_kafka_event_CreateAcls_result(rkev);
   }
 
   late final _rd_kafka_event_CreateAcls_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_CreateAcls_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_CreateAcls_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_CreateAcls_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_CreateAcls_result');
   late final _rd_kafka_event_CreateAcls_result =
-      _rd_kafka_event_CreateAcls_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_CreateAcls_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_CreateAcls_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_CreateAcls_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @returns the result of a DescribeAcls request, or NULL if event is of
   /// different type.
@@ -10093,23 +10699,24 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_DESCRIBEACLS_RESULT
   ffi.Pointer<rd_kafka_DescribeAcls_result_t>
-      rd_kafka_event_DescribeAcls_result(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_DescribeAcls_result(
-      rkev,
-    );
+  rd_kafka_event_DescribeAcls_result(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_DescribeAcls_result(rkev);
   }
 
   late final _rd_kafka_event_DescribeAcls_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_DescribeAcls_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_DescribeAcls_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_DescribeAcls_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_DescribeAcls_result');
   late final _rd_kafka_event_DescribeAcls_result =
-      _rd_kafka_event_DescribeAcls_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_DescribeAcls_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_DescribeAcls_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_DescribeAcls_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @returns the result of a DeleteAcls request, or NULL if event is of
   /// different type.
@@ -10119,20 +10726,23 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_DeleteAcls_result_t> rd_kafka_event_DeleteAcls_result(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_DeleteAcls_result(
-      rkev,
-    );
+    return _rd_kafka_event_DeleteAcls_result(rkev);
   }
 
   late final _rd_kafka_event_DeleteAcls_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_DeleteAcls_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_DeleteAcls_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_DeleteAcls_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_DeleteAcls_result');
   late final _rd_kafka_event_DeleteAcls_result =
-      _rd_kafka_event_DeleteAcls_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_DeleteAcls_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_DeleteAcls_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_DeleteAcls_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get ListConsumerGroupOffsets result.
   ///
@@ -10145,23 +10755,26 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_LISTCONSUMERGROUPOFFSETS_RESULT
   ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_result_t>
-      rd_kafka_event_ListConsumerGroupOffsets_result(
+  rd_kafka_event_ListConsumerGroupOffsets_result(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_ListConsumerGroupOffsets_result(
-      rkev,
-    );
+    return _rd_kafka_event_ListConsumerGroupOffsets_result(rkev);
   }
 
   late final _rd_kafka_event_ListConsumerGroupOffsets_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_ListConsumerGroupOffsets_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_ListConsumerGroupOffsets_result');
   late final _rd_kafka_event_ListConsumerGroupOffsets_result =
-      _rd_kafka_event_ListConsumerGroupOffsets_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_ListConsumerGroupOffsets_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get AlterConsumerGroupOffsets result.
   ///
@@ -10174,23 +10787,26 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_ALTERCONSUMERGROUPOFFSETS_RESULT
   ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_result_t>
-      rd_kafka_event_AlterConsumerGroupOffsets_result(
+  rd_kafka_event_AlterConsumerGroupOffsets_result(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_AlterConsumerGroupOffsets_result(
-      rkev,
-    );
+    return _rd_kafka_event_AlterConsumerGroupOffsets_result(rkev);
   }
 
   late final _rd_kafka_event_AlterConsumerGroupOffsets_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_AlterConsumerGroupOffsets_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_AlterConsumerGroupOffsets_result');
   late final _rd_kafka_event_AlterConsumerGroupOffsets_result =
-      _rd_kafka_event_AlterConsumerGroupOffsets_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_AlterConsumerGroupOffsets_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get ListOffsets result.
   ///
@@ -10205,20 +10821,23 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_ListOffsets_result_t> rd_kafka_event_ListOffsets_result(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_ListOffsets_result(
-      rkev,
-    );
+    return _rd_kafka_event_ListOffsets_result(rkev);
   }
 
   late final _rd_kafka_event_ListOffsets_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_ListOffsets_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_ListOffsets_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_ListOffsets_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_ListOffsets_result');
   late final _rd_kafka_event_ListOffsets_result =
-      _rd_kafka_event_ListOffsets_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_ListOffsets_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_ListOffsets_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_ListOffsets_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get DescribeUserScramCredentials result.
   ///
@@ -10231,23 +10850,25 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_DESCRIBEUSERSCRAMCREDENTIALS_RESULT
   ffi.Pointer<rd_kafka_DescribeUserScramCredentials_result_t>
-      rd_kafka_event_DescribeUserScramCredentials_result(
+  rd_kafka_event_DescribeUserScramCredentials_result(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_DescribeUserScramCredentials_result(
-      rkev,
-    );
+    return _rd_kafka_event_DescribeUserScramCredentials_result(rkev);
   }
 
   late final _rd_kafka_event_DescribeUserScramCredentials_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_DescribeUserScramCredentials_result_t>
-                  Function(ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_DescribeUserScramCredentials_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_DescribeUserScramCredentials_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_DescribeUserScramCredentials_result');
   late final _rd_kafka_event_DescribeUserScramCredentials_result =
-      _rd_kafka_event_DescribeUserScramCredentials_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_DescribeUserScramCredentials_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_DescribeUserScramCredentials_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_DescribeUserScramCredentials_result_t>
+            Function(ffi.Pointer<rd_kafka_event_t>)
+          >();
 
   /// @brief Get AlterUserScramCredentials result.
   ///
@@ -10260,23 +10881,26 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_ALTERUSERSCRAMCREDENTIALS_RESULT
   ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_t>
-      rd_kafka_event_AlterUserScramCredentials_result(
+  rd_kafka_event_AlterUserScramCredentials_result(
     ffi.Pointer<rd_kafka_event_t> rkev,
   ) {
-    return _rd_kafka_event_AlterUserScramCredentials_result(
-      rkev,
-    );
+    return _rd_kafka_event_AlterUserScramCredentials_result(rkev);
   }
 
   late final _rd_kafka_event_AlterUserScramCredentials_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_AlterUserScramCredentials_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_AlterUserScramCredentials_result');
   late final _rd_kafka_event_AlterUserScramCredentials_result =
-      _rd_kafka_event_AlterUserScramCredentials_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_AlterUserScramCredentials_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Get ElectLeaders result.
   ///
@@ -10289,23 +10913,24 @@ class LibRdKafka {
   /// Event types:
   /// RD_KAFKA_EVENT_ELECTLEADERS_RESULT
   ffi.Pointer<rd_kafka_ElectLeaders_result_t>
-      rd_kafka_event_ElectLeaders_result(
-    ffi.Pointer<rd_kafka_event_t> rkev,
-  ) {
-    return _rd_kafka_event_ElectLeaders_result(
-      rkev,
-    );
+  rd_kafka_event_ElectLeaders_result(ffi.Pointer<rd_kafka_event_t> rkev) {
+    return _rd_kafka_event_ElectLeaders_result(rkev);
   }
 
   late final _rd_kafka_event_ElectLeaders_resultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_ElectLeaders_result_t> Function(
-                  ffi.Pointer<rd_kafka_event_t>)>>(
-      'rd_kafka_event_ElectLeaders_result');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_ElectLeaders_result_t> Function(
+        ffi.Pointer<rd_kafka_event_t>,
+      )
+    >
+  >('rd_kafka_event_ElectLeaders_result');
   late final _rd_kafka_event_ElectLeaders_result =
-      _rd_kafka_event_ElectLeaders_resultPtr.asFunction<
-          ffi.Pointer<rd_kafka_ElectLeaders_result_t> Function(
-              ffi.Pointer<rd_kafka_event_t>)>();
+      _rd_kafka_event_ElectLeaders_resultPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_ElectLeaders_result_t> Function(
+              ffi.Pointer<rd_kafka_event_t>,
+            )
+          >();
 
   /// @brief Poll a queue for an event for max \p timeout_ms.
   ///
@@ -10318,19 +10943,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_queue_t> rkqu,
     int timeout_ms,
   ) {
-    return _rd_kafka_queue_poll(
-      rkqu,
-      timeout_ms,
-    );
+    return _rd_kafka_queue_poll(rkqu, timeout_ms);
   }
 
   late final _rd_kafka_queue_pollPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_event_t> Function(
-              ffi.Pointer<rd_kafka_queue_t>, ffi.Int)>>('rd_kafka_queue_poll');
-  late final _rd_kafka_queue_poll = _rd_kafka_queue_pollPtr.asFunction<
+    ffi.NativeFunction<
       ffi.Pointer<rd_kafka_event_t> Function(
-          ffi.Pointer<rd_kafka_queue_t>, int)>();
+        ffi.Pointer<rd_kafka_queue_t>,
+        ffi.Int,
+      )
+    >
+  >('rd_kafka_queue_poll');
+  late final _rd_kafka_queue_poll =
+      _rd_kafka_queue_pollPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_event_t> Function(
+              ffi.Pointer<rd_kafka_queue_t>,
+              int,
+            )
+          >();
 
   /// @brief Poll a queue for events served through callbacks for max \p
   /// timeout_ms.
@@ -10348,18 +10979,15 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_queue_t> rkqu,
     int timeout_ms,
   ) {
-    return _rd_kafka_queue_poll_callback(
-      rkqu,
-      timeout_ms,
-    );
+    return _rd_kafka_queue_poll_callback(rkqu, timeout_ms);
   }
 
   late final _rd_kafka_queue_poll_callbackPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<rd_kafka_queue_t>,
-              ffi.Int)>>('rd_kafka_queue_poll_callback');
-  late final _rd_kafka_queue_poll_callback = _rd_kafka_queue_poll_callbackPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_queue_t>, int)>();
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_queue_t>, ffi.Int)>
+  >('rd_kafka_queue_poll_callback');
+  late final _rd_kafka_queue_poll_callback =
+      _rd_kafka_queue_poll_callbackPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_queue_t>, int)>();
 
   /// @brief Append an on_conf_set() interceptor.
   ///
@@ -10377,30 +11005,36 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_interceptor_f_on_conf_set_t> on_conf_set,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_conf_interceptor_add_on_conf_set(
-      conf,
-      ic_name,
-      on_conf_set,
-      ic_opaque,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_conf_interceptor_add_on_conf_set(
+        conf,
+        ic_name,
+        on_conf_set,
+        ic_opaque,
+      ),
+    );
   }
 
   late final _rd_kafka_conf_interceptor_add_on_conf_setPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<rd_kafka_interceptor_f_on_conf_set_t>,
-                  ffi.Pointer<ffi.Void>)>>(
-      'rd_kafka_conf_interceptor_add_on_conf_set');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_interceptor_f_on_conf_set_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_conf_interceptor_add_on_conf_set');
   late final _rd_kafka_conf_interceptor_add_on_conf_set =
-      _rd_kafka_conf_interceptor_add_on_conf_setPtr.asFunction<
-          int Function(
+      _rd_kafka_conf_interceptor_add_on_conf_setPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_conf_set_t>,
-              ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Append an on_conf_dup() interceptor.
   ///
@@ -10418,30 +11052,36 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_interceptor_f_on_conf_dup_t> on_conf_dup,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_conf_interceptor_add_on_conf_dup(
-      conf,
-      ic_name,
-      on_conf_dup,
-      ic_opaque,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_conf_interceptor_add_on_conf_dup(
+        conf,
+        ic_name,
+        on_conf_dup,
+        ic_opaque,
+      ),
+    );
   }
 
   late final _rd_kafka_conf_interceptor_add_on_conf_dupPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<rd_kafka_interceptor_f_on_conf_dup_t>,
-                  ffi.Pointer<ffi.Void>)>>(
-      'rd_kafka_conf_interceptor_add_on_conf_dup');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_interceptor_f_on_conf_dup_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_conf_interceptor_add_on_conf_dup');
   late final _rd_kafka_conf_interceptor_add_on_conf_dup =
-      _rd_kafka_conf_interceptor_add_on_conf_dupPtr.asFunction<
-          int Function(
+      _rd_kafka_conf_interceptor_add_on_conf_dupPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_conf_dup_t>,
-              ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Append an on_conf_destroy() interceptor.
   ///
@@ -10460,30 +11100,36 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_interceptor_f_on_conf_destroy_t> on_conf_destroy,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_conf_interceptor_add_on_conf_destroy(
-      conf,
-      ic_name,
-      on_conf_destroy,
-      ic_opaque,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_conf_interceptor_add_on_conf_destroy(
+        conf,
+        ic_name,
+        on_conf_destroy,
+        ic_opaque,
+      ),
+    );
   }
 
   late final _rd_kafka_conf_interceptor_add_on_conf_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<rd_kafka_conf_t>,
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<rd_kafka_interceptor_f_on_conf_destroy_t>,
-                  ffi.Pointer<ffi.Void>)>>(
-      'rd_kafka_conf_interceptor_add_on_conf_destroy');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_interceptor_f_on_conf_destroy_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_conf_interceptor_add_on_conf_destroy');
   late final _rd_kafka_conf_interceptor_add_on_conf_destroy =
-      _rd_kafka_conf_interceptor_add_on_conf_destroyPtr.asFunction<
-          int Function(
+      _rd_kafka_conf_interceptor_add_on_conf_destroyPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_conf_destroy_t>,
-              ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Append an on_new() interceptor.
   ///
@@ -10510,28 +11156,31 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_interceptor_f_on_new_t> on_new,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_conf_interceptor_add_on_new(
-      conf,
-      ic_name,
-      on_new,
-      ic_opaque,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_conf_interceptor_add_on_new(conf, ic_name, on_new, ic_opaque),
+    );
   }
 
   late final _rd_kafka_conf_interceptor_add_on_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_conf_t>,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<rd_kafka_interceptor_f_on_new_t>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_conf_interceptor_add_on_new');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_conf_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_interceptor_f_on_new_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_conf_interceptor_add_on_new');
   late final _rd_kafka_conf_interceptor_add_on_new =
-      _rd_kafka_conf_interceptor_add_on_newPtr.asFunction<
-          int Function(
+      _rd_kafka_conf_interceptor_add_on_newPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_conf_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_new_t>,
-              ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Append an on_destroy() interceptor.
   ///
@@ -10549,28 +11198,31 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_interceptor_f_on_destroy_t> on_destroy,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_interceptor_add_on_destroy(
-      rk,
-      ic_name,
-      on_destroy,
-      ic_opaque,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_interceptor_add_on_destroy(rk, ic_name, on_destroy, ic_opaque),
+    );
   }
 
   late final _rd_kafka_interceptor_add_on_destroyPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<rd_kafka_interceptor_f_on_destroy_t>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_interceptor_add_on_destroy');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_interceptor_f_on_destroy_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_interceptor_add_on_destroy');
   late final _rd_kafka_interceptor_add_on_destroy =
-      _rd_kafka_interceptor_add_on_destroyPtr.asFunction<
-          int Function(
+      _rd_kafka_interceptor_add_on_destroyPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_destroy_t>,
-              ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Append an on_send() interceptor.
   ///
@@ -10588,28 +11240,31 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_interceptor_f_on_send_t> on_send,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_interceptor_add_on_send(
-      rk,
-      ic_name,
-      on_send,
-      ic_opaque,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_interceptor_add_on_send(rk, ic_name, on_send, ic_opaque),
+    );
   }
 
   late final _rd_kafka_interceptor_add_on_sendPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<rd_kafka_interceptor_f_on_send_t>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_interceptor_add_on_send');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_interceptor_f_on_send_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_interceptor_add_on_send');
   late final _rd_kafka_interceptor_add_on_send =
-      _rd_kafka_interceptor_add_on_sendPtr.asFunction<
-          int Function(
+      _rd_kafka_interceptor_add_on_sendPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_send_t>,
-              ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Append an on_acknowledgement() interceptor.
   ///
@@ -10627,30 +11282,36 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_interceptor_f_on_acknowledgement_t> on_acknowledgement,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_interceptor_add_on_acknowledgement(
-      rk,
-      ic_name,
-      on_acknowledgement,
-      ic_opaque,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_interceptor_add_on_acknowledgement(
+        rk,
+        ic_name,
+        on_acknowledgement,
+        ic_opaque,
+      ),
+    );
   }
 
   late final _rd_kafka_interceptor_add_on_acknowledgementPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<rd_kafka_interceptor_f_on_acknowledgement_t>,
-                  ffi.Pointer<ffi.Void>)>>(
-      'rd_kafka_interceptor_add_on_acknowledgement');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_interceptor_f_on_acknowledgement_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_interceptor_add_on_acknowledgement');
   late final _rd_kafka_interceptor_add_on_acknowledgement =
-      _rd_kafka_interceptor_add_on_acknowledgementPtr.asFunction<
-          int Function(
+      _rd_kafka_interceptor_add_on_acknowledgementPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_acknowledgement_t>,
-              ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Append an on_consume() interceptor.
   ///
@@ -10668,28 +11329,31 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_interceptor_f_on_consume_t> on_consume,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_interceptor_add_on_consume(
-      rk,
-      ic_name,
-      on_consume,
-      ic_opaque,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_interceptor_add_on_consume(rk, ic_name, on_consume, ic_opaque),
+    );
   }
 
   late final _rd_kafka_interceptor_add_on_consumePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<rd_kafka_interceptor_f_on_consume_t>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_interceptor_add_on_consume');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_interceptor_f_on_consume_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_interceptor_add_on_consume');
   late final _rd_kafka_interceptor_add_on_consume =
-      _rd_kafka_interceptor_add_on_consumePtr.asFunction<
-          int Function(
+      _rd_kafka_interceptor_add_on_consumePtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_consume_t>,
-              ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Append an on_commit() interceptor.
   ///
@@ -10707,28 +11371,31 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_interceptor_f_on_commit_t> on_commit,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_interceptor_add_on_commit(
-      rk,
-      ic_name,
-      on_commit,
-      ic_opaque,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_interceptor_add_on_commit(rk, ic_name, on_commit, ic_opaque),
+    );
   }
 
   late final _rd_kafka_interceptor_add_on_commitPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<rd_kafka_interceptor_f_on_commit_t>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_interceptor_add_on_commit');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_interceptor_f_on_commit_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_interceptor_add_on_commit');
   late final _rd_kafka_interceptor_add_on_commit =
-      _rd_kafka_interceptor_add_on_commitPtr.asFunction<
-          int Function(
+      _rd_kafka_interceptor_add_on_commitPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_commit_t>,
-              ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Append an on_request_sent() interceptor.
   ///
@@ -10746,30 +11413,36 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_interceptor_f_on_request_sent_t> on_request_sent,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_interceptor_add_on_request_sent(
-      rk,
-      ic_name,
-      on_request_sent,
-      ic_opaque,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_interceptor_add_on_request_sent(
+        rk,
+        ic_name,
+        on_request_sent,
+        ic_opaque,
+      ),
+    );
   }
 
   late final _rd_kafka_interceptor_add_on_request_sentPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<rd_kafka_interceptor_f_on_request_sent_t>,
-                  ffi.Pointer<ffi.Void>)>>(
-      'rd_kafka_interceptor_add_on_request_sent');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_interceptor_f_on_request_sent_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_interceptor_add_on_request_sent');
   late final _rd_kafka_interceptor_add_on_request_sent =
-      _rd_kafka_interceptor_add_on_request_sentPtr.asFunction<
-          int Function(
+      _rd_kafka_interceptor_add_on_request_sentPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_request_sent_t>,
-              ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Append an on_response_received() interceptor.
   ///
@@ -10785,33 +11458,39 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_response_received_t>
-        on_response_received,
+    on_response_received,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_interceptor_add_on_response_received(
-      rk,
-      ic_name,
-      on_response_received,
-      ic_opaque,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_interceptor_add_on_response_received(
+        rk,
+        ic_name,
+        on_response_received,
+        ic_opaque,
+      ),
+    );
   }
 
   late final _rd_kafka_interceptor_add_on_response_receivedPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<rd_kafka_interceptor_f_on_response_received_t>,
-                  ffi.Pointer<ffi.Void>)>>(
-      'rd_kafka_interceptor_add_on_response_received');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_interceptor_f_on_response_received_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_interceptor_add_on_response_received');
   late final _rd_kafka_interceptor_add_on_response_received =
-      _rd_kafka_interceptor_add_on_response_receivedPtr.asFunction<
-          int Function(
+      _rd_kafka_interceptor_add_on_response_receivedPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_response_received_t>,
-              ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Append an on_thread_start() interceptor.
   ///
@@ -10829,30 +11508,36 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_interceptor_f_on_thread_start_t> on_thread_start,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_interceptor_add_on_thread_start(
-      rk,
-      ic_name,
-      on_thread_start,
-      ic_opaque,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_interceptor_add_on_thread_start(
+        rk,
+        ic_name,
+        on_thread_start,
+        ic_opaque,
+      ),
+    );
   }
 
   late final _rd_kafka_interceptor_add_on_thread_startPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<rd_kafka_interceptor_f_on_thread_start_t>,
-                  ffi.Pointer<ffi.Void>)>>(
-      'rd_kafka_interceptor_add_on_thread_start');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_interceptor_f_on_thread_start_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_interceptor_add_on_thread_start');
   late final _rd_kafka_interceptor_add_on_thread_start =
-      _rd_kafka_interceptor_add_on_thread_startPtr.asFunction<
-          int Function(
+      _rd_kafka_interceptor_add_on_thread_startPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_thread_start_t>,
-              ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Append an on_thread_exit() interceptor.
   ///
@@ -10870,30 +11555,36 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_interceptor_f_on_thread_exit_t> on_thread_exit,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_interceptor_add_on_thread_exit(
-      rk,
-      ic_name,
-      on_thread_exit,
-      ic_opaque,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_interceptor_add_on_thread_exit(
+        rk,
+        ic_name,
+        on_thread_exit,
+        ic_opaque,
+      ),
+    );
   }
 
   late final _rd_kafka_interceptor_add_on_thread_exitPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<rd_kafka_interceptor_f_on_thread_exit_t>,
-                  ffi.Pointer<ffi.Void>)>>(
-      'rd_kafka_interceptor_add_on_thread_exit');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_interceptor_f_on_thread_exit_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_interceptor_add_on_thread_exit');
   late final _rd_kafka_interceptor_add_on_thread_exit =
-      _rd_kafka_interceptor_add_on_thread_exitPtr.asFunction<
-          int Function(
+      _rd_kafka_interceptor_add_on_thread_exitPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_thread_exit_t>,
-              ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Append an on_broker_state_change() interceptor.
   ///
@@ -10909,49 +11600,55 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> ic_name,
     ffi.Pointer<rd_kafka_interceptor_f_on_broker_state_change_t>
-        on_broker_state_change,
+    on_broker_state_change,
     ffi.Pointer<ffi.Void> ic_opaque,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_interceptor_add_on_broker_state_change(
-      rk,
-      ic_name,
-      on_broker_state_change,
-      ic_opaque,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_interceptor_add_on_broker_state_change(
+        rk,
+        ic_name,
+        on_broker_state_change,
+        ic_opaque,
+      ),
+    );
   }
 
   late final _rd_kafka_interceptor_add_on_broker_state_changePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<rd_kafka_interceptor_f_on_broker_state_change_t>,
-                  ffi.Pointer<ffi.Void>)>>(
-      'rd_kafka_interceptor_add_on_broker_state_change');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_interceptor_f_on_broker_state_change_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_interceptor_add_on_broker_state_change');
   late final _rd_kafka_interceptor_add_on_broker_state_change =
-      _rd_kafka_interceptor_add_on_broker_state_changePtr.asFunction<
-          int Function(
+      _rd_kafka_interceptor_add_on_broker_state_changePtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rd_kafka_interceptor_f_on_broker_state_change_t>,
-              ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @returns the error code for the given topic result.
   rd_kafka_resp_err_t rd_kafka_topic_result_error(
     ffi.Pointer<rd_kafka_topic_result_t> topicres,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_topic_result_error(
-      topicres,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_topic_result_error(topicres),
+    );
   }
 
   late final _rd_kafka_topic_result_errorPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_topic_result_t>)>>(
-      'rd_kafka_topic_result_error');
-  late final _rd_kafka_topic_result_error = _rd_kafka_topic_result_errorPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_topic_result_t>)>();
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_topic_result_t>)>
+  >('rd_kafka_topic_result_error');
+  late final _rd_kafka_topic_result_error =
+      _rd_kafka_topic_result_errorPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_topic_result_t>)>();
 
   /// @returns the human readable error string for the given topic result,
   /// or NULL if there was no error.
@@ -10960,80 +11657,80 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_topic_result_error_string(
     ffi.Pointer<rd_kafka_topic_result_t> topicres,
   ) {
-    return _rd_kafka_topic_result_error_string(
-      topicres,
-    );
+    return _rd_kafka_topic_result_error_string(topicres);
   }
 
   late final _rd_kafka_topic_result_error_stringPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_topic_result_t>)>>(
-      'rd_kafka_topic_result_error_string');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_topic_result_t>)
+    >
+  >('rd_kafka_topic_result_error_string');
   late final _rd_kafka_topic_result_error_string =
-      _rd_kafka_topic_result_error_stringPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_topic_result_t>)>();
+      _rd_kafka_topic_result_error_stringPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_topic_result_t>)
+          >();
 
   /// @returns the name of the topic for the given topic result.
   /// @remark lifetime of the returned string is the same as the \p topicres.
   ffi.Pointer<ffi.Char> rd_kafka_topic_result_name(
     ffi.Pointer<rd_kafka_topic_result_t> topicres,
   ) {
-    return _rd_kafka_topic_result_name(
-      topicres,
-    );
+    return _rd_kafka_topic_result_name(topicres);
   }
 
   late final _rd_kafka_topic_result_namePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_topic_result_t>)>>(
-      'rd_kafka_topic_result_name');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_topic_result_t>)
+    >
+  >('rd_kafka_topic_result_name');
   late final _rd_kafka_topic_result_name =
-      _rd_kafka_topic_result_namePtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_topic_result_t>)>();
+      _rd_kafka_topic_result_namePtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_topic_result_t>)
+          >();
 
   /// @returns the error for the given group result, or NULL on success.
   /// @remark lifetime of the returned error is the same as the \p groupres.
   ffi.Pointer<rd_kafka_error_t> rd_kafka_group_result_error(
     ffi.Pointer<rd_kafka_group_result_t> groupres,
   ) {
-    return _rd_kafka_group_result_error(
-      groupres,
-    );
+    return _rd_kafka_group_result_error(groupres);
   }
 
   late final _rd_kafka_group_result_errorPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_error_t> Function(
-                  ffi.Pointer<rd_kafka_group_result_t>)>>(
-      'rd_kafka_group_result_error');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_group_result_t>,
+      )
+    >
+  >('rd_kafka_group_result_error');
   late final _rd_kafka_group_result_error =
-      _rd_kafka_group_result_errorPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_group_result_t>)>();
+      _rd_kafka_group_result_errorPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_group_result_t>,
+            )
+          >();
 
   /// @returns the name of the group for the given group result.
   /// @remark lifetime of the returned string is the same as the \p groupres.
   ffi.Pointer<ffi.Char> rd_kafka_group_result_name(
     ffi.Pointer<rd_kafka_group_result_t> groupres,
   ) {
-    return _rd_kafka_group_result_name(
-      groupres,
-    );
+    return _rd_kafka_group_result_name(groupres);
   }
 
   late final _rd_kafka_group_result_namePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_group_result_t>)>>(
-      'rd_kafka_group_result_name');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_group_result_t>)
+    >
+  >('rd_kafka_group_result_name');
   late final _rd_kafka_group_result_name =
-      _rd_kafka_group_result_namePtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_group_result_t>)>();
+      _rd_kafka_group_result_namePtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_group_result_t>)
+          >();
 
   /// @returns the partitions/offsets for the given group result, if applicable
   /// to the request type, else NULL.
@@ -11041,20 +11738,23 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_topic_partition_list_t> rd_kafka_group_result_partitions(
     ffi.Pointer<rd_kafka_group_result_t> groupres,
   ) {
-    return _rd_kafka_group_result_partitions(
-      groupres,
-    );
+    return _rd_kafka_group_result_partitions(groupres);
   }
 
   late final _rd_kafka_group_result_partitionsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
-                  ffi.Pointer<rd_kafka_group_result_t>)>>(
-      'rd_kafka_group_result_partitions');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
+        ffi.Pointer<rd_kafka_group_result_t>,
+      )
+    >
+  >('rd_kafka_group_result_partitions');
   late final _rd_kafka_group_result_partitions =
-      _rd_kafka_group_result_partitionsPtr.asFunction<
-          ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
-              ffi.Pointer<rd_kafka_group_result_t>)>();
+      _rd_kafka_group_result_partitionsPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
+              ffi.Pointer<rd_kafka_group_result_t>,
+            )
+          >();
 
   /// @returns the topic partition object from the topic partition result object.
   /// @remarks lifetime of the returned string is the same as the \p
@@ -11063,23 +11763,26 @@ class LibRdKafka {
   /// detailed error information, use
   /// rd_kafka_topic_partition_result_error()
   ffi.Pointer<rd_kafka_topic_partition_t>
-      rd_kafka_topic_partition_result_partition(
+  rd_kafka_topic_partition_result_partition(
     ffi.Pointer<rd_kafka_topic_partition_result_t> partition_result,
   ) {
-    return _rd_kafka_topic_partition_result_partition(
-      partition_result,
-    );
+    return _rd_kafka_topic_partition_result_partition(partition_result);
   }
 
   late final _rd_kafka_topic_partition_result_partitionPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_topic_partition_t> Function(
-                  ffi.Pointer<rd_kafka_topic_partition_result_t>)>>(
-      'rd_kafka_topic_partition_result_partition');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_topic_partition_t> Function(
+        ffi.Pointer<rd_kafka_topic_partition_result_t>,
+      )
+    >
+  >('rd_kafka_topic_partition_result_partition');
   late final _rd_kafka_topic_partition_result_partition =
-      _rd_kafka_topic_partition_result_partitionPtr.asFunction<
-          ffi.Pointer<rd_kafka_topic_partition_t> Function(
-              ffi.Pointer<rd_kafka_topic_partition_result_t>)>();
+      _rd_kafka_topic_partition_result_partitionPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_topic_partition_t> Function(
+              ffi.Pointer<rd_kafka_topic_partition_result_t>,
+            )
+          >();
 
   /// @returns the error object from the topic partition result object.
   /// @remarks lifetime of the returned string is the same as the \p
@@ -11087,20 +11790,23 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_error_t> rd_kafka_topic_partition_result_error(
     ffi.Pointer<rd_kafka_topic_partition_result_t> partition_result,
   ) {
-    return _rd_kafka_topic_partition_result_error(
-      partition_result,
-    );
+    return _rd_kafka_topic_partition_result_error(partition_result);
   }
 
   late final _rd_kafka_topic_partition_result_errorPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_error_t> Function(
-                  ffi.Pointer<rd_kafka_topic_partition_result_t>)>>(
-      'rd_kafka_topic_partition_result_error');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_topic_partition_result_t>,
+      )
+    >
+  >('rd_kafka_topic_partition_result_error');
   late final _rd_kafka_topic_partition_result_error =
-      _rd_kafka_topic_partition_result_errorPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_topic_partition_result_t>)>();
+      _rd_kafka_topic_partition_result_errorPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_topic_partition_result_t>,
+            )
+          >();
 
   /// @brief Create a new AdminOptions object.
   ///
@@ -11123,36 +11829,39 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     rd_kafka_admin_op_t for_api,
   ) {
-    return _rd_kafka_AdminOptions_new(
-      rk,
-      for_api.value,
-    );
+    return _rd_kafka_AdminOptions_new(rk, for_api.value);
   }
 
   late final _rd_kafka_AdminOptions_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_AdminOptions_t> Function(ffi.Pointer<rd_kafka_t>,
-              ffi.UnsignedInt)>>('rd_kafka_AdminOptions_new');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_AdminOptions_t> Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.UnsignedInt,
+      )
+    >
+  >('rd_kafka_AdminOptions_new');
   late final _rd_kafka_AdminOptions_new =
-      _rd_kafka_AdminOptions_newPtr.asFunction<
-          ffi.Pointer<rd_kafka_AdminOptions_t> Function(
-              ffi.Pointer<rd_kafka_t>, int)>();
+      _rd_kafka_AdminOptions_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_AdminOptions_t> Function(
+              ffi.Pointer<rd_kafka_t>,
+              int,
+            )
+          >();
 
   /// @brief Destroy a AdminOptions object.
   void rd_kafka_AdminOptions_destroy(
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
   ) {
-    return _rd_kafka_AdminOptions_destroy(
-      options,
-    );
+    return _rd_kafka_AdminOptions_destroy(options);
   }
 
   late final _rd_kafka_AdminOptions_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<rd_kafka_AdminOptions_t>)>>(
-      'rd_kafka_AdminOptions_destroy');
-  late final _rd_kafka_AdminOptions_destroy = _rd_kafka_AdminOptions_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_AdminOptions_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_AdminOptions_t>)>
+  >('rd_kafka_AdminOptions_destroy');
+  late final _rd_kafka_AdminOptions_destroy =
+      _rd_kafka_AdminOptions_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_AdminOptions_t>)>();
 
   /// @brief Sets the overall request timeout, including broker lookup,
   /// request transmission, operation time on broker, and response.
@@ -11175,26 +11884,36 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_AdminOptions_set_request_timeout(
-      options,
-      timeout_ms,
-      errstr,
-      errstr_size,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_AdminOptions_set_request_timeout(
+        options,
+        timeout_ms,
+        errstr,
+        errstr_size,
+      ),
+    );
   }
 
   late final _rd_kafka_AdminOptions_set_request_timeoutPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Int,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_AdminOptions_set_request_timeout');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Int,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_AdminOptions_set_request_timeout');
   late final _rd_kafka_AdminOptions_set_request_timeout =
-      _rd_kafka_AdminOptions_set_request_timeoutPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_AdminOptions_t>, int,
-              ffi.Pointer<ffi.Char>, int)>();
+      _rd_kafka_AdminOptions_set_request_timeoutPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_AdminOptions_t>,
+              int,
+              ffi.Pointer<ffi.Char>,
+              int,
+            )
+          >();
 
   /// @brief Sets the broker's operation timeout, such as the timeout for
   /// CreateTopics to complete the creation of topics on the controller
@@ -11226,26 +11945,36 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_AdminOptions_set_operation_timeout(
-      options,
-      timeout_ms,
-      errstr,
-      errstr_size,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_AdminOptions_set_operation_timeout(
+        options,
+        timeout_ms,
+        errstr,
+        errstr_size,
+      ),
+    );
   }
 
   late final _rd_kafka_AdminOptions_set_operation_timeoutPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Int,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_AdminOptions_set_operation_timeout');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Int,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_AdminOptions_set_operation_timeout');
   late final _rd_kafka_AdminOptions_set_operation_timeout =
-      _rd_kafka_AdminOptions_set_operation_timeoutPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_AdminOptions_t>, int,
-              ffi.Pointer<ffi.Char>, int)>();
+      _rd_kafka_AdminOptions_set_operation_timeoutPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_AdminOptions_t>,
+              int,
+              ffi.Pointer<ffi.Char>,
+              int,
+            )
+          >();
 
   /// @brief Tell broker to only validate the request, without performing
   /// the requested operation (create topics, etc).
@@ -11269,26 +11998,36 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_AdminOptions_set_validate_only(
-      options,
-      true_or_false,
-      errstr,
-      errstr_size,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_AdminOptions_set_validate_only(
+        options,
+        true_or_false,
+        errstr,
+        errstr_size,
+      ),
+    );
   }
 
   late final _rd_kafka_AdminOptions_set_validate_onlyPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Int,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_AdminOptions_set_validate_only');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Int,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_AdminOptions_set_validate_only');
   late final _rd_kafka_AdminOptions_set_validate_only =
-      _rd_kafka_AdminOptions_set_validate_onlyPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_AdminOptions_t>, int,
-              ffi.Pointer<ffi.Char>, int)>();
+      _rd_kafka_AdminOptions_set_validate_onlyPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_AdminOptions_t>,
+              int,
+              ffi.Pointer<ffi.Char>,
+              int,
+            )
+          >();
 
   /// @brief Override what broker the Admin request will be sent to.
   ///
@@ -11321,25 +12060,36 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_AdminOptions_set_broker(
-      options,
-      broker_id,
-      errstr,
-      errstr_size,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_AdminOptions_set_broker(
+        options,
+        broker_id,
+        errstr,
+        errstr_size,
+      ),
+    );
   }
 
   late final _rd_kafka_AdminOptions_set_brokerPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Int32,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_AdminOptions_set_broker');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Int32,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_AdminOptions_set_broker');
   late final _rd_kafka_AdminOptions_set_broker =
-      _rd_kafka_AdminOptions_set_brokerPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_AdminOptions_t>, int,
-              ffi.Pointer<ffi.Char>, int)>();
+      _rd_kafka_AdminOptions_set_brokerPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_AdminOptions_t>,
+              int,
+              ffi.Pointer<ffi.Char>,
+              int,
+            )
+          >();
 
   /// @brief Whether broker should return stable offsets
   /// (transaction-committed).
@@ -11352,7 +12102,7 @@ class LibRdKafka {
   ///
   /// @remark This option is valid for ListConsumerGroupOffsets.
   ffi.Pointer<rd_kafka_error_t>
-      rd_kafka_AdminOptions_set_require_stable_offsets(
+  rd_kafka_AdminOptions_set_require_stable_offsets(
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     int true_or_false,
   ) {
@@ -11363,14 +12113,21 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_AdminOptions_set_require_stable_offsetsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Int)>>('rd_kafka_AdminOptions_set_require_stable_offsets');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Int,
+      )
+    >
+  >('rd_kafka_AdminOptions_set_require_stable_offsets');
   late final _rd_kafka_AdminOptions_set_require_stable_offsets =
-      _rd_kafka_AdminOptions_set_require_stable_offsetsPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_AdminOptions_t>, int)>();
+      _rd_kafka_AdminOptions_set_require_stable_offsetsPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_AdminOptions_t>,
+              int,
+            )
+          >();
 
   /// @brief Whether broker should return authorized operations for the given
   /// resource in the DescribeConsumerGroups, DescribeTopics, or
@@ -11385,7 +12142,7 @@ class LibRdKafka {
   /// @remark This option is valid for DescribeConsumerGroups, DescribeTopics,
   /// DescribeCluster.
   ffi.Pointer<rd_kafka_error_t>
-      rd_kafka_AdminOptions_set_include_authorized_operations(
+  rd_kafka_AdminOptions_set_include_authorized_operations(
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     int true_or_false,
   ) {
@@ -11397,14 +12154,21 @@ class LibRdKafka {
 
   late final _rd_kafka_AdminOptions_set_include_authorized_operationsPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Pointer<rd_kafka_error_t> Function(
-                      ffi.Pointer<rd_kafka_AdminOptions_t>, ffi.Int)>>(
-          'rd_kafka_AdminOptions_set_include_authorized_operations');
-  late final _rd_kafka_AdminOptions_set_include_authorized_operations =
-      _rd_kafka_AdminOptions_set_include_authorized_operationsPtr.asFunction<
+        ffi.NativeFunction<
           ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_AdminOptions_t>, int)>();
+            ffi.Pointer<rd_kafka_AdminOptions_t>,
+            ffi.Int,
+          )
+        >
+      >('rd_kafka_AdminOptions_set_include_authorized_operations');
+  late final _rd_kafka_AdminOptions_set_include_authorized_operations =
+      _rd_kafka_AdminOptions_set_include_authorized_operationsPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_AdminOptions_t>,
+              int,
+            )
+          >();
 
   /// @brief Set consumer groups states to query for.
   ///
@@ -11417,7 +12181,7 @@ class LibRdKafka {
   ///
   /// @remark This option is valid for ListConsumerGroups.
   ffi.Pointer<rd_kafka_error_t>
-      rd_kafka_AdminOptions_set_match_consumer_group_states(
+  rd_kafka_AdminOptions_set_match_consumer_group_states(
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<ffi.UnsignedInt> consumer_group_states,
     int consumer_group_states_cnt,
@@ -11431,18 +12195,23 @@ class LibRdKafka {
 
   late final _rd_kafka_AdminOptions_set_match_consumer_group_statesPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Pointer<rd_kafka_error_t> Function(
-                      ffi.Pointer<rd_kafka_AdminOptions_t>,
-                      ffi.Pointer<ffi.UnsignedInt>,
-                      ffi.Size)>>(
-          'rd_kafka_AdminOptions_set_match_consumer_group_states');
-  late final _rd_kafka_AdminOptions_set_match_consumer_group_states =
-      _rd_kafka_AdminOptions_set_match_consumer_group_statesPtr.asFunction<
+        ffi.NativeFunction<
           ffi.Pointer<rd_kafka_error_t> Function(
+            ffi.Pointer<rd_kafka_AdminOptions_t>,
+            ffi.Pointer<ffi.UnsignedInt>,
+            ffi.Size,
+          )
+        >
+      >('rd_kafka_AdminOptions_set_match_consumer_group_states');
+  late final _rd_kafka_AdminOptions_set_match_consumer_group_states =
+      _rd_kafka_AdminOptions_set_match_consumer_group_statesPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
               ffi.Pointer<rd_kafka_AdminOptions_t>,
               ffi.Pointer<ffi.UnsignedInt>,
-              int)>();
+              int,
+            )
+          >();
 
   /// @brief Set consumer groups types to query for.
   ///
@@ -11455,7 +12224,7 @@ class LibRdKafka {
   ///
   /// @remark This option is valid for ListConsumerGroups.
   ffi.Pointer<rd_kafka_error_t>
-      rd_kafka_AdminOptions_set_match_consumer_group_types(
+  rd_kafka_AdminOptions_set_match_consumer_group_types(
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<ffi.UnsignedInt> consumer_group_types,
     int consumer_group_types_cnt,
@@ -11468,39 +12237,48 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_AdminOptions_set_match_consumer_group_typesPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_error_t> Function(
-                  ffi.Pointer<rd_kafka_AdminOptions_t>,
-                  ffi.Pointer<ffi.UnsignedInt>,
-                  ffi.Size)>>(
-      'rd_kafka_AdminOptions_set_match_consumer_group_types');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<ffi.UnsignedInt>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_AdminOptions_set_match_consumer_group_types');
   late final _rd_kafka_AdminOptions_set_match_consumer_group_types =
-      _rd_kafka_AdminOptions_set_match_consumer_group_typesPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
+      _rd_kafka_AdminOptions_set_match_consumer_group_typesPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
               ffi.Pointer<rd_kafka_AdminOptions_t>,
               ffi.Pointer<ffi.UnsignedInt>,
-              int)>();
+              int,
+            )
+          >();
 
   /// @brief Set Isolation Level to an allowed `rd_kafka_IsolationLevel_t` value.
   ffi.Pointer<rd_kafka_error_t> rd_kafka_AdminOptions_set_isolation_level(
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     rd_kafka_IsolationLevel_t value,
   ) {
-    return _rd_kafka_AdminOptions_set_isolation_level(
-      options,
-      value.value,
-    );
+    return _rd_kafka_AdminOptions_set_isolation_level(options, value.value);
   }
 
   late final _rd_kafka_AdminOptions_set_isolation_levelPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.UnsignedInt)>>('rd_kafka_AdminOptions_set_isolation_level');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.UnsignedInt,
+      )
+    >
+  >('rd_kafka_AdminOptions_set_isolation_level');
   late final _rd_kafka_AdminOptions_set_isolation_level =
-      _rd_kafka_AdminOptions_set_isolation_levelPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_AdminOptions_t>, int)>();
+      _rd_kafka_AdminOptions_set_isolation_levelPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_AdminOptions_t>,
+              int,
+            )
+          >();
 
   /// @brief Set application opaque value that can be extracted from the
   /// result event using rd_kafka_event_opaque()
@@ -11508,20 +12286,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<ffi.Void> ev_opaque,
   ) {
-    return _rd_kafka_AdminOptions_set_opaque(
-      options,
-      ev_opaque,
-    );
+    return _rd_kafka_AdminOptions_set_opaque(options, ev_opaque);
   }
 
   late final _rd_kafka_AdminOptions_set_opaquePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<ffi.Void>)>>('rd_kafka_AdminOptions_set_opaque');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<ffi.Void>,
+      )
+    >
+  >('rd_kafka_AdminOptions_set_opaque');
   late final _rd_kafka_AdminOptions_set_opaque =
-      _rd_kafka_AdminOptions_set_opaquePtr.asFunction<
-          void Function(
-              ffi.Pointer<rd_kafka_AdminOptions_t>, ffi.Pointer<ffi.Void>)>();
+      _rd_kafka_AdminOptions_set_opaquePtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<rd_kafka_AdminOptions_t>,
+              ffi.Pointer<ffi.Void>,
+            )
+          >();
 
   /// @brief Create a new NewTopic object. This object is later passed to
   /// rd_kafka_CreateTopics().
@@ -11559,33 +12342,40 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_NewTopic_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_NewTopic_t> Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.Int,
-              ffi.Int,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_NewTopic_new');
-  late final _rd_kafka_NewTopic_new = _rd_kafka_NewTopic_newPtr.asFunction<
+    ffi.NativeFunction<
       ffi.Pointer<rd_kafka_NewTopic_t> Function(
-          ffi.Pointer<ffi.Char>, int, int, ffi.Pointer<ffi.Char>, int)>();
+        ffi.Pointer<ffi.Char>,
+        ffi.Int,
+        ffi.Int,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_NewTopic_new');
+  late final _rd_kafka_NewTopic_new =
+      _rd_kafka_NewTopic_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_NewTopic_t> Function(
+              ffi.Pointer<ffi.Char>,
+              int,
+              int,
+              ffi.Pointer<ffi.Char>,
+              int,
+            )
+          >();
 
   /// @brief Destroy and free a NewTopic object previously created with
   /// rd_kafka_NewTopic_new()
-  void rd_kafka_NewTopic_destroy(
-    ffi.Pointer<rd_kafka_NewTopic_t> new_topic,
-  ) {
-    return _rd_kafka_NewTopic_destroy(
-      new_topic,
-    );
+  void rd_kafka_NewTopic_destroy(ffi.Pointer<rd_kafka_NewTopic_t> new_topic) {
+    return _rd_kafka_NewTopic_destroy(new_topic);
   }
 
   late final _rd_kafka_NewTopic_destroyPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_NewTopic_t>)>>(
-      'rd_kafka_NewTopic_destroy');
-  late final _rd_kafka_NewTopic_destroy = _rd_kafka_NewTopic_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_NewTopic_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_NewTopic_t>)>
+  >('rd_kafka_NewTopic_destroy');
+  late final _rd_kafka_NewTopic_destroy =
+      _rd_kafka_NewTopic_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_NewTopic_t>)>();
 
   /// @brief Helper function to destroy all NewTopic objects in the \p new_topics
   /// array (of \p new_topic_cnt elements).
@@ -11594,19 +12384,19 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<rd_kafka_NewTopic_t>> new_topics,
     int new_topic_cnt,
   ) {
-    return _rd_kafka_NewTopic_destroy_array(
-      new_topics,
-      new_topic_cnt,
-    );
+    return _rd_kafka_NewTopic_destroy_array(new_topics, new_topic_cnt);
   }
 
   late final _rd_kafka_NewTopic_destroy_arrayPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<ffi.Pointer<rd_kafka_NewTopic_t>>,
-              ffi.Size)>>('rd_kafka_NewTopic_destroy_array');
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<ffi.Pointer<rd_kafka_NewTopic_t>>, ffi.Size)
+    >
+  >('rd_kafka_NewTopic_destroy_array');
   late final _rd_kafka_NewTopic_destroy_array =
-      _rd_kafka_NewTopic_destroy_arrayPtr.asFunction<
-          void Function(ffi.Pointer<ffi.Pointer<rd_kafka_NewTopic_t>>, int)>();
+      _rd_kafka_NewTopic_destroy_arrayPtr
+          .asFunction<
+            void Function(ffi.Pointer<ffi.Pointer<rd_kafka_NewTopic_t>>, int)
+          >();
 
   /// @brief Set the replica (broker) assignment for \p partition to the
   /// replica set in \p broker_ids (of \p broker_id_cnt elements).
@@ -11635,30 +12425,42 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_NewTopic_set_replica_assignment(
-      new_topic,
-      partition,
-      broker_ids,
-      broker_id_cnt,
-      errstr,
-      errstr_size,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_NewTopic_set_replica_assignment(
+        new_topic,
+        partition,
+        broker_ids,
+        broker_id_cnt,
+        errstr,
+        errstr_size,
+      ),
+    );
   }
 
   late final _rd_kafka_NewTopic_set_replica_assignmentPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_NewTopic_t>,
-              ffi.Int32,
-              ffi.Pointer<ffi.Int32>,
-              ffi.Size,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_NewTopic_set_replica_assignment');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_NewTopic_t>,
+        ffi.Int32,
+        ffi.Pointer<ffi.Int32>,
+        ffi.Size,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_NewTopic_set_replica_assignment');
   late final _rd_kafka_NewTopic_set_replica_assignment =
-      _rd_kafka_NewTopic_set_replica_assignmentPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_NewTopic_t>, int,
-              ffi.Pointer<ffi.Int32>, int, ffi.Pointer<ffi.Char>, int)>();
+      _rd_kafka_NewTopic_set_replica_assignmentPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_NewTopic_t>,
+              int,
+              ffi.Pointer<ffi.Int32>,
+              int,
+              ffi.Pointer<ffi.Char>,
+              int,
+            )
+          >();
 
   /// @brief Set (broker-side) topic configuration name/value pair.
   ///
@@ -11675,23 +12477,29 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> value,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_NewTopic_set_config(
-      new_topic,
-      name,
-      value,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_NewTopic_set_config(new_topic, name, value),
+    );
   }
 
   late final _rd_kafka_NewTopic_set_configPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_NewTopic_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('rd_kafka_NewTopic_set_config');
+  late final _rd_kafka_NewTopic_set_config =
+      _rd_kafka_NewTopic_set_configPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_NewTopic_t>,
               ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>>('rd_kafka_NewTopic_set_config');
-  late final _rd_kafka_NewTopic_set_config =
-      _rd_kafka_NewTopic_set_configPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_NewTopic_t>, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>();
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
   /// @brief Create topics in cluster as specified by the \p new_topics
   /// array of size \p new_topic_cnt elements.
@@ -11716,30 +12524,31 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_CreateTopics(
-      rk,
-      new_topics,
-      new_topic_cnt,
-      options,
-      rkqu,
-    );
+    return _rd_kafka_CreateTopics(rk, new_topics, new_topic_cnt, options, rkqu);
   }
 
   late final _rd_kafka_CreateTopicsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_NewTopic_t>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_CreateTopics');
+  late final _rd_kafka_CreateTopics =
+      _rd_kafka_CreateTopicsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Pointer<rd_kafka_NewTopic_t>>,
-              ffi.Size,
+              int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_CreateTopics');
-  late final _rd_kafka_CreateTopics = _rd_kafka_CreateTopicsPtr.asFunction<
-      void Function(
-          ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<ffi.Pointer<rd_kafka_NewTopic_t>>,
-          int,
-          ffi.Pointer<rd_kafka_AdminOptions_t>,
-          ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get an array of topic results from a CreateTopics result.
   ///
@@ -11748,26 +12557,29 @@ class LibRdKafka {
   /// @param result Result to get topics from.
   /// @param cntp Updated to the number of elements in the array.
   ffi.Pointer<ffi.Pointer<rd_kafka_topic_result_t>>
-      rd_kafka_CreateTopics_result_topics(
+  rd_kafka_CreateTopics_result_topics(
     ffi.Pointer<rd_kafka_CreateTopics_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_CreateTopics_result_topics(
-      result,
-      cntp,
-    );
+    return _rd_kafka_CreateTopics_result_topics(result, cntp);
   }
 
   late final _rd_kafka_CreateTopics_result_topicsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_topic_result_t>> Function(
-              ffi.Pointer<rd_kafka_CreateTopics_result_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_CreateTopics_result_topics');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_topic_result_t>> Function(
+        ffi.Pointer<rd_kafka_CreateTopics_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_CreateTopics_result_topics');
   late final _rd_kafka_CreateTopics_result_topics =
-      _rd_kafka_CreateTopics_result_topicsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_topic_result_t>> Function(
+      _rd_kafka_CreateTopics_result_topicsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_topic_result_t>> Function(
               ffi.Pointer<rd_kafka_CreateTopics_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Create a new DeleteTopic object. This object is later passed to
   /// rd_kafka_DeleteTopics().
@@ -11779,36 +12591,34 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_DeleteTopic_t> rd_kafka_DeleteTopic_new(
     ffi.Pointer<ffi.Char> topic,
   ) {
-    return _rd_kafka_DeleteTopic_new(
-      topic,
-    );
+    return _rd_kafka_DeleteTopic_new(topic);
   }
 
   late final _rd_kafka_DeleteTopic_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_DeleteTopic_t> Function(
-              ffi.Pointer<ffi.Char>)>>('rd_kafka_DeleteTopic_new');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_DeleteTopic_t> Function(ffi.Pointer<ffi.Char>)
+    >
+  >('rd_kafka_DeleteTopic_new');
   late final _rd_kafka_DeleteTopic_new =
-      _rd_kafka_DeleteTopic_newPtr.asFunction<
-          ffi.Pointer<rd_kafka_DeleteTopic_t> Function(
-              ffi.Pointer<ffi.Char>)>();
+      _rd_kafka_DeleteTopic_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_DeleteTopic_t> Function(ffi.Pointer<ffi.Char>)
+          >();
 
   /// @brief Destroy and free a DeleteTopic object previously created with
   /// rd_kafka_DeleteTopic_new()
   void rd_kafka_DeleteTopic_destroy(
     ffi.Pointer<rd_kafka_DeleteTopic_t> del_topic,
   ) {
-    return _rd_kafka_DeleteTopic_destroy(
-      del_topic,
-    );
+    return _rd_kafka_DeleteTopic_destroy(del_topic);
   }
 
   late final _rd_kafka_DeleteTopic_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<rd_kafka_DeleteTopic_t>)>>(
-      'rd_kafka_DeleteTopic_destroy');
-  late final _rd_kafka_DeleteTopic_destroy = _rd_kafka_DeleteTopic_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_DeleteTopic_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_DeleteTopic_t>)>
+  >('rd_kafka_DeleteTopic_destroy');
+  late final _rd_kafka_DeleteTopic_destroy =
+      _rd_kafka_DeleteTopic_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_DeleteTopic_t>)>();
 
   /// @brief Helper function to destroy all DeleteTopic objects in
   /// the \p del_topics array (of \p del_topic_cnt elements).
@@ -11817,20 +12627,22 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<rd_kafka_DeleteTopic_t>> del_topics,
     int del_topic_cnt,
   ) {
-    return _rd_kafka_DeleteTopic_destroy_array(
-      del_topics,
-      del_topic_cnt,
-    );
+    return _rd_kafka_DeleteTopic_destroy_array(del_topics, del_topic_cnt);
   }
 
   late final _rd_kafka_DeleteTopic_destroy_arrayPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<ffi.Pointer<rd_kafka_DeleteTopic_t>>,
-              ffi.Size)>>('rd_kafka_DeleteTopic_destroy_array');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<ffi.Pointer<rd_kafka_DeleteTopic_t>>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_DeleteTopic_destroy_array');
   late final _rd_kafka_DeleteTopic_destroy_array =
-      _rd_kafka_DeleteTopic_destroy_arrayPtr.asFunction<
-          void Function(
-              ffi.Pointer<ffi.Pointer<rd_kafka_DeleteTopic_t>>, int)>();
+      _rd_kafka_DeleteTopic_destroy_arrayPtr
+          .asFunction<
+            void Function(ffi.Pointer<ffi.Pointer<rd_kafka_DeleteTopic_t>>, int)
+          >();
 
   /// @brief Delete topics from cluster as specified by the \p topics
   /// array of size \p topic_cnt elements.
@@ -11850,30 +12662,31 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_DeleteTopics(
-      rk,
-      del_topics,
-      del_topic_cnt,
-      options,
-      rkqu,
-    );
+    return _rd_kafka_DeleteTopics(rk, del_topics, del_topic_cnt, options, rkqu);
   }
 
   late final _rd_kafka_DeleteTopicsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_DeleteTopic_t>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_DeleteTopics');
+  late final _rd_kafka_DeleteTopics =
+      _rd_kafka_DeleteTopicsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Pointer<rd_kafka_DeleteTopic_t>>,
-              ffi.Size,
+              int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_DeleteTopics');
-  late final _rd_kafka_DeleteTopics = _rd_kafka_DeleteTopicsPtr.asFunction<
-      void Function(
-          ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<ffi.Pointer<rd_kafka_DeleteTopic_t>>,
-          int,
-          ffi.Pointer<rd_kafka_AdminOptions_t>,
-          ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get an array of topic results from a DeleteTopics result.
   ///
@@ -11882,26 +12695,29 @@ class LibRdKafka {
   /// @param result Result to get topic results from.
   /// @param cntp is updated to the number of elements in the array.
   ffi.Pointer<ffi.Pointer<rd_kafka_topic_result_t>>
-      rd_kafka_DeleteTopics_result_topics(
+  rd_kafka_DeleteTopics_result_topics(
     ffi.Pointer<rd_kafka_DeleteTopics_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_DeleteTopics_result_topics(
-      result,
-      cntp,
-    );
+    return _rd_kafka_DeleteTopics_result_topics(result, cntp);
   }
 
   late final _rd_kafka_DeleteTopics_result_topicsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_topic_result_t>> Function(
-              ffi.Pointer<rd_kafka_DeleteTopics_result_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_DeleteTopics_result_topics');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_topic_result_t>> Function(
+        ffi.Pointer<rd_kafka_DeleteTopics_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_DeleteTopics_result_topics');
   late final _rd_kafka_DeleteTopics_result_topics =
-      _rd_kafka_DeleteTopics_result_topicsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_topic_result_t>> Function(
+      _rd_kafka_DeleteTopics_result_topicsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_topic_result_t>> Function(
               ffi.Pointer<rd_kafka_DeleteTopics_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Create a new NewPartitions. This object is later passed to
   /// rd_kafka_CreatePartitions() to increase the number of partitions
@@ -11932,31 +12748,37 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_NewPartitions_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_NewPartitions_t> Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_NewPartitions_new');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_NewPartitions_t> Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_NewPartitions_new');
   late final _rd_kafka_NewPartitions_new =
-      _rd_kafka_NewPartitions_newPtr.asFunction<
-          ffi.Pointer<rd_kafka_NewPartitions_t> Function(
-              ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>, int)>();
+      _rd_kafka_NewPartitions_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_NewPartitions_t> Function(
+              ffi.Pointer<ffi.Char>,
+              int,
+              ffi.Pointer<ffi.Char>,
+              int,
+            )
+          >();
 
   /// @brief Destroy and free a NewPartitions object previously created with
   /// rd_kafka_NewPartitions_new()
   void rd_kafka_NewPartitions_destroy(
     ffi.Pointer<rd_kafka_NewPartitions_t> new_parts,
   ) {
-    return _rd_kafka_NewPartitions_destroy(
-      new_parts,
-    );
+    return _rd_kafka_NewPartitions_destroy(new_parts);
   }
 
   late final _rd_kafka_NewPartitions_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<rd_kafka_NewPartitions_t>)>>(
-      'rd_kafka_NewPartitions_destroy');
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_NewPartitions_t>)>
+  >('rd_kafka_NewPartitions_destroy');
   late final _rd_kafka_NewPartitions_destroy =
       _rd_kafka_NewPartitions_destroyPtr
           .asFunction<void Function(ffi.Pointer<rd_kafka_NewPartitions_t>)>();
@@ -11968,20 +12790,25 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<rd_kafka_NewPartitions_t>> new_parts,
     int new_parts_cnt,
   ) {
-    return _rd_kafka_NewPartitions_destroy_array(
-      new_parts,
-      new_parts_cnt,
-    );
+    return _rd_kafka_NewPartitions_destroy_array(new_parts, new_parts_cnt);
   }
 
   late final _rd_kafka_NewPartitions_destroy_arrayPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<ffi.Pointer<rd_kafka_NewPartitions_t>>,
-              ffi.Size)>>('rd_kafka_NewPartitions_destroy_array');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<ffi.Pointer<rd_kafka_NewPartitions_t>>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_NewPartitions_destroy_array');
   late final _rd_kafka_NewPartitions_destroy_array =
-      _rd_kafka_NewPartitions_destroy_arrayPtr.asFunction<
-          void Function(
-              ffi.Pointer<ffi.Pointer<rd_kafka_NewPartitions_t>>, int)>();
+      _rd_kafka_NewPartitions_destroy_arrayPtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<ffi.Pointer<rd_kafka_NewPartitions_t>>,
+              int,
+            )
+          >();
 
   /// @brief Set the replica (broker id) assignment for \p new_partition_idx to the
   /// replica set in \p broker_ids (of \p broker_id_cnt elements).
@@ -12011,30 +12838,42 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_NewPartitions_set_replica_assignment(
-      new_parts,
-      new_partition_idx,
-      broker_ids,
-      broker_id_cnt,
-      errstr,
-      errstr_size,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_NewPartitions_set_replica_assignment(
+        new_parts,
+        new_partition_idx,
+        broker_ids,
+        broker_id_cnt,
+        errstr,
+        errstr_size,
+      ),
+    );
   }
 
   late final _rd_kafka_NewPartitions_set_replica_assignmentPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_NewPartitions_t>,
-              ffi.Int32,
-              ffi.Pointer<ffi.Int32>,
-              ffi.Size,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_NewPartitions_set_replica_assignment');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_NewPartitions_t>,
+        ffi.Int32,
+        ffi.Pointer<ffi.Int32>,
+        ffi.Size,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_NewPartitions_set_replica_assignment');
   late final _rd_kafka_NewPartitions_set_replica_assignment =
-      _rd_kafka_NewPartitions_set_replica_assignmentPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_NewPartitions_t>, int,
-              ffi.Pointer<ffi.Int32>, int, ffi.Pointer<ffi.Char>, int)>();
+      _rd_kafka_NewPartitions_set_replica_assignmentPtr
+          .asFunction<
+            int Function(
+              ffi.Pointer<rd_kafka_NewPartitions_t>,
+              int,
+              ffi.Pointer<ffi.Int32>,
+              int,
+              ffi.Pointer<ffi.Char>,
+              int,
+            )
+          >();
 
   /// @brief Create additional partitions for the given topics, as specified
   /// by the \p new_parts array of size \p new_parts_cnt elements.
@@ -12069,21 +12908,27 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_CreatePartitionsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<ffi.Pointer<rd_kafka_NewPartitions_t>>,
-              ffi.Size,
-              ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_CreatePartitions');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_NewPartitions_t>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_CreatePartitions');
   late final _rd_kafka_CreatePartitions =
-      _rd_kafka_CreatePartitionsPtr.asFunction<
-          void Function(
+      _rd_kafka_CreatePartitionsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Pointer<rd_kafka_NewPartitions_t>>,
               int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get an array of topic results from a CreatePartitions result.
   ///
@@ -12092,112 +12937,110 @@ class LibRdKafka {
   /// @param result Result o get topic results from.
   /// @param cntp is updated to the number of elements in the array.
   ffi.Pointer<ffi.Pointer<rd_kafka_topic_result_t>>
-      rd_kafka_CreatePartitions_result_topics(
+  rd_kafka_CreatePartitions_result_topics(
     ffi.Pointer<rd_kafka_CreatePartitions_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_CreatePartitions_result_topics(
-      result,
-      cntp,
-    );
+    return _rd_kafka_CreatePartitions_result_topics(result, cntp);
   }
 
   late final _rd_kafka_CreatePartitions_result_topicsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Pointer<rd_kafka_topic_result_t>> Function(
-                  ffi.Pointer<rd_kafka_CreatePartitions_result_t>,
-                  ffi.Pointer<ffi.Size>)>>(
-      'rd_kafka_CreatePartitions_result_topics');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_topic_result_t>> Function(
+        ffi.Pointer<rd_kafka_CreatePartitions_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_CreatePartitions_result_topics');
   late final _rd_kafka_CreatePartitions_result_topics =
-      _rd_kafka_CreatePartitions_result_topicsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_topic_result_t>> Function(
+      _rd_kafka_CreatePartitions_result_topicsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_topic_result_t>> Function(
               ffi.Pointer<rd_kafka_CreatePartitions_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @returns a string representation of the \p confsource.
   ffi.Pointer<ffi.Char> rd_kafka_ConfigSource_name(
     rd_kafka_ConfigSource_t confsource,
   ) {
-    return _rd_kafka_ConfigSource_name(
-      confsource.value,
-    );
+    return _rd_kafka_ConfigSource_name(confsource.value);
   }
 
   late final _rd_kafka_ConfigSource_namePtr = _lookup<
-          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>>(
-      'rd_kafka_ConfigSource_name');
-  late final _rd_kafka_ConfigSource_name = _rd_kafka_ConfigSource_namePtr
-      .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
+    ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>
+  >('rd_kafka_ConfigSource_name');
+  late final _rd_kafka_ConfigSource_name =
+      _rd_kafka_ConfigSource_namePtr
+          .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
 
   /// @returns the configuration property name
   ffi.Pointer<ffi.Char> rd_kafka_ConfigEntry_name(
     ffi.Pointer<rd_kafka_ConfigEntry_t> entry,
   ) {
-    return _rd_kafka_ConfigEntry_name(
-      entry,
-    );
+    return _rd_kafka_ConfigEntry_name(entry);
   }
 
   late final _rd_kafka_ConfigEntry_namePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_ConfigEntry_t>)>>(
-      'rd_kafka_ConfigEntry_name');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)
+    >
+  >('rd_kafka_ConfigEntry_name');
   late final _rd_kafka_ConfigEntry_name =
-      _rd_kafka_ConfigEntry_namePtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_ConfigEntry_t>)>();
+      _rd_kafka_ConfigEntry_namePtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)
+          >();
 
   /// @returns the configuration value, may be NULL for sensitive or unset
   /// properties.
   ffi.Pointer<ffi.Char> rd_kafka_ConfigEntry_value(
     ffi.Pointer<rd_kafka_ConfigEntry_t> entry,
   ) {
-    return _rd_kafka_ConfigEntry_value(
-      entry,
-    );
+    return _rd_kafka_ConfigEntry_value(entry);
   }
 
   late final _rd_kafka_ConfigEntry_valuePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_ConfigEntry_t>)>>(
-      'rd_kafka_ConfigEntry_value');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)
+    >
+  >('rd_kafka_ConfigEntry_value');
   late final _rd_kafka_ConfigEntry_value =
-      _rd_kafka_ConfigEntry_valuePtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_ConfigEntry_t>)>();
+      _rd_kafka_ConfigEntry_valuePtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)
+          >();
 
   /// @returns the config source.
   rd_kafka_ConfigSource_t rd_kafka_ConfigEntry_source(
     ffi.Pointer<rd_kafka_ConfigEntry_t> entry,
   ) {
-    return rd_kafka_ConfigSource_t.fromValue(_rd_kafka_ConfigEntry_source(
-      entry,
-    ));
+    return rd_kafka_ConfigSource_t.fromValue(
+      _rd_kafka_ConfigEntry_source(entry),
+    );
   }
 
   late final _rd_kafka_ConfigEntry_sourcePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>>(
-      'rd_kafka_ConfigEntry_source');
-  late final _rd_kafka_ConfigEntry_source = _rd_kafka_ConfigEntry_sourcePtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>();
+    ffi.NativeFunction<
+      ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)
+    >
+  >('rd_kafka_ConfigEntry_source');
+  late final _rd_kafka_ConfigEntry_source =
+      _rd_kafka_ConfigEntry_sourcePtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>();
 
   /// @returns 1 if the config property is read-only on the broker, else 0.
   /// @remark Shall only be used on a DescribeConfigs result, otherwise returns -1.
   int rd_kafka_ConfigEntry_is_read_only(
     ffi.Pointer<rd_kafka_ConfigEntry_t> entry,
   ) {
-    return _rd_kafka_ConfigEntry_is_read_only(
-      entry,
-    );
+    return _rd_kafka_ConfigEntry_is_read_only(entry);
   }
 
   late final _rd_kafka_ConfigEntry_is_read_onlyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>>(
-      'rd_kafka_ConfigEntry_is_read_only');
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>
+  >('rd_kafka_ConfigEntry_is_read_only');
   late final _rd_kafka_ConfigEntry_is_read_only =
       _rd_kafka_ConfigEntry_is_read_onlyPtr
           .asFunction<int Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>();
@@ -12208,15 +13051,12 @@ class LibRdKafka {
   int rd_kafka_ConfigEntry_is_default(
     ffi.Pointer<rd_kafka_ConfigEntry_t> entry,
   ) {
-    return _rd_kafka_ConfigEntry_is_default(
-      entry,
-    );
+    return _rd_kafka_ConfigEntry_is_default(entry);
   }
 
   late final _rd_kafka_ConfigEntry_is_defaultPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>>(
-      'rd_kafka_ConfigEntry_is_default');
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>
+  >('rd_kafka_ConfigEntry_is_default');
   late final _rd_kafka_ConfigEntry_is_default =
       _rd_kafka_ConfigEntry_is_defaultPtr
           .asFunction<int Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>();
@@ -12229,15 +13069,12 @@ class LibRdKafka {
   int rd_kafka_ConfigEntry_is_sensitive(
     ffi.Pointer<rd_kafka_ConfigEntry_t> entry,
   ) {
-    return _rd_kafka_ConfigEntry_is_sensitive(
-      entry,
-    );
+    return _rd_kafka_ConfigEntry_is_sensitive(entry);
   }
 
   late final _rd_kafka_ConfigEntry_is_sensitivePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>>(
-      'rd_kafka_ConfigEntry_is_sensitive');
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>
+  >('rd_kafka_ConfigEntry_is_sensitive');
   late final _rd_kafka_ConfigEntry_is_sensitive =
       _rd_kafka_ConfigEntry_is_sensitivePtr
           .asFunction<int Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>();
@@ -12246,15 +13083,12 @@ class LibRdKafka {
   int rd_kafka_ConfigEntry_is_synonym(
     ffi.Pointer<rd_kafka_ConfigEntry_t> entry,
   ) {
-    return _rd_kafka_ConfigEntry_is_synonym(
-      entry,
-    );
+    return _rd_kafka_ConfigEntry_is_synonym(entry);
   }
 
   late final _rd_kafka_ConfigEntry_is_synonymPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>>(
-      'rd_kafka_ConfigEntry_is_synonym');
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>
+  >('rd_kafka_ConfigEntry_is_synonym');
   late final _rd_kafka_ConfigEntry_is_synonym =
       _rd_kafka_ConfigEntry_is_synonymPtr
           .asFunction<int Function(ffi.Pointer<rd_kafka_ConfigEntry_t>)>();
@@ -12268,38 +13102,40 @@ class LibRdKafka {
   /// @remark Shall only be used on a DescribeConfigs result,
   /// otherwise returns NULL.
   ffi.Pointer<ffi.Pointer<rd_kafka_ConfigEntry_t>>
-      rd_kafka_ConfigEntry_synonyms(
+  rd_kafka_ConfigEntry_synonyms(
     ffi.Pointer<rd_kafka_ConfigEntry_t> entry,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_ConfigEntry_synonyms(
-      entry,
-      cntp,
-    );
+    return _rd_kafka_ConfigEntry_synonyms(entry, cntp);
   }
 
   late final _rd_kafka_ConfigEntry_synonymsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_ConfigEntry_t>> Function(
-              ffi.Pointer<rd_kafka_ConfigEntry_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_ConfigEntry_synonyms');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_ConfigEntry_t>> Function(
+        ffi.Pointer<rd_kafka_ConfigEntry_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_ConfigEntry_synonyms');
   late final _rd_kafka_ConfigEntry_synonyms =
-      _rd_kafka_ConfigEntry_synonymsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_ConfigEntry_t>> Function(
-              ffi.Pointer<rd_kafka_ConfigEntry_t>, ffi.Pointer<ffi.Size>)>();
+      _rd_kafka_ConfigEntry_synonymsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_ConfigEntry_t>> Function(
+              ffi.Pointer<rd_kafka_ConfigEntry_t>,
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @returns a string representation of the \p resource_pattern_type
   ffi.Pointer<ffi.Char> rd_kafka_ResourcePatternType_name(
     rd_kafka_ResourcePatternType_t resource_pattern_type,
   ) {
-    return _rd_kafka_ResourcePatternType_name(
-      resource_pattern_type.value,
-    );
+    return _rd_kafka_ResourcePatternType_name(resource_pattern_type.value);
   }
 
   late final _rd_kafka_ResourcePatternType_namePtr = _lookup<
-          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>>(
-      'rd_kafka_ResourcePatternType_name');
+    ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>
+  >('rd_kafka_ResourcePatternType_name');
   late final _rd_kafka_ResourcePatternType_name =
       _rd_kafka_ResourcePatternType_namePtr
           .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
@@ -12308,16 +13144,15 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_ResourceType_name(
     rd_kafka_ResourceType_t restype,
   ) {
-    return _rd_kafka_ResourceType_name(
-      restype.value,
-    );
+    return _rd_kafka_ResourceType_name(restype.value);
   }
 
   late final _rd_kafka_ResourceType_namePtr = _lookup<
-          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>>(
-      'rd_kafka_ResourceType_name');
-  late final _rd_kafka_ResourceType_name = _rd_kafka_ResourceType_namePtr
-      .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
+    ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>
+  >('rd_kafka_ResourceType_name');
+  late final _rd_kafka_ResourceType_name =
+      _rd_kafka_ResourceType_namePtr
+          .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
 
   /// @brief Create new ConfigResource object.
   ///
@@ -12329,35 +13164,39 @@ class LibRdKafka {
     rd_kafka_ResourceType_t restype,
     ffi.Pointer<ffi.Char> resname,
   ) {
-    return _rd_kafka_ConfigResource_new(
-      restype.value,
-      resname,
-    );
+    return _rd_kafka_ConfigResource_new(restype.value, resname);
   }
 
   late final _rd_kafka_ConfigResource_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_ConfigResource_t> Function(ffi.UnsignedInt,
-              ffi.Pointer<ffi.Char>)>>('rd_kafka_ConfigResource_new');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_ConfigResource_t> Function(
+        ffi.UnsignedInt,
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('rd_kafka_ConfigResource_new');
   late final _rd_kafka_ConfigResource_new =
-      _rd_kafka_ConfigResource_newPtr.asFunction<
-          ffi.Pointer<rd_kafka_ConfigResource_t> Function(
-              int, ffi.Pointer<ffi.Char>)>();
+      _rd_kafka_ConfigResource_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_ConfigResource_t> Function(
+              int,
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
   /// @brief Destroy and free a ConfigResource object previously created with
   /// rd_kafka_ConfigResource_new()
   void rd_kafka_ConfigResource_destroy(
     ffi.Pointer<rd_kafka_ConfigResource_t> config,
   ) {
-    return _rd_kafka_ConfigResource_destroy(
-      config,
-    );
+    return _rd_kafka_ConfigResource_destroy(config);
   }
 
   late final _rd_kafka_ConfigResource_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<rd_kafka_ConfigResource_t>)>>(
-      'rd_kafka_ConfigResource_destroy');
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<rd_kafka_ConfigResource_t>)
+    >
+  >('rd_kafka_ConfigResource_destroy');
   late final _rd_kafka_ConfigResource_destroy =
       _rd_kafka_ConfigResource_destroyPtr
           .asFunction<void Function(ffi.Pointer<rd_kafka_ConfigResource_t>)>();
@@ -12369,20 +13208,25 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>> config,
     int config_cnt,
   ) {
-    return _rd_kafka_ConfigResource_destroy_array(
-      config,
-      config_cnt,
-    );
+    return _rd_kafka_ConfigResource_destroy_array(config, config_cnt);
   }
 
   late final _rd_kafka_ConfigResource_destroy_arrayPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>,
-              ffi.Size)>>('rd_kafka_ConfigResource_destroy_array');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_ConfigResource_destroy_array');
   late final _rd_kafka_ConfigResource_destroy_array =
-      _rd_kafka_ConfigResource_destroy_arrayPtr.asFunction<
-          void Function(
-              ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>, int)>();
+      _rd_kafka_ConfigResource_destroy_arrayPtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>,
+              int,
+            )
+          >();
 
   /// @brief Set configuration name value pair.
   ///
@@ -12400,23 +13244,29 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> value,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_ConfigResource_set_config(
-      config,
-      name,
-      value,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_ConfigResource_set_config(config, name, value),
+    );
   }
 
   late final _rd_kafka_ConfigResource_set_configPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_ConfigResource_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('rd_kafka_ConfigResource_set_config');
+  late final _rd_kafka_ConfigResource_set_config =
+      _rd_kafka_ConfigResource_set_configPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_ConfigResource_t>,
               ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>>('rd_kafka_ConfigResource_set_config');
-  late final _rd_kafka_ConfigResource_set_config =
-      _rd_kafka_ConfigResource_set_configPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_ConfigResource_t>,
-              ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
   /// @brief Add the value of the configuration entry for a subsequent
   /// incremental alter config operation. APPEND and SUBTRACT are
@@ -12449,20 +13299,25 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_ConfigResource_add_incremental_configPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_error_t> Function(
-                  ffi.Pointer<rd_kafka_ConfigResource_t>,
-                  ffi.Pointer<ffi.Char>,
-                  ffi.UnsignedInt,
-                  ffi.Pointer<ffi.Char>)>>(
-      'rd_kafka_ConfigResource_add_incremental_config');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_ConfigResource_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.UnsignedInt,
+        ffi.Pointer<ffi.Char>,
+      )
+    >
+  >('rd_kafka_ConfigResource_add_incremental_config');
   late final _rd_kafka_ConfigResource_add_incremental_config =
-      _rd_kafka_ConfigResource_add_incremental_configPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
+      _rd_kafka_ConfigResource_add_incremental_configPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
               ffi.Pointer<rd_kafka_ConfigResource_t>,
               ffi.Pointer<ffi.Char>,
               int,
-              ffi.Pointer<ffi.Char>)>();
+              ffi.Pointer<ffi.Char>,
+            )
+          >();
 
   /// @brief Get an array of config entries from a ConfigResource object.
   ///
@@ -12471,97 +13326,104 @@ class LibRdKafka {
   /// @param config ConfigResource to get configs from.
   /// @param cntp is updated to the number of elements in the array.
   ffi.Pointer<ffi.Pointer<rd_kafka_ConfigEntry_t>>
-      rd_kafka_ConfigResource_configs(
+  rd_kafka_ConfigResource_configs(
     ffi.Pointer<rd_kafka_ConfigResource_t> config,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_ConfigResource_configs(
-      config,
-      cntp,
-    );
+    return _rd_kafka_ConfigResource_configs(config, cntp);
   }
 
   late final _rd_kafka_ConfigResource_configsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_ConfigEntry_t>> Function(
-              ffi.Pointer<rd_kafka_ConfigResource_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_ConfigResource_configs');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_ConfigEntry_t>> Function(
+        ffi.Pointer<rd_kafka_ConfigResource_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_ConfigResource_configs');
   late final _rd_kafka_ConfigResource_configs =
-      _rd_kafka_ConfigResource_configsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_ConfigEntry_t>> Function(
-              ffi.Pointer<rd_kafka_ConfigResource_t>, ffi.Pointer<ffi.Size>)>();
+      _rd_kafka_ConfigResource_configsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_ConfigEntry_t>> Function(
+              ffi.Pointer<rd_kafka_ConfigResource_t>,
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @returns the ResourceType for \p config
   rd_kafka_ResourceType_t rd_kafka_ConfigResource_type(
     ffi.Pointer<rd_kafka_ConfigResource_t> config,
   ) {
-    return rd_kafka_ResourceType_t.fromValue(_rd_kafka_ConfigResource_type(
-      config,
-    ));
+    return rd_kafka_ResourceType_t.fromValue(
+      _rd_kafka_ConfigResource_type(config),
+    );
   }
 
   late final _rd_kafka_ConfigResource_typePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.UnsignedInt Function(
-                  ffi.Pointer<rd_kafka_ConfigResource_t>)>>(
-      'rd_kafka_ConfigResource_type');
-  late final _rd_kafka_ConfigResource_type = _rd_kafka_ConfigResource_typePtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_ConfigResource_t>)>();
+    ffi.NativeFunction<
+      ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_ConfigResource_t>)
+    >
+  >('rd_kafka_ConfigResource_type');
+  late final _rd_kafka_ConfigResource_type =
+      _rd_kafka_ConfigResource_typePtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_ConfigResource_t>)>();
 
   /// @returns the name for \p config
   ffi.Pointer<ffi.Char> rd_kafka_ConfigResource_name(
     ffi.Pointer<rd_kafka_ConfigResource_t> config,
   ) {
-    return _rd_kafka_ConfigResource_name(
-      config,
-    );
+    return _rd_kafka_ConfigResource_name(config);
   }
 
   late final _rd_kafka_ConfigResource_namePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_ConfigResource_t>)>>(
-      'rd_kafka_ConfigResource_name');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_ConfigResource_t>)
+    >
+  >('rd_kafka_ConfigResource_name');
   late final _rd_kafka_ConfigResource_name =
-      _rd_kafka_ConfigResource_namePtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_ConfigResource_t>)>();
+      _rd_kafka_ConfigResource_namePtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_ConfigResource_t>,
+            )
+          >();
 
   /// @returns the error for this resource from an AlterConfigs request
   rd_kafka_resp_err_t rd_kafka_ConfigResource_error(
     ffi.Pointer<rd_kafka_ConfigResource_t> config,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_ConfigResource_error(
-      config,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_ConfigResource_error(config),
+    );
   }
 
   late final _rd_kafka_ConfigResource_errorPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_ConfigResource_t>)>>(
-      'rd_kafka_ConfigResource_error');
-  late final _rd_kafka_ConfigResource_error = _rd_kafka_ConfigResource_errorPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_ConfigResource_t>)>();
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<rd_kafka_ConfigResource_t>)>
+  >('rd_kafka_ConfigResource_error');
+  late final _rd_kafka_ConfigResource_error =
+      _rd_kafka_ConfigResource_errorPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_ConfigResource_t>)>();
 
   /// @returns the error string for this resource from an AlterConfigs
   /// request, or NULL if no error.
   ffi.Pointer<ffi.Char> rd_kafka_ConfigResource_error_string(
     ffi.Pointer<rd_kafka_ConfigResource_t> config,
   ) {
-    return _rd_kafka_ConfigResource_error_string(
-      config,
-    );
+    return _rd_kafka_ConfigResource_error_string(config);
   }
 
   late final _rd_kafka_ConfigResource_error_stringPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_ConfigResource_t>)>>(
-      'rd_kafka_ConfigResource_error_string');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_ConfigResource_t>)
+    >
+  >('rd_kafka_ConfigResource_error_string');
   late final _rd_kafka_ConfigResource_error_string =
-      _rd_kafka_ConfigResource_error_stringPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_ConfigResource_t>)>();
+      _rd_kafka_ConfigResource_error_stringPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_ConfigResource_t>,
+            )
+          >();
 
   /// @brief Update the configuration for the specified resources.
   /// Updates are not transactional so they may succeed for a subset
@@ -12589,30 +13451,31 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_AlterConfigs(
-      rk,
-      configs,
-      config_cnt,
-      options,
-      rkqu,
-    );
+    return _rd_kafka_AlterConfigs(rk, configs, config_cnt, options, rkqu);
   }
 
   late final _rd_kafka_AlterConfigsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_AlterConfigs');
+  late final _rd_kafka_AlterConfigs =
+      _rd_kafka_AlterConfigsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>,
-              ffi.Size,
+              int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_AlterConfigs');
-  late final _rd_kafka_AlterConfigs = _rd_kafka_AlterConfigsPtr.asFunction<
-      void Function(
-          ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>,
-          int,
-          ffi.Pointer<rd_kafka_AdminOptions_t>,
-          ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get an array of resource results from a AlterConfigs result.
   ///
@@ -12627,27 +13490,29 @@ class LibRdKafka {
   ///
   /// @returns an array of ConfigResource elements, or NULL if not available.
   ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>
-      rd_kafka_AlterConfigs_result_resources(
+  rd_kafka_AlterConfigs_result_resources(
     ffi.Pointer<rd_kafka_AlterConfigs_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_AlterConfigs_result_resources(
-      result,
-      cntp,
-    );
+    return _rd_kafka_AlterConfigs_result_resources(result, cntp);
   }
 
   late final _rd_kafka_AlterConfigs_result_resourcesPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>> Function(
-                  ffi.Pointer<rd_kafka_AlterConfigs_result_t>,
-                  ffi.Pointer<ffi.Size>)>>(
-      'rd_kafka_AlterConfigs_result_resources');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>> Function(
+        ffi.Pointer<rd_kafka_AlterConfigs_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_AlterConfigs_result_resources');
   late final _rd_kafka_AlterConfigs_result_resources =
-      _rd_kafka_AlterConfigs_result_resourcesPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>> Function(
+      _rd_kafka_AlterConfigs_result_resourcesPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>> Function(
               ffi.Pointer<rd_kafka_AlterConfigs_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Incrementally update the configuration for the specified resources.
   /// Updates are not transactional so they may succeed for some resources
@@ -12684,22 +13549,27 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_IncrementalAlterConfigsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>,
-                  ffi.Size,
-                  ffi.Pointer<rd_kafka_AdminOptions_t>,
-                  ffi.Pointer<rd_kafka_queue_t>)>>(
-      'rd_kafka_IncrementalAlterConfigs');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_IncrementalAlterConfigs');
   late final _rd_kafka_IncrementalAlterConfigs =
-      _rd_kafka_IncrementalAlterConfigsPtr.asFunction<
-          void Function(
+      _rd_kafka_IncrementalAlterConfigsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>,
               int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get an array of resource results from a IncrementalAlterConfigs
   /// result.
@@ -12715,27 +13585,29 @@ class LibRdKafka {
   ///
   /// @returns an array of ConfigResource elements, or NULL if not available.
   ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>
-      rd_kafka_IncrementalAlterConfigs_result_resources(
+  rd_kafka_IncrementalAlterConfigs_result_resources(
     ffi.Pointer<rd_kafka_IncrementalAlterConfigs_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_IncrementalAlterConfigs_result_resources(
-      result,
-      cntp,
-    );
+    return _rd_kafka_IncrementalAlterConfigs_result_resources(result, cntp);
   }
 
   late final _rd_kafka_IncrementalAlterConfigs_result_resourcesPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>> Function(
-                  ffi.Pointer<rd_kafka_IncrementalAlterConfigs_result_t>,
-                  ffi.Pointer<ffi.Size>)>>(
-      'rd_kafka_IncrementalAlterConfigs_result_resources');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>> Function(
+        ffi.Pointer<rd_kafka_IncrementalAlterConfigs_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_IncrementalAlterConfigs_result_resources');
   late final _rd_kafka_IncrementalAlterConfigs_result_resources =
-      _rd_kafka_IncrementalAlterConfigs_result_resourcesPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>> Function(
+      _rd_kafka_IncrementalAlterConfigs_result_resourcesPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>> Function(
               ffi.Pointer<rd_kafka_IncrementalAlterConfigs_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Get configuration for the specified resources in \p configs.
   ///
@@ -12766,31 +13638,31 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_DescribeConfigs(
-      rk,
-      configs,
-      config_cnt,
-      options,
-      rkqu,
-    );
+    return _rd_kafka_DescribeConfigs(rk, configs, config_cnt, options, rkqu);
   }
 
   late final _rd_kafka_DescribeConfigsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>,
-              ffi.Size,
-              ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_DescribeConfigs');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_DescribeConfigs');
   late final _rd_kafka_DescribeConfigs =
-      _rd_kafka_DescribeConfigsPtr.asFunction<
-          void Function(
+      _rd_kafka_DescribeConfigsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>,
               int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get an array of resource results from a DescribeConfigs result.
   ///
@@ -12799,27 +13671,29 @@ class LibRdKafka {
   /// @param result Result object to get resource results from.
   /// @param cntp is updated to the number of elements in the array.
   ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>>
-      rd_kafka_DescribeConfigs_result_resources(
+  rd_kafka_DescribeConfigs_result_resources(
     ffi.Pointer<rd_kafka_DescribeConfigs_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_DescribeConfigs_result_resources(
-      result,
-      cntp,
-    );
+    return _rd_kafka_DescribeConfigs_result_resources(result, cntp);
   }
 
   late final _rd_kafka_DescribeConfigs_result_resourcesPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>> Function(
-                  ffi.Pointer<rd_kafka_DescribeConfigs_result_t>,
-                  ffi.Pointer<ffi.Size>)>>(
-      'rd_kafka_DescribeConfigs_result_resources');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>> Function(
+        ffi.Pointer<rd_kafka_DescribeConfigs_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_DescribeConfigs_result_resources');
   late final _rd_kafka_DescribeConfigs_result_resources =
-      _rd_kafka_DescribeConfigs_result_resourcesPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>> Function(
+      _rd_kafka_DescribeConfigs_result_resourcesPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_ConfigResource_t>> Function(
               ffi.Pointer<rd_kafka_DescribeConfigs_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Create a new DeleteRecords object. This object is later passed to
   /// rd_kafka_DeleteRecords().
@@ -12838,35 +13712,35 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_DeleteRecords_t> rd_kafka_DeleteRecords_new(
     ffi.Pointer<rd_kafka_topic_partition_list_t> before_offsets,
   ) {
-    return _rd_kafka_DeleteRecords_new(
-      before_offsets,
-    );
+    return _rd_kafka_DeleteRecords_new(before_offsets);
   }
 
   late final _rd_kafka_DeleteRecords_newPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_DeleteRecords_t> Function(
-                  ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
-      'rd_kafka_DeleteRecords_new');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_DeleteRecords_t> Function(
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+      )
+    >
+  >('rd_kafka_DeleteRecords_new');
   late final _rd_kafka_DeleteRecords_new =
-      _rd_kafka_DeleteRecords_newPtr.asFunction<
-          ffi.Pointer<rd_kafka_DeleteRecords_t> Function(
-              ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+      _rd_kafka_DeleteRecords_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_DeleteRecords_t> Function(
+              ffi.Pointer<rd_kafka_topic_partition_list_t>,
+            )
+          >();
 
   /// @brief Destroy and free a DeleteRecords object previously created with
   /// rd_kafka_DeleteRecords_new()
   void rd_kafka_DeleteRecords_destroy(
     ffi.Pointer<rd_kafka_DeleteRecords_t> del_records,
   ) {
-    return _rd_kafka_DeleteRecords_destroy(
-      del_records,
-    );
+    return _rd_kafka_DeleteRecords_destroy(del_records);
   }
 
   late final _rd_kafka_DeleteRecords_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<rd_kafka_DeleteRecords_t>)>>(
-      'rd_kafka_DeleteRecords_destroy');
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_DeleteRecords_t>)>
+  >('rd_kafka_DeleteRecords_destroy');
   late final _rd_kafka_DeleteRecords_destroy =
       _rd_kafka_DeleteRecords_destroyPtr
           .asFunction<void Function(ffi.Pointer<rd_kafka_DeleteRecords_t>)>();
@@ -12878,20 +13752,25 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<rd_kafka_DeleteRecords_t>> del_records,
     int del_record_cnt,
   ) {
-    return _rd_kafka_DeleteRecords_destroy_array(
-      del_records,
-      del_record_cnt,
-    );
+    return _rd_kafka_DeleteRecords_destroy_array(del_records, del_record_cnt);
   }
 
   late final _rd_kafka_DeleteRecords_destroy_arrayPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<ffi.Pointer<rd_kafka_DeleteRecords_t>>,
-              ffi.Size)>>('rd_kafka_DeleteRecords_destroy_array');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<ffi.Pointer<rd_kafka_DeleteRecords_t>>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_DeleteRecords_destroy_array');
   late final _rd_kafka_DeleteRecords_destroy_array =
-      _rd_kafka_DeleteRecords_destroy_arrayPtr.asFunction<
-          void Function(
-              ffi.Pointer<ffi.Pointer<rd_kafka_DeleteRecords_t>>, int)>();
+      _rd_kafka_DeleteRecords_destroy_arrayPtr
+          .asFunction<
+            void Function(
+              ffi.Pointer<ffi.Pointer<rd_kafka_DeleteRecords_t>>,
+              int,
+            )
+          >();
 
   /// @brief Delete records (messages) in topic partitions older than the
   /// offsets provided.
@@ -12929,20 +13808,27 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_DeleteRecordsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_DeleteRecords_t>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_DeleteRecords');
+  late final _rd_kafka_DeleteRecords =
+      _rd_kafka_DeleteRecordsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Pointer<rd_kafka_DeleteRecords_t>>,
-              ffi.Size,
+              int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_DeleteRecords');
-  late final _rd_kafka_DeleteRecords = _rd_kafka_DeleteRecordsPtr.asFunction<
-      void Function(
-          ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<ffi.Pointer<rd_kafka_DeleteRecords_t>>,
-          int,
-          ffi.Pointer<rd_kafka_AdminOptions_t>,
-          ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get a list of topic and partition results from a DeleteRecords result.
   /// The returned objects will contain \c topic, \c partition, \c offset
@@ -12952,23 +13838,26 @@ class LibRdKafka {
   ///
   /// The returned object's life-time is the same as the \p result object.
   ffi.Pointer<rd_kafka_topic_partition_list_t>
-      rd_kafka_DeleteRecords_result_offsets(
+  rd_kafka_DeleteRecords_result_offsets(
     ffi.Pointer<rd_kafka_DeleteRecords_result_t> result,
   ) {
-    return _rd_kafka_DeleteRecords_result_offsets(
-      result,
-    );
+    return _rd_kafka_DeleteRecords_result_offsets(result);
   }
 
   late final _rd_kafka_DeleteRecords_result_offsetsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
-                  ffi.Pointer<rd_kafka_DeleteRecords_result_t>)>>(
-      'rd_kafka_DeleteRecords_result_offsets');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
+        ffi.Pointer<rd_kafka_DeleteRecords_result_t>,
+      )
+    >
+  >('rd_kafka_DeleteRecords_result_offsets');
   late final _rd_kafka_DeleteRecords_result_offsets =
-      _rd_kafka_DeleteRecords_result_offsetsPtr.asFunction<
-          ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
-              ffi.Pointer<rd_kafka_DeleteRecords_result_t>)>();
+      _rd_kafka_DeleteRecords_result_offsetsPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
+              ffi.Pointer<rd_kafka_DeleteRecords_result_t>,
+            )
+          >();
 
   /// @brief Creates a new TopicCollection for passing to rd_kafka_DescribeTopics.
   ///
@@ -12978,40 +13867,43 @@ class LibRdKafka {
   /// @return a newly allocated TopicCollection object. Must be freed using
   /// rd_kafka_TopicCollection_destroy when done.
   ffi.Pointer<rd_kafka_TopicCollection_t>
-      rd_kafka_TopicCollection_of_topic_names(
+  rd_kafka_TopicCollection_of_topic_names(
     ffi.Pointer<ffi.Pointer<ffi.Char>> topics,
     int topics_cnt,
   ) {
-    return _rd_kafka_TopicCollection_of_topic_names(
-      topics,
-      topics_cnt,
-    );
+    return _rd_kafka_TopicCollection_of_topic_names(topics, topics_cnt);
   }
 
   late final _rd_kafka_TopicCollection_of_topic_namesPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_TopicCollection_t> Function(
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Size)>>('rd_kafka_TopicCollection_of_topic_names');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_TopicCollection_t> Function(
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_TopicCollection_of_topic_names');
   late final _rd_kafka_TopicCollection_of_topic_names =
-      _rd_kafka_TopicCollection_of_topic_namesPtr.asFunction<
-          ffi.Pointer<rd_kafka_TopicCollection_t> Function(
-              ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
+      _rd_kafka_TopicCollection_of_topic_namesPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_TopicCollection_t> Function(
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              int,
+            )
+          >();
 
   /// @brief Destroy and free a TopicCollection object created with
   /// rd_kafka_TopicCollection_new_* methods.
   void rd_kafka_TopicCollection_destroy(
     ffi.Pointer<rd_kafka_TopicCollection_t> topics,
   ) {
-    return _rd_kafka_TopicCollection_destroy(
-      topics,
-    );
+    return _rd_kafka_TopicCollection_destroy(topics);
   }
 
   late final _rd_kafka_TopicCollection_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<rd_kafka_TopicCollection_t>)>>(
-      'rd_kafka_TopicCollection_destroy');
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<rd_kafka_TopicCollection_t>)
+    >
+  >('rd_kafka_TopicCollection_destroy');
   late final _rd_kafka_TopicCollection_destroy =
       _rd_kafka_TopicCollection_destroyPtr
           .asFunction<void Function(ffi.Pointer<rd_kafka_TopicCollection_t>)>();
@@ -13034,27 +13926,29 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_DescribeTopics(
-      rk,
-      topics,
-      options,
-      rkqu,
-    );
+    return _rd_kafka_DescribeTopics(rk, topics, options, rkqu);
   }
 
   late final _rd_kafka_DescribeTopicsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_TopicCollection_t>,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_DescribeTopics');
+  late final _rd_kafka_DescribeTopics =
+      _rd_kafka_DescribeTopicsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_TopicCollection_t>,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_DescribeTopics');
-  late final _rd_kafka_DescribeTopics = _rd_kafka_DescribeTopicsPtr.asFunction<
-      void Function(
-          ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<rd_kafka_TopicCollection_t>,
-          ffi.Pointer<rd_kafka_AdminOptions_t>,
-          ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get an array of topic results from a DescribeTopics result.
   ///
@@ -13064,26 +13958,29 @@ class LibRdKafka {
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p result object.
   ffi.Pointer<ffi.Pointer<rd_kafka_TopicDescription_t>>
-      rd_kafka_DescribeTopics_result_topics(
+  rd_kafka_DescribeTopics_result_topics(
     ffi.Pointer<rd_kafka_DescribeTopics_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_DescribeTopics_result_topics(
-      result,
-      cntp,
-    );
+    return _rd_kafka_DescribeTopics_result_topics(result, cntp);
   }
 
   late final _rd_kafka_DescribeTopics_result_topicsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_TopicDescription_t>> Function(
-              ffi.Pointer<rd_kafka_DescribeTopics_result_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_DescribeTopics_result_topics');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_TopicDescription_t>> Function(
+        ffi.Pointer<rd_kafka_DescribeTopics_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_DescribeTopics_result_topics');
   late final _rd_kafka_DescribeTopics_result_topics =
-      _rd_kafka_DescribeTopics_result_topicsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_TopicDescription_t>> Function(
+      _rd_kafka_DescribeTopics_result_topicsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_TopicDescription_t>> Function(
               ffi.Pointer<rd_kafka_DescribeTopics_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Gets an array of partitions for the \p topicdesc topic.
   ///
@@ -13094,26 +13991,29 @@ class LibRdKafka {
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p topicdesc object.
   ffi.Pointer<ffi.Pointer<rd_kafka_TopicPartitionInfo_t>>
-      rd_kafka_TopicDescription_partitions(
+  rd_kafka_TopicDescription_partitions(
     ffi.Pointer<rd_kafka_TopicDescription_t> topicdesc,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_TopicDescription_partitions(
-      topicdesc,
-      cntp,
-    );
+    return _rd_kafka_TopicDescription_partitions(topicdesc, cntp);
   }
 
   late final _rd_kafka_TopicDescription_partitionsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_TopicPartitionInfo_t>> Function(
-              ffi.Pointer<rd_kafka_TopicDescription_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_TopicDescription_partitions');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_TopicPartitionInfo_t>> Function(
+        ffi.Pointer<rd_kafka_TopicDescription_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_TopicDescription_partitions');
   late final _rd_kafka_TopicDescription_partitions =
-      _rd_kafka_TopicDescription_partitionsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_TopicPartitionInfo_t>> Function(
+      _rd_kafka_TopicDescription_partitionsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_TopicPartitionInfo_t>> Function(
               ffi.Pointer<rd_kafka_TopicDescription_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Gets the partition id for \p partition.
   ///
@@ -13123,18 +14023,19 @@ class LibRdKafka {
   int rd_kafka_TopicPartitionInfo_partition(
     ffi.Pointer<rd_kafka_TopicPartitionInfo_t> partition,
   ) {
-    return _rd_kafka_TopicPartitionInfo_partition(
-      partition,
-    );
+    return _rd_kafka_TopicPartitionInfo_partition(partition);
   }
 
   late final _rd_kafka_TopicPartitionInfo_partitionPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_TopicPartitionInfo_t>)>>(
-      'rd_kafka_TopicPartitionInfo_partition');
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<rd_kafka_TopicPartitionInfo_t>)
+    >
+  >('rd_kafka_TopicPartitionInfo_partition');
   late final _rd_kafka_TopicPartitionInfo_partition =
-      _rd_kafka_TopicPartitionInfo_partitionPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_TopicPartitionInfo_t>)>();
+      _rd_kafka_TopicPartitionInfo_partitionPtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_TopicPartitionInfo_t>)
+          >();
 
   /// @brief Gets the partition leader for \p partition.
   ///
@@ -13147,20 +14048,23 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_Node_t> rd_kafka_TopicPartitionInfo_leader(
     ffi.Pointer<rd_kafka_TopicPartitionInfo_t> partition,
   ) {
-    return _rd_kafka_TopicPartitionInfo_leader(
-      partition,
-    );
+    return _rd_kafka_TopicPartitionInfo_leader(partition);
   }
 
   late final _rd_kafka_TopicPartitionInfo_leaderPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_Node_t> Function(
-                  ffi.Pointer<rd_kafka_TopicPartitionInfo_t>)>>(
-      'rd_kafka_TopicPartitionInfo_leader');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_Node_t> Function(
+        ffi.Pointer<rd_kafka_TopicPartitionInfo_t>,
+      )
+    >
+  >('rd_kafka_TopicPartitionInfo_leader');
   late final _rd_kafka_TopicPartitionInfo_leader =
-      _rd_kafka_TopicPartitionInfo_leaderPtr.asFunction<
-          ffi.Pointer<rd_kafka_Node_t> Function(
-              ffi.Pointer<rd_kafka_TopicPartitionInfo_t>)>();
+      _rd_kafka_TopicPartitionInfo_leaderPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_Node_t> Function(
+              ffi.Pointer<rd_kafka_TopicPartitionInfo_t>,
+            )
+          >();
 
   /// @brief Gets the partition in-sync replicas for \p partition.
   ///
@@ -13175,22 +14079,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_TopicPartitionInfo_t> partition,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_TopicPartitionInfo_isr(
-      partition,
-      cntp,
-    );
+    return _rd_kafka_TopicPartitionInfo_isr(partition, cntp);
   }
 
   late final _rd_kafka_TopicPartitionInfo_isrPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_Node_t>> Function(
-              ffi.Pointer<rd_kafka_TopicPartitionInfo_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_TopicPartitionInfo_isr');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_Node_t>> Function(
+        ffi.Pointer<rd_kafka_TopicPartitionInfo_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_TopicPartitionInfo_isr');
   late final _rd_kafka_TopicPartitionInfo_isr =
-      _rd_kafka_TopicPartitionInfo_isrPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_Node_t>> Function(
+      _rd_kafka_TopicPartitionInfo_isrPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_Node_t>> Function(
               ffi.Pointer<rd_kafka_TopicPartitionInfo_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Gets the partition replicas for \p partition.
   ///
@@ -13202,26 +14109,29 @@ class LibRdKafka {
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p partition object.
   ffi.Pointer<ffi.Pointer<rd_kafka_Node_t>>
-      rd_kafka_TopicPartitionInfo_replicas(
+  rd_kafka_TopicPartitionInfo_replicas(
     ffi.Pointer<rd_kafka_TopicPartitionInfo_t> partition,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_TopicPartitionInfo_replicas(
-      partition,
-      cntp,
-    );
+    return _rd_kafka_TopicPartitionInfo_replicas(partition, cntp);
   }
 
   late final _rd_kafka_TopicPartitionInfo_replicasPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_Node_t>> Function(
-              ffi.Pointer<rd_kafka_TopicPartitionInfo_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_TopicPartitionInfo_replicas');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_Node_t>> Function(
+        ffi.Pointer<rd_kafka_TopicPartitionInfo_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_TopicPartitionInfo_replicas');
   late final _rd_kafka_TopicPartitionInfo_replicas =
-      _rd_kafka_TopicPartitionInfo_replicasPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_Node_t>> Function(
+      _rd_kafka_TopicPartitionInfo_replicasPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_Node_t>> Function(
               ffi.Pointer<rd_kafka_TopicPartitionInfo_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Gets the topic authorized ACL operations for the \p topicdesc topic.
   ///
@@ -13237,23 +14147,25 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_TopicDescription_t> topicdesc,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_TopicDescription_authorized_operations(
-      topicdesc,
-      cntp,
-    );
+    return _rd_kafka_TopicDescription_authorized_operations(topicdesc, cntp);
   }
 
   late final _rd_kafka_TopicDescription_authorized_operationsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.UnsignedInt> Function(
-                  ffi.Pointer<rd_kafka_TopicDescription_t>,
-                  ffi.Pointer<ffi.Size>)>>(
-      'rd_kafka_TopicDescription_authorized_operations');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.UnsignedInt> Function(
+        ffi.Pointer<rd_kafka_TopicDescription_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_TopicDescription_authorized_operations');
   late final _rd_kafka_TopicDescription_authorized_operations =
-      _rd_kafka_TopicDescription_authorized_operationsPtr.asFunction<
-          ffi.Pointer<ffi.UnsignedInt> Function(
+      _rd_kafka_TopicDescription_authorized_operationsPtr
+          .asFunction<
+            ffi.Pointer<ffi.UnsignedInt> Function(
               ffi.Pointer<rd_kafka_TopicDescription_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Gets the topic name for the \p topicdesc topic.
   ///
@@ -13266,20 +14178,21 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_TopicDescription_name(
     ffi.Pointer<rd_kafka_TopicDescription_t> topicdesc,
   ) {
-    return _rd_kafka_TopicDescription_name(
-      topicdesc,
-    );
+    return _rd_kafka_TopicDescription_name(topicdesc);
   }
 
   late final _rd_kafka_TopicDescription_namePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_TopicDescription_t>)>>(
-      'rd_kafka_TopicDescription_name');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_TopicDescription_t>)
+    >
+  >('rd_kafka_TopicDescription_name');
   late final _rd_kafka_TopicDescription_name =
-      _rd_kafka_TopicDescription_namePtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_TopicDescription_t>)>();
+      _rd_kafka_TopicDescription_namePtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_TopicDescription_t>,
+            )
+          >();
 
   /// @brief Gets the topic id for the \p topicdesc topic.
   ///
@@ -13291,20 +14204,23 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_Uuid_t> rd_kafka_TopicDescription_topic_id(
     ffi.Pointer<rd_kafka_TopicDescription_t> topicdesc,
   ) {
-    return _rd_kafka_TopicDescription_topic_id(
-      topicdesc,
-    );
+    return _rd_kafka_TopicDescription_topic_id(topicdesc);
   }
 
   late final _rd_kafka_TopicDescription_topic_idPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_Uuid_t> Function(
-                  ffi.Pointer<rd_kafka_TopicDescription_t>)>>(
-      'rd_kafka_TopicDescription_topic_id');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_Uuid_t> Function(
+        ffi.Pointer<rd_kafka_TopicDescription_t>,
+      )
+    >
+  >('rd_kafka_TopicDescription_topic_id');
   late final _rd_kafka_TopicDescription_topic_id =
-      _rd_kafka_TopicDescription_topic_idPtr.asFunction<
-          ffi.Pointer<rd_kafka_Uuid_t> Function(
-              ffi.Pointer<rd_kafka_TopicDescription_t>)>();
+      _rd_kafka_TopicDescription_topic_idPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_Uuid_t> Function(
+              ffi.Pointer<rd_kafka_TopicDescription_t>,
+            )
+          >();
 
   /// @brief Gets if the \p topicdesc topic is internal.
   ///
@@ -13314,15 +14230,14 @@ class LibRdKafka {
   int rd_kafka_TopicDescription_is_internal(
     ffi.Pointer<rd_kafka_TopicDescription_t> topicdesc,
   ) {
-    return _rd_kafka_TopicDescription_is_internal(
-      topicdesc,
-    );
+    return _rd_kafka_TopicDescription_is_internal(topicdesc);
   }
 
   late final _rd_kafka_TopicDescription_is_internalPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(ffi.Pointer<rd_kafka_TopicDescription_t>)>>(
-      'rd_kafka_TopicDescription_is_internal');
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<rd_kafka_TopicDescription_t>)
+    >
+  >('rd_kafka_TopicDescription_is_internal');
   late final _rd_kafka_TopicDescription_is_internal =
       _rd_kafka_TopicDescription_is_internalPtr
           .asFunction<int Function(ffi.Pointer<rd_kafka_TopicDescription_t>)>();
@@ -13338,20 +14253,23 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_error_t> rd_kafka_TopicDescription_error(
     ffi.Pointer<rd_kafka_TopicDescription_t> topicdesc,
   ) {
-    return _rd_kafka_TopicDescription_error(
-      topicdesc,
-    );
+    return _rd_kafka_TopicDescription_error(topicdesc);
   }
 
   late final _rd_kafka_TopicDescription_errorPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_error_t> Function(
-                  ffi.Pointer<rd_kafka_TopicDescription_t>)>>(
-      'rd_kafka_TopicDescription_error');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_TopicDescription_t>,
+      )
+    >
+  >('rd_kafka_TopicDescription_error');
   late final _rd_kafka_TopicDescription_error =
-      _rd_kafka_TopicDescription_errorPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_TopicDescription_t>)>();
+      _rd_kafka_TopicDescription_errorPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_TopicDescription_t>,
+            )
+          >();
 
   /// @brief Describes the cluster.
   ///
@@ -13368,25 +14286,27 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_DescribeCluster(
-      rk,
-      options,
-      rkqu,
-    );
+    return _rd_kafka_DescribeCluster(rk, options, rkqu);
   }
 
   late final _rd_kafka_DescribeClusterPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_DescribeCluster');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_DescribeCluster');
   late final _rd_kafka_DescribeCluster =
-      _rd_kafka_DescribeClusterPtr.asFunction<
-          void Function(
+      _rd_kafka_DescribeClusterPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Gets the broker nodes for the \p result cluster.
   ///
@@ -13397,26 +14317,29 @@ class LibRdKafka {
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p result object.
   ffi.Pointer<ffi.Pointer<rd_kafka_Node_t>>
-      rd_kafka_DescribeCluster_result_nodes(
+  rd_kafka_DescribeCluster_result_nodes(
     ffi.Pointer<rd_kafka_DescribeCluster_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_DescribeCluster_result_nodes(
-      result,
-      cntp,
-    );
+    return _rd_kafka_DescribeCluster_result_nodes(result, cntp);
   }
 
   late final _rd_kafka_DescribeCluster_result_nodesPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_Node_t>> Function(
-              ffi.Pointer<rd_kafka_DescribeCluster_result_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_DescribeCluster_result_nodes');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_Node_t>> Function(
+        ffi.Pointer<rd_kafka_DescribeCluster_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_DescribeCluster_result_nodes');
   late final _rd_kafka_DescribeCluster_result_nodes =
-      _rd_kafka_DescribeCluster_result_nodesPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_Node_t>> Function(
+      _rd_kafka_DescribeCluster_result_nodesPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_Node_t>> Function(
               ffi.Pointer<rd_kafka_DescribeCluster_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Gets the authorized ACL operations for the \p result cluster.
   ///
@@ -13428,28 +14351,30 @@ class LibRdKafka {
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p result object.
   ffi.Pointer<ffi.UnsignedInt>
-      rd_kafka_DescribeCluster_result_authorized_operations(
+  rd_kafka_DescribeCluster_result_authorized_operations(
     ffi.Pointer<rd_kafka_DescribeCluster_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_DescribeCluster_result_authorized_operations(
-      result,
-      cntp,
-    );
+    return _rd_kafka_DescribeCluster_result_authorized_operations(result, cntp);
   }
 
   late final _rd_kafka_DescribeCluster_result_authorized_operationsPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Pointer<ffi.UnsignedInt> Function(
-                      ffi.Pointer<rd_kafka_DescribeCluster_result_t>,
-                      ffi.Pointer<ffi.Size>)>>(
-          'rd_kafka_DescribeCluster_result_authorized_operations');
-  late final _rd_kafka_DescribeCluster_result_authorized_operations =
-      _rd_kafka_DescribeCluster_result_authorized_operationsPtr.asFunction<
+        ffi.NativeFunction<
           ffi.Pointer<ffi.UnsignedInt> Function(
+            ffi.Pointer<rd_kafka_DescribeCluster_result_t>,
+            ffi.Pointer<ffi.Size>,
+          )
+        >
+      >('rd_kafka_DescribeCluster_result_authorized_operations');
+  late final _rd_kafka_DescribeCluster_result_authorized_operations =
+      _rd_kafka_DescribeCluster_result_authorized_operationsPtr
+          .asFunction<
+            ffi.Pointer<ffi.UnsignedInt> Function(
               ffi.Pointer<rd_kafka_DescribeCluster_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Gets the current controller for the \p result cluster.
   ///
@@ -13459,20 +14384,23 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_Node_t> rd_kafka_DescribeCluster_result_controller(
     ffi.Pointer<rd_kafka_DescribeCluster_result_t> result,
   ) {
-    return _rd_kafka_DescribeCluster_result_controller(
-      result,
-    );
+    return _rd_kafka_DescribeCluster_result_controller(result);
   }
 
   late final _rd_kafka_DescribeCluster_result_controllerPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_Node_t> Function(
-                  ffi.Pointer<rd_kafka_DescribeCluster_result_t>)>>(
-      'rd_kafka_DescribeCluster_result_controller');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_Node_t> Function(
+        ffi.Pointer<rd_kafka_DescribeCluster_result_t>,
+      )
+    >
+  >('rd_kafka_DescribeCluster_result_controller');
   late final _rd_kafka_DescribeCluster_result_controller =
-      _rd_kafka_DescribeCluster_result_controllerPtr.asFunction<
-          ffi.Pointer<rd_kafka_Node_t> Function(
-              ffi.Pointer<rd_kafka_DescribeCluster_result_t>)>();
+      _rd_kafka_DescribeCluster_result_controllerPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_Node_t> Function(
+              ffi.Pointer<rd_kafka_DescribeCluster_result_t>,
+            )
+          >();
 
   /// @brief Gets the cluster id for the \p result cluster.
   ///
@@ -13484,20 +14412,23 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_DescribeCluster_result_cluster_id(
     ffi.Pointer<rd_kafka_DescribeCluster_result_t> result,
   ) {
-    return _rd_kafka_DescribeCluster_result_cluster_id(
-      result,
-    );
+    return _rd_kafka_DescribeCluster_result_cluster_id(result);
   }
 
   late final _rd_kafka_DescribeCluster_result_cluster_idPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_DescribeCluster_result_t>)>>(
-      'rd_kafka_DescribeCluster_result_cluster_id');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(
+        ffi.Pointer<rd_kafka_DescribeCluster_result_t>,
+      )
+    >
+  >('rd_kafka_DescribeCluster_result_cluster_id');
   late final _rd_kafka_DescribeCluster_result_cluster_id =
-      _rd_kafka_DescribeCluster_result_cluster_idPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_DescribeCluster_result_t>)>();
+      _rd_kafka_DescribeCluster_result_cluster_idPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_DescribeCluster_result_t>,
+            )
+          >();
 
   /// @brief List the consumer groups available in the cluster.
   ///
@@ -13512,25 +14443,27 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_ListConsumerGroups(
-      rk,
-      options,
-      rkqu,
-    );
+    return _rd_kafka_ListConsumerGroups(rk, options, rkqu);
   }
 
   late final _rd_kafka_ListConsumerGroupsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_ListConsumerGroups');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_ListConsumerGroups');
   late final _rd_kafka_ListConsumerGroups =
-      _rd_kafka_ListConsumerGroupsPtr.asFunction<
-          void Function(
+      _rd_kafka_ListConsumerGroupsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Gets the group id for the \p grplist group.
   ///
@@ -13543,20 +14476,23 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_ConsumerGroupListing_group_id(
     ffi.Pointer<rd_kafka_ConsumerGroupListing_t> grplist,
   ) {
-    return _rd_kafka_ConsumerGroupListing_group_id(
-      grplist,
-    );
+    return _rd_kafka_ConsumerGroupListing_group_id(grplist);
   }
 
   late final _rd_kafka_ConsumerGroupListing_group_idPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)>>(
-      'rd_kafka_ConsumerGroupListing_group_id');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(
+        ffi.Pointer<rd_kafka_ConsumerGroupListing_t>,
+      )
+    >
+  >('rd_kafka_ConsumerGroupListing_group_id');
   late final _rd_kafka_ConsumerGroupListing_group_id =
-      _rd_kafka_ConsumerGroupListing_group_idPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)>();
+      _rd_kafka_ConsumerGroupListing_group_idPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_ConsumerGroupListing_t>,
+            )
+          >();
 
   /// @brief Is the \p grplist group a simple consumer group.
   ///
@@ -13567,20 +14503,20 @@ class LibRdKafka {
   int rd_kafka_ConsumerGroupListing_is_simple_consumer_group(
     ffi.Pointer<rd_kafka_ConsumerGroupListing_t> grplist,
   ) {
-    return _rd_kafka_ConsumerGroupListing_is_simple_consumer_group(
-      grplist,
-    );
+    return _rd_kafka_ConsumerGroupListing_is_simple_consumer_group(grplist);
   }
 
   late final _rd_kafka_ConsumerGroupListing_is_simple_consumer_groupPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Int Function(
-                      ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)>>(
-          'rd_kafka_ConsumerGroupListing_is_simple_consumer_group');
+        ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)
+        >
+      >('rd_kafka_ConsumerGroupListing_is_simple_consumer_group');
   late final _rd_kafka_ConsumerGroupListing_is_simple_consumer_group =
-      _rd_kafka_ConsumerGroupListing_is_simple_consumer_groupPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)>();
+      _rd_kafka_ConsumerGroupListing_is_simple_consumer_groupPtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)
+          >();
 
   /// @brief Gets state for the \p grplist group.
   ///
@@ -13590,20 +14526,21 @@ class LibRdKafka {
   rd_kafka_consumer_group_state_t rd_kafka_ConsumerGroupListing_state(
     ffi.Pointer<rd_kafka_ConsumerGroupListing_t> grplist,
   ) {
-    return rd_kafka_consumer_group_state_t
-        .fromValue(_rd_kafka_ConsumerGroupListing_state(
-      grplist,
-    ));
+    return rd_kafka_consumer_group_state_t.fromValue(
+      _rd_kafka_ConsumerGroupListing_state(grplist),
+    );
   }
 
   late final _rd_kafka_ConsumerGroupListing_statePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.UnsignedInt Function(
-                  ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)>>(
-      'rd_kafka_ConsumerGroupListing_state');
+    ffi.NativeFunction<
+      ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)
+    >
+  >('rd_kafka_ConsumerGroupListing_state');
   late final _rd_kafka_ConsumerGroupListing_state =
-      _rd_kafka_ConsumerGroupListing_statePtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)>();
+      _rd_kafka_ConsumerGroupListing_statePtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)
+          >();
 
   /// @brief Gets type for the \p grplist group.
   ///
@@ -13613,20 +14550,21 @@ class LibRdKafka {
   rd_kafka_consumer_group_type_t rd_kafka_ConsumerGroupListing_type(
     ffi.Pointer<rd_kafka_ConsumerGroupListing_t> grplist,
   ) {
-    return rd_kafka_consumer_group_type_t
-        .fromValue(_rd_kafka_ConsumerGroupListing_type(
-      grplist,
-    ));
+    return rd_kafka_consumer_group_type_t.fromValue(
+      _rd_kafka_ConsumerGroupListing_type(grplist),
+    );
   }
 
   late final _rd_kafka_ConsumerGroupListing_typePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.UnsignedInt Function(
-                  ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)>>(
-      'rd_kafka_ConsumerGroupListing_type');
+    ffi.NativeFunction<
+      ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)
+    >
+  >('rd_kafka_ConsumerGroupListing_type');
   late final _rd_kafka_ConsumerGroupListing_type =
-      _rd_kafka_ConsumerGroupListing_typePtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)>();
+      _rd_kafka_ConsumerGroupListing_typePtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_ConsumerGroupListing_t>)
+          >();
 
   /// @brief Get an array of valid list groups from a ListConsumerGroups result.
   ///
@@ -13638,27 +14576,29 @@ class LibRdKafka {
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p result object.
   ffi.Pointer<ffi.Pointer<rd_kafka_ConsumerGroupListing_t>>
-      rd_kafka_ListConsumerGroups_result_valid(
+  rd_kafka_ListConsumerGroups_result_valid(
     ffi.Pointer<rd_kafka_ListConsumerGroups_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_ListConsumerGroups_result_valid(
-      result,
-      cntp,
-    );
+    return _rd_kafka_ListConsumerGroups_result_valid(result, cntp);
   }
 
   late final _rd_kafka_ListConsumerGroups_result_validPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_ConsumerGroupListing_t>> Function(
-              ffi.Pointer<rd_kafka_ListConsumerGroups_result_t>,
-              ffi.Pointer<
-                  ffi.Size>)>>('rd_kafka_ListConsumerGroups_result_valid');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_ConsumerGroupListing_t>> Function(
+        ffi.Pointer<rd_kafka_ListConsumerGroups_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_ListConsumerGroups_result_valid');
   late final _rd_kafka_ListConsumerGroups_result_valid =
-      _rd_kafka_ListConsumerGroups_result_validPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_ConsumerGroupListing_t>> Function(
+      _rd_kafka_ListConsumerGroups_result_validPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_ConsumerGroupListing_t>> Function(
               ffi.Pointer<rd_kafka_ListConsumerGroups_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Get an array of errors from a ListConsumerGroups call result.
   ///
@@ -13672,27 +14612,29 @@ class LibRdKafka {
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p result object.
   ffi.Pointer<ffi.Pointer<rd_kafka_error_t>>
-      rd_kafka_ListConsumerGroups_result_errors(
+  rd_kafka_ListConsumerGroups_result_errors(
     ffi.Pointer<rd_kafka_ListConsumerGroups_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_ListConsumerGroups_result_errors(
-      result,
-      cntp,
-    );
+    return _rd_kafka_ListConsumerGroups_result_errors(result, cntp);
   }
 
   late final _rd_kafka_ListConsumerGroups_result_errorsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Pointer<rd_kafka_error_t>> Function(
-                  ffi.Pointer<rd_kafka_ListConsumerGroups_result_t>,
-                  ffi.Pointer<ffi.Size>)>>(
-      'rd_kafka_ListConsumerGroups_result_errors');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_error_t>> Function(
+        ffi.Pointer<rd_kafka_ListConsumerGroups_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_ListConsumerGroups_result_errors');
   late final _rd_kafka_ListConsumerGroups_result_errors =
-      _rd_kafka_ListConsumerGroups_result_errorsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_error_t>> Function(
+      _rd_kafka_ListConsumerGroups_result_errorsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_error_t>> Function(
               ffi.Pointer<rd_kafka_ListConsumerGroups_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Describe groups from cluster as specified by the \p groups
   /// array of size \p groups_cnt elements.
@@ -13724,22 +14666,27 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_DescribeConsumerGroupsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<ffi.Pointer<ffi.Char>>,
-                  ffi.Size,
-                  ffi.Pointer<rd_kafka_AdminOptions_t>,
-                  ffi.Pointer<rd_kafka_queue_t>)>>(
-      'rd_kafka_DescribeConsumerGroups');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_DescribeConsumerGroups');
   late final _rd_kafka_DescribeConsumerGroups =
-      _rd_kafka_DescribeConsumerGroupsPtr.asFunction<
-          void Function(
+      _rd_kafka_DescribeConsumerGroupsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>,
               int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get an array of group results from a DescribeConsumerGroups result.
   ///
@@ -13751,27 +14698,30 @@ class LibRdKafka {
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p result object.
   ffi.Pointer<ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>>
-      rd_kafka_DescribeConsumerGroups_result_groups(
+  rd_kafka_DescribeConsumerGroups_result_groups(
     ffi.Pointer<rd_kafka_DescribeConsumerGroups_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_DescribeConsumerGroups_result_groups(
-      result,
-      cntp,
-    );
+    return _rd_kafka_DescribeConsumerGroups_result_groups(result, cntp);
   }
 
   late final _rd_kafka_DescribeConsumerGroups_result_groupsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>> Function(
-              ffi.Pointer<rd_kafka_DescribeConsumerGroups_result_t>,
-              ffi.Pointer<
-                  ffi.Size>)>>('rd_kafka_DescribeConsumerGroups_result_groups');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>> Function(
+        ffi.Pointer<rd_kafka_DescribeConsumerGroups_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_DescribeConsumerGroups_result_groups');
   late final _rd_kafka_DescribeConsumerGroups_result_groups =
-      _rd_kafka_DescribeConsumerGroups_result_groupsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>> Function(
+      _rd_kafka_DescribeConsumerGroups_result_groupsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>>
+            Function(
               ffi.Pointer<rd_kafka_DescribeConsumerGroups_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Gets the group id for the \p grpdesc group.
   ///
@@ -13784,20 +14734,23 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_ConsumerGroupDescription_group_id(
     ffi.Pointer<rd_kafka_ConsumerGroupDescription_t> grpdesc,
   ) {
-    return _rd_kafka_ConsumerGroupDescription_group_id(
-      grpdesc,
-    );
+    return _rd_kafka_ConsumerGroupDescription_group_id(grpdesc);
   }
 
   late final _rd_kafka_ConsumerGroupDescription_group_idPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)>>(
-      'rd_kafka_ConsumerGroupDescription_group_id');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(
+        ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
+      )
+    >
+  >('rd_kafka_ConsumerGroupDescription_group_id');
   late final _rd_kafka_ConsumerGroupDescription_group_id =
-      _rd_kafka_ConsumerGroupDescription_group_idPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)>();
+      _rd_kafka_ConsumerGroupDescription_group_idPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
+            )
+          >();
 
   /// @brief Gets the error for the \p grpdesc group.
   ///
@@ -13810,20 +14763,23 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_error_t> rd_kafka_ConsumerGroupDescription_error(
     ffi.Pointer<rd_kafka_ConsumerGroupDescription_t> grpdesc,
   ) {
-    return _rd_kafka_ConsumerGroupDescription_error(
-      grpdesc,
-    );
+    return _rd_kafka_ConsumerGroupDescription_error(grpdesc);
   }
 
   late final _rd_kafka_ConsumerGroupDescription_errorPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_error_t> Function(
-                  ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)>>(
-      'rd_kafka_ConsumerGroupDescription_error');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
+      )
+    >
+  >('rd_kafka_ConsumerGroupDescription_error');
   late final _rd_kafka_ConsumerGroupDescription_error =
-      _rd_kafka_ConsumerGroupDescription_errorPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)>();
+      _rd_kafka_ConsumerGroupDescription_errorPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
+            )
+          >();
 
   /// @brief Is the \p grpdesc group a simple consumer group.
   ///
@@ -13833,20 +14789,20 @@ class LibRdKafka {
   int rd_kafka_ConsumerGroupDescription_is_simple_consumer_group(
     ffi.Pointer<rd_kafka_ConsumerGroupDescription_t> grpdesc,
   ) {
-    return _rd_kafka_ConsumerGroupDescription_is_simple_consumer_group(
-      grpdesc,
-    );
+    return _rd_kafka_ConsumerGroupDescription_is_simple_consumer_group(grpdesc);
   }
 
   late final _rd_kafka_ConsumerGroupDescription_is_simple_consumer_groupPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Int Function(
-                      ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)>>(
-          'rd_kafka_ConsumerGroupDescription_is_simple_consumer_group');
+        ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)
+        >
+      >('rd_kafka_ConsumerGroupDescription_is_simple_consumer_group');
   late final _rd_kafka_ConsumerGroupDescription_is_simple_consumer_group =
-      _rd_kafka_ConsumerGroupDescription_is_simple_consumer_groupPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)>();
+      _rd_kafka_ConsumerGroupDescription_is_simple_consumer_groupPtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)
+          >();
 
   /// @brief Gets the partition assignor for the \p grpdesc group.
   ///
@@ -13859,20 +14815,23 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_ConsumerGroupDescription_partition_assignor(
     ffi.Pointer<rd_kafka_ConsumerGroupDescription_t> grpdesc,
   ) {
-    return _rd_kafka_ConsumerGroupDescription_partition_assignor(
-      grpdesc,
-    );
+    return _rd_kafka_ConsumerGroupDescription_partition_assignor(grpdesc);
   }
 
   late final _rd_kafka_ConsumerGroupDescription_partition_assignorPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)>>(
-      'rd_kafka_ConsumerGroupDescription_partition_assignor');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(
+        ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
+      )
+    >
+  >('rd_kafka_ConsumerGroupDescription_partition_assignor');
   late final _rd_kafka_ConsumerGroupDescription_partition_assignor =
-      _rd_kafka_ConsumerGroupDescription_partition_assignorPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)>();
+      _rd_kafka_ConsumerGroupDescription_partition_assignorPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
+            )
+          >();
 
   /// @brief Gets the authorized ACL operations for the \p grpdesc group.
   ///
@@ -13885,7 +14844,7 @@ class LibRdKafka {
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p grpdesc object.
   ffi.Pointer<ffi.UnsignedInt>
-      rd_kafka_ConsumerGroupDescription_authorized_operations(
+  rd_kafka_ConsumerGroupDescription_authorized_operations(
     ffi.Pointer<rd_kafka_ConsumerGroupDescription_t> grpdesc,
     ffi.Pointer<ffi.Size> cntp,
   ) {
@@ -13897,16 +14856,21 @@ class LibRdKafka {
 
   late final _rd_kafka_ConsumerGroupDescription_authorized_operationsPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Pointer<ffi.UnsignedInt> Function(
-                      ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
-                      ffi.Pointer<ffi.Size>)>>(
-          'rd_kafka_ConsumerGroupDescription_authorized_operations');
-  late final _rd_kafka_ConsumerGroupDescription_authorized_operations =
-      _rd_kafka_ConsumerGroupDescription_authorized_operationsPtr.asFunction<
+        ffi.NativeFunction<
           ffi.Pointer<ffi.UnsignedInt> Function(
+            ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
+            ffi.Pointer<ffi.Size>,
+          )
+        >
+      >('rd_kafka_ConsumerGroupDescription_authorized_operations');
+  late final _rd_kafka_ConsumerGroupDescription_authorized_operations =
+      _rd_kafka_ConsumerGroupDescription_authorized_operationsPtr
+          .asFunction<
+            ffi.Pointer<ffi.UnsignedInt> Function(
               ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Gets state for the \p grpdesc group.
   ///
@@ -13916,20 +14880,21 @@ class LibRdKafka {
   rd_kafka_consumer_group_state_t rd_kafka_ConsumerGroupDescription_state(
     ffi.Pointer<rd_kafka_ConsumerGroupDescription_t> grpdesc,
   ) {
-    return rd_kafka_consumer_group_state_t
-        .fromValue(_rd_kafka_ConsumerGroupDescription_state(
-      grpdesc,
-    ));
+    return rd_kafka_consumer_group_state_t.fromValue(
+      _rd_kafka_ConsumerGroupDescription_state(grpdesc),
+    );
   }
 
   late final _rd_kafka_ConsumerGroupDescription_statePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.UnsignedInt Function(
-                  ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)>>(
-      'rd_kafka_ConsumerGroupDescription_state');
+    ffi.NativeFunction<
+      ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)
+    >
+  >('rd_kafka_ConsumerGroupDescription_state');
   late final _rd_kafka_ConsumerGroupDescription_state =
-      _rd_kafka_ConsumerGroupDescription_statePtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)>();
+      _rd_kafka_ConsumerGroupDescription_statePtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)
+          >();
 
   /// @brief Gets the coordinator for the \p grpdesc group.
   ///
@@ -13942,20 +14907,23 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_Node_t> rd_kafka_ConsumerGroupDescription_coordinator(
     ffi.Pointer<rd_kafka_ConsumerGroupDescription_t> grpdesc,
   ) {
-    return _rd_kafka_ConsumerGroupDescription_coordinator(
-      grpdesc,
-    );
+    return _rd_kafka_ConsumerGroupDescription_coordinator(grpdesc);
   }
 
   late final _rd_kafka_ConsumerGroupDescription_coordinatorPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_Node_t> Function(
-                  ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)>>(
-      'rd_kafka_ConsumerGroupDescription_coordinator');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_Node_t> Function(
+        ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
+      )
+    >
+  >('rd_kafka_ConsumerGroupDescription_coordinator');
   late final _rd_kafka_ConsumerGroupDescription_coordinator =
-      _rd_kafka_ConsumerGroupDescription_coordinatorPtr.asFunction<
-          ffi.Pointer<rd_kafka_Node_t> Function(
-              ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)>();
+      _rd_kafka_ConsumerGroupDescription_coordinatorPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_Node_t> Function(
+              ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
+            )
+          >();
 
   /// @brief Gets the members count of \p grpdesc group.
   ///
@@ -13965,19 +14933,19 @@ class LibRdKafka {
   int rd_kafka_ConsumerGroupDescription_member_count(
     ffi.Pointer<rd_kafka_ConsumerGroupDescription_t> grpdesc,
   ) {
-    return _rd_kafka_ConsumerGroupDescription_member_count(
-      grpdesc,
-    );
+    return _rd_kafka_ConsumerGroupDescription_member_count(grpdesc);
   }
 
   late final _rd_kafka_ConsumerGroupDescription_member_countPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Size Function(
-                  ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)>>(
-      'rd_kafka_ConsumerGroupDescription_member_count');
+    ffi.NativeFunction<
+      ffi.Size Function(ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)
+    >
+  >('rd_kafka_ConsumerGroupDescription_member_count');
   late final _rd_kafka_ConsumerGroupDescription_member_count =
-      _rd_kafka_ConsumerGroupDescription_member_countPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)>();
+      _rd_kafka_ConsumerGroupDescription_member_countPtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>)
+          >();
 
   /// @brief Gets a member of \p grpdesc group.
   ///
@@ -13990,25 +14958,29 @@ class LibRdKafka {
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p grpdesc object.
   ffi.Pointer<rd_kafka_MemberDescription_t>
-      rd_kafka_ConsumerGroupDescription_member(
+  rd_kafka_ConsumerGroupDescription_member(
     ffi.Pointer<rd_kafka_ConsumerGroupDescription_t> grpdesc,
     int idx,
   ) {
-    return _rd_kafka_ConsumerGroupDescription_member(
-      grpdesc,
-      idx,
-    );
+    return _rd_kafka_ConsumerGroupDescription_member(grpdesc, idx);
   }
 
   late final _rd_kafka_ConsumerGroupDescription_memberPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_MemberDescription_t> Function(
-              ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
-              ffi.Size)>>('rd_kafka_ConsumerGroupDescription_member');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_MemberDescription_t> Function(
+        ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_ConsumerGroupDescription_member');
   late final _rd_kafka_ConsumerGroupDescription_member =
-      _rd_kafka_ConsumerGroupDescription_memberPtr.asFunction<
-          ffi.Pointer<rd_kafka_MemberDescription_t> Function(
-              ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>, int)>();
+      _rd_kafka_ConsumerGroupDescription_memberPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_MemberDescription_t> Function(
+              ffi.Pointer<rd_kafka_ConsumerGroupDescription_t>,
+              int,
+            )
+          >();
 
   /// @brief Gets client id of \p member.
   ///
@@ -14021,20 +14993,21 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_MemberDescription_client_id(
     ffi.Pointer<rd_kafka_MemberDescription_t> member,
   ) {
-    return _rd_kafka_MemberDescription_client_id(
-      member,
-    );
+    return _rd_kafka_MemberDescription_client_id(member);
   }
 
   late final _rd_kafka_MemberDescription_client_idPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_MemberDescription_t>)>>(
-      'rd_kafka_MemberDescription_client_id');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_MemberDescription_t>)
+    >
+  >('rd_kafka_MemberDescription_client_id');
   late final _rd_kafka_MemberDescription_client_id =
-      _rd_kafka_MemberDescription_client_idPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_MemberDescription_t>)>();
+      _rd_kafka_MemberDescription_client_idPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_MemberDescription_t>,
+            )
+          >();
 
   /// @brief Gets group instance id of \p member.
   ///
@@ -14047,20 +15020,21 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_MemberDescription_group_instance_id(
     ffi.Pointer<rd_kafka_MemberDescription_t> member,
   ) {
-    return _rd_kafka_MemberDescription_group_instance_id(
-      member,
-    );
+    return _rd_kafka_MemberDescription_group_instance_id(member);
   }
 
   late final _rd_kafka_MemberDescription_group_instance_idPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_MemberDescription_t>)>>(
-      'rd_kafka_MemberDescription_group_instance_id');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_MemberDescription_t>)
+    >
+  >('rd_kafka_MemberDescription_group_instance_id');
   late final _rd_kafka_MemberDescription_group_instance_id =
-      _rd_kafka_MemberDescription_group_instance_idPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_MemberDescription_t>)>();
+      _rd_kafka_MemberDescription_group_instance_idPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_MemberDescription_t>,
+            )
+          >();
 
   /// @brief Gets consumer id of \p member.
   ///
@@ -14073,20 +15047,21 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_MemberDescription_consumer_id(
     ffi.Pointer<rd_kafka_MemberDescription_t> member,
   ) {
-    return _rd_kafka_MemberDescription_consumer_id(
-      member,
-    );
+    return _rd_kafka_MemberDescription_consumer_id(member);
   }
 
   late final _rd_kafka_MemberDescription_consumer_idPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_MemberDescription_t>)>>(
-      'rd_kafka_MemberDescription_consumer_id');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_MemberDescription_t>)
+    >
+  >('rd_kafka_MemberDescription_consumer_id');
   late final _rd_kafka_MemberDescription_consumer_id =
-      _rd_kafka_MemberDescription_consumer_idPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_MemberDescription_t>)>();
+      _rd_kafka_MemberDescription_consumer_idPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_MemberDescription_t>,
+            )
+          >();
 
   /// @brief Gets host of \p member.
   ///
@@ -14099,20 +15074,21 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_MemberDescription_host(
     ffi.Pointer<rd_kafka_MemberDescription_t> member,
   ) {
-    return _rd_kafka_MemberDescription_host(
-      member,
-    );
+    return _rd_kafka_MemberDescription_host(member);
   }
 
   late final _rd_kafka_MemberDescription_hostPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_MemberDescription_t>)>>(
-      'rd_kafka_MemberDescription_host');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_MemberDescription_t>)
+    >
+  >('rd_kafka_MemberDescription_host');
   late final _rd_kafka_MemberDescription_host =
-      _rd_kafka_MemberDescription_hostPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_MemberDescription_t>)>();
+      _rd_kafka_MemberDescription_hostPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_MemberDescription_t>,
+            )
+          >();
 
   /// @brief Gets assignment of \p member.
   ///
@@ -14123,23 +15099,26 @@ class LibRdKafka {
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p member object.
   ffi.Pointer<rd_kafka_MemberAssignment_t>
-      rd_kafka_MemberDescription_assignment(
+  rd_kafka_MemberDescription_assignment(
     ffi.Pointer<rd_kafka_MemberDescription_t> member,
   ) {
-    return _rd_kafka_MemberDescription_assignment(
-      member,
-    );
+    return _rd_kafka_MemberDescription_assignment(member);
   }
 
   late final _rd_kafka_MemberDescription_assignmentPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_MemberAssignment_t> Function(
-                  ffi.Pointer<rd_kafka_MemberDescription_t>)>>(
-      'rd_kafka_MemberDescription_assignment');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_MemberAssignment_t> Function(
+        ffi.Pointer<rd_kafka_MemberDescription_t>,
+      )
+    >
+  >('rd_kafka_MemberDescription_assignment');
   late final _rd_kafka_MemberDescription_assignment =
-      _rd_kafka_MemberDescription_assignmentPtr.asFunction<
-          ffi.Pointer<rd_kafka_MemberAssignment_t> Function(
-              ffi.Pointer<rd_kafka_MemberDescription_t>)>();
+      _rd_kafka_MemberDescription_assignmentPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_MemberAssignment_t> Function(
+              ffi.Pointer<rd_kafka_MemberDescription_t>,
+            )
+          >();
 
   /// @brief Gets assigned partitions of a member \p assignment.
   ///
@@ -14150,23 +15129,26 @@ class LibRdKafka {
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p assignment object.
   ffi.Pointer<rd_kafka_topic_partition_list_t>
-      rd_kafka_MemberAssignment_partitions(
+  rd_kafka_MemberAssignment_partitions(
     ffi.Pointer<rd_kafka_MemberAssignment_t> assignment,
   ) {
-    return _rd_kafka_MemberAssignment_partitions(
-      assignment,
-    );
+    return _rd_kafka_MemberAssignment_partitions(assignment);
   }
 
   late final _rd_kafka_MemberAssignment_partitionsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
-                  ffi.Pointer<rd_kafka_MemberAssignment_t>)>>(
-      'rd_kafka_MemberAssignment_partitions');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
+        ffi.Pointer<rd_kafka_MemberAssignment_t>,
+      )
+    >
+  >('rd_kafka_MemberAssignment_partitions');
   late final _rd_kafka_MemberAssignment_partitions =
-      _rd_kafka_MemberAssignment_partitionsPtr.asFunction<
-          ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
-              ffi.Pointer<rd_kafka_MemberAssignment_t>)>();
+      _rd_kafka_MemberAssignment_partitionsPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_topic_partition_list_t> Function(
+              ffi.Pointer<rd_kafka_MemberAssignment_t>,
+            )
+          >();
 
   /// @brief Create a new DeleteGroup object. This object is later passed to
   /// rd_kafka_DeleteGroups().
@@ -14178,36 +15160,34 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_DeleteGroup_t> rd_kafka_DeleteGroup_new(
     ffi.Pointer<ffi.Char> group,
   ) {
-    return _rd_kafka_DeleteGroup_new(
-      group,
-    );
+    return _rd_kafka_DeleteGroup_new(group);
   }
 
   late final _rd_kafka_DeleteGroup_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_DeleteGroup_t> Function(
-              ffi.Pointer<ffi.Char>)>>('rd_kafka_DeleteGroup_new');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_DeleteGroup_t> Function(ffi.Pointer<ffi.Char>)
+    >
+  >('rd_kafka_DeleteGroup_new');
   late final _rd_kafka_DeleteGroup_new =
-      _rd_kafka_DeleteGroup_newPtr.asFunction<
-          ffi.Pointer<rd_kafka_DeleteGroup_t> Function(
-              ffi.Pointer<ffi.Char>)>();
+      _rd_kafka_DeleteGroup_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_DeleteGroup_t> Function(ffi.Pointer<ffi.Char>)
+          >();
 
   /// @brief Destroy and free a DeleteGroup object previously created with
   /// rd_kafka_DeleteGroup_new()
   void rd_kafka_DeleteGroup_destroy(
     ffi.Pointer<rd_kafka_DeleteGroup_t> del_group,
   ) {
-    return _rd_kafka_DeleteGroup_destroy(
-      del_group,
-    );
+    return _rd_kafka_DeleteGroup_destroy(del_group);
   }
 
   late final _rd_kafka_DeleteGroup_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<rd_kafka_DeleteGroup_t>)>>(
-      'rd_kafka_DeleteGroup_destroy');
-  late final _rd_kafka_DeleteGroup_destroy = _rd_kafka_DeleteGroup_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_DeleteGroup_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_DeleteGroup_t>)>
+  >('rd_kafka_DeleteGroup_destroy');
+  late final _rd_kafka_DeleteGroup_destroy =
+      _rd_kafka_DeleteGroup_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_DeleteGroup_t>)>();
 
   /// @brief Helper function to destroy all DeleteGroup objects in
   /// the \p del_groups array (of \p del_group_cnt elements).
@@ -14216,20 +15196,22 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<rd_kafka_DeleteGroup_t>> del_groups,
     int del_group_cnt,
   ) {
-    return _rd_kafka_DeleteGroup_destroy_array(
-      del_groups,
-      del_group_cnt,
-    );
+    return _rd_kafka_DeleteGroup_destroy_array(del_groups, del_group_cnt);
   }
 
   late final _rd_kafka_DeleteGroup_destroy_arrayPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<ffi.Pointer<rd_kafka_DeleteGroup_t>>,
-              ffi.Size)>>('rd_kafka_DeleteGroup_destroy_array');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<ffi.Pointer<rd_kafka_DeleteGroup_t>>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_DeleteGroup_destroy_array');
   late final _rd_kafka_DeleteGroup_destroy_array =
-      _rd_kafka_DeleteGroup_destroy_arrayPtr.asFunction<
-          void Function(
-              ffi.Pointer<ffi.Pointer<rd_kafka_DeleteGroup_t>>, int)>();
+      _rd_kafka_DeleteGroup_destroy_arrayPtr
+          .asFunction<
+            void Function(ffi.Pointer<ffi.Pointer<rd_kafka_DeleteGroup_t>>, int)
+          >();
 
   /// @brief Delete groups from cluster as specified by the \p del_groups
   /// array of size \p del_group_cnt elements.
@@ -14251,30 +15233,31 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_DeleteGroups(
-      rk,
-      del_groups,
-      del_group_cnt,
-      options,
-      rkqu,
-    );
+    return _rd_kafka_DeleteGroups(rk, del_groups, del_group_cnt, options, rkqu);
   }
 
   late final _rd_kafka_DeleteGroupsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_DeleteGroup_t>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_DeleteGroups');
+  late final _rd_kafka_DeleteGroups =
+      _rd_kafka_DeleteGroupsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Pointer<rd_kafka_DeleteGroup_t>>,
-              ffi.Size,
+              int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_DeleteGroups');
-  late final _rd_kafka_DeleteGroups = _rd_kafka_DeleteGroupsPtr.asFunction<
-      void Function(
-          ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<ffi.Pointer<rd_kafka_DeleteGroup_t>>,
-          int,
-          ffi.Pointer<rd_kafka_AdminOptions_t>,
-          ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get an array of group results from a DeleteGroups result.
   ///
@@ -14283,26 +15266,29 @@ class LibRdKafka {
   /// @param result Result to get group results from.
   /// @param cntp is updated to the number of elements in the array.
   ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>>
-      rd_kafka_DeleteGroups_result_groups(
+  rd_kafka_DeleteGroups_result_groups(
     ffi.Pointer<rd_kafka_DeleteGroups_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_DeleteGroups_result_groups(
-      result,
-      cntp,
-    );
+    return _rd_kafka_DeleteGroups_result_groups(result, cntp);
   }
 
   late final _rd_kafka_DeleteGroups_result_groupsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
-              ffi.Pointer<rd_kafka_DeleteGroups_result_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_DeleteGroups_result_groups');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
+        ffi.Pointer<rd_kafka_DeleteGroups_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_DeleteGroups_result_groups');
   late final _rd_kafka_DeleteGroups_result_groups =
-      _rd_kafka_DeleteGroups_result_groupsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
+      _rd_kafka_DeleteGroups_result_groupsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
               ffi.Pointer<rd_kafka_DeleteGroups_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Create a new ListConsumerGroupOffsets object.
   /// This object is later passed to rd_kafka_ListConsumerGroupOffsets().
@@ -14315,53 +15301,55 @@ class LibRdKafka {
   /// Use rd_kafka_ListConsumerGroupOffsets_destroy() to free
   /// object when done.
   ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t>
-      rd_kafka_ListConsumerGroupOffsets_new(
+  rd_kafka_ListConsumerGroupOffsets_new(
     ffi.Pointer<ffi.Char> group_id,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
   ) {
-    return _rd_kafka_ListConsumerGroupOffsets_new(
-      group_id,
-      partitions,
-    );
+    return _rd_kafka_ListConsumerGroupOffsets_new(group_id, partitions);
   }
 
   late final _rd_kafka_ListConsumerGroupOffsets_newPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t> Function(
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
-      'rd_kafka_ListConsumerGroupOffsets_new');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t> Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+      )
+    >
+  >('rd_kafka_ListConsumerGroupOffsets_new');
   late final _rd_kafka_ListConsumerGroupOffsets_new =
-      _rd_kafka_ListConsumerGroupOffsets_newPtr.asFunction<
-          ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t> Function(
+      _rd_kafka_ListConsumerGroupOffsets_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t> Function(
               ffi.Pointer<ffi.Char>,
-              ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+              ffi.Pointer<rd_kafka_topic_partition_list_t>,
+            )
+          >();
 
   /// @brief Destroy and free a ListConsumerGroupOffsets object previously
   /// created with rd_kafka_ListConsumerGroupOffsets_new()
   void rd_kafka_ListConsumerGroupOffsets_destroy(
     ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t> list_grpoffsets,
   ) {
-    return _rd_kafka_ListConsumerGroupOffsets_destroy(
-      list_grpoffsets,
-    );
+    return _rd_kafka_ListConsumerGroupOffsets_destroy(list_grpoffsets);
   }
 
   late final _rd_kafka_ListConsumerGroupOffsets_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t>)>>(
-      'rd_kafka_ListConsumerGroupOffsets_destroy');
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t>)
+    >
+  >('rd_kafka_ListConsumerGroupOffsets_destroy');
   late final _rd_kafka_ListConsumerGroupOffsets_destroy =
-      _rd_kafka_ListConsumerGroupOffsets_destroyPtr.asFunction<
-          void Function(ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t>)>();
+      _rd_kafka_ListConsumerGroupOffsets_destroyPtr
+          .asFunction<
+            void Function(ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t>)
+          >();
 
   /// @brief Helper function to destroy all ListConsumerGroupOffsets objects in
   /// the \p list_grpoffsets array (of \p list_grpoffsets_cnt elements).
   /// The array itself is not freed.
   void rd_kafka_ListConsumerGroupOffsets_destroy_array(
     ffi.Pointer<ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t>>
-        list_grpoffsets,
+    list_grpoffsets,
     int list_grpoffset_cnt,
   ) {
     return _rd_kafka_ListConsumerGroupOffsets_destroy_array(
@@ -14371,15 +15359,21 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_ListConsumerGroupOffsets_destroy_arrayPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t>>,
-              ffi.Size)>>('rd_kafka_ListConsumerGroupOffsets_destroy_array');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t>>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_ListConsumerGroupOffsets_destroy_array');
   late final _rd_kafka_ListConsumerGroupOffsets_destroy_array =
-      _rd_kafka_ListConsumerGroupOffsets_destroy_arrayPtr.asFunction<
-          void Function(
+      _rd_kafka_ListConsumerGroupOffsets_destroy_arrayPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t>>,
-              int)>();
+              int,
+            )
+          >();
 
   /// @brief List committed offsets for a set of partitions in a consumer
   /// group.
@@ -14399,7 +15393,7 @@ class LibRdKafka {
   void rd_kafka_ListConsumerGroupOffsets(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t>>
-        list_grpoffsets,
+    list_grpoffsets,
     int list_grpoffsets_cnt,
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
@@ -14414,22 +15408,27 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_ListConsumerGroupOffsetsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t>>,
-                  ffi.Size,
-                  ffi.Pointer<rd_kafka_AdminOptions_t>,
-                  ffi.Pointer<rd_kafka_queue_t>)>>(
-      'rd_kafka_ListConsumerGroupOffsets');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_ListConsumerGroupOffsets');
   late final _rd_kafka_ListConsumerGroupOffsets =
-      _rd_kafka_ListConsumerGroupOffsetsPtr.asFunction<
-          void Function(
+      _rd_kafka_ListConsumerGroupOffsetsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_t>>,
               int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get an array of results from a ListConsumerGroupOffsets result.
   ///
@@ -14441,27 +15440,29 @@ class LibRdKafka {
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p result object.
   ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>>
-      rd_kafka_ListConsumerGroupOffsets_result_groups(
+  rd_kafka_ListConsumerGroupOffsets_result_groups(
     ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_ListConsumerGroupOffsets_result_groups(
-      result,
-      cntp,
-    );
+    return _rd_kafka_ListConsumerGroupOffsets_result_groups(result, cntp);
   }
 
   late final _rd_kafka_ListConsumerGroupOffsets_result_groupsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
-                  ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_result_t>,
-                  ffi.Pointer<ffi.Size>)>>(
-      'rd_kafka_ListConsumerGroupOffsets_result_groups');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
+        ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_ListConsumerGroupOffsets_result_groups');
   late final _rd_kafka_ListConsumerGroupOffsets_result_groups =
-      _rd_kafka_ListConsumerGroupOffsets_result_groupsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
+      _rd_kafka_ListConsumerGroupOffsets_result_groupsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
               ffi.Pointer<rd_kafka_ListConsumerGroupOffsets_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Create a new AlterConsumerGroupOffsets object.
   /// This object is later passed to rd_kafka_AlterConsumerGroupOffsets().
@@ -14474,53 +15475,55 @@ class LibRdKafka {
   /// Use rd_kafka_AlterConsumerGroupOffsets_destroy() to free
   /// object when done.
   ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t>
-      rd_kafka_AlterConsumerGroupOffsets_new(
+  rd_kafka_AlterConsumerGroupOffsets_new(
     ffi.Pointer<ffi.Char> group_id,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
   ) {
-    return _rd_kafka_AlterConsumerGroupOffsets_new(
-      group_id,
-      partitions,
-    );
+    return _rd_kafka_AlterConsumerGroupOffsets_new(group_id, partitions);
   }
 
   late final _rd_kafka_AlterConsumerGroupOffsets_newPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t> Function(
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
-      'rd_kafka_AlterConsumerGroupOffsets_new');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t> Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+      )
+    >
+  >('rd_kafka_AlterConsumerGroupOffsets_new');
   late final _rd_kafka_AlterConsumerGroupOffsets_new =
-      _rd_kafka_AlterConsumerGroupOffsets_newPtr.asFunction<
-          ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t> Function(
+      _rd_kafka_AlterConsumerGroupOffsets_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t> Function(
               ffi.Pointer<ffi.Char>,
-              ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+              ffi.Pointer<rd_kafka_topic_partition_list_t>,
+            )
+          >();
 
   /// @brief Destroy and free a AlterConsumerGroupOffsets object previously
   /// created with rd_kafka_AlterConsumerGroupOffsets_new()
   void rd_kafka_AlterConsumerGroupOffsets_destroy(
     ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t> alter_grpoffsets,
   ) {
-    return _rd_kafka_AlterConsumerGroupOffsets_destroy(
-      alter_grpoffsets,
-    );
+    return _rd_kafka_AlterConsumerGroupOffsets_destroy(alter_grpoffsets);
   }
 
   late final _rd_kafka_AlterConsumerGroupOffsets_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t>)>>(
-      'rd_kafka_AlterConsumerGroupOffsets_destroy');
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t>)
+    >
+  >('rd_kafka_AlterConsumerGroupOffsets_destroy');
   late final _rd_kafka_AlterConsumerGroupOffsets_destroy =
-      _rd_kafka_AlterConsumerGroupOffsets_destroyPtr.asFunction<
-          void Function(ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t>)>();
+      _rd_kafka_AlterConsumerGroupOffsets_destroyPtr
+          .asFunction<
+            void Function(ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t>)
+          >();
 
   /// @brief Helper function to destroy all AlterConsumerGroupOffsets objects in
   /// the \p alter_grpoffsets array (of \p alter_grpoffsets_cnt elements).
   /// The array itself is not freed.
   void rd_kafka_AlterConsumerGroupOffsets_destroy_array(
     ffi.Pointer<ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t>>
-        alter_grpoffsets,
+    alter_grpoffsets,
     int alter_grpoffset_cnt,
   ) {
     return _rd_kafka_AlterConsumerGroupOffsets_destroy_array(
@@ -14530,15 +15533,21 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_AlterConsumerGroupOffsets_destroy_arrayPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t>>,
-              ffi.Size)>>('rd_kafka_AlterConsumerGroupOffsets_destroy_array');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t>>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_AlterConsumerGroupOffsets_destroy_array');
   late final _rd_kafka_AlterConsumerGroupOffsets_destroy_array =
-      _rd_kafka_AlterConsumerGroupOffsets_destroy_arrayPtr.asFunction<
-          void Function(
+      _rd_kafka_AlterConsumerGroupOffsets_destroy_arrayPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t>>,
-              int)>();
+              int,
+            )
+          >();
 
   /// @brief Alter committed offsets for a set of partitions in a consumer
   /// group. This will succeed at the partition level only if the group
@@ -14559,7 +15568,7 @@ class LibRdKafka {
   void rd_kafka_AlterConsumerGroupOffsets(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t>>
-        alter_grpoffsets,
+    alter_grpoffsets,
     int alter_grpoffsets_cnt,
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
@@ -14574,22 +15583,27 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_AlterConsumerGroupOffsetsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t>>,
-              ffi.Size,
-              ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<
-                  rd_kafka_queue_t>)>>('rd_kafka_AlterConsumerGroupOffsets');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_AlterConsumerGroupOffsets');
   late final _rd_kafka_AlterConsumerGroupOffsets =
-      _rd_kafka_AlterConsumerGroupOffsetsPtr.asFunction<
-          void Function(
+      _rd_kafka_AlterConsumerGroupOffsetsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_t>>,
               int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get an array of results from a AlterConsumerGroupOffsets result.
   ///
@@ -14601,27 +15615,29 @@ class LibRdKafka {
   /// @remark The lifetime of the returned memory is the same
   /// as the lifetime of the \p result object.
   ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>>
-      rd_kafka_AlterConsumerGroupOffsets_result_groups(
+  rd_kafka_AlterConsumerGroupOffsets_result_groups(
     ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_AlterConsumerGroupOffsets_result_groups(
-      result,
-      cntp,
-    );
+    return _rd_kafka_AlterConsumerGroupOffsets_result_groups(result, cntp);
   }
 
   late final _rd_kafka_AlterConsumerGroupOffsets_result_groupsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
-                  ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_result_t>,
-                  ffi.Pointer<ffi.Size>)>>(
-      'rd_kafka_AlterConsumerGroupOffsets_result_groups');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
+        ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_AlterConsumerGroupOffsets_result_groups');
   late final _rd_kafka_AlterConsumerGroupOffsets_result_groups =
-      _rd_kafka_AlterConsumerGroupOffsets_result_groupsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
+      _rd_kafka_AlterConsumerGroupOffsets_result_groupsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
               ffi.Pointer<rd_kafka_AlterConsumerGroupOffsets_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Create a new DeleteConsumerGroupOffsets object.
   /// This object is later passed to rd_kafka_DeleteConsumerGroupOffsets().
@@ -14634,53 +15650,55 @@ class LibRdKafka {
   /// Use rd_kafka_DeleteConsumerGroupOffsets_destroy() to free
   /// object when done.
   ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t>
-      rd_kafka_DeleteConsumerGroupOffsets_new(
+  rd_kafka_DeleteConsumerGroupOffsets_new(
     ffi.Pointer<ffi.Char> group,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
   ) {
-    return _rd_kafka_DeleteConsumerGroupOffsets_new(
-      group,
-      partitions,
-    );
+    return _rd_kafka_DeleteConsumerGroupOffsets_new(group, partitions);
   }
 
   late final _rd_kafka_DeleteConsumerGroupOffsets_newPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t> Function(
-                  ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
-      'rd_kafka_DeleteConsumerGroupOffsets_new');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t> Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+      )
+    >
+  >('rd_kafka_DeleteConsumerGroupOffsets_new');
   late final _rd_kafka_DeleteConsumerGroupOffsets_new =
-      _rd_kafka_DeleteConsumerGroupOffsets_newPtr.asFunction<
-          ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t> Function(
+      _rd_kafka_DeleteConsumerGroupOffsets_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t> Function(
               ffi.Pointer<ffi.Char>,
-              ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+              ffi.Pointer<rd_kafka_topic_partition_list_t>,
+            )
+          >();
 
   /// @brief Destroy and free a DeleteConsumerGroupOffsets object previously
   /// created with rd_kafka_DeleteConsumerGroupOffsets_new()
   void rd_kafka_DeleteConsumerGroupOffsets_destroy(
     ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t> del_grpoffsets,
   ) {
-    return _rd_kafka_DeleteConsumerGroupOffsets_destroy(
-      del_grpoffsets,
-    );
+    return _rd_kafka_DeleteConsumerGroupOffsets_destroy(del_grpoffsets);
   }
 
   late final _rd_kafka_DeleteConsumerGroupOffsets_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t>)>>(
-      'rd_kafka_DeleteConsumerGroupOffsets_destroy');
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t>)
+    >
+  >('rd_kafka_DeleteConsumerGroupOffsets_destroy');
   late final _rd_kafka_DeleteConsumerGroupOffsets_destroy =
-      _rd_kafka_DeleteConsumerGroupOffsets_destroyPtr.asFunction<
-          void Function(ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t>)>();
+      _rd_kafka_DeleteConsumerGroupOffsets_destroyPtr
+          .asFunction<
+            void Function(ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t>)
+          >();
 
   /// @brief Helper function to destroy all DeleteConsumerGroupOffsets objects in
   /// the \p del_grpoffsets array (of \p del_grpoffsets_cnt elements).
   /// The array itself is not freed.
   void rd_kafka_DeleteConsumerGroupOffsets_destroy_array(
     ffi.Pointer<ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t>>
-        del_grpoffsets,
+    del_grpoffsets,
     int del_grpoffset_cnt,
   ) {
     return _rd_kafka_DeleteConsumerGroupOffsets_destroy_array(
@@ -14690,15 +15708,21 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_DeleteConsumerGroupOffsets_destroy_arrayPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t>>,
-              ffi.Size)>>('rd_kafka_DeleteConsumerGroupOffsets_destroy_array');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t>>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_DeleteConsumerGroupOffsets_destroy_array');
   late final _rd_kafka_DeleteConsumerGroupOffsets_destroy_array =
-      _rd_kafka_DeleteConsumerGroupOffsets_destroy_arrayPtr.asFunction<
-          void Function(
+      _rd_kafka_DeleteConsumerGroupOffsets_destroy_arrayPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t>>,
-              int)>();
+              int,
+            )
+          >();
 
   /// @brief Delete committed offsets for a set of partitions in a consumer
   /// group. This will succeed at the partition level only if the group
@@ -14719,7 +15743,7 @@ class LibRdKafka {
   void rd_kafka_DeleteConsumerGroupOffsets(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t>>
-        del_grpoffsets,
+    del_grpoffsets,
     int del_grpoffsets_cnt,
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
@@ -14734,22 +15758,27 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_DeleteConsumerGroupOffsetsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t>>,
-              ffi.Size,
-              ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<
-                  rd_kafka_queue_t>)>>('rd_kafka_DeleteConsumerGroupOffsets');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_DeleteConsumerGroupOffsets');
   late final _rd_kafka_DeleteConsumerGroupOffsets =
-      _rd_kafka_DeleteConsumerGroupOffsetsPtr.asFunction<
-          void Function(
+      _rd_kafka_DeleteConsumerGroupOffsetsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_t>>,
               int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get an array of results from a DeleteConsumerGroupOffsets result.
   ///
@@ -14758,89 +15787,97 @@ class LibRdKafka {
   /// @param result Result to get group results from.
   /// @param cntp is updated to the number of elements in the array.
   ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>>
-      rd_kafka_DeleteConsumerGroupOffsets_result_groups(
+  rd_kafka_DeleteConsumerGroupOffsets_result_groups(
     ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_DeleteConsumerGroupOffsets_result_groups(
-      result,
-      cntp,
-    );
+    return _rd_kafka_DeleteConsumerGroupOffsets_result_groups(result, cntp);
   }
 
   late final _rd_kafka_DeleteConsumerGroupOffsets_result_groupsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
-                  ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_result_t>,
-                  ffi.Pointer<ffi.Size>)>>(
-      'rd_kafka_DeleteConsumerGroupOffsets_result_groups');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
+        ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_DeleteConsumerGroupOffsets_result_groups');
   late final _rd_kafka_DeleteConsumerGroupOffsets_result_groups =
-      _rd_kafka_DeleteConsumerGroupOffsets_result_groupsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
+      _rd_kafka_DeleteConsumerGroupOffsets_result_groupsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_group_result_t>> Function(
               ffi.Pointer<rd_kafka_DeleteConsumerGroupOffsets_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Returns the topic partition of the passed \p result_info.
   ffi.Pointer<rd_kafka_topic_partition_t>
-      rd_kafka_ListOffsetsResultInfo_topic_partition(
+  rd_kafka_ListOffsetsResultInfo_topic_partition(
     ffi.Pointer<rd_kafka_ListOffsetsResultInfo_t> result_info,
   ) {
-    return _rd_kafka_ListOffsetsResultInfo_topic_partition(
-      result_info,
-    );
+    return _rd_kafka_ListOffsetsResultInfo_topic_partition(result_info);
   }
 
   late final _rd_kafka_ListOffsetsResultInfo_topic_partitionPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_topic_partition_t> Function(
-                  ffi.Pointer<rd_kafka_ListOffsetsResultInfo_t>)>>(
-      'rd_kafka_ListOffsetsResultInfo_topic_partition');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_topic_partition_t> Function(
+        ffi.Pointer<rd_kafka_ListOffsetsResultInfo_t>,
+      )
+    >
+  >('rd_kafka_ListOffsetsResultInfo_topic_partition');
   late final _rd_kafka_ListOffsetsResultInfo_topic_partition =
-      _rd_kafka_ListOffsetsResultInfo_topic_partitionPtr.asFunction<
-          ffi.Pointer<rd_kafka_topic_partition_t> Function(
-              ffi.Pointer<rd_kafka_ListOffsetsResultInfo_t>)>();
+      _rd_kafka_ListOffsetsResultInfo_topic_partitionPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_topic_partition_t> Function(
+              ffi.Pointer<rd_kafka_ListOffsetsResultInfo_t>,
+            )
+          >();
 
   /// @brief Returns the timestamp corresponding to the offset in \p result_info.
   int rd_kafka_ListOffsetsResultInfo_timestamp(
     ffi.Pointer<rd_kafka_ListOffsetsResultInfo_t> result_info,
   ) {
-    return _rd_kafka_ListOffsetsResultInfo_timestamp(
-      result_info,
-    );
+    return _rd_kafka_ListOffsetsResultInfo_timestamp(result_info);
   }
 
   late final _rd_kafka_ListOffsetsResultInfo_timestampPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int64 Function(
-                  ffi.Pointer<rd_kafka_ListOffsetsResultInfo_t>)>>(
-      'rd_kafka_ListOffsetsResultInfo_timestamp');
+    ffi.NativeFunction<
+      ffi.Int64 Function(ffi.Pointer<rd_kafka_ListOffsetsResultInfo_t>)
+    >
+  >('rd_kafka_ListOffsetsResultInfo_timestamp');
   late final _rd_kafka_ListOffsetsResultInfo_timestamp =
-      _rd_kafka_ListOffsetsResultInfo_timestampPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_ListOffsetsResultInfo_t>)>();
+      _rd_kafka_ListOffsetsResultInfo_timestampPtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_ListOffsetsResultInfo_t>)
+          >();
 
   /// @brief Returns the array of ListOffsetsResultInfo in \p result
   /// and populates the size of the array in \p cntp.
   ffi.Pointer<ffi.Pointer<rd_kafka_ListOffsetsResultInfo_t>>
-      rd_kafka_ListOffsets_result_infos(
+  rd_kafka_ListOffsets_result_infos(
     ffi.Pointer<rd_kafka_ListOffsets_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_ListOffsets_result_infos(
-      result,
-      cntp,
-    );
+    return _rd_kafka_ListOffsets_result_infos(result, cntp);
   }
 
   late final _rd_kafka_ListOffsets_result_infosPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_ListOffsetsResultInfo_t>> Function(
-              ffi.Pointer<rd_kafka_ListOffsets_result_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_ListOffsets_result_infos');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_ListOffsetsResultInfo_t>> Function(
+        ffi.Pointer<rd_kafka_ListOffsets_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_ListOffsets_result_infos');
   late final _rd_kafka_ListOffsets_result_infos =
-      _rd_kafka_ListOffsets_result_infosPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_ListOffsetsResultInfo_t>> Function(
+      _rd_kafka_ListOffsets_result_infosPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_ListOffsetsResultInfo_t>> Function(
               ffi.Pointer<rd_kafka_ListOffsets_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief List offsets for the specified \p topic_partitions.
   /// This operation enables to find the beginning offset,
@@ -14870,101 +15907,111 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_ListOffsets(
-      rk,
-      topic_partitions,
-      options,
-      rkqu,
-    );
+    return _rd_kafka_ListOffsets(rk, topic_partitions, options, rkqu);
   }
 
   late final _rd_kafka_ListOffsetsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_ListOffsets');
+  late final _rd_kafka_ListOffsets =
+      _rd_kafka_ListOffsetsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_ListOffsets');
-  late final _rd_kafka_ListOffsets = _rd_kafka_ListOffsetsPtr.asFunction<
-      void Function(
-          ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<rd_kafka_topic_partition_list_t>,
-          ffi.Pointer<rd_kafka_AdminOptions_t>,
-          ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Returns the mechanism of a given ScramCredentialInfo.
   rd_kafka_ScramMechanism_t rd_kafka_ScramCredentialInfo_mechanism(
     ffi.Pointer<rd_kafka_ScramCredentialInfo_t> scram_credential_info,
   ) {
-    return rd_kafka_ScramMechanism_t
-        .fromValue(_rd_kafka_ScramCredentialInfo_mechanism(
-      scram_credential_info,
-    ));
+    return rd_kafka_ScramMechanism_t.fromValue(
+      _rd_kafka_ScramCredentialInfo_mechanism(scram_credential_info),
+    );
   }
 
   late final _rd_kafka_ScramCredentialInfo_mechanismPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.UnsignedInt Function(
-                  ffi.Pointer<rd_kafka_ScramCredentialInfo_t>)>>(
-      'rd_kafka_ScramCredentialInfo_mechanism');
+    ffi.NativeFunction<
+      ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_ScramCredentialInfo_t>)
+    >
+  >('rd_kafka_ScramCredentialInfo_mechanism');
   late final _rd_kafka_ScramCredentialInfo_mechanism =
-      _rd_kafka_ScramCredentialInfo_mechanismPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_ScramCredentialInfo_t>)>();
+      _rd_kafka_ScramCredentialInfo_mechanismPtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_ScramCredentialInfo_t>)
+          >();
 
   /// @brief Returns the iterations of a given ScramCredentialInfo.
   int rd_kafka_ScramCredentialInfo_iterations(
     ffi.Pointer<rd_kafka_ScramCredentialInfo_t> scram_credential_info,
   ) {
-    return _rd_kafka_ScramCredentialInfo_iterations(
-      scram_credential_info,
-    );
+    return _rd_kafka_ScramCredentialInfo_iterations(scram_credential_info);
   }
 
   late final _rd_kafka_ScramCredentialInfo_iterationsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int32 Function(ffi.Pointer<rd_kafka_ScramCredentialInfo_t>)>>(
-      'rd_kafka_ScramCredentialInfo_iterations');
+    ffi.NativeFunction<
+      ffi.Int32 Function(ffi.Pointer<rd_kafka_ScramCredentialInfo_t>)
+    >
+  >('rd_kafka_ScramCredentialInfo_iterations');
   late final _rd_kafka_ScramCredentialInfo_iterations =
-      _rd_kafka_ScramCredentialInfo_iterationsPtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_ScramCredentialInfo_t>)>();
+      _rd_kafka_ScramCredentialInfo_iterationsPtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_ScramCredentialInfo_t>)
+          >();
 
   /// @brief Returns the username of a UserScramCredentialsDescription.
   ffi.Pointer<ffi.Char> rd_kafka_UserScramCredentialsDescription_user(
     ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t> description,
   ) {
-    return _rd_kafka_UserScramCredentialsDescription_user(
-      description,
-    );
+    return _rd_kafka_UserScramCredentialsDescription_user(description);
   }
 
   late final _rd_kafka_UserScramCredentialsDescription_userPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>)>>(
-      'rd_kafka_UserScramCredentialsDescription_user');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(
+        ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>,
+      )
+    >
+  >('rd_kafka_UserScramCredentialsDescription_user');
   late final _rd_kafka_UserScramCredentialsDescription_user =
-      _rd_kafka_UserScramCredentialsDescription_userPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>)>();
+      _rd_kafka_UserScramCredentialsDescription_userPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>,
+            )
+          >();
 
   /// @brief Returns the error associated with a UserScramCredentialsDescription.
   ffi.Pointer<rd_kafka_error_t> rd_kafka_UserScramCredentialsDescription_error(
     ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t> description,
   ) {
-    return _rd_kafka_UserScramCredentialsDescription_error(
-      description,
-    );
+    return _rd_kafka_UserScramCredentialsDescription_error(description);
   }
 
   late final _rd_kafka_UserScramCredentialsDescription_errorPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_error_t> Function(
-                  ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>)>>(
-      'rd_kafka_UserScramCredentialsDescription_error');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>,
+      )
+    >
+  >('rd_kafka_UserScramCredentialsDescription_error');
   late final _rd_kafka_UserScramCredentialsDescription_error =
-      _rd_kafka_UserScramCredentialsDescription_errorPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>)>();
+      _rd_kafka_UserScramCredentialsDescription_errorPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>,
+            )
+          >();
 
   /// @brief Returns the count of ScramCredentialInfos of a
   /// UserScramCredentialsDescription.
@@ -14978,21 +16025,24 @@ class LibRdKafka {
 
   late final _rd_kafka_UserScramCredentialsDescription_scramcredentialinfo_countPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Size Function(
-                      ffi.Pointer<
-                          rd_kafka_UserScramCredentialsDescription_t>)>>(
-          'rd_kafka_UserScramCredentialsDescription_scramcredentialinfo_count');
+        ffi.NativeFunction<
+          ffi.Size Function(
+            ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>,
+          )
+        >
+      >('rd_kafka_UserScramCredentialsDescription_scramcredentialinfo_count');
   late final _rd_kafka_UserScramCredentialsDescription_scramcredentialinfo_count =
       _rd_kafka_UserScramCredentialsDescription_scramcredentialinfo_countPtr
           .asFunction<
-              int Function(
-                  ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>)>();
+            int Function(
+              ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>,
+            )
+          >();
 
   /// @brief Returns the ScramCredentialInfo at index idx of
   /// UserScramCredentialsDescription.
   ffi.Pointer<rd_kafka_ScramCredentialInfo_t>
-      rd_kafka_UserScramCredentialsDescription_scramcredentialinfo(
+  rd_kafka_UserScramCredentialsDescription_scramcredentialinfo(
     ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t> description,
     int idx,
   ) {
@@ -15004,17 +16054,21 @@ class LibRdKafka {
 
   late final _rd_kafka_UserScramCredentialsDescription_scramcredentialinfoPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Pointer<rd_kafka_ScramCredentialInfo_t> Function(
-                      ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>,
-                      ffi.Size)>>(
-          'rd_kafka_UserScramCredentialsDescription_scramcredentialinfo');
+        ffi.NativeFunction<
+          ffi.Pointer<rd_kafka_ScramCredentialInfo_t> Function(
+            ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>,
+            ffi.Size,
+          )
+        >
+      >('rd_kafka_UserScramCredentialsDescription_scramcredentialinfo');
   late final _rd_kafka_UserScramCredentialsDescription_scramcredentialinfo =
       _rd_kafka_UserScramCredentialsDescription_scramcredentialinfoPtr
           .asFunction<
-              ffi.Pointer<rd_kafka_ScramCredentialInfo_t> Function(
-                  ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>,
-                  int)>();
+            ffi.Pointer<rd_kafka_ScramCredentialInfo_t> Function(
+              ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>,
+              int,
+            )
+          >();
 
   /// @brief Get an array of descriptions from a DescribeUserScramCredentials
   /// result.
@@ -15024,7 +16078,7 @@ class LibRdKafka {
   /// @param result Result to get descriptions from.
   /// @param cntp is updated to the number of elements in the array.
   ffi.Pointer<ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>>
-      rd_kafka_DescribeUserScramCredentials_result_descriptions(
+  rd_kafka_DescribeUserScramCredentials_result_descriptions(
     ffi.Pointer<rd_kafka_DescribeUserScramCredentials_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
@@ -15034,17 +16088,25 @@ class LibRdKafka {
     );
   }
 
-  late final _rd_kafka_DescribeUserScramCredentials_result_descriptionsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>> Function(
-                  ffi.Pointer<rd_kafka_DescribeUserScramCredentials_result_t>,
-                  ffi.Pointer<ffi.Size>)>>(
-      'rd_kafka_DescribeUserScramCredentials_result_descriptions');
+  late final _rd_kafka_DescribeUserScramCredentials_result_descriptionsPtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Pointer<ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>>
+          Function(
+            ffi.Pointer<rd_kafka_DescribeUserScramCredentials_result_t>,
+            ffi.Pointer<ffi.Size>,
+          )
+        >
+      >('rd_kafka_DescribeUserScramCredentials_result_descriptions');
   late final _rd_kafka_DescribeUserScramCredentials_result_descriptions =
-      _rd_kafka_DescribeUserScramCredentials_result_descriptionsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>> Function(
+      _rd_kafka_DescribeUserScramCredentials_result_descriptionsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_UserScramCredentialsDescription_t>>
+            Function(
               ffi.Pointer<rd_kafka_DescribeUserScramCredentials_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Describe SASL/SCRAM credentials.
   /// This operation is supported by brokers with version 2.7.0 or higher.
@@ -15072,22 +16134,27 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_DescribeUserScramCredentialsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<ffi.Pointer<ffi.Char>>,
-                  ffi.Size,
-                  ffi.Pointer<rd_kafka_AdminOptions_t>,
-                  ffi.Pointer<rd_kafka_queue_t>)>>(
-      'rd_kafka_DescribeUserScramCredentials');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_DescribeUserScramCredentials');
   late final _rd_kafka_DescribeUserScramCredentials =
-      _rd_kafka_DescribeUserScramCredentialsPtr.asFunction<
-          void Function(
+      _rd_kafka_DescribeUserScramCredentialsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>,
               int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Allocates a new UserScramCredentialUpsertion given its fields.
   /// If salt isn't given a 64 B salt is generated using OpenSSL
@@ -15108,7 +16175,7 @@ class LibRdKafka {
   /// Ownership belongs to the caller, use
   /// rd_kafka_UserScramCredentialAlteration_destroy to destroy.
   ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>
-      rd_kafka_UserScramCredentialUpsertion_new(
+  rd_kafka_UserScramCredentialUpsertion_new(
     ffi.Pointer<ffi.Char> username,
     rd_kafka_ScramMechanism_t mechanism,
     int iterations,
@@ -15129,25 +16196,31 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_UserScramCredentialUpsertion_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t> Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.UnsignedInt,
-              ffi.Int32,
-              ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Size,
-              ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Size)>>('rd_kafka_UserScramCredentialUpsertion_new');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t> Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.UnsignedInt,
+        ffi.Int32,
+        ffi.Pointer<ffi.UnsignedChar>,
+        ffi.Size,
+        ffi.Pointer<ffi.UnsignedChar>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_UserScramCredentialUpsertion_new');
   late final _rd_kafka_UserScramCredentialUpsertion_new =
-      _rd_kafka_UserScramCredentialUpsertion_newPtr.asFunction<
-          ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t> Function(
+      _rd_kafka_UserScramCredentialUpsertion_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t> Function(
               ffi.Pointer<ffi.Char>,
               int,
               int,
               ffi.Pointer<ffi.UnsignedChar>,
               int,
               ffi.Pointer<ffi.UnsignedChar>,
-              int)>();
+              int,
+            )
+          >();
 
   /// @brief Allocates a new UserScramCredentialDeletion given its fields.
   ///
@@ -15157,49 +16230,52 @@ class LibRdKafka {
   /// Ownership belongs to the caller, use
   /// rd_kafka_UserScramCredentialAlteration_destroy to destroy.
   ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>
-      rd_kafka_UserScramCredentialDeletion_new(
+  rd_kafka_UserScramCredentialDeletion_new(
     ffi.Pointer<ffi.Char> username,
     rd_kafka_ScramMechanism_t mechanism,
   ) {
-    return _rd_kafka_UserScramCredentialDeletion_new(
-      username,
-      mechanism.value,
-    );
+    return _rd_kafka_UserScramCredentialDeletion_new(username, mechanism.value);
   }
 
   late final _rd_kafka_UserScramCredentialDeletion_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t> Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.UnsignedInt)>>('rd_kafka_UserScramCredentialDeletion_new');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t> Function(
+        ffi.Pointer<ffi.Char>,
+        ffi.UnsignedInt,
+      )
+    >
+  >('rd_kafka_UserScramCredentialDeletion_new');
   late final _rd_kafka_UserScramCredentialDeletion_new =
-      _rd_kafka_UserScramCredentialDeletion_newPtr.asFunction<
-          ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t> Function(
-              ffi.Pointer<ffi.Char>, int)>();
+      _rd_kafka_UserScramCredentialDeletion_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t> Function(
+              ffi.Pointer<ffi.Char>,
+              int,
+            )
+          >();
 
   /// @brief Destroys a UserScramCredentialAlteration given its pointer
   void rd_kafka_UserScramCredentialAlteration_destroy(
     ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t> alteration,
   ) {
-    return _rd_kafka_UserScramCredentialAlteration_destroy(
-      alteration,
-    );
+    return _rd_kafka_UserScramCredentialAlteration_destroy(alteration);
   }
 
   late final _rd_kafka_UserScramCredentialAlteration_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>)>>(
-      'rd_kafka_UserScramCredentialAlteration_destroy');
+    ffi.NativeFunction<
+      ffi.Void Function(ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>)
+    >
+  >('rd_kafka_UserScramCredentialAlteration_destroy');
   late final _rd_kafka_UserScramCredentialAlteration_destroy =
-      _rd_kafka_UserScramCredentialAlteration_destroyPtr.asFunction<
-          void Function(
-              ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>)>();
+      _rd_kafka_UserScramCredentialAlteration_destroyPtr
+          .asFunction<
+            void Function(ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>)
+          >();
 
   /// @brief Destroys an array of UserScramCredentialAlteration
   void rd_kafka_UserScramCredentialAlteration_destroy_array(
     ffi.Pointer<ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>>
-        alterations,
+    alterations,
     int alteration_cnt,
   ) {
     return _rd_kafka_UserScramCredentialAlteration_destroy_array(
@@ -15209,64 +16285,72 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_UserScramCredentialAlteration_destroy_arrayPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<
-                      ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>>,
-                  ffi.Size)>>(
-      'rd_kafka_UserScramCredentialAlteration_destroy_array');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_UserScramCredentialAlteration_destroy_array');
   late final _rd_kafka_UserScramCredentialAlteration_destroy_array =
-      _rd_kafka_UserScramCredentialAlteration_destroy_arrayPtr.asFunction<
-          void Function(
+      _rd_kafka_UserScramCredentialAlteration_destroy_arrayPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<
-                  ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>>,
-              int)>();
+                ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>
+              >,
+              int,
+            )
+          >();
 
   /// @brief Returns the username for a
   /// rd_kafka_AlterUserScramCredentials_result_response.
   ffi.Pointer<ffi.Char> rd_kafka_AlterUserScramCredentials_result_response_user(
     ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_response_t> response,
   ) {
-    return _rd_kafka_AlterUserScramCredentials_result_response_user(
-      response,
-    );
+    return _rd_kafka_AlterUserScramCredentials_result_response_user(response);
   }
 
-  late final _rd_kafka_AlterUserScramCredentials_result_response_userPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<
-                      rd_kafka_AlterUserScramCredentials_result_response_t>)>>(
-      'rd_kafka_AlterUserScramCredentials_result_response_user');
-  late final _rd_kafka_AlterUserScramCredentials_result_response_user =
-      _rd_kafka_AlterUserScramCredentials_result_response_userPtr.asFunction<
+  late final _rd_kafka_AlterUserScramCredentials_result_response_userPtr =
+      _lookup<
+        ffi.NativeFunction<
           ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<
-                  rd_kafka_AlterUserScramCredentials_result_response_t>)>();
+            ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_response_t>,
+          )
+        >
+      >('rd_kafka_AlterUserScramCredentials_result_response_user');
+  late final _rd_kafka_AlterUserScramCredentials_result_response_user =
+      _rd_kafka_AlterUserScramCredentials_result_response_userPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_response_t>,
+            )
+          >();
 
   /// @brief Returns the error of a
   /// rd_kafka_AlterUserScramCredentials_result_response.
   ffi.Pointer<rd_kafka_error_t>
-      rd_kafka_AlterUserScramCredentials_result_response_error(
+  rd_kafka_AlterUserScramCredentials_result_response_error(
     ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_response_t> response,
   ) {
-    return _rd_kafka_AlterUserScramCredentials_result_response_error(
-      response,
-    );
+    return _rd_kafka_AlterUserScramCredentials_result_response_error(response);
   }
 
   late final _rd_kafka_AlterUserScramCredentials_result_response_errorPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Pointer<rd_kafka_error_t> Function(
-                      ffi.Pointer<
-                          rd_kafka_AlterUserScramCredentials_result_response_t>)>>(
-          'rd_kafka_AlterUserScramCredentials_result_response_error');
-  late final _rd_kafka_AlterUserScramCredentials_result_response_error =
-      _rd_kafka_AlterUserScramCredentials_result_response_errorPtr.asFunction<
+        ffi.NativeFunction<
           ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<
-                  rd_kafka_AlterUserScramCredentials_result_response_t>)>();
+            ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_response_t>,
+          )
+        >
+      >('rd_kafka_AlterUserScramCredentials_result_response_error');
+  late final _rd_kafka_AlterUserScramCredentials_result_response_error =
+      _rd_kafka_AlterUserScramCredentials_result_response_errorPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_response_t>,
+            )
+          >();
 
   /// @brief Get an array of responses from a AlterUserScramCredentials result.
   ///
@@ -15275,28 +16359,35 @@ class LibRdKafka {
   /// @param result Result to get responses from.
   /// @param cntp is updated to the number of elements in the array.
   ffi.Pointer<ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_response_t>>
-      rd_kafka_AlterUserScramCredentials_result_responses(
+  rd_kafka_AlterUserScramCredentials_result_responses(
     ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_AlterUserScramCredentials_result_responses(
-      result,
-      cntp,
-    );
+    return _rd_kafka_AlterUserScramCredentials_result_responses(result, cntp);
   }
 
   late final _rd_kafka_AlterUserScramCredentials_result_responsesPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_response_t>> Function(
-              ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_t>,
-              ffi.Pointer<
-                  ffi
-                  .Size>)>>('rd_kafka_AlterUserScramCredentials_result_responses');
+    ffi.NativeFunction<
+      ffi.Pointer<
+        ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_response_t>
+      >
+      Function(
+        ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_AlterUserScramCredentials_result_responses');
   late final _rd_kafka_AlterUserScramCredentials_result_responses =
-      _rd_kafka_AlterUserScramCredentials_result_responsesPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_response_t>> Function(
+      _rd_kafka_AlterUserScramCredentials_result_responsesPtr
+          .asFunction<
+            ffi.Pointer<
+              ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_response_t>
+            >
+            Function(
               ffi.Pointer<rd_kafka_AlterUserScramCredentials_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Alter SASL/SCRAM credentials.
   /// This operation is supported by brokers with version 2.7.0 or higher.
@@ -15312,7 +16403,7 @@ class LibRdKafka {
   void rd_kafka_AlterUserScramCredentials(
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>>
-        alterations,
+    alterations,
     int alteration_cnt,
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
@@ -15327,71 +16418,74 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_AlterUserScramCredentialsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Pointer<rd_kafka_t>,
-                  ffi.Pointer<
-                      ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>>,
-                  ffi.Size,
-                  ffi.Pointer<rd_kafka_AdminOptions_t>,
-                  ffi.Pointer<rd_kafka_queue_t>)>>(
-      'rd_kafka_AlterUserScramCredentials');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_AlterUserScramCredentials');
   late final _rd_kafka_AlterUserScramCredentials =
-      _rd_kafka_AlterUserScramCredentialsPtr.asFunction<
-          void Function(
+      _rd_kafka_AlterUserScramCredentialsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<
-                  ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>>,
+                ffi.Pointer<rd_kafka_UserScramCredentialAlteration_t>
+              >,
               int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @returns the error object for the given acl result, or NULL on success.
   ffi.Pointer<rd_kafka_error_t> rd_kafka_acl_result_error(
     ffi.Pointer<rd_kafka_acl_result_t> aclres,
   ) {
-    return _rd_kafka_acl_result_error(
-      aclres,
-    );
+    return _rd_kafka_acl_result_error(aclres);
   }
 
   late final _rd_kafka_acl_result_errorPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_error_t> Function(
-                  ffi.Pointer<rd_kafka_acl_result_t>)>>(
-      'rd_kafka_acl_result_error');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_acl_result_t>)
+    >
+  >('rd_kafka_acl_result_error');
   late final _rd_kafka_acl_result_error =
-      _rd_kafka_acl_result_errorPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_acl_result_t>)>();
+      _rd_kafka_acl_result_errorPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_acl_result_t>,
+            )
+          >();
 
   /// @returns a string representation of the \p acl_operation
   ffi.Pointer<ffi.Char> rd_kafka_AclOperation_name(
     rd_kafka_AclOperation_t acl_operation,
   ) {
-    return _rd_kafka_AclOperation_name(
-      acl_operation.value,
-    );
+    return _rd_kafka_AclOperation_name(acl_operation.value);
   }
 
   late final _rd_kafka_AclOperation_namePtr = _lookup<
-          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>>(
-      'rd_kafka_AclOperation_name');
-  late final _rd_kafka_AclOperation_name = _rd_kafka_AclOperation_namePtr
-      .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
+    ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>
+  >('rd_kafka_AclOperation_name');
+  late final _rd_kafka_AclOperation_name =
+      _rd_kafka_AclOperation_namePtr
+          .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
 
   /// @returns a string representation of the \p acl_permission_type
   ffi.Pointer<ffi.Char> rd_kafka_AclPermissionType_name(
     rd_kafka_AclPermissionType_t acl_permission_type,
   ) {
-    return _rd_kafka_AclPermissionType_name(
-      acl_permission_type.value,
-    );
+    return _rd_kafka_AclPermissionType_name(acl_permission_type.value);
   }
 
   late final _rd_kafka_AclPermissionType_namePtr = _lookup<
-          ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>>(
-      'rd_kafka_AclPermissionType_name');
+    ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.UnsignedInt)>
+  >('rd_kafka_AclPermissionType_name');
   late final _rd_kafka_AclPermissionType_name =
       _rd_kafka_AclPermissionType_namePtr
           .asFunction<ffi.Pointer<ffi.Char> Function(int)>();
@@ -15437,28 +16531,35 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_AclBinding_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_AclBinding_t> Function(
-              ffi.UnsignedInt,
-              ffi.Pointer<ffi.Char>,
-              ffi.UnsignedInt,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>,
-              ffi.UnsignedInt,
-              ffi.UnsignedInt,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_AclBinding_new');
-  late final _rd_kafka_AclBinding_new = _rd_kafka_AclBinding_newPtr.asFunction<
+    ffi.NativeFunction<
       ffi.Pointer<rd_kafka_AclBinding_t> Function(
-          int,
-          ffi.Pointer<ffi.Char>,
-          int,
-          ffi.Pointer<ffi.Char>,
-          ffi.Pointer<ffi.Char>,
-          int,
-          int,
-          ffi.Pointer<ffi.Char>,
-          int)>();
+        ffi.UnsignedInt,
+        ffi.Pointer<ffi.Char>,
+        ffi.UnsignedInt,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+        ffi.UnsignedInt,
+        ffi.UnsignedInt,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_AclBinding_new');
+  late final _rd_kafka_AclBinding_new =
+      _rd_kafka_AclBinding_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_AclBinding_t> Function(
+              int,
+              ffi.Pointer<ffi.Char>,
+              int,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              int,
+              int,
+              ffi.Pointer<ffi.Char>,
+              int,
+            )
+          >();
 
   /// @brief Create a new AclBindingFilter object. This object is later passed to
   /// rd_kafka_DescribeAcls() or
@@ -15508,20 +16609,24 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_AclBindingFilter_newPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_AclBindingFilter_t> Function(
-              ffi.UnsignedInt,
-              ffi.Pointer<ffi.Char>,
-              ffi.UnsignedInt,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>,
-              ffi.UnsignedInt,
-              ffi.UnsignedInt,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_AclBindingFilter_new');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_AclBindingFilter_t> Function(
+        ffi.UnsignedInt,
+        ffi.Pointer<ffi.Char>,
+        ffi.UnsignedInt,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Char>,
+        ffi.UnsignedInt,
+        ffi.UnsignedInt,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_AclBindingFilter_new');
   late final _rd_kafka_AclBindingFilter_new =
-      _rd_kafka_AclBindingFilter_newPtr.asFunction<
-          ffi.Pointer<rd_kafka_AclBindingFilter_t> Function(
+      _rd_kafka_AclBindingFilter_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_AclBindingFilter_t> Function(
               int,
               ffi.Pointer<ffi.Char>,
               int,
@@ -15530,23 +16635,25 @@ class LibRdKafka {
               int,
               int,
               ffi.Pointer<ffi.Char>,
-              int)>();
+              int,
+            )
+          >();
 
   /// @returns the resource type for the given acl binding.
   rd_kafka_ResourceType_t rd_kafka_AclBinding_restype(
     ffi.Pointer<rd_kafka_AclBinding_t> acl,
   ) {
-    return rd_kafka_ResourceType_t.fromValue(_rd_kafka_AclBinding_restype(
-      acl,
-    ));
+    return rd_kafka_ResourceType_t.fromValue(_rd_kafka_AclBinding_restype(acl));
   }
 
   late final _rd_kafka_AclBinding_restypePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_AclBinding_t>)>>(
-      'rd_kafka_AclBinding_restype');
-  late final _rd_kafka_AclBinding_restype = _rd_kafka_AclBinding_restypePtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_AclBinding_t>)>();
+    ffi.NativeFunction<
+      ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_AclBinding_t>)
+    >
+  >('rd_kafka_AclBinding_restype');
+  late final _rd_kafka_AclBinding_restype =
+      _rd_kafka_AclBinding_restypePtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_AclBinding_t>)>();
 
   /// @returns the resource name for the given acl binding.
   ///
@@ -15554,18 +16661,19 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_AclBinding_name(
     ffi.Pointer<rd_kafka_AclBinding_t> acl,
   ) {
-    return _rd_kafka_AclBinding_name(
-      acl,
-    );
+    return _rd_kafka_AclBinding_name(acl);
   }
 
   late final _rd_kafka_AclBinding_namePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_AclBinding_t>)>>('rd_kafka_AclBinding_name');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_AclBinding_t>)
+    >
+  >('rd_kafka_AclBinding_name');
   late final _rd_kafka_AclBinding_name =
-      _rd_kafka_AclBinding_namePtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_AclBinding_t>)>();
+      _rd_kafka_AclBinding_namePtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_AclBinding_t>)
+          >();
 
   /// @returns the principal for the given acl binding.
   ///
@@ -15573,19 +16681,19 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_AclBinding_principal(
     ffi.Pointer<rd_kafka_AclBinding_t> acl,
   ) {
-    return _rd_kafka_AclBinding_principal(
-      acl,
-    );
+    return _rd_kafka_AclBinding_principal(acl);
   }
 
   late final _rd_kafka_AclBinding_principalPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Char> Function(
-                  ffi.Pointer<rd_kafka_AclBinding_t>)>>(
-      'rd_kafka_AclBinding_principal');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_AclBinding_t>)
+    >
+  >('rd_kafka_AclBinding_principal');
   late final _rd_kafka_AclBinding_principal =
-      _rd_kafka_AclBinding_principalPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_AclBinding_t>)>();
+      _rd_kafka_AclBinding_principalPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_AclBinding_t>)
+          >();
 
   /// @returns the host for the given acl binding.
   ///
@@ -15593,49 +16701,52 @@ class LibRdKafka {
   ffi.Pointer<ffi.Char> rd_kafka_AclBinding_host(
     ffi.Pointer<rd_kafka_AclBinding_t> acl,
   ) {
-    return _rd_kafka_AclBinding_host(
-      acl,
-    );
+    return _rd_kafka_AclBinding_host(acl);
   }
 
   late final _rd_kafka_AclBinding_hostPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<rd_kafka_AclBinding_t>)>>('rd_kafka_AclBinding_host');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_AclBinding_t>)
+    >
+  >('rd_kafka_AclBinding_host');
   late final _rd_kafka_AclBinding_host =
-      _rd_kafka_AclBinding_hostPtr.asFunction<
-          ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_AclBinding_t>)>();
+      _rd_kafka_AclBinding_hostPtr
+          .asFunction<
+            ffi.Pointer<ffi.Char> Function(ffi.Pointer<rd_kafka_AclBinding_t>)
+          >();
 
   /// @returns the acl operation for the given acl binding.
   rd_kafka_AclOperation_t rd_kafka_AclBinding_operation(
     ffi.Pointer<rd_kafka_AclBinding_t> acl,
   ) {
-    return rd_kafka_AclOperation_t.fromValue(_rd_kafka_AclBinding_operation(
-      acl,
-    ));
+    return rd_kafka_AclOperation_t.fromValue(
+      _rd_kafka_AclBinding_operation(acl),
+    );
   }
 
   late final _rd_kafka_AclBinding_operationPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_AclBinding_t>)>>(
-      'rd_kafka_AclBinding_operation');
-  late final _rd_kafka_AclBinding_operation = _rd_kafka_AclBinding_operationPtr
-      .asFunction<int Function(ffi.Pointer<rd_kafka_AclBinding_t>)>();
+    ffi.NativeFunction<
+      ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_AclBinding_t>)
+    >
+  >('rd_kafka_AclBinding_operation');
+  late final _rd_kafka_AclBinding_operation =
+      _rd_kafka_AclBinding_operationPtr
+          .asFunction<int Function(ffi.Pointer<rd_kafka_AclBinding_t>)>();
 
   /// @returns the permission type for the given acl binding.
   rd_kafka_AclPermissionType_t rd_kafka_AclBinding_permission_type(
     ffi.Pointer<rd_kafka_AclBinding_t> acl,
   ) {
-    return rd_kafka_AclPermissionType_t
-        .fromValue(_rd_kafka_AclBinding_permission_type(
-      acl,
-    ));
+    return rd_kafka_AclPermissionType_t.fromValue(
+      _rd_kafka_AclBinding_permission_type(acl),
+    );
   }
 
   late final _rd_kafka_AclBinding_permission_typePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_AclBinding_t>)>>(
-      'rd_kafka_AclBinding_permission_type');
+    ffi.NativeFunction<
+      ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_AclBinding_t>)
+    >
+  >('rd_kafka_AclBinding_permission_type');
   late final _rd_kafka_AclBinding_permission_type =
       _rd_kafka_AclBinding_permission_typePtr
           .asFunction<int Function(ffi.Pointer<rd_kafka_AclBinding_t>)>();
@@ -15644,16 +16755,16 @@ class LibRdKafka {
   rd_kafka_ResourcePatternType_t rd_kafka_AclBinding_resource_pattern_type(
     ffi.Pointer<rd_kafka_AclBinding_t> acl,
   ) {
-    return rd_kafka_ResourcePatternType_t
-        .fromValue(_rd_kafka_AclBinding_resource_pattern_type(
-      acl,
-    ));
+    return rd_kafka_ResourcePatternType_t.fromValue(
+      _rd_kafka_AclBinding_resource_pattern_type(acl),
+    );
   }
 
   late final _rd_kafka_AclBinding_resource_pattern_typePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_AclBinding_t>)>>(
-      'rd_kafka_AclBinding_resource_pattern_type');
+    ffi.NativeFunction<
+      ffi.UnsignedInt Function(ffi.Pointer<rd_kafka_AclBinding_t>)
+    >
+  >('rd_kafka_AclBinding_resource_pattern_type');
   late final _rd_kafka_AclBinding_resource_pattern_type =
       _rd_kafka_AclBinding_resource_pattern_typePtr
           .asFunction<int Function(ffi.Pointer<rd_kafka_AclBinding_t>)>();
@@ -15662,37 +16773,36 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_error_t> rd_kafka_AclBinding_error(
     ffi.Pointer<rd_kafka_AclBinding_t> acl,
   ) {
-    return _rd_kafka_AclBinding_error(
-      acl,
-    );
+    return _rd_kafka_AclBinding_error(acl);
   }
 
   late final _rd_kafka_AclBinding_errorPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_error_t> Function(
-                  ffi.Pointer<rd_kafka_AclBinding_t>)>>(
-      'rd_kafka_AclBinding_error');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_AclBinding_t>)
+    >
+  >('rd_kafka_AclBinding_error');
   late final _rd_kafka_AclBinding_error =
-      _rd_kafka_AclBinding_errorPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_AclBinding_t>)>();
+      _rd_kafka_AclBinding_errorPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_AclBinding_t>,
+            )
+          >();
 
   /// @brief Destroy and free an AclBinding object previously created with
   /// rd_kafka_AclBinding_new()
   void rd_kafka_AclBinding_destroy(
     ffi.Pointer<rd_kafka_AclBinding_t> acl_binding,
   ) {
-    return _rd_kafka_AclBinding_destroy(
-      acl_binding,
-    );
+    return _rd_kafka_AclBinding_destroy(acl_binding);
   }
 
   late final _rd_kafka_AclBinding_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<rd_kafka_AclBinding_t>)>>(
-      'rd_kafka_AclBinding_destroy');
-  late final _rd_kafka_AclBinding_destroy = _rd_kafka_AclBinding_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_AclBinding_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_AclBinding_t>)>
+  >('rd_kafka_AclBinding_destroy');
+  late final _rd_kafka_AclBinding_destroy =
+      _rd_kafka_AclBinding_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_AclBinding_t>)>();
 
   /// @brief Helper function to destroy all AclBinding objects in
   /// the \p acl_bindings array (of \p acl_bindings_cnt elements).
@@ -15701,20 +16811,22 @@ class LibRdKafka {
     ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>> acl_bindings,
     int acl_bindings_cnt,
   ) {
-    return _rd_kafka_AclBinding_destroy_array(
-      acl_bindings,
-      acl_bindings_cnt,
-    );
+    return _rd_kafka_AclBinding_destroy_array(acl_bindings, acl_bindings_cnt);
   }
 
   late final _rd_kafka_AclBinding_destroy_arrayPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>>,
-              ffi.Size)>>('rd_kafka_AclBinding_destroy_array');
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_AclBinding_destroy_array');
   late final _rd_kafka_AclBinding_destroy_array =
-      _rd_kafka_AclBinding_destroy_arrayPtr.asFunction<
-          void Function(
-              ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>>, int)>();
+      _rd_kafka_AclBinding_destroy_arrayPtr
+          .asFunction<
+            void Function(ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>>, int)
+          >();
 
   /// @brief Get an array of acl results from a CreateAcls result.
   ///
@@ -15722,26 +16834,29 @@ class LibRdKafka {
   /// @param result CreateAcls result to get acl results from.
   /// @param cntp is updated to the number of elements in the array.
   ffi.Pointer<ffi.Pointer<rd_kafka_acl_result_t>>
-      rd_kafka_CreateAcls_result_acls(
+  rd_kafka_CreateAcls_result_acls(
     ffi.Pointer<rd_kafka_CreateAcls_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_CreateAcls_result_acls(
-      result,
-      cntp,
-    );
+    return _rd_kafka_CreateAcls_result_acls(result, cntp);
   }
 
   late final _rd_kafka_CreateAcls_result_aclsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_acl_result_t>> Function(
-              ffi.Pointer<rd_kafka_CreateAcls_result_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_CreateAcls_result_acls');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_acl_result_t>> Function(
+        ffi.Pointer<rd_kafka_CreateAcls_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_CreateAcls_result_acls');
   late final _rd_kafka_CreateAcls_result_acls =
-      _rd_kafka_CreateAcls_result_aclsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_acl_result_t>> Function(
+      _rd_kafka_CreateAcls_result_aclsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_acl_result_t>> Function(
               ffi.Pointer<rd_kafka_CreateAcls_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Create acls as specified by the \p new_acls
   /// array of size \p new_topic_cnt elements.
@@ -15764,30 +16879,31 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_CreateAcls(
-      rk,
-      new_acls,
-      new_acls_cnt,
-      options,
-      rkqu,
-    );
+    return _rd_kafka_CreateAcls(rk, new_acls, new_acls_cnt, options, rkqu);
   }
 
   late final _rd_kafka_CreateAclsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_CreateAcls');
+  late final _rd_kafka_CreateAcls =
+      _rd_kafka_CreateAclsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>>,
-              ffi.Size,
+              int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_CreateAcls');
-  late final _rd_kafka_CreateAcls = _rd_kafka_CreateAclsPtr.asFunction<
-      void Function(
-          ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>>,
-          int,
-          ffi.Pointer<rd_kafka_AdminOptions_t>,
-          ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get an array of resource results from a DescribeAcls result.
   ///
@@ -15795,26 +16911,29 @@ class LibRdKafka {
   /// @param result DescribeAcls result to get acls from.
   /// @param cntp is updated to the number of elements in the array.
   ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>>
-      rd_kafka_DescribeAcls_result_acls(
+  rd_kafka_DescribeAcls_result_acls(
     ffi.Pointer<rd_kafka_DescribeAcls_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_DescribeAcls_result_acls(
-      result,
-      cntp,
-    );
+    return _rd_kafka_DescribeAcls_result_acls(result, cntp);
   }
 
   late final _rd_kafka_DescribeAcls_result_aclsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>> Function(
-              ffi.Pointer<rd_kafka_DescribeAcls_result_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_DescribeAcls_result_acls');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>> Function(
+        ffi.Pointer<rd_kafka_DescribeAcls_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_DescribeAcls_result_acls');
   late final _rd_kafka_DescribeAcls_result_acls =
-      _rd_kafka_DescribeAcls_result_aclsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>> Function(
+      _rd_kafka_DescribeAcls_result_aclsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>> Function(
               ffi.Pointer<rd_kafka_DescribeAcls_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Describe acls matching the filter provided in \p acl_filter
   ///
@@ -15834,27 +16953,29 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_DescribeAcls(
-      rk,
-      acl_filter,
-      options,
-      rkqu,
-    );
+    return _rd_kafka_DescribeAcls(rk, acl_filter, options, rkqu);
   }
 
   late final _rd_kafka_DescribeAclsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_AclBindingFilter_t>,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_DescribeAcls');
+  late final _rd_kafka_DescribeAcls =
+      _rd_kafka_DescribeAclsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_AclBindingFilter_t>,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_DescribeAcls');
-  late final _rd_kafka_DescribeAcls = _rd_kafka_DescribeAclsPtr.asFunction<
-      void Function(
-          ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<rd_kafka_AclBindingFilter_t>,
-          ffi.Pointer<rd_kafka_AdminOptions_t>,
-          ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get an array of DeleteAcls result responses from a DeleteAcls result.
   ///
@@ -15862,53 +16983,60 @@ class LibRdKafka {
   /// @param result DeleteAcls result to get responses from.
   /// @param cntp is updated to the number of elements in the array.
   ffi.Pointer<ffi.Pointer<rd_kafka_DeleteAcls_result_response_t>>
-      rd_kafka_DeleteAcls_result_responses(
+  rd_kafka_DeleteAcls_result_responses(
     ffi.Pointer<rd_kafka_DeleteAcls_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_DeleteAcls_result_responses(
-      result,
-      cntp,
-    );
+    return _rd_kafka_DeleteAcls_result_responses(result, cntp);
   }
 
   late final _rd_kafka_DeleteAcls_result_responsesPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_DeleteAcls_result_response_t>> Function(
-              ffi.Pointer<rd_kafka_DeleteAcls_result_t>,
-              ffi.Pointer<ffi.Size>)>>('rd_kafka_DeleteAcls_result_responses');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_DeleteAcls_result_response_t>> Function(
+        ffi.Pointer<rd_kafka_DeleteAcls_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_DeleteAcls_result_responses');
   late final _rd_kafka_DeleteAcls_result_responses =
-      _rd_kafka_DeleteAcls_result_responsesPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_DeleteAcls_result_response_t>> Function(
+      _rd_kafka_DeleteAcls_result_responsesPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_DeleteAcls_result_response_t>>
+            Function(
               ffi.Pointer<rd_kafka_DeleteAcls_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @returns the error object for the given DeleteAcls result response,
   /// or NULL on success.
   ffi.Pointer<rd_kafka_error_t> rd_kafka_DeleteAcls_result_response_error(
     ffi.Pointer<rd_kafka_DeleteAcls_result_response_t> result_response,
   ) {
-    return _rd_kafka_DeleteAcls_result_response_error(
-      result_response,
-    );
+    return _rd_kafka_DeleteAcls_result_response_error(result_response);
   }
 
   late final _rd_kafka_DeleteAcls_result_response_errorPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_error_t> Function(
-                  ffi.Pointer<rd_kafka_DeleteAcls_result_response_t>)>>(
-      'rd_kafka_DeleteAcls_result_response_error');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_DeleteAcls_result_response_t>,
+      )
+    >
+  >('rd_kafka_DeleteAcls_result_response_error');
   late final _rd_kafka_DeleteAcls_result_response_error =
-      _rd_kafka_DeleteAcls_result_response_errorPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_DeleteAcls_result_response_t>)>();
+      _rd_kafka_DeleteAcls_result_response_errorPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
+              ffi.Pointer<rd_kafka_DeleteAcls_result_response_t>,
+            )
+          >();
 
   /// @returns the matching acls array for the given DeleteAcls result response.
   ///
   /// @remark lifetime of the returned acl bindings is the same as the \p
   /// result_response.
   ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>>
-      rd_kafka_DeleteAcls_result_response_matching_acls(
+  rd_kafka_DeleteAcls_result_response_matching_acls(
     ffi.Pointer<rd_kafka_DeleteAcls_result_response_t> result_response,
     ffi.Pointer<ffi.Size> matching_acls_cntp,
   ) {
@@ -15919,16 +17047,21 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_DeleteAcls_result_response_matching_aclsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>> Function(
-                  ffi.Pointer<rd_kafka_DeleteAcls_result_response_t>,
-                  ffi.Pointer<ffi.Size>)>>(
-      'rd_kafka_DeleteAcls_result_response_matching_acls');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>> Function(
+        ffi.Pointer<rd_kafka_DeleteAcls_result_response_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_DeleteAcls_result_response_matching_acls');
   late final _rd_kafka_DeleteAcls_result_response_matching_acls =
-      _rd_kafka_DeleteAcls_result_response_matching_aclsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>> Function(
+      _rd_kafka_DeleteAcls_result_response_matching_aclsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_AclBinding_t>> Function(
               ffi.Pointer<rd_kafka_DeleteAcls_result_response_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Delete acls matching the filteres provided in \p del_acls
   /// array of size \p del_acls_cnt.
@@ -15951,30 +17084,31 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_DeleteAcls(
-      rk,
-      del_acls,
-      del_acls_cnt,
-      options,
-      rkqu,
-    );
+    return _rd_kafka_DeleteAcls(rk, del_acls, del_acls_cnt, options, rkqu);
   }
 
   late final _rd_kafka_DeleteAclsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Pointer<rd_kafka_AclBindingFilter_t>>,
+        ffi.Size,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_DeleteAcls');
+  late final _rd_kafka_DeleteAcls =
+      _rd_kafka_DeleteAclsPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Pointer<rd_kafka_AclBindingFilter_t>>,
-              ffi.Size,
+              int,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_DeleteAcls');
-  late final _rd_kafka_DeleteAcls = _rd_kafka_DeleteAclsPtr.asFunction<
-      void Function(
-          ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<ffi.Pointer<rd_kafka_AclBindingFilter_t>>,
-          int,
-          ffi.Pointer<rd_kafka_AdminOptions_t>,
-          ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Create a new rd_kafka_ElectLeaders_t object. This object is later
   /// passed to rd_kafka_ElectLeaders().
@@ -15991,21 +17125,25 @@ class LibRdKafka {
     rd_kafka_ElectionType_t election_type,
     ffi.Pointer<rd_kafka_topic_partition_list_t> partitions,
   ) {
-    return _rd_kafka_ElectLeaders_new(
-      election_type.value,
-      partitions,
-    );
+    return _rd_kafka_ElectLeaders_new(election_type.value, partitions);
   }
 
   late final _rd_kafka_ElectLeaders_newPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rd_kafka_ElectLeaders_t> Function(ffi.UnsignedInt,
-                  ffi.Pointer<rd_kafka_topic_partition_list_t>)>>(
-      'rd_kafka_ElectLeaders_new');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_ElectLeaders_t> Function(
+        ffi.UnsignedInt,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+      )
+    >
+  >('rd_kafka_ElectLeaders_new');
   late final _rd_kafka_ElectLeaders_new =
-      _rd_kafka_ElectLeaders_newPtr.asFunction<
-          ffi.Pointer<rd_kafka_ElectLeaders_t> Function(
-              int, ffi.Pointer<rd_kafka_topic_partition_list_t>)>();
+      _rd_kafka_ElectLeaders_newPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_ElectLeaders_t> Function(
+              int,
+              ffi.Pointer<rd_kafka_topic_partition_list_t>,
+            )
+          >();
 
   /// @brief Destroy and free a rd_kafka_ElectLeaders_t object previously created
   /// with rd_kafka_ElectLeaders_new()
@@ -16014,17 +17152,15 @@ class LibRdKafka {
   void rd_kafka_ElectLeaders_destroy(
     ffi.Pointer<rd_kafka_ElectLeaders_t> elect_leaders,
   ) {
-    return _rd_kafka_ElectLeaders_destroy(
-      elect_leaders,
-    );
+    return _rd_kafka_ElectLeaders_destroy(elect_leaders);
   }
 
   late final _rd_kafka_ElectLeaders_destroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Pointer<rd_kafka_ElectLeaders_t>)>>(
-      'rd_kafka_ElectLeaders_destroy');
-  late final _rd_kafka_ElectLeaders_destroy = _rd_kafka_ElectLeaders_destroyPtr
-      .asFunction<void Function(ffi.Pointer<rd_kafka_ElectLeaders_t>)>();
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rd_kafka_ElectLeaders_t>)>
+  >('rd_kafka_ElectLeaders_destroy');
+  late final _rd_kafka_ElectLeaders_destroy =
+      _rd_kafka_ElectLeaders_destroyPtr
+          .asFunction<void Function(ffi.Pointer<rd_kafka_ElectLeaders_t>)>();
 
   /// @brief Elect Leaders for the provided Topic Partitions
   /// according to the specified election type.
@@ -16053,27 +17189,29 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_AdminOptions_t> options,
     ffi.Pointer<rd_kafka_queue_t> rkqu,
   ) {
-    return _rd_kafka_ElectLeaders(
-      rk,
-      elect_leaders,
-      options,
-      rkqu,
-    );
+    return _rd_kafka_ElectLeaders(rk, elect_leaders, options, rkqu);
   }
 
   late final _rd_kafka_ElectLeadersPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
+    ffi.NativeFunction<
+      ffi.Void Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_ElectLeaders_t>,
+        ffi.Pointer<rd_kafka_AdminOptions_t>,
+        ffi.Pointer<rd_kafka_queue_t>,
+      )
+    >
+  >('rd_kafka_ElectLeaders');
+  late final _rd_kafka_ElectLeaders =
+      _rd_kafka_ElectLeadersPtr
+          .asFunction<
+            void Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_ElectLeaders_t>,
               ffi.Pointer<rd_kafka_AdminOptions_t>,
-              ffi.Pointer<rd_kafka_queue_t>)>>('rd_kafka_ElectLeaders');
-  late final _rd_kafka_ElectLeaders = _rd_kafka_ElectLeadersPtr.asFunction<
-      void Function(
-          ffi.Pointer<rd_kafka_t>,
-          ffi.Pointer<rd_kafka_ElectLeaders_t>,
-          ffi.Pointer<rd_kafka_AdminOptions_t>,
-          ffi.Pointer<rd_kafka_queue_t>)>();
+              ffi.Pointer<rd_kafka_queue_t>,
+            )
+          >();
 
   /// @brief Get the array of topic partition result objects from the
   /// elect leaders result event and populates the size of the
@@ -16085,27 +17223,30 @@ class LibRdKafka {
   /// @returns the array of topic partition result objects from the
   /// elect leaders result event.
   ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_result_t>>
-      rd_kafka_ElectLeaders_result_partitions(
+  rd_kafka_ElectLeaders_result_partitions(
     ffi.Pointer<rd_kafka_ElectLeaders_result_t> result,
     ffi.Pointer<ffi.Size> cntp,
   ) {
-    return _rd_kafka_ElectLeaders_result_partitions(
-      result,
-      cntp,
-    );
+    return _rd_kafka_ElectLeaders_result_partitions(result, cntp);
   }
 
   late final _rd_kafka_ElectLeaders_result_partitionsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_result_t>> Function(
-              ffi.Pointer<rd_kafka_ElectLeaders_result_t>,
-              ffi.Pointer<
-                  ffi.Size>)>>('rd_kafka_ElectLeaders_result_partitions');
+    ffi.NativeFunction<
+      ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_result_t>> Function(
+        ffi.Pointer<rd_kafka_ElectLeaders_result_t>,
+        ffi.Pointer<ffi.Size>,
+      )
+    >
+  >('rd_kafka_ElectLeaders_result_partitions');
   late final _rd_kafka_ElectLeaders_result_partitions =
-      _rd_kafka_ElectLeaders_result_partitionsPtr.asFunction<
-          ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_result_t>> Function(
+      _rd_kafka_ElectLeaders_result_partitionsPtr
+          .asFunction<
+            ffi.Pointer<ffi.Pointer<rd_kafka_topic_partition_result_t>>
+            Function(
               ffi.Pointer<rd_kafka_ElectLeaders_result_t>,
-              ffi.Pointer<ffi.Size>)>();
+              ffi.Pointer<ffi.Size>,
+            )
+          >();
 
   /// @brief Set SASL/OAUTHBEARER token and metadata
   ///
@@ -16159,32 +17300,38 @@ class LibRdKafka {
     ffi.Pointer<ffi.Char> errstr,
     int errstr_size,
   ) {
-    return rd_kafka_resp_err_t.fromValue(_rd_kafka_oauthbearer_set_token(
-      rk,
-      token_value,
-      md_lifetime_ms,
-      md_principal_name,
-      extensions,
-      extension_size,
-      errstr,
-      errstr_size,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_oauthbearer_set_token(
+        rk,
+        token_value,
+        md_lifetime_ms,
+        md_principal_name,
+        extensions,
+        extension_size,
+        errstr,
+        errstr_size,
+      ),
+    );
   }
 
   late final _rd_kafka_oauthbearer_set_tokenPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<ffi.Char>,
-              ffi.Int64,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Size,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('rd_kafka_oauthbearer_set_token');
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<ffi.Char>,
+        ffi.Int64,
+        ffi.Pointer<ffi.Char>,
+        ffi.Pointer<ffi.Pointer<ffi.Char>>,
+        ffi.Size,
+        ffi.Pointer<ffi.Char>,
+        ffi.Size,
+      )
+    >
+  >('rd_kafka_oauthbearer_set_token');
   late final _rd_kafka_oauthbearer_set_token =
-      _rd_kafka_oauthbearer_set_tokenPtr.asFunction<
-          int Function(
+      _rd_kafka_oauthbearer_set_tokenPtr
+          .asFunction<
+            int Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<ffi.Char>,
               int,
@@ -16192,7 +17339,9 @@ class LibRdKafka {
               ffi.Pointer<ffi.Pointer<ffi.Char>>,
               int,
               ffi.Pointer<ffi.Char>,
-              int)>();
+              int,
+            )
+          >();
 
   /// @brief SASL/OAUTHBEARER token refresh failure indicator.
   ///
@@ -16216,21 +17365,21 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     ffi.Pointer<ffi.Char> errstr,
   ) {
-    return rd_kafka_resp_err_t
-        .fromValue(_rd_kafka_oauthbearer_set_token_failure(
-      rk,
-      errstr,
-    ));
+    return rd_kafka_resp_err_t.fromValue(
+      _rd_kafka_oauthbearer_set_token_failure(rk, errstr),
+    );
   }
 
   late final _rd_kafka_oauthbearer_set_token_failurePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>)>>(
-      'rd_kafka_oauthbearer_set_token_failure');
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>)
+    >
+  >('rd_kafka_oauthbearer_set_token_failure');
   late final _rd_kafka_oauthbearer_set_token_failure =
-      _rd_kafka_oauthbearer_set_token_failurePtr.asFunction<
-          int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>)>();
+      _rd_kafka_oauthbearer_set_token_failurePtr
+          .asFunction<
+            int Function(ffi.Pointer<rd_kafka_t>, ffi.Pointer<ffi.Char>)
+          >();
 
   /// @brief Initialize transactions for the producer instance.
   ///
@@ -16294,20 +17443,19 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     int timeout_ms,
   ) {
-    return _rd_kafka_init_transactions(
-      rk,
-      timeout_ms,
-    );
+    return _rd_kafka_init_transactions(rk, timeout_ms);
   }
 
   late final _rd_kafka_init_transactionsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_t>, ffi.Int)>>('rd_kafka_init_transactions');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>, ffi.Int)
+    >
+  >('rd_kafka_init_transactions');
   late final _rd_kafka_init_transactions =
-      _rd_kafka_init_transactionsPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_t>, int)>();
+      _rd_kafka_init_transactionsPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>, int)
+          >();
 
   /// @brief Begin a new transaction.
   ///
@@ -16354,18 +17502,19 @@ class LibRdKafka {
   ffi.Pointer<rd_kafka_error_t> rd_kafka_begin_transaction(
     ffi.Pointer<rd_kafka_t> rk,
   ) {
-    return _rd_kafka_begin_transaction(
-      rk,
-    );
+    return _rd_kafka_begin_transaction(rk);
   }
 
   late final _rd_kafka_begin_transactionPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_t>)>>('rd_kafka_begin_transaction');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>)
+    >
+  >('rd_kafka_begin_transaction');
   late final _rd_kafka_begin_transaction =
-      _rd_kafka_begin_transactionPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>)>();
+      _rd_kafka_begin_transactionPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>)
+          >();
 
   /// @brief Sends a list of topic partition offsets to the consumer group
   /// coordinator for \p cgmetadata, and marks the offsets as part
@@ -16451,19 +17600,25 @@ class LibRdKafka {
   }
 
   late final _rd_kafka_send_offsets_to_transactionPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_t>,
-              ffi.Pointer<rd_kafka_topic_partition_list_t>,
-              ffi.Pointer<rd_kafka_consumer_group_metadata_t>,
-              ffi.Int)>>('rd_kafka_send_offsets_to_transaction');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(
+        ffi.Pointer<rd_kafka_t>,
+        ffi.Pointer<rd_kafka_topic_partition_list_t>,
+        ffi.Pointer<rd_kafka_consumer_group_metadata_t>,
+        ffi.Int,
+      )
+    >
+  >('rd_kafka_send_offsets_to_transaction');
   late final _rd_kafka_send_offsets_to_transaction =
-      _rd_kafka_send_offsets_to_transactionPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
+      _rd_kafka_send_offsets_to_transactionPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(
               ffi.Pointer<rd_kafka_t>,
               ffi.Pointer<rd_kafka_topic_partition_list_t>,
               ffi.Pointer<rd_kafka_consumer_group_metadata_t>,
-              int)>();
+              int,
+            )
+          >();
 
   /// @brief Commit the current transaction (as started with
   /// rd_kafka_begin_transaction()).
@@ -16534,20 +17689,19 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     int timeout_ms,
   ) {
-    return _rd_kafka_commit_transaction(
-      rk,
-      timeout_ms,
-    );
+    return _rd_kafka_commit_transaction(rk, timeout_ms);
   }
 
   late final _rd_kafka_commit_transactionPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>,
-              ffi.Int)>>('rd_kafka_commit_transaction');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>, ffi.Int)
+    >
+  >('rd_kafka_commit_transaction');
   late final _rd_kafka_commit_transaction =
-      _rd_kafka_commit_transactionPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_t>, int)>();
+      _rd_kafka_commit_transactionPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>, int)
+          >();
 
   /// @brief Aborts the ongoing transaction.
   ///
@@ -16609,20 +17763,19 @@ class LibRdKafka {
     ffi.Pointer<rd_kafka_t> rk,
     int timeout_ms,
   ) {
-    return _rd_kafka_abort_transaction(
-      rk,
-      timeout_ms,
-    );
+    return _rd_kafka_abort_transaction(rk, timeout_ms);
   }
 
   late final _rd_kafka_abort_transactionPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_t>, ffi.Int)>>('rd_kafka_abort_transaction');
+    ffi.NativeFunction<
+      ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>, ffi.Int)
+    >
+  >('rd_kafka_abort_transaction');
   late final _rd_kafka_abort_transaction =
-      _rd_kafka_abort_transactionPtr.asFunction<
-          ffi.Pointer<rd_kafka_error_t> Function(
-              ffi.Pointer<rd_kafka_t>, int)>();
+      _rd_kafka_abort_transactionPtr
+          .asFunction<
+            ffi.Pointer<rd_kafka_error_t> Function(ffi.Pointer<rd_kafka_t>, int)
+          >();
 }
 
 typedef __int8_t = ffi.SignedChar;
@@ -16697,9 +17850,10 @@ typedef __darwin_uid_t = __uint32_t;
 typedef __darwin_useconds_t = __uint32_t;
 
 final class __darwin_pthread_handler_rec extends ffi.Struct {
-  external ffi
-      .Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>
-      __routine;
+  external ffi.Pointer<
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>
+  >
+  __routine;
 
   external ffi.Pointer<ffi.Void> __arg;
 
@@ -16852,23 +18006,29 @@ final class __sFILE extends ffi.Struct {
 
   external ffi.Pointer<ffi.Void> _cookie;
 
-  external ffi
-      .Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>)>>
-      _close;
+  external ffi.Pointer<
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>)>
+  >
+  _close;
 
   external ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>, ffi.Int)>> _read;
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>, ffi.Int)
+    >
+  >
+  _read;
 
   external ffi.Pointer<
-      ffi.NativeFunction<
-          fpos_t Function(ffi.Pointer<ffi.Void>, fpos_t, ffi.Int)>> _seek;
+    ffi.NativeFunction<fpos_t Function(ffi.Pointer<ffi.Void>, fpos_t, ffi.Int)>
+  >
+  _seek;
 
   external ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>, ffi.Int)>> _write;
+    ffi.NativeFunction<
+      ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>, ffi.Int)
+    >
+  >
+  _write;
 
   external __sbuf _ub;
 
@@ -17153,10 +18313,10 @@ enum rd_kafka_type_t {
   const rd_kafka_type_t(this.value);
 
   static rd_kafka_type_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_PRODUCER,
-        1 => RD_KAFKA_CONSUMER,
-        _ => throw ArgumentError('Unknown value for rd_kafka_type_t: $value'),
-      };
+    0 => RD_KAFKA_PRODUCER,
+    1 => RD_KAFKA_CONSUMER,
+    _ => throw ArgumentError('Unknown value for rd_kafka_type_t: $value'),
+  };
 }
 
 /// !
@@ -17177,12 +18337,14 @@ enum rd_kafka_timestamp_type_t {
   const rd_kafka_timestamp_type_t(this.value);
 
   static rd_kafka_timestamp_type_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_TIMESTAMP_NOT_AVAILABLE,
-        1 => RD_KAFKA_TIMESTAMP_CREATE_TIME,
-        2 => RD_KAFKA_TIMESTAMP_LOG_APPEND_TIME,
-        _ => throw ArgumentError(
-            'Unknown value for rd_kafka_timestamp_type_t: $value'),
-      };
+    0 => RD_KAFKA_TIMESTAMP_NOT_AVAILABLE,
+    1 => RD_KAFKA_TIMESTAMP_CREATE_TIME,
+    2 => RD_KAFKA_TIMESTAMP_LOG_APPEND_TIME,
+    _ =>
+      throw ArgumentError(
+        'Unknown value for rd_kafka_timestamp_type_t: $value',
+      ),
+  };
 }
 
 final class rd_kafka_s extends ffi.Opaque {}
@@ -17782,180 +18944,179 @@ enum rd_kafka_resp_err_t {
   const rd_kafka_resp_err_t(this.value);
 
   static rd_kafka_resp_err_t fromValue(int value) => switch (value) {
-        -200 => RD_KAFKA_RESP_ERR__BEGIN,
-        -199 => RD_KAFKA_RESP_ERR__BAD_MSG,
-        -198 => RD_KAFKA_RESP_ERR__BAD_COMPRESSION,
-        -197 => RD_KAFKA_RESP_ERR__DESTROY,
-        -196 => RD_KAFKA_RESP_ERR__FAIL,
-        -195 => RD_KAFKA_RESP_ERR__TRANSPORT,
-        -194 => RD_KAFKA_RESP_ERR__CRIT_SYS_RESOURCE,
-        -193 => RD_KAFKA_RESP_ERR__RESOLVE,
-        -192 => RD_KAFKA_RESP_ERR__MSG_TIMED_OUT,
-        -191 => RD_KAFKA_RESP_ERR__PARTITION_EOF,
-        -190 => RD_KAFKA_RESP_ERR__UNKNOWN_PARTITION,
-        -189 => RD_KAFKA_RESP_ERR__FS,
-        -188 => RD_KAFKA_RESP_ERR__UNKNOWN_TOPIC,
-        -187 => RD_KAFKA_RESP_ERR__ALL_BROKERS_DOWN,
-        -186 => RD_KAFKA_RESP_ERR__INVALID_ARG,
-        -185 => RD_KAFKA_RESP_ERR__TIMED_OUT,
-        -184 => RD_KAFKA_RESP_ERR__QUEUE_FULL,
-        -183 => RD_KAFKA_RESP_ERR__ISR_INSUFF,
-        -182 => RD_KAFKA_RESP_ERR__NODE_UPDATE,
-        -181 => RD_KAFKA_RESP_ERR__SSL,
-        -180 => RD_KAFKA_RESP_ERR__WAIT_COORD,
-        -179 => RD_KAFKA_RESP_ERR__UNKNOWN_GROUP,
-        -178 => RD_KAFKA_RESP_ERR__IN_PROGRESS,
-        -177 => RD_KAFKA_RESP_ERR__PREV_IN_PROGRESS,
-        -176 => RD_KAFKA_RESP_ERR__EXISTING_SUBSCRIPTION,
-        -175 => RD_KAFKA_RESP_ERR__ASSIGN_PARTITIONS,
-        -174 => RD_KAFKA_RESP_ERR__REVOKE_PARTITIONS,
-        -173 => RD_KAFKA_RESP_ERR__CONFLICT,
-        -172 => RD_KAFKA_RESP_ERR__STATE,
-        -171 => RD_KAFKA_RESP_ERR__UNKNOWN_PROTOCOL,
-        -170 => RD_KAFKA_RESP_ERR__NOT_IMPLEMENTED,
-        -169 => RD_KAFKA_RESP_ERR__AUTHENTICATION,
-        -168 => RD_KAFKA_RESP_ERR__NO_OFFSET,
-        -167 => RD_KAFKA_RESP_ERR__OUTDATED,
-        -166 => RD_KAFKA_RESP_ERR__TIMED_OUT_QUEUE,
-        -165 => RD_KAFKA_RESP_ERR__UNSUPPORTED_FEATURE,
-        -164 => RD_KAFKA_RESP_ERR__WAIT_CACHE,
-        -163 => RD_KAFKA_RESP_ERR__INTR,
-        -162 => RD_KAFKA_RESP_ERR__KEY_SERIALIZATION,
-        -161 => RD_KAFKA_RESP_ERR__VALUE_SERIALIZATION,
-        -160 => RD_KAFKA_RESP_ERR__KEY_DESERIALIZATION,
-        -159 => RD_KAFKA_RESP_ERR__VALUE_DESERIALIZATION,
-        -158 => RD_KAFKA_RESP_ERR__PARTIAL,
-        -157 => RD_KAFKA_RESP_ERR__READ_ONLY,
-        -156 => RD_KAFKA_RESP_ERR__NOENT,
-        -155 => RD_KAFKA_RESP_ERR__UNDERFLOW,
-        -154 => RD_KAFKA_RESP_ERR__INVALID_TYPE,
-        -153 => RD_KAFKA_RESP_ERR__RETRY,
-        -152 => RD_KAFKA_RESP_ERR__PURGE_QUEUE,
-        -151 => RD_KAFKA_RESP_ERR__PURGE_INFLIGHT,
-        -150 => RD_KAFKA_RESP_ERR__FATAL,
-        -149 => RD_KAFKA_RESP_ERR__INCONSISTENT,
-        -148 => RD_KAFKA_RESP_ERR__GAPLESS_GUARANTEE,
-        -147 => RD_KAFKA_RESP_ERR__MAX_POLL_EXCEEDED,
-        -146 => RD_KAFKA_RESP_ERR__UNKNOWN_BROKER,
-        -145 => RD_KAFKA_RESP_ERR__NOT_CONFIGURED,
-        -144 => RD_KAFKA_RESP_ERR__FENCED,
-        -143 => RD_KAFKA_RESP_ERR__APPLICATION,
-        -142 => RD_KAFKA_RESP_ERR__ASSIGNMENT_LOST,
-        -141 => RD_KAFKA_RESP_ERR__NOOP,
-        -140 => RD_KAFKA_RESP_ERR__AUTO_OFFSET_RESET,
-        -139 => RD_KAFKA_RESP_ERR__LOG_TRUNCATION,
-        -138 => RD_KAFKA_RESP_ERR__INVALID_DIFFERENT_RECORD,
-        -100 => RD_KAFKA_RESP_ERR__END,
-        -1 => RD_KAFKA_RESP_ERR_UNKNOWN,
-        0 => RD_KAFKA_RESP_ERR_NO_ERROR,
-        1 => RD_KAFKA_RESP_ERR_OFFSET_OUT_OF_RANGE,
-        2 => RD_KAFKA_RESP_ERR_INVALID_MSG,
-        3 => RD_KAFKA_RESP_ERR_UNKNOWN_TOPIC_OR_PART,
-        4 => RD_KAFKA_RESP_ERR_INVALID_MSG_SIZE,
-        5 => RD_KAFKA_RESP_ERR_LEADER_NOT_AVAILABLE,
-        6 => RD_KAFKA_RESP_ERR_NOT_LEADER_FOR_PARTITION,
-        7 => RD_KAFKA_RESP_ERR_REQUEST_TIMED_OUT,
-        8 => RD_KAFKA_RESP_ERR_BROKER_NOT_AVAILABLE,
-        9 => RD_KAFKA_RESP_ERR_REPLICA_NOT_AVAILABLE,
-        10 => RD_KAFKA_RESP_ERR_MSG_SIZE_TOO_LARGE,
-        11 => RD_KAFKA_RESP_ERR_STALE_CTRL_EPOCH,
-        12 => RD_KAFKA_RESP_ERR_OFFSET_METADATA_TOO_LARGE,
-        13 => RD_KAFKA_RESP_ERR_NETWORK_EXCEPTION,
-        14 => RD_KAFKA_RESP_ERR_COORDINATOR_LOAD_IN_PROGRESS,
-        15 => RD_KAFKA_RESP_ERR_COORDINATOR_NOT_AVAILABLE,
-        16 => RD_KAFKA_RESP_ERR_NOT_COORDINATOR,
-        17 => RD_KAFKA_RESP_ERR_TOPIC_EXCEPTION,
-        18 => RD_KAFKA_RESP_ERR_RECORD_LIST_TOO_LARGE,
-        19 => RD_KAFKA_RESP_ERR_NOT_ENOUGH_REPLICAS,
-        20 => RD_KAFKA_RESP_ERR_NOT_ENOUGH_REPLICAS_AFTER_APPEND,
-        21 => RD_KAFKA_RESP_ERR_INVALID_REQUIRED_ACKS,
-        22 => RD_KAFKA_RESP_ERR_ILLEGAL_GENERATION,
-        23 => RD_KAFKA_RESP_ERR_INCONSISTENT_GROUP_PROTOCOL,
-        24 => RD_KAFKA_RESP_ERR_INVALID_GROUP_ID,
-        25 => RD_KAFKA_RESP_ERR_UNKNOWN_MEMBER_ID,
-        26 => RD_KAFKA_RESP_ERR_INVALID_SESSION_TIMEOUT,
-        27 => RD_KAFKA_RESP_ERR_REBALANCE_IN_PROGRESS,
-        28 => RD_KAFKA_RESP_ERR_INVALID_COMMIT_OFFSET_SIZE,
-        29 => RD_KAFKA_RESP_ERR_TOPIC_AUTHORIZATION_FAILED,
-        30 => RD_KAFKA_RESP_ERR_GROUP_AUTHORIZATION_FAILED,
-        31 => RD_KAFKA_RESP_ERR_CLUSTER_AUTHORIZATION_FAILED,
-        32 => RD_KAFKA_RESP_ERR_INVALID_TIMESTAMP,
-        33 => RD_KAFKA_RESP_ERR_UNSUPPORTED_SASL_MECHANISM,
-        34 => RD_KAFKA_RESP_ERR_ILLEGAL_SASL_STATE,
-        35 => RD_KAFKA_RESP_ERR_UNSUPPORTED_VERSION,
-        36 => RD_KAFKA_RESP_ERR_TOPIC_ALREADY_EXISTS,
-        37 => RD_KAFKA_RESP_ERR_INVALID_PARTITIONS,
-        38 => RD_KAFKA_RESP_ERR_INVALID_REPLICATION_FACTOR,
-        39 => RD_KAFKA_RESP_ERR_INVALID_REPLICA_ASSIGNMENT,
-        40 => RD_KAFKA_RESP_ERR_INVALID_CONFIG,
-        41 => RD_KAFKA_RESP_ERR_NOT_CONTROLLER,
-        42 => RD_KAFKA_RESP_ERR_INVALID_REQUEST,
-        43 => RD_KAFKA_RESP_ERR_UNSUPPORTED_FOR_MESSAGE_FORMAT,
-        44 => RD_KAFKA_RESP_ERR_POLICY_VIOLATION,
-        45 => RD_KAFKA_RESP_ERR_OUT_OF_ORDER_SEQUENCE_NUMBER,
-        46 => RD_KAFKA_RESP_ERR_DUPLICATE_SEQUENCE_NUMBER,
-        47 => RD_KAFKA_RESP_ERR_INVALID_PRODUCER_EPOCH,
-        48 => RD_KAFKA_RESP_ERR_INVALID_TXN_STATE,
-        49 => RD_KAFKA_RESP_ERR_INVALID_PRODUCER_ID_MAPPING,
-        50 => RD_KAFKA_RESP_ERR_INVALID_TRANSACTION_TIMEOUT,
-        51 => RD_KAFKA_RESP_ERR_CONCURRENT_TRANSACTIONS,
-        52 => RD_KAFKA_RESP_ERR_TRANSACTION_COORDINATOR_FENCED,
-        53 => RD_KAFKA_RESP_ERR_TRANSACTIONAL_ID_AUTHORIZATION_FAILED,
-        54 => RD_KAFKA_RESP_ERR_SECURITY_DISABLED,
-        55 => RD_KAFKA_RESP_ERR_OPERATION_NOT_ATTEMPTED,
-        56 => RD_KAFKA_RESP_ERR_KAFKA_STORAGE_ERROR,
-        57 => RD_KAFKA_RESP_ERR_LOG_DIR_NOT_FOUND,
-        58 => RD_KAFKA_RESP_ERR_SASL_AUTHENTICATION_FAILED,
-        59 => RD_KAFKA_RESP_ERR_UNKNOWN_PRODUCER_ID,
-        60 => RD_KAFKA_RESP_ERR_REASSIGNMENT_IN_PROGRESS,
-        61 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_AUTH_DISABLED,
-        62 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_NOT_FOUND,
-        63 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_OWNER_MISMATCH,
-        64 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_REQUEST_NOT_ALLOWED,
-        65 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_AUTHORIZATION_FAILED,
-        66 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_EXPIRED,
-        67 => RD_KAFKA_RESP_ERR_INVALID_PRINCIPAL_TYPE,
-        68 => RD_KAFKA_RESP_ERR_NON_EMPTY_GROUP,
-        69 => RD_KAFKA_RESP_ERR_GROUP_ID_NOT_FOUND,
-        70 => RD_KAFKA_RESP_ERR_FETCH_SESSION_ID_NOT_FOUND,
-        71 => RD_KAFKA_RESP_ERR_INVALID_FETCH_SESSION_EPOCH,
-        72 => RD_KAFKA_RESP_ERR_LISTENER_NOT_FOUND,
-        73 => RD_KAFKA_RESP_ERR_TOPIC_DELETION_DISABLED,
-        74 => RD_KAFKA_RESP_ERR_FENCED_LEADER_EPOCH,
-        75 => RD_KAFKA_RESP_ERR_UNKNOWN_LEADER_EPOCH,
-        76 => RD_KAFKA_RESP_ERR_UNSUPPORTED_COMPRESSION_TYPE,
-        77 => RD_KAFKA_RESP_ERR_STALE_BROKER_EPOCH,
-        78 => RD_KAFKA_RESP_ERR_OFFSET_NOT_AVAILABLE,
-        79 => RD_KAFKA_RESP_ERR_MEMBER_ID_REQUIRED,
-        80 => RD_KAFKA_RESP_ERR_PREFERRED_LEADER_NOT_AVAILABLE,
-        81 => RD_KAFKA_RESP_ERR_GROUP_MAX_SIZE_REACHED,
-        82 => RD_KAFKA_RESP_ERR_FENCED_INSTANCE_ID,
-        83 => RD_KAFKA_RESP_ERR_ELIGIBLE_LEADERS_NOT_AVAILABLE,
-        84 => RD_KAFKA_RESP_ERR_ELECTION_NOT_NEEDED,
-        85 => RD_KAFKA_RESP_ERR_NO_REASSIGNMENT_IN_PROGRESS,
-        86 => RD_KAFKA_RESP_ERR_GROUP_SUBSCRIBED_TO_TOPIC,
-        87 => RD_KAFKA_RESP_ERR_INVALID_RECORD,
-        88 => RD_KAFKA_RESP_ERR_UNSTABLE_OFFSET_COMMIT,
-        89 => RD_KAFKA_RESP_ERR_THROTTLING_QUOTA_EXCEEDED,
-        90 => RD_KAFKA_RESP_ERR_PRODUCER_FENCED,
-        91 => RD_KAFKA_RESP_ERR_RESOURCE_NOT_FOUND,
-        92 => RD_KAFKA_RESP_ERR_DUPLICATE_RESOURCE,
-        93 => RD_KAFKA_RESP_ERR_UNACCEPTABLE_CREDENTIAL,
-        94 => RD_KAFKA_RESP_ERR_INCONSISTENT_VOTER_SET,
-        95 => RD_KAFKA_RESP_ERR_INVALID_UPDATE_VERSION,
-        96 => RD_KAFKA_RESP_ERR_FEATURE_UPDATE_FAILED,
-        97 => RD_KAFKA_RESP_ERR_PRINCIPAL_DESERIALIZATION_FAILURE,
-        100 => RD_KAFKA_RESP_ERR_UNKNOWN_TOPIC_ID,
-        110 => RD_KAFKA_RESP_ERR_FENCED_MEMBER_EPOCH,
-        111 => RD_KAFKA_RESP_ERR_UNRELEASED_INSTANCE_ID,
-        112 => RD_KAFKA_RESP_ERR_UNSUPPORTED_ASSIGNOR,
-        113 => RD_KAFKA_RESP_ERR_STALE_MEMBER_EPOCH,
-        117 => RD_KAFKA_RESP_ERR_UNKNOWN_SUBSCRIPTION_ID,
-        118 => RD_KAFKA_RESP_ERR_TELEMETRY_TOO_LARGE,
-        119 => RD_KAFKA_RESP_ERR_END_ALL,
-        _ =>
-          throw ArgumentError('Unknown value for rd_kafka_resp_err_t: $value'),
-      };
+    -200 => RD_KAFKA_RESP_ERR__BEGIN,
+    -199 => RD_KAFKA_RESP_ERR__BAD_MSG,
+    -198 => RD_KAFKA_RESP_ERR__BAD_COMPRESSION,
+    -197 => RD_KAFKA_RESP_ERR__DESTROY,
+    -196 => RD_KAFKA_RESP_ERR__FAIL,
+    -195 => RD_KAFKA_RESP_ERR__TRANSPORT,
+    -194 => RD_KAFKA_RESP_ERR__CRIT_SYS_RESOURCE,
+    -193 => RD_KAFKA_RESP_ERR__RESOLVE,
+    -192 => RD_KAFKA_RESP_ERR__MSG_TIMED_OUT,
+    -191 => RD_KAFKA_RESP_ERR__PARTITION_EOF,
+    -190 => RD_KAFKA_RESP_ERR__UNKNOWN_PARTITION,
+    -189 => RD_KAFKA_RESP_ERR__FS,
+    -188 => RD_KAFKA_RESP_ERR__UNKNOWN_TOPIC,
+    -187 => RD_KAFKA_RESP_ERR__ALL_BROKERS_DOWN,
+    -186 => RD_KAFKA_RESP_ERR__INVALID_ARG,
+    -185 => RD_KAFKA_RESP_ERR__TIMED_OUT,
+    -184 => RD_KAFKA_RESP_ERR__QUEUE_FULL,
+    -183 => RD_KAFKA_RESP_ERR__ISR_INSUFF,
+    -182 => RD_KAFKA_RESP_ERR__NODE_UPDATE,
+    -181 => RD_KAFKA_RESP_ERR__SSL,
+    -180 => RD_KAFKA_RESP_ERR__WAIT_COORD,
+    -179 => RD_KAFKA_RESP_ERR__UNKNOWN_GROUP,
+    -178 => RD_KAFKA_RESP_ERR__IN_PROGRESS,
+    -177 => RD_KAFKA_RESP_ERR__PREV_IN_PROGRESS,
+    -176 => RD_KAFKA_RESP_ERR__EXISTING_SUBSCRIPTION,
+    -175 => RD_KAFKA_RESP_ERR__ASSIGN_PARTITIONS,
+    -174 => RD_KAFKA_RESP_ERR__REVOKE_PARTITIONS,
+    -173 => RD_KAFKA_RESP_ERR__CONFLICT,
+    -172 => RD_KAFKA_RESP_ERR__STATE,
+    -171 => RD_KAFKA_RESP_ERR__UNKNOWN_PROTOCOL,
+    -170 => RD_KAFKA_RESP_ERR__NOT_IMPLEMENTED,
+    -169 => RD_KAFKA_RESP_ERR__AUTHENTICATION,
+    -168 => RD_KAFKA_RESP_ERR__NO_OFFSET,
+    -167 => RD_KAFKA_RESP_ERR__OUTDATED,
+    -166 => RD_KAFKA_RESP_ERR__TIMED_OUT_QUEUE,
+    -165 => RD_KAFKA_RESP_ERR__UNSUPPORTED_FEATURE,
+    -164 => RD_KAFKA_RESP_ERR__WAIT_CACHE,
+    -163 => RD_KAFKA_RESP_ERR__INTR,
+    -162 => RD_KAFKA_RESP_ERR__KEY_SERIALIZATION,
+    -161 => RD_KAFKA_RESP_ERR__VALUE_SERIALIZATION,
+    -160 => RD_KAFKA_RESP_ERR__KEY_DESERIALIZATION,
+    -159 => RD_KAFKA_RESP_ERR__VALUE_DESERIALIZATION,
+    -158 => RD_KAFKA_RESP_ERR__PARTIAL,
+    -157 => RD_KAFKA_RESP_ERR__READ_ONLY,
+    -156 => RD_KAFKA_RESP_ERR__NOENT,
+    -155 => RD_KAFKA_RESP_ERR__UNDERFLOW,
+    -154 => RD_KAFKA_RESP_ERR__INVALID_TYPE,
+    -153 => RD_KAFKA_RESP_ERR__RETRY,
+    -152 => RD_KAFKA_RESP_ERR__PURGE_QUEUE,
+    -151 => RD_KAFKA_RESP_ERR__PURGE_INFLIGHT,
+    -150 => RD_KAFKA_RESP_ERR__FATAL,
+    -149 => RD_KAFKA_RESP_ERR__INCONSISTENT,
+    -148 => RD_KAFKA_RESP_ERR__GAPLESS_GUARANTEE,
+    -147 => RD_KAFKA_RESP_ERR__MAX_POLL_EXCEEDED,
+    -146 => RD_KAFKA_RESP_ERR__UNKNOWN_BROKER,
+    -145 => RD_KAFKA_RESP_ERR__NOT_CONFIGURED,
+    -144 => RD_KAFKA_RESP_ERR__FENCED,
+    -143 => RD_KAFKA_RESP_ERR__APPLICATION,
+    -142 => RD_KAFKA_RESP_ERR__ASSIGNMENT_LOST,
+    -141 => RD_KAFKA_RESP_ERR__NOOP,
+    -140 => RD_KAFKA_RESP_ERR__AUTO_OFFSET_RESET,
+    -139 => RD_KAFKA_RESP_ERR__LOG_TRUNCATION,
+    -138 => RD_KAFKA_RESP_ERR__INVALID_DIFFERENT_RECORD,
+    -100 => RD_KAFKA_RESP_ERR__END,
+    -1 => RD_KAFKA_RESP_ERR_UNKNOWN,
+    0 => RD_KAFKA_RESP_ERR_NO_ERROR,
+    1 => RD_KAFKA_RESP_ERR_OFFSET_OUT_OF_RANGE,
+    2 => RD_KAFKA_RESP_ERR_INVALID_MSG,
+    3 => RD_KAFKA_RESP_ERR_UNKNOWN_TOPIC_OR_PART,
+    4 => RD_KAFKA_RESP_ERR_INVALID_MSG_SIZE,
+    5 => RD_KAFKA_RESP_ERR_LEADER_NOT_AVAILABLE,
+    6 => RD_KAFKA_RESP_ERR_NOT_LEADER_FOR_PARTITION,
+    7 => RD_KAFKA_RESP_ERR_REQUEST_TIMED_OUT,
+    8 => RD_KAFKA_RESP_ERR_BROKER_NOT_AVAILABLE,
+    9 => RD_KAFKA_RESP_ERR_REPLICA_NOT_AVAILABLE,
+    10 => RD_KAFKA_RESP_ERR_MSG_SIZE_TOO_LARGE,
+    11 => RD_KAFKA_RESP_ERR_STALE_CTRL_EPOCH,
+    12 => RD_KAFKA_RESP_ERR_OFFSET_METADATA_TOO_LARGE,
+    13 => RD_KAFKA_RESP_ERR_NETWORK_EXCEPTION,
+    14 => RD_KAFKA_RESP_ERR_COORDINATOR_LOAD_IN_PROGRESS,
+    15 => RD_KAFKA_RESP_ERR_COORDINATOR_NOT_AVAILABLE,
+    16 => RD_KAFKA_RESP_ERR_NOT_COORDINATOR,
+    17 => RD_KAFKA_RESP_ERR_TOPIC_EXCEPTION,
+    18 => RD_KAFKA_RESP_ERR_RECORD_LIST_TOO_LARGE,
+    19 => RD_KAFKA_RESP_ERR_NOT_ENOUGH_REPLICAS,
+    20 => RD_KAFKA_RESP_ERR_NOT_ENOUGH_REPLICAS_AFTER_APPEND,
+    21 => RD_KAFKA_RESP_ERR_INVALID_REQUIRED_ACKS,
+    22 => RD_KAFKA_RESP_ERR_ILLEGAL_GENERATION,
+    23 => RD_KAFKA_RESP_ERR_INCONSISTENT_GROUP_PROTOCOL,
+    24 => RD_KAFKA_RESP_ERR_INVALID_GROUP_ID,
+    25 => RD_KAFKA_RESP_ERR_UNKNOWN_MEMBER_ID,
+    26 => RD_KAFKA_RESP_ERR_INVALID_SESSION_TIMEOUT,
+    27 => RD_KAFKA_RESP_ERR_REBALANCE_IN_PROGRESS,
+    28 => RD_KAFKA_RESP_ERR_INVALID_COMMIT_OFFSET_SIZE,
+    29 => RD_KAFKA_RESP_ERR_TOPIC_AUTHORIZATION_FAILED,
+    30 => RD_KAFKA_RESP_ERR_GROUP_AUTHORIZATION_FAILED,
+    31 => RD_KAFKA_RESP_ERR_CLUSTER_AUTHORIZATION_FAILED,
+    32 => RD_KAFKA_RESP_ERR_INVALID_TIMESTAMP,
+    33 => RD_KAFKA_RESP_ERR_UNSUPPORTED_SASL_MECHANISM,
+    34 => RD_KAFKA_RESP_ERR_ILLEGAL_SASL_STATE,
+    35 => RD_KAFKA_RESP_ERR_UNSUPPORTED_VERSION,
+    36 => RD_KAFKA_RESP_ERR_TOPIC_ALREADY_EXISTS,
+    37 => RD_KAFKA_RESP_ERR_INVALID_PARTITIONS,
+    38 => RD_KAFKA_RESP_ERR_INVALID_REPLICATION_FACTOR,
+    39 => RD_KAFKA_RESP_ERR_INVALID_REPLICA_ASSIGNMENT,
+    40 => RD_KAFKA_RESP_ERR_INVALID_CONFIG,
+    41 => RD_KAFKA_RESP_ERR_NOT_CONTROLLER,
+    42 => RD_KAFKA_RESP_ERR_INVALID_REQUEST,
+    43 => RD_KAFKA_RESP_ERR_UNSUPPORTED_FOR_MESSAGE_FORMAT,
+    44 => RD_KAFKA_RESP_ERR_POLICY_VIOLATION,
+    45 => RD_KAFKA_RESP_ERR_OUT_OF_ORDER_SEQUENCE_NUMBER,
+    46 => RD_KAFKA_RESP_ERR_DUPLICATE_SEQUENCE_NUMBER,
+    47 => RD_KAFKA_RESP_ERR_INVALID_PRODUCER_EPOCH,
+    48 => RD_KAFKA_RESP_ERR_INVALID_TXN_STATE,
+    49 => RD_KAFKA_RESP_ERR_INVALID_PRODUCER_ID_MAPPING,
+    50 => RD_KAFKA_RESP_ERR_INVALID_TRANSACTION_TIMEOUT,
+    51 => RD_KAFKA_RESP_ERR_CONCURRENT_TRANSACTIONS,
+    52 => RD_KAFKA_RESP_ERR_TRANSACTION_COORDINATOR_FENCED,
+    53 => RD_KAFKA_RESP_ERR_TRANSACTIONAL_ID_AUTHORIZATION_FAILED,
+    54 => RD_KAFKA_RESP_ERR_SECURITY_DISABLED,
+    55 => RD_KAFKA_RESP_ERR_OPERATION_NOT_ATTEMPTED,
+    56 => RD_KAFKA_RESP_ERR_KAFKA_STORAGE_ERROR,
+    57 => RD_KAFKA_RESP_ERR_LOG_DIR_NOT_FOUND,
+    58 => RD_KAFKA_RESP_ERR_SASL_AUTHENTICATION_FAILED,
+    59 => RD_KAFKA_RESP_ERR_UNKNOWN_PRODUCER_ID,
+    60 => RD_KAFKA_RESP_ERR_REASSIGNMENT_IN_PROGRESS,
+    61 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_AUTH_DISABLED,
+    62 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_NOT_FOUND,
+    63 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_OWNER_MISMATCH,
+    64 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_REQUEST_NOT_ALLOWED,
+    65 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_AUTHORIZATION_FAILED,
+    66 => RD_KAFKA_RESP_ERR_DELEGATION_TOKEN_EXPIRED,
+    67 => RD_KAFKA_RESP_ERR_INVALID_PRINCIPAL_TYPE,
+    68 => RD_KAFKA_RESP_ERR_NON_EMPTY_GROUP,
+    69 => RD_KAFKA_RESP_ERR_GROUP_ID_NOT_FOUND,
+    70 => RD_KAFKA_RESP_ERR_FETCH_SESSION_ID_NOT_FOUND,
+    71 => RD_KAFKA_RESP_ERR_INVALID_FETCH_SESSION_EPOCH,
+    72 => RD_KAFKA_RESP_ERR_LISTENER_NOT_FOUND,
+    73 => RD_KAFKA_RESP_ERR_TOPIC_DELETION_DISABLED,
+    74 => RD_KAFKA_RESP_ERR_FENCED_LEADER_EPOCH,
+    75 => RD_KAFKA_RESP_ERR_UNKNOWN_LEADER_EPOCH,
+    76 => RD_KAFKA_RESP_ERR_UNSUPPORTED_COMPRESSION_TYPE,
+    77 => RD_KAFKA_RESP_ERR_STALE_BROKER_EPOCH,
+    78 => RD_KAFKA_RESP_ERR_OFFSET_NOT_AVAILABLE,
+    79 => RD_KAFKA_RESP_ERR_MEMBER_ID_REQUIRED,
+    80 => RD_KAFKA_RESP_ERR_PREFERRED_LEADER_NOT_AVAILABLE,
+    81 => RD_KAFKA_RESP_ERR_GROUP_MAX_SIZE_REACHED,
+    82 => RD_KAFKA_RESP_ERR_FENCED_INSTANCE_ID,
+    83 => RD_KAFKA_RESP_ERR_ELIGIBLE_LEADERS_NOT_AVAILABLE,
+    84 => RD_KAFKA_RESP_ERR_ELECTION_NOT_NEEDED,
+    85 => RD_KAFKA_RESP_ERR_NO_REASSIGNMENT_IN_PROGRESS,
+    86 => RD_KAFKA_RESP_ERR_GROUP_SUBSCRIBED_TO_TOPIC,
+    87 => RD_KAFKA_RESP_ERR_INVALID_RECORD,
+    88 => RD_KAFKA_RESP_ERR_UNSTABLE_OFFSET_COMMIT,
+    89 => RD_KAFKA_RESP_ERR_THROTTLING_QUOTA_EXCEEDED,
+    90 => RD_KAFKA_RESP_ERR_PRODUCER_FENCED,
+    91 => RD_KAFKA_RESP_ERR_RESOURCE_NOT_FOUND,
+    92 => RD_KAFKA_RESP_ERR_DUPLICATE_RESOURCE,
+    93 => RD_KAFKA_RESP_ERR_UNACCEPTABLE_CREDENTIAL,
+    94 => RD_KAFKA_RESP_ERR_INCONSISTENT_VOTER_SET,
+    95 => RD_KAFKA_RESP_ERR_INVALID_UPDATE_VERSION,
+    96 => RD_KAFKA_RESP_ERR_FEATURE_UPDATE_FAILED,
+    97 => RD_KAFKA_RESP_ERR_PRINCIPAL_DESERIALIZATION_FAILURE,
+    100 => RD_KAFKA_RESP_ERR_UNKNOWN_TOPIC_ID,
+    110 => RD_KAFKA_RESP_ERR_FENCED_MEMBER_EPOCH,
+    111 => RD_KAFKA_RESP_ERR_UNRELEASED_INSTANCE_ID,
+    112 => RD_KAFKA_RESP_ERR_UNSUPPORTED_ASSIGNOR,
+    113 => RD_KAFKA_RESP_ERR_STALE_MEMBER_EPOCH,
+    117 => RD_KAFKA_RESP_ERR_UNKNOWN_SUBSCRIPTION_ID,
+    118 => RD_KAFKA_RESP_ERR_TELEMETRY_TOO_LARGE,
+    119 => RD_KAFKA_RESP_ERR_END_ALL,
+    _ => throw ArgumentError('Unknown value for rd_kafka_resp_err_t: $value'),
+  };
 }
 
 /// @brief Error code value, name and description.
@@ -18083,19 +19244,19 @@ enum rd_kafka_vtype_t {
   const rd_kafka_vtype_t(this.value);
 
   static rd_kafka_vtype_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_VTYPE_END,
-        1 => RD_KAFKA_VTYPE_TOPIC,
-        2 => RD_KAFKA_VTYPE_RKT,
-        3 => RD_KAFKA_VTYPE_PARTITION,
-        4 => RD_KAFKA_VTYPE_VALUE,
-        5 => RD_KAFKA_VTYPE_KEY,
-        6 => RD_KAFKA_VTYPE_OPAQUE,
-        7 => RD_KAFKA_VTYPE_MSGFLAGS,
-        8 => RD_KAFKA_VTYPE_TIMESTAMP,
-        9 => RD_KAFKA_VTYPE_HEADER,
-        10 => RD_KAFKA_VTYPE_HEADERS,
-        _ => throw ArgumentError('Unknown value for rd_kafka_vtype_t: $value'),
-      };
+    0 => RD_KAFKA_VTYPE_END,
+    1 => RD_KAFKA_VTYPE_TOPIC,
+    2 => RD_KAFKA_VTYPE_RKT,
+    3 => RD_KAFKA_VTYPE_PARTITION,
+    4 => RD_KAFKA_VTYPE_VALUE,
+    5 => RD_KAFKA_VTYPE_KEY,
+    6 => RD_KAFKA_VTYPE_OPAQUE,
+    7 => RD_KAFKA_VTYPE_MSGFLAGS,
+    8 => RD_KAFKA_VTYPE_TIMESTAMP,
+    9 => RD_KAFKA_VTYPE_HEADER,
+    10 => RD_KAFKA_VTYPE_HEADERS,
+    _ => throw ArgumentError('Unknown value for rd_kafka_vtype_t: $value'),
+  };
 }
 
 final class UnnamedStruct1 extends ffi.Struct {
@@ -18265,12 +19426,11 @@ enum rd_kafka_msg_status_t {
   const rd_kafka_msg_status_t(this.value);
 
   static rd_kafka_msg_status_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_MSG_STATUS_NOT_PERSISTED,
-        1 => RD_KAFKA_MSG_STATUS_POSSIBLY_PERSISTED,
-        2 => RD_KAFKA_MSG_STATUS_PERSISTED,
-        _ => throw ArgumentError(
-            'Unknown value for rd_kafka_msg_status_t: $value'),
-      };
+    0 => RD_KAFKA_MSG_STATUS_NOT_PERSISTED,
+    1 => RD_KAFKA_MSG_STATUS_POSSIBLY_PERSISTED,
+    2 => RD_KAFKA_MSG_STATUS_PERSISTED,
+    _ => throw ArgumentError('Unknown value for rd_kafka_msg_status_t: $value'),
+  };
 }
 
 /// @enum rd_kafka_conf_res_t
@@ -18291,12 +19451,11 @@ enum rd_kafka_conf_res_t {
   const rd_kafka_conf_res_t(this.value);
 
   static rd_kafka_conf_res_t fromValue(int value) => switch (value) {
-        -2 => RD_KAFKA_CONF_UNKNOWN,
-        -1 => RD_KAFKA_CONF_INVALID,
-        0 => RD_KAFKA_CONF_OK,
-        _ =>
-          throw ArgumentError('Unknown value for rd_kafka_conf_res_t: $value'),
-      };
+    -2 => RD_KAFKA_CONF_UNKNOWN,
+    -1 => RD_KAFKA_CONF_INVALID,
+    0 => RD_KAFKA_CONF_OK,
+    _ => throw ArgumentError('Unknown value for rd_kafka_conf_res_t: $value'),
+  };
 }
 
 /// Forward declaration to avoid netdb.h or winsock includes
@@ -18322,13 +19481,12 @@ enum rd_kafka_cert_type_t {
   const rd_kafka_cert_type_t(this.value);
 
   static rd_kafka_cert_type_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_CERT_PUBLIC_KEY,
-        1 => RD_KAFKA_CERT_PRIVATE_KEY,
-        2 => RD_KAFKA_CERT_CA,
-        3 => RD_KAFKA_CERT__CNT,
-        _ =>
-          throw ArgumentError('Unknown value for rd_kafka_cert_type_t: $value'),
-      };
+    0 => RD_KAFKA_CERT_PUBLIC_KEY,
+    1 => RD_KAFKA_CERT_PRIVATE_KEY,
+    2 => RD_KAFKA_CERT_CA,
+    3 => RD_KAFKA_CERT__CNT,
+    _ => throw ArgumentError('Unknown value for rd_kafka_cert_type_t: $value'),
+  };
 }
 
 /// @enum rd_kafka_cert_enc_t
@@ -18351,13 +19509,12 @@ enum rd_kafka_cert_enc_t {
   const rd_kafka_cert_enc_t(this.value);
 
   static rd_kafka_cert_enc_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_CERT_ENC_PKCS12,
-        1 => RD_KAFKA_CERT_ENC_DER,
-        2 => RD_KAFKA_CERT_ENC_PEM,
-        3 => RD_KAFKA_CERT_ENC__CNT,
-        _ =>
-          throw ArgumentError('Unknown value for rd_kafka_cert_enc_t: $value'),
-      };
+    0 => RD_KAFKA_CERT_ENC_PKCS12,
+    1 => RD_KAFKA_CERT_ENC_DER,
+    2 => RD_KAFKA_CERT_ENC_PEM,
+    3 => RD_KAFKA_CERT_ENC__CNT,
+    _ => throw ArgumentError('Unknown value for rd_kafka_cert_enc_t: $value'),
+  };
 }
 
 /// @brief Broker information
@@ -18520,8 +19677,10 @@ enum rd_kafka_consumer_group_state_t {
         4 => RD_KAFKA_CONSUMER_GROUP_STATE_DEAD,
         5 => RD_KAFKA_CONSUMER_GROUP_STATE_EMPTY,
         6 => RD_KAFKA_CONSUMER_GROUP_STATE__CNT,
-        _ => throw ArgumentError(
-            'Unknown value for rd_kafka_consumer_group_state_t: $value'),
+        _ =>
+          throw ArgumentError(
+            'Unknown value for rd_kafka_consumer_group_state_t: $value',
+          ),
       };
 }
 
@@ -18538,13 +19697,15 @@ enum rd_kafka_consumer_group_type_t {
   const rd_kafka_consumer_group_type_t(this.value);
 
   static rd_kafka_consumer_group_type_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_CONSUMER_GROUP_TYPE_UNKNOWN,
-        1 => RD_KAFKA_CONSUMER_GROUP_TYPE_CONSUMER,
-        2 => RD_KAFKA_CONSUMER_GROUP_TYPE_CLASSIC,
-        3 => RD_KAFKA_CONSUMER_GROUP_TYPE__CNT,
-        _ => throw ArgumentError(
-            'Unknown value for rd_kafka_consumer_group_type_t: $value'),
-      };
+    0 => RD_KAFKA_CONSUMER_GROUP_TYPE_UNKNOWN,
+    1 => RD_KAFKA_CONSUMER_GROUP_TYPE_CONSUMER,
+    2 => RD_KAFKA_CONSUMER_GROUP_TYPE_CLASSIC,
+    3 => RD_KAFKA_CONSUMER_GROUP_TYPE__CNT,
+    _ =>
+      throw ArgumentError(
+        'Unknown value for rd_kafka_consumer_group_type_t: $value',
+      ),
+  };
 }
 
 /// @brief Group information
@@ -18609,12 +19770,12 @@ enum rd_kafka_thread_type_t {
   const rd_kafka_thread_type_t(this.value);
 
   static rd_kafka_thread_type_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_THREAD_MAIN,
-        1 => RD_KAFKA_THREAD_BACKGROUND,
-        2 => RD_KAFKA_THREAD_BROKER,
-        _ => throw ArgumentError(
-            'Unknown value for rd_kafka_thread_type_t: $value'),
-      };
+    0 => RD_KAFKA_THREAD_MAIN,
+    1 => RD_KAFKA_THREAD_BACKGROUND,
+    2 => RD_KAFKA_THREAD_BROKER,
+    _ =>
+      throw ArgumentError('Unknown value for rd_kafka_thread_type_t: $value'),
+  };
 }
 
 /// @brief Event types
@@ -18706,12 +19867,15 @@ typedef rd_kafka_ElectLeaders_result_t = rd_kafka_event_t;
 /// plugin-specific resources created in the plugin's conf_init() method.
 ///
 /// @returns RD_KAFKA_RESP_ERR_NO_ERROR on success or an error code on error.
-typedef rd_kafka_plugin_f_conf_init_t = ffi.NativeFunction<
-    ffi.Int Function(
+typedef rd_kafka_plugin_f_conf_init_t =
+    ffi.NativeFunction<
+      ffi.Int Function(
         ffi.Pointer<rd_kafka_conf_t> conf,
         ffi.Pointer<ffi.Pointer<ffi.Void>> plug_opaquep,
         ffi.Pointer<ffi.Char> errstr,
-        ffi.Size errstr_size)>;
+        ffi.Size errstr_size,
+      )
+    >;
 
 /// @brief on_conf_set() is called from rd_kafka_*_conf_set() in the order
 /// the interceptors were added.
@@ -18731,14 +19895,17 @@ typedef rd_kafka_plugin_f_conf_init_t = ffi.NativeFunction<
 /// this property, in which case the property is passed on on the
 /// interceptor in the chain, finally ending up at the built-in
 /// configuration handler.
-typedef rd_kafka_interceptor_f_on_conf_set_t = ffi.NativeFunction<
-    ffi.Int Function(
+typedef rd_kafka_interceptor_f_on_conf_set_t =
+    ffi.NativeFunction<
+      ffi.Int Function(
         ffi.Pointer<rd_kafka_conf_t> conf,
         ffi.Pointer<ffi.Char> name,
         ffi.Pointer<ffi.Char> val,
         ffi.Pointer<ffi.Char> errstr,
         ffi.Size errstr_size,
-        ffi.Pointer<ffi.Void> ic_opaque)>;
+        ffi.Pointer<ffi.Void> ic_opaque,
+      )
+    >;
 
 /// @brief on_conf_dup() is called from rd_kafka_conf_dup() in the
 /// order the interceptors were added and is used to let
@@ -18759,20 +19926,23 @@ typedef rd_kafka_interceptor_f_on_conf_set_t = ffi.NativeFunction<
 ///
 /// @remark No on_conf_* interceptors are copied to the new configuration
 /// object on rd_kafka_conf_dup().
-typedef rd_kafka_interceptor_f_on_conf_dup_t = ffi.NativeFunction<
-    ffi.Int Function(
+typedef rd_kafka_interceptor_f_on_conf_dup_t =
+    ffi.NativeFunction<
+      ffi.Int Function(
         ffi.Pointer<rd_kafka_conf_t> new_conf,
         ffi.Pointer<rd_kafka_conf_t> old_conf,
         ffi.Size filter_cnt,
         ffi.Pointer<ffi.Pointer<ffi.Char>> filter,
-        ffi.Pointer<ffi.Void> ic_opaque)>;
+        ffi.Pointer<ffi.Void> ic_opaque,
+      )
+    >;
 
 /// @brief on_conf_destroy() is called from rd_kafka_*_conf_destroy() in the
 /// order the interceptors were added.
 ///
 /// @param ic_opaque The interceptor's opaque pointer specified in ..add..().
-typedef rd_kafka_interceptor_f_on_conf_destroy_t
-    = ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void> ic_opaque)>;
+typedef rd_kafka_interceptor_f_on_conf_destroy_t =
+    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void> ic_opaque)>;
 
 /// @brief on_new() is called from rd_kafka_new() prior toreturning
 /// the newly created client instance to the application.
@@ -18788,22 +19958,29 @@ typedef rd_kafka_interceptor_f_on_conf_destroy_t
 /// @warning The \p rk client instance will not be fully set up when this
 /// interceptor is called and the interceptor MUST NOT call any
 /// other rk-specific APIs than rd_kafka_interceptor_add..().
-typedef rd_kafka_interceptor_f_on_new_t = ffi.NativeFunction<
-    ffi.Int Function(
+typedef rd_kafka_interceptor_f_on_new_t =
+    ffi.NativeFunction<
+      ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Pointer<rd_kafka_conf_t> conf,
         ffi.Pointer<ffi.Void> ic_opaque,
         ffi.Pointer<ffi.Char> errstr,
-        ffi.Size errstr_size)>;
+        ffi.Size errstr_size,
+      )
+    >;
 
 /// @brief on_destroy() is called from rd_kafka_destroy() or (rd_kafka_new()
 /// if rd_kafka_new() fails during initialization).
 ///
 /// @param rk The client instance.
 /// @param ic_opaque The interceptor's opaque pointer specified in ..add..().
-typedef rd_kafka_interceptor_f_on_destroy_t = ffi.NativeFunction<
-    ffi.Int Function(
-        ffi.Pointer<rd_kafka_t> rk, ffi.Pointer<ffi.Void> ic_opaque)>;
+typedef rd_kafka_interceptor_f_on_destroy_t =
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t> rk,
+        ffi.Pointer<ffi.Void> ic_opaque,
+      )
+    >;
 
 /// @brief on_send() is called from rd_kafka_produce*() (et.al) prior to
 /// the partitioner being called.
@@ -18823,11 +20000,14 @@ typedef rd_kafka_interceptor_f_on_destroy_t = ffi.NativeFunction<
 /// symmetry.
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
-typedef rd_kafka_interceptor_f_on_send_t = ffi.NativeFunction<
-    ffi.Int Function(
+typedef rd_kafka_interceptor_f_on_send_t =
+    ffi.NativeFunction<
+      ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Pointer<rd_kafka_message_t> rkmessage,
-        ffi.Pointer<ffi.Void> ic_opaque)>;
+        ffi.Pointer<ffi.Void> ic_opaque,
+      )
+    >;
 
 /// @brief on_acknowledgement() is called to inform interceptors that a message
 /// was succesfully delivered or permanently failed delivery.
@@ -18849,11 +20029,14 @@ typedef rd_kafka_interceptor_f_on_send_t = ffi.NativeFunction<
 /// any blocking or prolonged work.
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
-typedef rd_kafka_interceptor_f_on_acknowledgement_t = ffi.NativeFunction<
-    ffi.Int Function(
+typedef rd_kafka_interceptor_f_on_acknowledgement_t =
+    ffi.NativeFunction<
+      ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Pointer<rd_kafka_message_t> rkmessage,
-        ffi.Pointer<ffi.Void> ic_opaque)>;
+        ffi.Pointer<ffi.Void> ic_opaque,
+      )
+    >;
 
 /// @brief on_consume() is called just prior to passing the message to the
 /// application in rd_kafka_consumer_poll(), rd_kafka_consume*(),
@@ -18869,11 +20052,14 @@ typedef rd_kafka_interceptor_f_on_acknowledgement_t = ffi.NativeFunction<
 /// by the interceptor.
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
-typedef rd_kafka_interceptor_f_on_consume_t = ffi.NativeFunction<
-    ffi.Int Function(
+typedef rd_kafka_interceptor_f_on_consume_t =
+    ffi.NativeFunction<
+      ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Pointer<rd_kafka_message_t> rkmessage,
-        ffi.Pointer<ffi.Void> ic_opaque)>;
+        ffi.Pointer<ffi.Void> ic_opaque,
+      )
+    >;
 
 /// @brief on_commit() is called on completed or failed offset commit.
 /// It is called from internal librdkafka threads.
@@ -18894,12 +20080,15 @@ typedef rd_kafka_interceptor_f_on_consume_t = ffi.NativeFunction<
 ///
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
-typedef rd_kafka_interceptor_f_on_commit_t = ffi.NativeFunction<
-    ffi.Int Function(
+typedef rd_kafka_interceptor_f_on_commit_t =
+    ffi.NativeFunction<
+      ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Pointer<rd_kafka_topic_partition_list_t> offsets,
         ffi.Int err,
-        ffi.Pointer<ffi.Void> ic_opaque)>;
+        ffi.Pointer<ffi.Void> ic_opaque,
+      )
+    >;
 
 /// @brief on_request_sent() is called when a request has been fully written
 /// to a broker TCP connections socket.
@@ -18920,8 +20109,9 @@ typedef rd_kafka_interceptor_f_on_commit_t = ffi.NativeFunction<
 /// any blocking or prolonged work.
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
-typedef rd_kafka_interceptor_f_on_request_sent_t = ffi.NativeFunction<
-    ffi.Int Function(
+typedef rd_kafka_interceptor_f_on_request_sent_t =
+    ffi.NativeFunction<
+      ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Int sockfd,
         ffi.Pointer<ffi.Char> brokername,
@@ -18930,7 +20120,9 @@ typedef rd_kafka_interceptor_f_on_request_sent_t = ffi.NativeFunction<
         ffi.Int16 ApiVersion,
         ffi.Int32 CorrId,
         ffi.Size size,
-        ffi.Pointer<ffi.Void> ic_opaque)>;
+        ffi.Pointer<ffi.Void> ic_opaque,
+      )
+    >;
 
 /// @brief on_response_received() is called when a protocol response has been
 /// fully received from a broker TCP connection socket but before the
@@ -18955,8 +20147,9 @@ typedef rd_kafka_interceptor_f_on_request_sent_t = ffi.NativeFunction<
 /// perform any blocking or prolonged work.
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
-typedef rd_kafka_interceptor_f_on_response_received_t = ffi.NativeFunction<
-    ffi.Int Function(
+typedef rd_kafka_interceptor_f_on_response_received_t =
+    ffi.NativeFunction<
+      ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Int sockfd,
         ffi.Pointer<ffi.Char> brokername,
@@ -18967,7 +20160,9 @@ typedef rd_kafka_interceptor_f_on_response_received_t = ffi.NativeFunction<
         ffi.Size size,
         ffi.Int64 rtt,
         ffi.Int err,
-        ffi.Pointer<ffi.Void> ic_opaque)>;
+        ffi.Pointer<ffi.Void> ic_opaque,
+      )
+    >;
 
 /// @brief on_thread_start() is called from a newly created librdkafka-managed
 /// thread.
@@ -18983,9 +20178,15 @@ typedef rd_kafka_interceptor_f_on_response_received_t = ffi.NativeFunction<
 /// any blocking or prolonged work.
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
-typedef rd_kafka_interceptor_f_on_thread_start_t = ffi.NativeFunction<
-    ffi.Int Function(ffi.Pointer<rd_kafka_t> rk, ffi.UnsignedInt thread_type,
-        ffi.Pointer<ffi.Char> thread_name, ffi.Pointer<ffi.Void> ic_opaque)>;
+typedef rd_kafka_interceptor_f_on_thread_start_t =
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t> rk,
+        ffi.UnsignedInt thread_type,
+        ffi.Pointer<ffi.Char> thread_name,
+        ffi.Pointer<ffi.Void> ic_opaque,
+      )
+    >;
 
 /// @brief on_thread_exit() is called just prior to a librdkafka-managed
 /// thread exiting from the exiting thread itself.
@@ -19004,9 +20205,15 @@ typedef rd_kafka_interceptor_f_on_thread_start_t = ffi.NativeFunction<
 /// any blocking or prolonged work.
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
-typedef rd_kafka_interceptor_f_on_thread_exit_t = ffi.NativeFunction<
-    ffi.Int Function(ffi.Pointer<rd_kafka_t> rk, ffi.UnsignedInt thread_type,
-        ffi.Pointer<ffi.Char> thread_name, ffi.Pointer<ffi.Void> ic_opaque)>;
+typedef rd_kafka_interceptor_f_on_thread_exit_t =
+    ffi.NativeFunction<
+      ffi.Int Function(
+        ffi.Pointer<rd_kafka_t> rk,
+        ffi.UnsignedInt thread_type,
+        ffi.Pointer<ffi.Char> thread_name,
+        ffi.Pointer<ffi.Void> ic_opaque,
+      )
+    >;
 
 /// @brief on_broker_state_change() is called just after a broker
 /// has been created or its state has been changed.
@@ -19020,15 +20227,18 @@ typedef rd_kafka_interceptor_f_on_thread_exit_t = ffi.NativeFunction<
 /// @param ic_opaque The interceptor's opaque pointer specified in ..add..().
 ///
 /// @returns an error code on failure, the error is logged but otherwise ignored.
-typedef rd_kafka_interceptor_f_on_broker_state_change_t = ffi.NativeFunction<
-    ffi.Int Function(
+typedef rd_kafka_interceptor_f_on_broker_state_change_t =
+    ffi.NativeFunction<
+      ffi.Int Function(
         ffi.Pointer<rd_kafka_t> rk,
         ffi.Int32 broker_id,
         ffi.Pointer<ffi.Char> secproto,
         ffi.Pointer<ffi.Char> name,
         ffi.Int port,
         ffi.Pointer<ffi.Char> state,
-        ffi.Pointer<ffi.Void> ic_opaque)>;
+        ffi.Pointer<ffi.Void> ic_opaque,
+      )
+    >;
 
 /// @enum rd_kafka_admin_op_t
 ///
@@ -19112,33 +20322,32 @@ enum rd_kafka_admin_op_t {
   const rd_kafka_admin_op_t(this.value);
 
   static rd_kafka_admin_op_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_ADMIN_OP_ANY,
-        1 => RD_KAFKA_ADMIN_OP_CREATETOPICS,
-        2 => RD_KAFKA_ADMIN_OP_DELETETOPICS,
-        3 => RD_KAFKA_ADMIN_OP_CREATEPARTITIONS,
-        4 => RD_KAFKA_ADMIN_OP_ALTERCONFIGS,
-        5 => RD_KAFKA_ADMIN_OP_DESCRIBECONFIGS,
-        6 => RD_KAFKA_ADMIN_OP_DELETERECORDS,
-        7 => RD_KAFKA_ADMIN_OP_DELETEGROUPS,
-        8 => RD_KAFKA_ADMIN_OP_DELETECONSUMERGROUPOFFSETS,
-        9 => RD_KAFKA_ADMIN_OP_CREATEACLS,
-        10 => RD_KAFKA_ADMIN_OP_DESCRIBEACLS,
-        11 => RD_KAFKA_ADMIN_OP_DELETEACLS,
-        12 => RD_KAFKA_ADMIN_OP_LISTCONSUMERGROUPS,
-        13 => RD_KAFKA_ADMIN_OP_DESCRIBECONSUMERGROUPS,
-        14 => RD_KAFKA_ADMIN_OP_LISTCONSUMERGROUPOFFSETS,
-        15 => RD_KAFKA_ADMIN_OP_ALTERCONSUMERGROUPOFFSETS,
-        16 => RD_KAFKA_ADMIN_OP_INCREMENTALALTERCONFIGS,
-        17 => RD_KAFKA_ADMIN_OP_DESCRIBEUSERSCRAMCREDENTIALS,
-        18 => RD_KAFKA_ADMIN_OP_ALTERUSERSCRAMCREDENTIALS,
-        19 => RD_KAFKA_ADMIN_OP_DESCRIBETOPICS,
-        20 => RD_KAFKA_ADMIN_OP_DESCRIBECLUSTER,
-        21 => RD_KAFKA_ADMIN_OP_LISTOFFSETS,
-        22 => RD_KAFKA_ADMIN_OP_ELECTLEADERS,
-        23 => RD_KAFKA_ADMIN_OP__CNT,
-        _ =>
-          throw ArgumentError('Unknown value for rd_kafka_admin_op_t: $value'),
-      };
+    0 => RD_KAFKA_ADMIN_OP_ANY,
+    1 => RD_KAFKA_ADMIN_OP_CREATETOPICS,
+    2 => RD_KAFKA_ADMIN_OP_DELETETOPICS,
+    3 => RD_KAFKA_ADMIN_OP_CREATEPARTITIONS,
+    4 => RD_KAFKA_ADMIN_OP_ALTERCONFIGS,
+    5 => RD_KAFKA_ADMIN_OP_DESCRIBECONFIGS,
+    6 => RD_KAFKA_ADMIN_OP_DELETERECORDS,
+    7 => RD_KAFKA_ADMIN_OP_DELETEGROUPS,
+    8 => RD_KAFKA_ADMIN_OP_DELETECONSUMERGROUPOFFSETS,
+    9 => RD_KAFKA_ADMIN_OP_CREATEACLS,
+    10 => RD_KAFKA_ADMIN_OP_DESCRIBEACLS,
+    11 => RD_KAFKA_ADMIN_OP_DELETEACLS,
+    12 => RD_KAFKA_ADMIN_OP_LISTCONSUMERGROUPS,
+    13 => RD_KAFKA_ADMIN_OP_DESCRIBECONSUMERGROUPS,
+    14 => RD_KAFKA_ADMIN_OP_LISTCONSUMERGROUPOFFSETS,
+    15 => RD_KAFKA_ADMIN_OP_ALTERCONSUMERGROUPOFFSETS,
+    16 => RD_KAFKA_ADMIN_OP_INCREMENTALALTERCONFIGS,
+    17 => RD_KAFKA_ADMIN_OP_DESCRIBEUSERSCRAMCREDENTIALS,
+    18 => RD_KAFKA_ADMIN_OP_ALTERUSERSCRAMCREDENTIALS,
+    19 => RD_KAFKA_ADMIN_OP_DESCRIBETOPICS,
+    20 => RD_KAFKA_ADMIN_OP_DESCRIBECLUSTER,
+    21 => RD_KAFKA_ADMIN_OP_LISTOFFSETS,
+    22 => RD_KAFKA_ADMIN_OP_ELECTLEADERS,
+    23 => RD_KAFKA_ADMIN_OP__CNT,
+    _ => throw ArgumentError('Unknown value for rd_kafka_admin_op_t: $value'),
+  };
 }
 
 final class rd_kafka_AdminOptions_s extends ffi.Opaque {}
@@ -19166,11 +20375,13 @@ enum rd_kafka_IsolationLevel_t {
   const rd_kafka_IsolationLevel_t(this.value);
 
   static rd_kafka_IsolationLevel_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_ISOLATION_LEVEL_READ_UNCOMMITTED,
-        1 => RD_KAFKA_ISOLATION_LEVEL_READ_COMMITTED,
-        _ => throw ArgumentError(
-            'Unknown value for rd_kafka_IsolationLevel_t: $value'),
-      };
+    0 => RD_KAFKA_ISOLATION_LEVEL_READ_UNCOMMITTED,
+    1 => RD_KAFKA_ISOLATION_LEVEL_READ_COMMITTED,
+    _ =>
+      throw ArgumentError(
+        'Unknown value for rd_kafka_IsolationLevel_t: $value',
+      ),
+  };
 }
 
 /// @enum rd_kafka_AclOperation_t
@@ -19211,23 +20422,23 @@ enum rd_kafka_AclOperation_t {
   const rd_kafka_AclOperation_t(this.value);
 
   static rd_kafka_AclOperation_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_ACL_OPERATION_UNKNOWN,
-        1 => RD_KAFKA_ACL_OPERATION_ANY,
-        2 => RD_KAFKA_ACL_OPERATION_ALL,
-        3 => RD_KAFKA_ACL_OPERATION_READ,
-        4 => RD_KAFKA_ACL_OPERATION_WRITE,
-        5 => RD_KAFKA_ACL_OPERATION_CREATE,
-        6 => RD_KAFKA_ACL_OPERATION_DELETE,
-        7 => RD_KAFKA_ACL_OPERATION_ALTER,
-        8 => RD_KAFKA_ACL_OPERATION_DESCRIBE,
-        9 => RD_KAFKA_ACL_OPERATION_CLUSTER_ACTION,
-        10 => RD_KAFKA_ACL_OPERATION_DESCRIBE_CONFIGS,
-        11 => RD_KAFKA_ACL_OPERATION_ALTER_CONFIGS,
-        12 => RD_KAFKA_ACL_OPERATION_IDEMPOTENT_WRITE,
-        13 => RD_KAFKA_ACL_OPERATION__CNT,
-        _ => throw ArgumentError(
-            'Unknown value for rd_kafka_AclOperation_t: $value'),
-      };
+    0 => RD_KAFKA_ACL_OPERATION_UNKNOWN,
+    1 => RD_KAFKA_ACL_OPERATION_ANY,
+    2 => RD_KAFKA_ACL_OPERATION_ALL,
+    3 => RD_KAFKA_ACL_OPERATION_READ,
+    4 => RD_KAFKA_ACL_OPERATION_WRITE,
+    5 => RD_KAFKA_ACL_OPERATION_CREATE,
+    6 => RD_KAFKA_ACL_OPERATION_DELETE,
+    7 => RD_KAFKA_ACL_OPERATION_ALTER,
+    8 => RD_KAFKA_ACL_OPERATION_DESCRIBE,
+    9 => RD_KAFKA_ACL_OPERATION_CLUSTER_ACTION,
+    10 => RD_KAFKA_ACL_OPERATION_DESCRIBE_CONFIGS,
+    11 => RD_KAFKA_ACL_OPERATION_ALTER_CONFIGS,
+    12 => RD_KAFKA_ACL_OPERATION_IDEMPOTENT_WRITE,
+    13 => RD_KAFKA_ACL_OPERATION__CNT,
+    _ =>
+      throw ArgumentError('Unknown value for rd_kafka_AclOperation_t: $value'),
+  };
 }
 
 final class rd_kafka_NewTopic_s extends ffi.Opaque {}
@@ -19282,16 +20493,16 @@ enum rd_kafka_ConfigSource_t {
   const rd_kafka_ConfigSource_t(this.value);
 
   static rd_kafka_ConfigSource_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_CONFIG_SOURCE_UNKNOWN_CONFIG,
-        1 => RD_KAFKA_CONFIG_SOURCE_DYNAMIC_TOPIC_CONFIG,
-        2 => RD_KAFKA_CONFIG_SOURCE_DYNAMIC_BROKER_CONFIG,
-        3 => RD_KAFKA_CONFIG_SOURCE_DYNAMIC_DEFAULT_BROKER_CONFIG,
-        4 => RD_KAFKA_CONFIG_SOURCE_STATIC_BROKER_CONFIG,
-        5 => RD_KAFKA_CONFIG_SOURCE_DEFAULT_CONFIG,
-        6 => RD_KAFKA_CONFIG_SOURCE__CNT,
-        _ => throw ArgumentError(
-            'Unknown value for rd_kafka_ConfigSource_t: $value'),
-      };
+    0 => RD_KAFKA_CONFIG_SOURCE_UNKNOWN_CONFIG,
+    1 => RD_KAFKA_CONFIG_SOURCE_DYNAMIC_TOPIC_CONFIG,
+    2 => RD_KAFKA_CONFIG_SOURCE_DYNAMIC_BROKER_CONFIG,
+    3 => RD_KAFKA_CONFIG_SOURCE_DYNAMIC_DEFAULT_BROKER_CONFIG,
+    4 => RD_KAFKA_CONFIG_SOURCE_STATIC_BROKER_CONFIG,
+    5 => RD_KAFKA_CONFIG_SOURCE_DEFAULT_CONFIG,
+    6 => RD_KAFKA_CONFIG_SOURCE__CNT,
+    _ =>
+      throw ArgumentError('Unknown value for rd_kafka_ConfigSource_t: $value'),
+  };
 }
 
 final class rd_kafka_ConfigEntry_s extends ffi.Opaque {}
@@ -19327,16 +20538,16 @@ enum rd_kafka_ResourceType_t {
   const rd_kafka_ResourceType_t(this.value);
 
   static rd_kafka_ResourceType_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_RESOURCE_UNKNOWN,
-        1 => RD_KAFKA_RESOURCE_ANY,
-        2 => RD_KAFKA_RESOURCE_TOPIC,
-        3 => RD_KAFKA_RESOURCE_GROUP,
-        4 => RD_KAFKA_RESOURCE_BROKER,
-        5 => RD_KAFKA_RESOURCE_TRANSACTIONAL_ID,
-        6 => RD_KAFKA_RESOURCE__CNT,
-        _ => throw ArgumentError(
-            'Unknown value for rd_kafka_ResourceType_t: $value'),
-      };
+    0 => RD_KAFKA_RESOURCE_UNKNOWN,
+    1 => RD_KAFKA_RESOURCE_ANY,
+    2 => RD_KAFKA_RESOURCE_TOPIC,
+    3 => RD_KAFKA_RESOURCE_GROUP,
+    4 => RD_KAFKA_RESOURCE_BROKER,
+    5 => RD_KAFKA_RESOURCE_TRANSACTIONAL_ID,
+    6 => RD_KAFKA_RESOURCE__CNT,
+    _ =>
+      throw ArgumentError('Unknown value for rd_kafka_ResourceType_t: $value'),
+  };
 }
 
 /// @enum rd_kafka_ResourcePatternType_t
@@ -19362,15 +20573,17 @@ enum rd_kafka_ResourcePatternType_t {
   const rd_kafka_ResourcePatternType_t(this.value);
 
   static rd_kafka_ResourcePatternType_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_RESOURCE_PATTERN_UNKNOWN,
-        1 => RD_KAFKA_RESOURCE_PATTERN_ANY,
-        2 => RD_KAFKA_RESOURCE_PATTERN_MATCH,
-        3 => RD_KAFKA_RESOURCE_PATTERN_LITERAL,
-        4 => RD_KAFKA_RESOURCE_PATTERN_PREFIXED,
-        5 => RD_KAFKA_RESOURCE_PATTERN_TYPE__CNT,
-        _ => throw ArgumentError(
-            'Unknown value for rd_kafka_ResourcePatternType_t: $value'),
-      };
+    0 => RD_KAFKA_RESOURCE_PATTERN_UNKNOWN,
+    1 => RD_KAFKA_RESOURCE_PATTERN_ANY,
+    2 => RD_KAFKA_RESOURCE_PATTERN_MATCH,
+    3 => RD_KAFKA_RESOURCE_PATTERN_LITERAL,
+    4 => RD_KAFKA_RESOURCE_PATTERN_PREFIXED,
+    5 => RD_KAFKA_RESOURCE_PATTERN_TYPE__CNT,
+    _ =>
+      throw ArgumentError(
+        'Unknown value for rd_kafka_ResourcePatternType_t: $value',
+      ),
+  };
 }
 
 /// @enum rd_kafka_AlterConfigOpType_t
@@ -19386,14 +20599,16 @@ enum rd_kafka_AlterConfigOpType_t {
   const rd_kafka_AlterConfigOpType_t(this.value);
 
   static rd_kafka_AlterConfigOpType_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_ALTER_CONFIG_OP_TYPE_SET,
-        1 => RD_KAFKA_ALTER_CONFIG_OP_TYPE_DELETE,
-        2 => RD_KAFKA_ALTER_CONFIG_OP_TYPE_APPEND,
-        3 => RD_KAFKA_ALTER_CONFIG_OP_TYPE_SUBTRACT,
-        4 => RD_KAFKA_ALTER_CONFIG_OP_TYPE__CNT,
-        _ => throw ArgumentError(
-            'Unknown value for rd_kafka_AlterConfigOpType_t: $value'),
-      };
+    0 => RD_KAFKA_ALTER_CONFIG_OP_TYPE_SET,
+    1 => RD_KAFKA_ALTER_CONFIG_OP_TYPE_DELETE,
+    2 => RD_KAFKA_ALTER_CONFIG_OP_TYPE_APPEND,
+    3 => RD_KAFKA_ALTER_CONFIG_OP_TYPE_SUBTRACT,
+    4 => RD_KAFKA_ALTER_CONFIG_OP_TYPE__CNT,
+    _ =>
+      throw ArgumentError(
+        'Unknown value for rd_kafka_AlterConfigOpType_t: $value',
+      ),
+  };
 }
 
 final class rd_kafka_ConfigResource_s extends ffi.Opaque {}
@@ -19429,14 +20644,14 @@ typedef rd_kafka_ConsumerGroupListing_t = rd_kafka_ConsumerGroupListing_s;
 final class rd_kafka_ListConsumerGroupsResult_s extends ffi.Opaque {}
 
 /// ! ListConsumerGroups results and errors
-typedef rd_kafka_ListConsumerGroupsResult_t
-    = rd_kafka_ListConsumerGroupsResult_s;
+typedef rd_kafka_ListConsumerGroupsResult_t =
+    rd_kafka_ListConsumerGroupsResult_s;
 
 final class rd_kafka_ConsumerGroupDescription_s extends ffi.Opaque {}
 
 /// @brief DescribeConsumerGroups result type.
-typedef rd_kafka_ConsumerGroupDescription_t
-    = rd_kafka_ConsumerGroupDescription_s;
+typedef rd_kafka_ConsumerGroupDescription_t =
+    rd_kafka_ConsumerGroupDescription_s;
 
 final class rd_kafka_MemberDescription_s extends ffi.Opaque {}
 
@@ -19456,20 +20671,20 @@ typedef rd_kafka_DeleteGroup_t = rd_kafka_DeleteGroup_s;
 final class rd_kafka_ListConsumerGroupOffsets_s extends ffi.Opaque {}
 
 /// ! Represents consumer group committed offsets to be listed.
-typedef rd_kafka_ListConsumerGroupOffsets_t
-    = rd_kafka_ListConsumerGroupOffsets_s;
+typedef rd_kafka_ListConsumerGroupOffsets_t =
+    rd_kafka_ListConsumerGroupOffsets_s;
 
 final class rd_kafka_AlterConsumerGroupOffsets_s extends ffi.Opaque {}
 
 /// ! Represents consumer group committed offsets to be altered.
-typedef rd_kafka_AlterConsumerGroupOffsets_t
-    = rd_kafka_AlterConsumerGroupOffsets_s;
+typedef rd_kafka_AlterConsumerGroupOffsets_t =
+    rd_kafka_AlterConsumerGroupOffsets_s;
 
 final class rd_kafka_DeleteConsumerGroupOffsets_s extends ffi.Opaque {}
 
 /// ! Represents consumer group committed offsets to be deleted.
-typedef rd_kafka_DeleteConsumerGroupOffsets_t
-    = rd_kafka_DeleteConsumerGroupOffsets_s;
+typedef rd_kafka_DeleteConsumerGroupOffsets_t =
+    rd_kafka_DeleteConsumerGroupOffsets_s;
 
 /// @enum rd_kafka_OffsetSpec_t
 /// @brief Allows to specify the desired offsets when using ListOffsets.
@@ -19482,12 +20697,11 @@ enum rd_kafka_OffsetSpec_t {
   const rd_kafka_OffsetSpec_t(this.value);
 
   static rd_kafka_OffsetSpec_t fromValue(int value) => switch (value) {
-        -3 => RD_KAFKA_OFFSET_SPEC_MAX_TIMESTAMP,
-        -2 => RD_KAFKA_OFFSET_SPEC_EARLIEST,
-        -1 => RD_KAFKA_OFFSET_SPEC_LATEST,
-        _ => throw ArgumentError(
-            'Unknown value for rd_kafka_OffsetSpec_t: $value'),
-      };
+    -3 => RD_KAFKA_OFFSET_SPEC_MAX_TIMESTAMP,
+    -2 => RD_KAFKA_OFFSET_SPEC_EARLIEST,
+    -1 => RD_KAFKA_OFFSET_SPEC_LATEST,
+    _ => throw ArgumentError('Unknown value for rd_kafka_OffsetSpec_t: $value'),
+  };
 }
 
 final class rd_kafka_ListOffsetsResultInfo_s extends ffi.Opaque {}
@@ -19508,13 +20722,15 @@ enum rd_kafka_ScramMechanism_t {
   const rd_kafka_ScramMechanism_t(this.value);
 
   static rd_kafka_ScramMechanism_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_SCRAM_MECHANISM_UNKNOWN,
-        1 => RD_KAFKA_SCRAM_MECHANISM_SHA_256,
-        2 => RD_KAFKA_SCRAM_MECHANISM_SHA_512,
-        3 => RD_KAFKA_SCRAM_MECHANISM__CNT,
-        _ => throw ArgumentError(
-            'Unknown value for rd_kafka_ScramMechanism_t: $value'),
-      };
+    0 => RD_KAFKA_SCRAM_MECHANISM_UNKNOWN,
+    1 => RD_KAFKA_SCRAM_MECHANISM_SHA_256,
+    2 => RD_KAFKA_SCRAM_MECHANISM_SHA_512,
+    3 => RD_KAFKA_SCRAM_MECHANISM__CNT,
+    _ =>
+      throw ArgumentError(
+        'Unknown value for rd_kafka_ScramMechanism_t: $value',
+      ),
+  };
 }
 
 final class rd_kafka_ScramCredentialInfo_s extends ffi.Opaque {}
@@ -19530,21 +20746,21 @@ final class rd_kafka_UserScramCredentialsDescription_s extends ffi.Opaque {}
 /// with a user that can be retrieved,
 /// or an error indicating why credentials
 /// could not be retrieved.
-typedef rd_kafka_UserScramCredentialsDescription_t
-    = rd_kafka_UserScramCredentialsDescription_s;
+typedef rd_kafka_UserScramCredentialsDescription_t =
+    rd_kafka_UserScramCredentialsDescription_s;
 
 final class rd_kafka_UserScramCredentialAlteration_s extends ffi.Opaque {}
 
 /// @brief A request to alter a user's SASL/SCRAM credentials.
-typedef rd_kafka_UserScramCredentialAlteration_t
-    = rd_kafka_UserScramCredentialAlteration_s;
+typedef rd_kafka_UserScramCredentialAlteration_t =
+    rd_kafka_UserScramCredentialAlteration_s;
 
 final class rd_kafka_AlterUserScramCredentials_result_response_s
     extends ffi.Opaque {}
 
 /// @brief Result of a single user SCRAM alteration.
-typedef rd_kafka_AlterUserScramCredentials_result_response_t
-    = rd_kafka_AlterUserScramCredentials_result_response_s;
+typedef rd_kafka_AlterUserScramCredentials_result_response_t =
+    rd_kafka_AlterUserScramCredentials_result_response_s;
 
 final class rd_kafka_AclBinding_s extends ffi.Opaque {}
 
@@ -19572,21 +20788,23 @@ enum rd_kafka_AclPermissionType_t {
   const rd_kafka_AclPermissionType_t(this.value);
 
   static rd_kafka_AclPermissionType_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_ACL_PERMISSION_TYPE_UNKNOWN,
-        1 => RD_KAFKA_ACL_PERMISSION_TYPE_ANY,
-        2 => RD_KAFKA_ACL_PERMISSION_TYPE_DENY,
-        3 => RD_KAFKA_ACL_PERMISSION_TYPE_ALLOW,
-        4 => RD_KAFKA_ACL_PERMISSION_TYPE__CNT,
-        _ => throw ArgumentError(
-            'Unknown value for rd_kafka_AclPermissionType_t: $value'),
-      };
+    0 => RD_KAFKA_ACL_PERMISSION_TYPE_UNKNOWN,
+    1 => RD_KAFKA_ACL_PERMISSION_TYPE_ANY,
+    2 => RD_KAFKA_ACL_PERMISSION_TYPE_DENY,
+    3 => RD_KAFKA_ACL_PERMISSION_TYPE_ALLOW,
+    4 => RD_KAFKA_ACL_PERMISSION_TYPE__CNT,
+    _ =>
+      throw ArgumentError(
+        'Unknown value for rd_kafka_AclPermissionType_t: $value',
+      ),
+  };
 }
 
 final class rd_kafka_DeleteAcls_result_response_s extends ffi.Opaque {}
 
 /// DeleteAcls - delete access control lists.
-typedef rd_kafka_DeleteAcls_result_response_t
-    = rd_kafka_DeleteAcls_result_response_s;
+typedef rd_kafka_DeleteAcls_result_response_t =
+    rd_kafka_DeleteAcls_result_response_s;
 
 final class rd_kafka_ElectLeaders_s extends ffi.Opaque {}
 
@@ -19606,11 +20824,11 @@ enum rd_kafka_ElectionType_t {
   const rd_kafka_ElectionType_t(this.value);
 
   static rd_kafka_ElectionType_t fromValue(int value) => switch (value) {
-        0 => RD_KAFKA_ELECTION_TYPE_PREFERRED,
-        1 => RD_KAFKA_ELECTION_TYPE_UNCLEAN,
-        _ => throw ArgumentError(
-            'Unknown value for rd_kafka_ElectionType_t: $value'),
-      };
+    0 => RD_KAFKA_ELECTION_TYPE_PREFERRED,
+    1 => RD_KAFKA_ELECTION_TYPE_UNCLEAN,
+    _ =>
+      throw ArgumentError('Unknown value for rd_kafka_ElectionType_t: $value'),
+  };
 }
 
 const int __has_safe_buffers = 1;

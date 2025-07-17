@@ -34,37 +34,37 @@ class KafkaConfiguration {
     String? saslPassword,
     String? logLevel,
   }) : _config = {
-          if (bootstrapServers != null) "bootstrap.servers": bootstrapServers,
-          if (clientId != null) "client.id": clientId,
-          if (metadataBrokerList != null)
-            "metadata.broker.list": metadataBrokerList,
-          if (acks != null) "acks": acks.toString(),
-          if (batchSize != null) "batch.size": batchSize.toString(),
-          if (compressionCodec != null) "compression.codec": compressionCodec,
-          if (lingerMs != null) "linger.ms": lingerMs.toString(),
-          if (maxInFlightRequestsPerConnection != null)
-            "max.in.flight.requests.per.connection":
-                maxInFlightRequestsPerConnection.toString(),
-          if (groupId != null) "group.id": groupId,
-          if (autoOffsetReset != null) "auto.offset.reset": autoOffsetReset,
-          if (enableAutoCommit != null)
-            "enable.auto.commit": enableAutoCommit.toString(),
-          if (maxPollRecords != null)
-            "max.poll.records": maxPollRecords.toString(),
-          if (autoCreateTopicsEnable != null)
-            "auto.create.topics.enable": autoCreateTopicsEnable.toString(),
-          if (messageTimeoutMs != null)
-            "message.timeout.ms": messageTimeoutMs.toString(),
-          if (securityProtocol != null) "security.protocol": securityProtocol,
-          if (sslCaLocation != null) "ssl.ca.location": sslCaLocation,
-          if (sslCertificateLocation != null)
-            "ssl.certificate.location": sslCertificateLocation,
-          if (sslKeyLocation != null) "ssl.key.location": sslKeyLocation,
-          if (saslMechanisms != null) "sasl.mechanisms": saslMechanisms,
-          if (saslUsername != null) "sasl.username": saslUsername,
-          if (saslPassword != null) "sasl.password": saslPassword,
-          if (logLevel != null) "log_level": logLevel,
-        };
+         if (bootstrapServers != null) "bootstrap.servers": bootstrapServers,
+         if (clientId != null) "client.id": clientId,
+         if (metadataBrokerList != null)
+           "metadata.broker.list": metadataBrokerList,
+         if (acks != null) "acks": acks.toString(),
+         if (batchSize != null) "batch.size": batchSize.toString(),
+         if (compressionCodec != null) "compression.codec": compressionCodec,
+         if (lingerMs != null) "linger.ms": lingerMs.toString(),
+         if (maxInFlightRequestsPerConnection != null)
+           "max.in.flight.requests.per.connection":
+               maxInFlightRequestsPerConnection.toString(),
+         if (groupId != null) "group.id": groupId,
+         if (autoOffsetReset != null) "auto.offset.reset": autoOffsetReset,
+         if (enableAutoCommit != null)
+           "enable.auto.commit": enableAutoCommit.toString(),
+         if (maxPollRecords != null)
+           "max.poll.records": maxPollRecords.toString(),
+         if (autoCreateTopicsEnable != null)
+           "auto.create.topics.enable": autoCreateTopicsEnable.toString(),
+         if (messageTimeoutMs != null)
+           "message.timeout.ms": messageTimeoutMs.toString(),
+         if (securityProtocol != null) "security.protocol": securityProtocol,
+         if (sslCaLocation != null) "ssl.ca.location": sslCaLocation,
+         if (sslCertificateLocation != null)
+           "ssl.certificate.location": sslCertificateLocation,
+         if (sslKeyLocation != null) "ssl.key.location": sslKeyLocation,
+         if (saslMechanisms != null) "sasl.mechanisms": saslMechanisms,
+         if (saslUsername != null) "sasl.username": saslUsername,
+         if (saslPassword != null) "sasl.password": saslPassword,
+         if (logLevel != null) "log_level": logLevel,
+       };
 
   Pointer<rd_kafka_conf_s> toNative() {
     final nativeConfigObject = librdkafka.rd_kafka_conf_new();
@@ -75,11 +75,12 @@ class KafkaConfiguration {
       final valueCstr = entry.value.toNativeUtf8();
 
       final result = librdkafka.rd_kafka_conf_set(
-          nativeConfigObject,
-          nameCstr.cast<Char>(),
-          valueCstr.cast<Char>(),
-          errHandler.ptr,
-          errHandler.maxLength);
+        nativeConfigObject,
+        nameCstr.cast<Char>(),
+        valueCstr.cast<Char>(),
+        errHandler.ptr,
+        errHandler.maxLength,
+      );
 
       malloc.free(nameCstr);
       malloc.free(valueCstr);

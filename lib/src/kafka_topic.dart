@@ -21,18 +21,24 @@ class KafkaTopic {
   final String name;
   late Pointer<rd_kafka_topic_s> _$native;
 
-  KafkaTopic(
-      {required Pointer<rd_kafka_s> kafkaNativeInstance, required this.name}) {
+  KafkaTopic({
+    required Pointer<rd_kafka_s> kafkaNativeInstance,
+    required this.name,
+  }) {
     final namePtr = name.toNativeUtf8();
 
     _$native = librdkafka.rd_kafka_topic_new(
-        kafkaNativeInstance, namePtr.cast<Char>(), nullptr);
+      kafkaNativeInstance,
+      namePtr.cast<Char>(),
+      nullptr,
+    );
 
     malloc.free(namePtr);
 
     if (_$native == nullptr) {
       throw KafkaTopicCreateError(
-          errorNumber: librdkafka.rd_kafka_errno()); // FIXME: probably wrong
+        errorNumber: librdkafka.rd_kafka_errno(),
+      ); // FIXME: probably wrong
     }
   }
 
