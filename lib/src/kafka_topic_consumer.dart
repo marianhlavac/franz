@@ -1,5 +1,7 @@
 part of 'kafka_topic.dart';
 
+const timeoutMs = 1000; // FIXME: make configurable
+
 class KafkaConsumerTopic extends KafkaTopic {
   final StreamController<ConsumerRecord> _sink =
       StreamController<ConsumerRecord>.broadcast();
@@ -43,7 +45,7 @@ class KafkaConsumerTopic extends KafkaTopic {
       final message = librdkafka.rd_kafka_consume(
         _$native,
         partition,
-        1000 /* FIXME */,
+        timeoutMs,
       );
 
       if (message == nullptr) continue;
