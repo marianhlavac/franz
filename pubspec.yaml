@@ -1,6 +1,6 @@
 name: franz
 description: Dart library using librdkafka via FFI
-version: 0.3.0
+version: 0.3.2
 repository: https://github.com/marianhlavac/franz
 
 environment:

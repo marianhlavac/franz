@@ -1,3 +1,7 @@
+## 0.3.2
+
+- Added support for a range of librdkafka versions to avoid minor patches causing lib incompatibility
+
 ## 0.3.0
 
 - Added support for **headers** in produced messages

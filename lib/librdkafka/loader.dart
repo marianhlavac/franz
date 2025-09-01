@@ -7,6 +7,9 @@ import 'generated_bindings.g.dart';
 
 const rootLibraryName = 'package:franz/franz.dart';
 
+const maxSupportedLibrdkafkaVersion =
+    0x02FF00FF; // 2.255.0 (largest 2.x version)
+
 String get libraryName {
   if (Platform.isLinux) return "librdkafka.so";
   if (Platform.isMacOS) return "librdkafka.dylib";
@@ -27,7 +30,7 @@ String get libraryPath {
 LibRdKafka _verifyVersion(LibRdKafka library) {
   final version = library.rd_kafka_version();
 
-  if (version != RD_KAFKA_VERSION) {
+  if (version > maxSupportedLibrdkafkaVersion || version < RD_KAFKA_VERSION) {
     throw UnsupportedLibRdKafkaVersion(
       version: version,
       supported: RD_KAFKA_VERSION,
